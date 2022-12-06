@@ -1,16 +1,31 @@
 import { DICE, ACC, HIT, SUR, BLO, EVA, DOD } from "../data/dice-data"
 
-// Reacreate python array addition
-const addValues = (first, second) => {
-    return first.map((value, index) => value + second[index])
+/**
+ * Adds the values of two arrays together to produce a new array
+ * @param {number[]} a An array to add
+ * @param {number[]} b An array to add
+ * @returns {number[]} An array of the sum of the values of the two arrays
+ */
+const addValues = (a, b) => {
+    return a.map((value, index) => value + b[index])
 }
 
-// Recreate python set equality check
+/**
+ * Checks if two sets are equal to each other with one level deep equals
+ * @param {Set<number>} a A set to check
+ * @param {Set<number>} b A set to check
+ * @returns {boolean} true if they are equal, false if not
+ */
 const isEqualSet = (a, b) => {
     return a.size === b.size && [...a].every(item => b.has(item))
 }
 
-const average = (results) => {
+/**
+ * Gets an average from a list of rolls
+ * @param {number[][]} results A list of possible results from rolls
+ * @returns {number[]} The average of all the results
+ */
+export const getAverage = (results) => {
     let total = [0, 0, 0, 0, 0, 0]
     for (const result of results) {
         total = addValues(total, result)
@@ -18,25 +33,65 @@ const average = (results) => {
     return total.map(num => num / results.length)
 }
 
-const hist = (results, index) => {
-    let data = []
-    for (const result of results) {
-        data.push(result[index])
-    }
-    return "ERROR"
-    // TODO: Get this working
-    //return np.histogram(data, list(range(max(data) + 2)), density=true)
+/**
+ * Creates multiple histograms for a specified list of properties (or indexes into an array)
+ * @param {number[][]|Object[]} data an array of data points (either arrays or objects)
+ * @param {number[]|string[]} properties a list of properties or array indexes to make histograms for
+ * @returns {{value: *, amount: number}[][]} An array of histograms, in the same order as the properties array
+ */
+export const getHistograms = (data, properties) => {
+    const histograms = properties.map(_ => [])
+    // For each datapoint, add the data to the histograms for each property
+    data.forEach((dataPoint) => {
+        properties.forEach((property, index) => {
+            let item = histograms[index].find(i => i.value === dataPoint[property]);
+            // If there's not already an item in the histogram for that property value, make one
+            if(!item) {
+                item = { value: dataPoint[property], amount: 0}
+                histograms[index].push(item)
+            }
+            // Count this data point in the histogram
+            item.amount++
+        })
+    })
+    histograms.forEach(histogram => {
+        // Sort the histograms by property value
+        histogram.sort((a,b) => a.value - b.value)
+        // Calculate percentage of getting the value
+        histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
+        // Calculate percentage of getting at least the value
+        for(let i = histogram.length - 1; i >= 0; i--) {
+            histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
+                histogram[i].percentage :
+                histogram[i].percentage + histogram[i + 1].atLeastPercentage
+        }
+    })
+    return histograms;
 }
 
+/**
+ * Ensures that blocks, evades, and dodges aren't below zero
+ * @param {number[]} result A result that may have negative values
+ */
 const defensefloor = (result) => {
     result[BLO] = Math.max(0, result[BLO])
     result[EVA] = Math.max(0, result[EVA])
     result[DOD] = Math.max(0, result[DOD])
 }
 
-
+/**
+ * Holds data about an attack
+ * Can run stats for the attack against different kinds of defenses
+ */
 export default class Attack {
 
+    /**
+     * Constructor
+     * @param {string[]} attack Colors of the attack dice
+     * @param {number[]} permanent Permanent bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @param {number[][]} surge Available surge abilities
+     * @param {number} [rerolls=0] How many rerolls are available
+     */
     constructor(attack, permanent, surge, rerolls=0) {
         this.attackdice = attack;
         this.permanentabilities = permanent
@@ -45,6 +100,12 @@ export default class Attack {
         this.rerolls = rerolls
     }
 
+    /**
+     * Generate all the possible rolls of attack and defense die, with smart rerolls
+     * @param {string[]} defense Colors of the defense dice
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @returns {number[][][]} All the possible rolls of the attack and defense die
+     */
     genrolls(defense, bonus=false) {
         // build list of step 2 rolls
         let rolls = [[]]
@@ -61,14 +122,17 @@ export default class Attack {
         // generate new list of rolls after step 3 rerolls
         // (assumes player knows which rerolls will, on average, increase priority result the most)
         if (this.rerolls) {
-            let priority = HIT;
-            if (this.surgepriorities) {
+            let priority;
+            if (this.surgepriorities.length) {
                 priority = this.surgepriorities[0]
+            }
+            else {
+                priority = HIT
             }
             const step3rolls = []
             // expand each step 2 roll
             for (const roll of rolls) {
-                const rerolls = this.rerolls  // max number of rerolls for step 3 of attacking after this roll from step 2
+                let rerolls = this.rerolls  // max number of rerolls for step 3 of attacking after this roll from step 2
                 const currentresult = this.rollresult(roll, bonus)
                 const rerollpotential = this.attackdice.map(_ => 0) // potential improvement of priority for each dice
                 this.attackdice.forEach((color, num) => {
@@ -76,36 +140,45 @@ export default class Attack {
                     for (const side of DICE[color]) {
                         const reroll = roll.slice()
                         reroll[num] = side.slice()
-                        rerollresults.append(this.rollresult(reroll, bonus))
+                        rerollresults.push(this.rollresult(reroll, bonus))
                     }
-                    const averesult = average(rerollresults)
+                    const averesult = getAverage(rerollresults)
                     if (averesult[priority] > currentresult[priority]) {
                         rerollpotential[num] = averesult[priority]
                     }
                 })
-                const newrolls = [roll]
+                let newrolls = [roll]
                 // While there's any dice that can be rerolled, and the character has rerolls to use
-                while (Math.max(rerollpotential) && rerolls) {  // assumes all dice are rerolled at the same time
-                    const numToReroll = rerollpotential.reduce((highestIndex, num, index, array) => (num > array[highestIndex]) ? index : highestIndex)  // dice number to reroll
+                while (Math.max(...rerollpotential) && rerolls) {  // assumes all dice are rerolled at the same time
+                    const numToReroll = rerollpotential.reduce(
+                        (highestIndex, num, index, array) => (num > array[highestIndex]) ? index : highestIndex, 
+                        0
+                    )  // dice number to reroll
                     const oldrolls = newrolls.slice()
-                    const newrolls = []
+                    newrolls = []
                     for (const oldroll of oldrolls) {
                         for (const side of DICE[this.attackdice[numToReroll]]) {
                             const newroll = oldroll.slice()
                             newroll[numToReroll] = side.slice()
-                            newrolls.append(newroll)
+                            newrolls.push(newroll)
                         }
                     }
                     rerollpotential[numToReroll] = 0  // because each dice can be rerolled at most once
                     rerolls -= 1
                 }
-                step3rolls.push(newrolls)
+                step3rolls.push(...newrolls)
             }
             rolls = step3rolls.slice()
         }
         return rolls
     }
 
+    /**
+     * Get the hit and accuracy results of an attack roll against a defense roll
+     * @param {number[][]} roll A particular roll of attack and defense die
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @returns {number[]} The best result the player could get with that roll, using surges, based on surgepriorities
+     */
     rollresult(roll, bonus=false) {
         let baseresult = this.permanentabilities.slice()
         if (bonus) {
@@ -171,7 +244,7 @@ export default class Attack {
                 result[HIT] = 0
             }
         }
-        const bestresult = possibleresults.pop()
+        let bestresult = possibleresults.pop()
         while (possibleresults.length) {
             const result = possibleresults.pop()
             if (result[HIT] > 0) {
@@ -189,6 +262,12 @@ export default class Attack {
         return bestresult
     }
 
+    /**
+     * Calculates all the results for all the possible rolls of this attack against a particular defense
+     * @param {string[]} defense Colors of the defense dice
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @returns {number[][]} All the possible results for accuracy and hits
+     */
     calcresults(defense, bonus=false) {
         const results = []
         const rolls = this.genrolls(defense, bonus)
@@ -198,23 +277,22 @@ export default class Attack {
         return results
     }
 
+    /**
+     * Calculates the average result of this attack against a particular defense
+     * @param {string[]} defense Colors of the defense dice
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @returns {number[]} The average result for accuracy and hits
+     */
     calcaverage(defense, bonus=false) {
-        return average(this.calcresults(defense, bonus))
+        return getAverage(this.calcresults(defense, bonus))
     }
 
-    calchist(defense, index, bonus=false) {
-        return hist(this.calcresults(defense, bonus), index)
-    }
-
+    /**
+     * Calculates the average result of this attack against one black die and against one white die
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @returns {number[]} The average result for accuracy and hits
+     */
     hitaverages(bonus=false) {
         return [this.calcaverage(['black'], bonus)[HIT], this.calcaverage(['white'], bonus)[HIT]]
-    }
-
-    blackhithist(bonus=false) {
-        return this.calchist(['black'], HIT, bonus)
-    }
-
-    whitehithist(bonus=false) {
-        return this.calchist(['white'], HIT, bonus)
     }
 }

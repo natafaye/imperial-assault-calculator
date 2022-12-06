@@ -1,6 +1,10 @@
-import Attack from "./attack-calculator";
+import Attack from "../calculators/Attack";
+import PunchDagger from "../calculators/PunchDagger";
 
-export const PRESETS = {
+/**
+ * Premade attacks for easy running
+ */
+export const PREMADE_ATTACKS = {
     // Fenn
     'Infantry Rifle': new Attack(
         ['blue', 'green'],
@@ -308,34 +312,34 @@ export const PRESETS = {
         ['red', 'yellow'],
         [0, 0, 0, 0, 0, 0],
         [],
-        rerolls=1),
+        1),
     'Close and Personal with Vibrobayonet and reroll': new Attack(
         ['red', 'yellow'],
         [0, 1, 0, -1, 0, 0],
         [],
-        rerolls=1),
+        1),
     'Close and Personal with Crushing Blow, Vibrobayonet, and reroll': new Attack(
         ['red', 'yellow'],
         [0, 1, 0, -1, 0, 0],
         [[0, 2, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'Repeating Blaster with reroll': new Attack(
         ['red', 'blue'],
         [0, 0, 0, 0, 0, 0],
         [[1, 0, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'EE-3 Carbine with reroll': new Attack(
         ['green', 'green'],
         [2, 0, 0, 0, 0, 0],
         [[0, 2, -1, 0, 0, 0],
          [0, 0, -1, -1, 0, 0]],
-        rerolls=1),
+        1),
     'Deathhammer with reroll': new Attack(
         ['red', 'blue'],
         [0, 1, 0, 0, 0, 0],
         [[1, 0, 0, 0, 0, 0],
          [0, 1, 0, 0, 0, 0]],
-        rerolls=1),
+        1),
     // Saska
     'Modified Blaster': new Attack(
         ['green', 'yellow'],
@@ -633,19 +637,19 @@ export const PRESETS = {
         ['green', 'blue'],
         [0, 0, 0, 0, 0, 0],
         [[2, 0, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'A280 with reroll': new Attack(
         ['blue', 'green'],
         [1, 0, 0, 0, 0, 0],
         [[0, 0, -1, -2, 0, 0],
          [0, 2, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'A280 with Disruption Cell and reroll': new Attack(
         ['red', 'green'],
         [3, 0, 0, 0, 0, 0],
         [[0, 0, -1, -2, 0, 0],
          [0, 2, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'Hunter\'s Rifle': new Attack(
         ['green', 'green'],
         [2, 0, 0, 0, 0, 0],
@@ -656,7 +660,7 @@ export const PRESETS = {
         [2, 0, 0, 0, 0, 0],
         [[0, 0, -1, -2, 0, 0],
          [0, 1, -1, 0, 0, 0]],
-        rerolls=1),
+        1),
     'A-12 Sniper Rifle': new Attack(
         ['blue', 'blue', 'yellow'],
         [0, 0, 0, 0, 0, 0],
@@ -668,7 +672,7 @@ export const PRESETS = {
         [6, 0, 0, 0, 0, 0],
         [[0, 2, -1, 0, 0, 0],
          [0, 0, -1, -2, 0, 0]],
-        rerolls=1),
+        1),
     // Jarrod
     'Vibro-Claws': new Attack(
         ['yellow', 'yellow'],
@@ -720,11 +724,11 @@ export const PRESETS = {
         ['red', 'blue', 'blue'],
         [0, 0, 0, 0, 0, 0],
         [[0, 1, -1, 0, 0, 0]]),
-    'Punch Dagger': PunchDagger(
+    'Punch Dagger': new PunchDagger(
         ['yellow', 'blue'],
         [0, 0, 0, 0, 0, 0],
         [[0, 3, -2, 0, 0, 0]]),
-    'Punch Dagger with High-Impact Guard': PunchDagger(
+    'Punch Dagger with High-Impact Guard': new PunchDagger(
         ['yellow', 'blue'],
         [0, 0, 0, 0, 0, 0],
         [[0, 3, -2, 0, 0, 0],

@@ -5,6 +5,13 @@ export const BLO = 3 // blocks
 export const EVA = 4 // evades
 export const DOD = 5 // dodges
 
+export const ATTACK_DICE = ["red", "green", "blue", "yellow"]
+export const DEFENSE_DICE = ["black", "white"]
+
+/**
+ * The sides of all dice by color
+ * In order of: Accuracy, Hits, Surges, Blocks, Evades, Dodges
+ */
 export const DICE = {
     'red': [
         [0, 1, 0, 0, 0, 0],

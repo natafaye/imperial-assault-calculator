@@ -2,6 +2,15 @@ import { faCaretDown, faSquare, faXmark } from '@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 
+const DICE_CLASSES = {
+    green: "success", 
+    blue: "info", 
+    yellow: "warning", 
+    red: "danger", 
+    black: "dark", 
+    white: "white"
+}
+
 export default function DieSelector({ colors, selectedColor, onChange, onDelete }) {
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
@@ -28,7 +37,7 @@ export default function DieSelector({ colors, selectedColor, onChange, onDelete 
                     aria-haspopup="listbox"
                     aria-expanded={isOptionsOpen}
                 >
-                    <FontAwesomeIcon icon={faSquare} size="2x" className={`text-${selectedColor}`} />
+                    <FontAwesomeIcon icon={faSquare} size="2x" className={`text-${DICE_CLASSES[selectedColor]}`} />
                     <FontAwesomeIcon icon={faCaretDown} className="ms-3" />
                 </button>
                 <button type="button" 
@@ -54,7 +63,7 @@ export default function DieSelector({ colors, selectedColor, onChange, onDelete 
                         onClick={() => handleOptionClick(color)}
                         onKeyDown={handleKeyDown(color)}
                     >
-                        <FontAwesomeIcon icon={faSquare} size="2x" className={`text-${color}`} />
+                        <FontAwesomeIcon icon={faSquare} size="2x" className={`text-${DICE_CLASSES[color]}`} />
                     </li>
                 ))}
             </ul>
