@@ -1,13 +1,13 @@
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { ATTACK_DICE, DEFENSE_DICE } from '../data/dice-data'
+import { ATTACK_DICE, DEFENSE_DICE } from '../data/dice'
 import DieSelector from './DieSelector'
 
 export default function DiceInput({ values, onChange, isDefense }) {
 
     const addDie = () => {
-        onChange([...values, (isDefense) ? "black" : "green"])
+        onChange([...values, (isDefense) ? BLACK : GREEN])
     }
 
     const updateDie = (index) => (newColor) => {
@@ -21,7 +21,7 @@ export default function DiceInput({ values, onChange, isDefense }) {
     return (
         <>
             {values.map((color, index) => (
-                <div key={index} className="flex-shrink-0 mb-2" style={{ flexBasis: "130px" }}>
+                <div key={index} className="flex-shrink-0 my-1" style={{ flexBasis: "130px" }}>
                     <DieSelector
                         colors={(isDefense) ? DEFENSE_DICE : ATTACK_DICE}
                         selectedColor={color}
@@ -30,7 +30,7 @@ export default function DiceInput({ values, onChange, isDefense }) {
                     />
                 </div>
             ))}
-            <button className="btn btn-outline-secondary mb-2 flex-shrink-0" onClick={addDie}>
+            <button className="btn btn-outline-secondary flex-shrink-0 my-1" onClick={addDie}>
                 <FontAwesomeIcon icon={faPlus} size="2x" />
             </button>
         </>

@@ -1,19 +1,24 @@
-export const ACC = 0 // accuracy
-export const HIT = 1 // hits
-export const SUR = 2 // surges
-export const BLO = 3 // blocks
-export const EVA = 4 // evades
-export const DOD = 5 // dodges
+export const ACC = 0 // Accuracy
+export const DAM = 1 // Damages
+export const SUR = 2 // Surges
+export const BLO = 3 // Blocks
+export const EVA = 4 // Evades
+export const DOD = 5 // Dodges
 
-export const ATTACK_DICE = ["red", "green", "blue", "yellow"]
-export const DEFENSE_DICE = ["black", "white"]
+export const ATTACK_DICE = [RED, GREEN, BLUE, YELLOW]
+export const DEFENSE_DICE = [BLACK, WHITE]
+
+export const BLUE = "Blue"
+export const RED = "Red"
+export const GREEN = "Green"
+export const YELLOW = "Yellow"
 
 /**
  * The sides of all dice by color
- * In order of: Accuracy, Hits, Surges, Blocks, Evades, Dodges
+ * In order of: Accuracy, Damages, Surges, Blocks, Evades, Dodges
  */
 export const DICE = {
-    'red': [
+    [RED]: [
         [0, 1, 0, 0, 0, 0],
         [0, 2, 0, 0, 0, 0],
         [0, 2, 0, 0, 0, 0],
@@ -21,7 +26,7 @@ export const DICE = {
         [0, 3, 0, 0, 0, 0],
         [0, 3, 0, 0, 0, 0]
     ],
-    'green': [
+    [GREEN]: [
         [1, 0, 1, 0, 0, 0],
         [1, 1, 1, 0, 0, 0],
         [1, 2, 0, 0, 0, 0],
@@ -29,7 +34,7 @@ export const DICE = {
         [2, 2, 0, 0, 0, 0],
         [3, 2, 0, 0, 0, 0]
     ],
-    'blue': [
+    [BLUE]: [
         [2, 0, 1, 0, 0, 0],
         [2, 1, 0, 0, 0, 0],
         [3, 1, 1, 0, 0, 0],
@@ -37,7 +42,7 @@ export const DICE = {
         [4, 2, 0, 0, 0, 0],
         [5, 1, 0, 0, 0, 0]
     ],
-    'yellow': [
+    [YELLOW]: [
         [0, 0, 1, 0, 0, 0],
         [0, 1, 2, 0, 0, 0],
         [1, 2, 0, 0, 0, 0],
@@ -45,7 +50,7 @@ export const DICE = {
         [2, 1, 0, 0, 0, 0],
         [2, 0, 1, 0, 0, 0]
     ],
-    'black': [
+    [BLACK]: [
         [0, 0, 0, 1, 0, 0],
         [0, 0, 0, 1, 0, 0],
         [0, 0, 0, 2, 0, 0],
@@ -53,7 +58,7 @@ export const DICE = {
         [0, 0, 0, 3, 0, 0],
         [0, 0, 0, 0, 1, 0]
     ],
-    'white': [
+    [WHITE]: [
         [0, 0, 0, 1, 1, 0],
         [0, 0, 0, 1, 1, 0],
         [0, 0, 0, 1, 0, 0],
