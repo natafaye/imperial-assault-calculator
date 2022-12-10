@@ -1,5 +1,4 @@
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import { BLUE, GREEN, YELLOW } from "./dice";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice";
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"
@@ -24,13 +23,36 @@ export const GUARDIAN = "Guardian"
 
 export const UNITS = [
     {
+        id: 500,
+        name: "J4X-7",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 3,
+        defenseDice: [],
+        attackDice: [BLUE],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+        defenseRerolls: 0,
+        surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },
+    {
         id: 0,
         name: "0-0-0",
         title: "Specialized in Pain",
         affiliation: IMPERIAL,
         deploymentCost: 4,
         reinforceCost: null,
-		traits: DROID,
+		traits: [DROID],
         size: SMALL,
         elite: true,
         health: 8,
@@ -38,7 +60,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        permanentBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: [
@@ -60,7 +83,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, YELLOW, YELLOW],
         attackType: RANGED,
-        permanentBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: [

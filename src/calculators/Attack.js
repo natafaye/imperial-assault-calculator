@@ -1,4 +1,4 @@
-import { DICE, ACC, HIT, SUR, BLO, EVA, DOD } from "../data/dice-data"
+import { DICE, ACC, DAM, SUR, BLO, EVA, DOD } from "../data/dice"
 
 /**
  * Adds the values of two arrays together to produce a new array
@@ -6,7 +6,7 @@ import { DICE, ACC, HIT, SUR, BLO, EVA, DOD } from "../data/dice-data"
  * @param {number[]} b An array to add
  * @returns {number[]} An array of the sum of the values of the two arrays
  */
-const addValues = (a, b) => {
+export const addValues = (a = [0,0,0,0,0,0], b = [0,0,0,0,0,0]) => {
     return a.map((value, index) => value + b[index])
 }
 
@@ -88,7 +88,7 @@ export default class Attack {
     /**
      * Constructor
      * @param {string[]} attack Colors of the attack dice
-     * @param {number[]} permanent Permanent bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @param {number[]} permanent Permanent bonuses to accuracy, damages, surges, blocks, evades, dodges
      * @param {number[][]} surge Available surge abilities
      * @param {number} [rerolls=0] How many rerolls are available
      */
@@ -96,14 +96,14 @@ export default class Attack {
         this.attackdice = attack;
         this.permanentabilities = permanent
         this.surgeabilities = surge
-        this.surgepriorities = [HIT, ACC]
+        this.surgepriorities = [DAM, ACC]
         this.rerolls = rerolls
     }
 
     /**
      * Generate all the possible rolls of attack and defense die, with smart rerolls
      * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
      * @returns {number[][][]} All the possible rolls of the attack and defense die
      */
     genrolls(defense, bonus=false) {
@@ -127,7 +127,7 @@ export default class Attack {
                 priority = this.surgepriorities[0]
             }
             else {
-                priority = HIT
+                priority = DAM
             }
             const step3rolls = []
             // expand each step 2 roll
@@ -174,9 +174,9 @@ export default class Attack {
     }
 
     /**
-     * Get the hit and accuracy results of an attack roll against a defense roll
+     * Get the damage and accuracy results of an attack roll against a defense roll
      * @param {number[][]} roll A particular roll of attack and defense die
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
      * @returns {number[]} The best result the player could get with that roll, using surges, based on surgepriorities
      */
     rollresult(roll, bonus=false) {
@@ -230,24 +230,24 @@ export default class Attack {
         // calculate damage for each possible result
         for (const result of possibleresults) {
             defensefloor(result)
-            if (result[HIT] > result[BLO]) {
+            if (result[DAM] > result[BLO]) {
                 if (result[DOD]) {
-                    result[HIT] = 0
+                    result[DAM] = 0
                 }
                 else {
-                    result[HIT] -= result[BLO]
+                    result[DAM] -= result[BLO]
                 }
                 result[BLO] = 0
             }
             else {
-                result[BLO] -= result[HIT]
-                result[HIT] = 0
+                result[BLO] -= result[DAM]
+                result[DAM] = 0
             }
         }
         let bestresult = possibleresults.pop()
         while (possibleresults.length) {
             const result = possibleresults.pop()
-            if (result[HIT] > 0) {
+            if (result[DAM] > 0) {
                 for (const priority of this.surgepriorities) {
                     if (result[priority] < bestresult[priority]) {
                         break
@@ -265,8 +265,8 @@ export default class Attack {
     /**
      * Calculates all the results for all the possible rolls of this attack against a particular defense
      * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
-     * @returns {number[][]} All the possible results for accuracy and hits
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
+     * @returns {number[][]} All the possible results for accuracy and damages
      */
     calcresults(defense, bonus=false) {
         const results = []
@@ -280,8 +280,8 @@ export default class Attack {
     /**
      * Calculates the average result of this attack against a particular defense
      * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
-     * @returns {number[]} The average result for accuracy and hits
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
+     * @returns {number[]} The average result for accuracy and damages
      */
     calcaverage(defense, bonus=false) {
         return getAverage(this.calcresults(defense, bonus))
@@ -289,10 +289,10 @@ export default class Attack {
 
     /**
      * Calculates the average result of this attack against one black die and against one white die
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, hits, surges, blocks, evades, dodges
-     * @returns {number[]} The average result for accuracy and hits
+     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
+     * @returns {number[]} The average result for accuracy and damages
      */
-    hitaverages(bonus=false) {
-        return [this.calcaverage(['black'], bonus)[HIT], this.calcaverage(['white'], bonus)[HIT]]
+    damageaverages(bonus=false) {
+        return [this.calcaverage(['black'], bonus)[DAM], this.calcaverage(['white'], bonus)[DAM]]
     }
 }

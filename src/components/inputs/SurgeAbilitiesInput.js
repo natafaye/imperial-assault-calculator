@@ -1,18 +1,18 @@
-import { faBolt, faPlus, faBurst, faBullseye, faPlay } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import evadeIcon from "../assets/evade-icon.webp"
 import React from 'react'
 import { Form, Stack } from "react-bootstrap"
-import { ACC, HIT, SUR, BLO, EVA } from '../data/dice-data'
+import { faBolt, faPlus, faBurst, faBullseye, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ButtonToggle from './ButtonToggle'
+import evadeIcon from "../../assets/evade-icon.webp"
+import { ACC, DAM, SUR, BLO, EVA } from '../../data/dice'
 
 const SurgeLabel = ({ num }) => {
   return (
-    <>
+    <span className="text-nowrap">
       { Array(num).fill(0).map((_, index) => (
         <FontAwesomeIcon key={index} icon={faBolt} title={num + " surge"} />
       ))}
-    </>
+    </span>
   )
 }
 
@@ -29,8 +29,6 @@ export default function SurgeAbilitiesInput({ values, onChange }) {
   const deleteAbility = (index) => {
     onChange(values.filter((_, i) => i !== index))
   }
-
-  console.log(values);
 
   return (
     <>
@@ -68,9 +66,9 @@ export default function SurgeAbilitiesInput({ values, onChange }) {
               size="sm" 
               min={-15} 
               max={15} 
-              name={HIT} 
-              value={ability[HIT]} 
-              onChange={(e) => updateProperty(index, HIT, parseInt(e.target.value))}
+              name={DAM} 
+              value={ability[DAM]} 
+              onChange={(e) => updateProperty(index, DAM, parseInt(e.target.value))}
             />
             <Form.Label htmlFor={"surge-block-" + index}>
               <FontAwesomeIcon icon={faPlay} title="Pierce" rotation={90}/>

@@ -1,6 +1,7 @@
-import { faCaretDown, faSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { BLACK, BLUE, GREEN, RED, WHITE, YELLOW } from '../../data/dice';
 
 // CSS classes to apply the right color for each dice
 const DICE_CLASSES = {
@@ -12,7 +13,7 @@ const DICE_CLASSES = {
     [WHITE]: "white"
 }
 
-export default function DieSelector({ colors, selectedColor, onChange, onDelete }) {
+export default function DieSelect({ colors, selectedColor, onChange, onDelete }) {
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const toggleOptions = () => setIsOptionsOpen(!isOptionsOpen);

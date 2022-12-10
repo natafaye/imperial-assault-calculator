@@ -5,13 +5,15 @@ export const BLO = 3 // Blocks
 export const EVA = 4 // Evades
 export const DOD = 5 // Dodges
 
-export const ATTACK_DICE = [RED, GREEN, BLUE, YELLOW]
-export const DEFENSE_DICE = [BLACK, WHITE]
-
 export const BLUE = "Blue"
 export const RED = "Red"
 export const GREEN = "Green"
 export const YELLOW = "Yellow"
+export const BLACK = "Black"
+export const WHITE = "White"
+
+export const ATTACK_DICE = [RED, GREEN, BLUE, YELLOW]
+export const DEFENSE_DICE = [BLACK, WHITE]
 
 /**
  * The sides of all dice by color

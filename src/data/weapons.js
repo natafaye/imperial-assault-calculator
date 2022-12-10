@@ -1,3 +1,5 @@
+import { BLUE, GREEN, RED, YELLOW } from "./dice";
+
 // WEAPON TYPES
 export const RANGED = "Ranged"
 export const MELEE = "Melee"
@@ -19,6 +21,7 @@ export const BALANCE = "Balance"
 export const IMPACT = "Impact"
 export const SIGHTS = "Sights"
 export const BARREL = "Barrel"
+export const LIGHTSABER = "Lightsaber"
 export const AMMUNITION = "Ammunition"
 
 /**
@@ -988,18 +991,4 @@ export const WEAPONS = [
             [0, 2, -1, 0, 0, 0]
         ]
     }, // Use one strain to apply pierce 1?
-    {
-        id: 65,
-        name: "J4X-7",
-        type: RANGED,
-        traits: [DROID],
-        attackDice: [BLUE],
-        modSpots: 0,
-        tier: 0,
-        cost: 0,
-        permanentBonus: [0, 0, 0, -1, 0, 0],
-        surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
-        ]
-    },
 ]

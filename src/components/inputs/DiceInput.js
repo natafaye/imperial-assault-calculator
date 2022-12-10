@@ -1,8 +1,8 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { ATTACK_DICE, DEFENSE_DICE } from '../data/dice'
-import DieSelector from './DieSelector'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import DieSelect from './DieSelect'
+import { ATTACK_DICE, DEFENSE_DICE, GREEN, BLACK } from '../../data/dice'
 
 export default function DiceInput({ values, onChange, isDefense }) {
 
@@ -22,7 +22,7 @@ export default function DiceInput({ values, onChange, isDefense }) {
         <>
             {values.map((color, index) => (
                 <div key={index} className="flex-shrink-0 my-1" style={{ flexBasis: "130px" }}>
-                    <DieSelector
+                    <DieSelect
                         colors={(isDefense) ? DEFENSE_DICE : ATTACK_DICE}
                         selectedColor={color}
                         onChange={updateDie(index)}
