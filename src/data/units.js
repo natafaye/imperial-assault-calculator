@@ -6,8 +6,8 @@ export const MERCENARY = "Mercenary"
 export const REBEL = "Rebel"
 
 export const SMALL = "1 x 1 (small)"
-export const LARGE = "1 x 2 (large)"
-export const HUGE = "2 x 2 (huge)"
+export const LARGE1 = "1 x 2 (large)"
+export const LARGE2 = "2 x 2 (large)"
 export const MASSIVE = "2 x 3 (massive)"
 
 export const DROID = "Droid"
@@ -174,7 +174,7 @@ export const UNITS = [
         deploymentCost: 7,
         reinforceCost: null,
 		traits: [TROOPER, LEADER, CREATURE],
-        size: LARGE,
+        size: LARGE1,
         elite: true,
         health: 13,
         speed: 5,
@@ -270,7 +270,7 @@ export const UNITS = [
         deploymentCost: 5,
         reinforceCost: null,
 		traits: [TROOPER, CREATURE],
-        size: LARGE,
+        size: LARGE1,
         elite: true,
         health: 9,
         speed: 4,
@@ -295,7 +295,7 @@ export const UNITS = [
         deploymentCost: 6,
         reinforceCost: null,
 		traits: [TROOPER, HEAVY_WEAPON],
-        size: LARGE,
+        size: LARGE1,
         elite: false,
         health: 5,
         speed: 2,
@@ -1365,7 +1365,7 @@ export const UNITS = [
         deploymentCost: 6,
         reinforceCost: null,
 		traits: [LEADER, SMUGGLER, HUNTER],
-        size: HUGE,
+        size: LARGE2,
         elite: true,
         health: 10,
         speed: 2,
@@ -1430,10 +1430,149 @@ export const UNITS = [
         ]
     },// TODO: May apply 1 block and -1 evade while defending
     {
+        id: 58,
+        name: "Loth-cat",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 4,
+        reinforceCost: 2,
+		traits: [CREATURE],
+        size: SMALL,
+        elite: false,
+        health: 3,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },
+    {
+        id: 59,
+        name: "Loth-cat (Elite)",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 6,
+        reinforceCost: 3,
+		traits: [CREATURE],
+        size: SMALL,
+        elite: true,
+        health: 5,
+        speed: 5,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    },
+    {
+        id: 60,
+        name: "Maul",
+        title: "Seeker of Vengeance",
+        affiliation: MERCENARY,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [FORCE_USER, BRAWLER],
+        size: SMALL,
+        elite: true,
+        health: 12,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -3, 0, 0]
+        ]
+    },
+    {
+        id: 61,
+        name: "Nexu",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 4,
+        reinforceCost: null,
+		traits: [CREATURE, BRAWLER],
+        size: LARGE2,
+        elite: false,
+        health: 6,
+        speed: 6,
+        defenseDice: [WHITE],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0]
+        ]
+    },// TODO: add a block for every evade result while defending
+    {
+        id: 62,
+        name: "Nexu (Elite)",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 6,
+        reinforceCost: null,
+		traits: [CREATURE, BRAWLER],
+        size: LARGE2,
+        elite: true,
+        health: 8,
+        speed: 6,
+        defenseDice: [WHITE],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    },
+    {
+        id: 63,
+        name: "Onar Koma",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 6,
+        reinforceCost: null,
+		traits: [GUARDIAN, HUNTER],
+        size: SMALL,
+        elite: false,
+        health: 15,
+        speed: 4,
+        defenseDice: [],
+        attackDice: [BLUE, RED, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [-2, 2, -1, 0, 0, 0],
+            [-1, 1, -1, 0, 0, 0]
+        ]
+    },
+    {
         id: 0,
         name: "",
         title: "",
-        affiliation: IMPERIAL,
+        affiliation: MERCENARY,
         deploymentCost: 0,
         reinforceCost: null,
 		traits: [],
@@ -1449,7 +1588,353 @@ export const UNITS = [
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: [
-
+            
         ]
     },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    {
+        id: 0,
+        name: "",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },
+    
 ]
