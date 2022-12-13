@@ -1,14 +1,13 @@
 import React from 'react'
-import { IMPERIAL, MERCENARY, REBEL, UNITS } from '../../data/units'
 import Select from 'react-select'
+import { IMPERIAL, MERCENARY, REBEL, UNITS } from '../../../data/units'
+import UnitLabel from '../../labels/UnitLabel'
+import { search, searchArray } from './selectUtilities'
 
 const UNIT_OPTIONS = [REBEL, IMPERIAL, MERCENARY].map(affiliation => ({
     label: affiliation,
     options: UNITS.filter(unit => unit.affiliation === affiliation)
 }))
-
-const search = (toCheck, input) => toCheck.toLowerCase().includes(input.toLowerCase())
-const searchArray = (toCheck, input) => toCheck.some(item => search(item, input))
 
 const filterOption = (candidate, input) => input.split(" ").every(term =>
     search(candidate.data.name, term)
@@ -19,7 +18,7 @@ const filterOption = (candidate, input) => input.split(" ").every(term =>
     || searchArray(candidate.data.attackDice, term)
     || searchArray(candidate.data.defenseDice, term)
     || (search(term, "elite") && candidate.data.elite)
-    || (search(term, "normal") && !candidate.data.elite)
+    || ((search(term, "normal") || search(term, "regular")) && !candidate.data.elite)
     || (search(term, "reroll") && (candidate.data.attackRerolls || candidate.data.defenseRerolls))
 )
 
@@ -35,7 +34,7 @@ export default function UnitSelect({ value, onChange }) {
             options={UNIT_OPTIONS}
             className="text-dark w-100"
             filterOption={filterOption}
-            getOptionLabel={u => u.name}
+            getOptionLabel={u => <UnitLabel unit={u} />}
             getOptionValue={u => u.id}
             placeholder="Select Unit"
             noOptionsMessage={() => noMatchesMessage}

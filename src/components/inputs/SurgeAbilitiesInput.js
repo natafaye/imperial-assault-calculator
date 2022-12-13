@@ -4,7 +4,8 @@ import { faBolt, faPlus, faBurst, faBullseye, faPlay } from '@fortawesome/free-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ButtonToggle from './ButtonToggle'
 import evadeIcon from "../../assets/evade-icon.webp"
-import { ACC, DAM, SUR, BLO, EVA } from '../../data/dice'
+import dodgeIcon from "../../assets/dodge-icon.webp"
+import { ACC, DAM, SUR, BLO, EVA, DOD } from '../../data/dice'
 
 const SurgeLabel = ({ num }) => {
   return (
@@ -84,7 +85,7 @@ export default function SurgeAbilitiesInput({ values, onChange }) {
               onChange={(e) => updateProperty(index, BLO, parseInt(e.target.value))}
             />
             <Form.Label htmlFor={"surge-evade-" + index}>
-              <img src={evadeIcon} title="Damage" alt="Damage icon"/>
+              <img src={evadeIcon} title="Evade" alt="Evade icon"/>
             </Form.Label>
             <Form.Control 
               id={"surge-evade-" + index}
@@ -95,6 +96,19 @@ export default function SurgeAbilitiesInput({ values, onChange }) {
               name={EVA} 
               value={ability[EVA]} 
               onChange={(e) => updateProperty(index, EVA, parseInt(e.target.value))}
+            />
+            <Form.Label htmlFor={"surge-dodge-" + index}>
+              <img src={dodgeIcon} title="Dodge" alt="Dodge icon"/>
+            </Form.Label>
+            <Form.Control 
+              id={"surge-dodge-" + index}
+              type="number" 
+              size="sm" 
+              min={-1} 
+              max={1} 
+              name={DOD} 
+              value={ability[DOD]} 
+              onChange={(e) => updateProperty(index, DOD, parseInt(e.target.value))}
             />
             <button className="btn btn-outline-secondary" onClick={() => deleteAbility(index)}>X</button>
           </Stack>

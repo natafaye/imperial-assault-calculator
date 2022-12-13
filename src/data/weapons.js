@@ -876,7 +876,7 @@ export const WEAPONS = [
     {
         id: 57,
         name: "Shu Yen's Lightsaber",
-        description: "Shu Yen reward",
+        description: "Diala reward",
         type: MELEE,
         traits: [LIGHTSABER, BLADE],
         attackDice: [BLUE, RED],

@@ -5,6 +5,8 @@ export const BLO = 3 // Blocks
 export const EVA = 4 // Evades
 export const DOD = 5 // Dodges
 
+export const VALUE_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge"]
+
 export const BLUE = "Blue"
 export const RED = "Red"
 export const GREEN = "Green"
@@ -14,6 +16,16 @@ export const WHITE = "White"
 
 export const ATTACK_DICE = [RED, GREEN, BLUE, YELLOW]
 export const DEFENSE_DICE = [BLACK, WHITE]
+
+// CSS classes to apply the right color for each dice
+export const DICE_CLASSES = {
+    [GREEN]: "success", 
+    [BLUE]: "info", 
+    [YELLOW]: "warning", 
+    [RED]: "danger", 
+    [BLACK]: "dark", 
+    [WHITE]: "white"
+}
 
 /**
  * The sides of all dice by color

@@ -1,22 +1,32 @@
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
+import { REBEL, IMPERIAL } from "./units"
 
-export const TRESS = "Tress Hacnua"
-export const SHYLA = "Shyla Varad"
-export const KOTUN = "Ko-Tun Feralo"
-export const DROKKATTA = "Drokkatta"
-export const VINTO = "Vinto Hreeda"
+// Hero names
+export const BIV = "Biv Bodhrik"
 export const CT1701 = "CT-1701"
-export const GIDEON = "Gideon Argus"
-export const JYN = "Jyn Odan"
-export const LOKU = "Loku Kanoloa"
 export const DAVITH = "Davith Elso"
 export const DIALA = "Diala Passil"
-export const ONAR = "Onar Koma"
-export const MAK = "Mak Eshka'rey"
+export const DROKKATTA = "Drokkatta"
+export const FENN = "Fenn Signis"
 export const GAARKHAN = "Gaarkhan"
+export const GIDEON = "Gideon Argus"
+export const JARROD = "Jarrod Kelvin"
+export const JYN = "Jyn Odan"
+export const KOTUN = "Ko-Tun Feralo"
+export const LOKU = "Loku Kanoloa"
+export const MAK = "Mak Eshka'rey"
+export const ONAR = "Onar Koma"
+export const SHYLA = "Shyla Varad"
+export const TRESS = "Tress Hacnua"
+export const VERENA = "Verena Talos"
+export const VINTO = "Vinto Hreeda"
 
+// Droid name
 export const J4X7 = "JFX-7"
 
-
+/**
+ * All the class cards (reward and upgrades) that the heros can use
+ */
 export const CLASS_CARDS = [
     {
         id: 0,
@@ -24,10 +34,8 @@ export const CLASS_CARDS = [
         affiliation: REBEL,
 		availableTo: [TRESS],
         cost: 3,
-        health: 0,
-        speed: 0,
-        defenseDice: [],
         attackDice: [],
+        defenseDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
@@ -40,8 +48,8 @@ export const CLASS_CARDS = [
         affiliation: REBEL,
 		availableTo: [REBEL],
         cost: 3,
-        defenseDice: [],
         attackDice: [YELLOW],
+        defenseDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
@@ -54,8 +62,8 @@ export const CLASS_CARDS = [
         affiliation: REBEL,
 		availableTo: [SHYLA],
         cost: 1,
-        defenseDice: [],
         attackDice: [],
+        defenseDice: [],
         attackBonus: [0, 1, -1, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
@@ -347,20 +355,6 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 23,
-        name: "Double Agent",
-        affiliation: REBEL,
-		availableTo: [],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
-		surgeAbilities: []
-    },
-    {
         id: 24,
         name: "Embody the Force",
         affiliation: REBEL,
@@ -463,7 +457,7 @@ export const CLASS_CARDS = [
         id: 31,
         name: "Gunslinger",
         affiliation: REBEL,
-		availableTo: [],
+		availableTo: [JYN],
         cost: 3,
         defenseDice: [],
         attackDice: [],
@@ -476,6 +470,192 @@ export const CLASS_CARDS = [
     }, // TODO: Allow using surge abilities from other pistols
     {
         id: 32,
+        name: "Military Efficiency",
+        affiliation: REBEL,
+		availableTo: [GIDEON],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Convert 1 damage to 1 surge, or 1 block to 1 evade
+    {
+        id: 53,
+        name: "Hondo's Treasure",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 1],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Choose to use
+    {
+        id: 54,
+        name: "Hunt Them Down (Reward)",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 1, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: while attacking an imperial TROOPER
+    {
+        id: 40,
+        name: "Mon Cala Special Forces",
+        affiliation: REBEL,
+		availableTo: [LOKU],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    },
+    {
+        id: 39,
+        name: "Mutual Progression",
+        affiliation: REBEL,
+		availableTo: [JARROD, J4X7],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    },
+    {
+        id: 38,
+        name: "Pinpoint Shot",
+        affiliation: REBEL,
+		availableTo: [VINTO],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Remove all results except accuracy, then add 1
+    {
+        id: 37,
+        name: "Point Blank Shot",
+        affiliation: REBEL,
+		availableTo: [VERENA],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Replace one die with red die, trigger adjacent & pistol
+    {
+        id: 36,
+        name: "Power Converter",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // Replace 1 die in your attack pool with a different attack die of your choice
+    {
+        id: 35,
+        name: "Proximity Strike",
+        affiliation: REBEL,
+		availableTo: [SHYLA],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 1,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // Force defense to reroll one defense die
+    {
+        id: 34,
+        name: "Rapid Fire",
+        affiliation: REBEL,
+		availableTo: [VINTO],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // Rerolls for ranged, all attack and all defense
+    {
+        id: 33,
+        name: "Roll With It",
+        affiliation: REBEL,
+		availableTo: [JYN],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // TODO: Choose to use, Convert 1 or more block to evade
+    {
+        id: 41,
+        name: "Sharpshooter",
+        affiliation: REBEL,
+		availableTo: [VINTO],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    },
+    {
+        id: 42,
+        name: "Smuggler's Luck",
+        affiliation: REBEL,
+		availableTo: [JYN],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // TODO: applies to attribute tests
+    {
+        id: 45,
         name: "",
         affiliation: REBEL,
 		availableTo: [],
@@ -490,25 +670,41 @@ export const CLASS_CARDS = [
         ]
     },
     {
-        id: 0,
-        name: "",
+        id: 46,
+        name: "Structural Exploitation",
         affiliation: REBEL,
-		availableTo: [],
-        cost: 0,
+		availableTo: [DROKKATTA],
+        cost: 3,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 1, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
-		surgeAbilities: [
-        ]
-    },
+		surgeAbilities: []
+    }, // TODO: trigger to use, if object apply additional +1 damage and pierce 1
     {
-        id: 0,
-        name: "",
+        id: 47,
+        name: "Student of Battle",
         affiliation: REBEL,
-		availableTo: [],
+		availableTo: [VERENA],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0],
+            [5, 0, -1, 0, 0, 0]
+        ]
+    }, // TODO: Trigger or not
+    {
+        id: 43,
+        name: "Swords Dance",
+        affiliation: REBEL,
+		availableTo: [SHYLA],
         cost: 0,
         defenseDice: [],
         attackDice: [],
@@ -518,5 +714,91 @@ export const CLASS_CARDS = [
 		defenseRerolls: 0,
 		surgeAbilities: [
         ]
-    },
+    }, // TODO: Remove 1 die from attack pool
+    {
+        id: 44,
+        name: "Take Cover",
+        affiliation: REBEL,
+		availableTo: [FENN],
+        cost: 1,
+        defenseDice: [WHITE],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // TODO: turn on
+    {
+        id: 48,
+        name: "Thermal Explosives",
+        affiliation: REBEL,
+		availableTo: [DROKKATTA],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [YELLOW],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: trigger or not for strain with ranged weapon
+    {
+        id: 49,
+        name: "Weakness Identified",
+        affiliation: REBEL,
+		availableTo: [CT1701],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+        ]
+    }, // TODO: Either remove one defense die or apply +1 damage
+    {
+        id: 50,
+        name: "Weapon Expert",
+        affiliation: REBEL,
+		availableTo: [FENN],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [2, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Choose to use
+    {
+        id: 51,
+        name: "Wholeness",
+        affiliation: REBEL,
+		availableTo: [TRESS],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Add green die for attribute tests, choose to use while defending
+    {
+        id: 52,
+        name: "X-8 Upgrade",
+        affiliation: REBEL,
+		availableTo: [J4X7],
+        cost: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 1, 0, 1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // TODO: Supporting fire does +1 damage insted of pierce 1
 ]

@@ -1,4 +1,5 @@
 import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION } from "./weapons";
+import { GREEN } from "./dice"
 
 export const MODS = [
     {

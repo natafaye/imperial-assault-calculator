@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import TopBar from "./components/TopBar";
-import CustomAttackPage from "./pages/CustomAttackPage";
-import PrefilledAttackPage from './pages/PrefilledAttackPage';
+import AttackPage from "./pages/AttackPage";
+import AttributeTestPage from './pages/AttributeTestPage';
+import ComparePage from './pages/ComparePage';
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <TopBar />
       <Container>
         <Routes>
-          <Route path="/" element={<CustomAttackPage/>}/>
-          <Route path="/prefilled" element={<PrefilledAttackPage/>}/>
+          <Route path="/" element={<AttackPage/>}/>
+          <Route path="/attribute" element={<AttributeTestPage/>}/>
+          <Route path="/compare" element={<ComparePage/>}/>
         </Routes>
       </Container>
     </>

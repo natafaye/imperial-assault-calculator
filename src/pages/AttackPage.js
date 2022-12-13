@@ -4,7 +4,7 @@ import AttackDataHistogram from "../components/histograms/AttackHistogram";
 import Attack, { getAverage, getHistograms } from "../calculators/Attack";
 import { DAM, ACC } from "../data/dice";
 
-export default function CustomAttackPage() {
+export default function AttackPage() {
     const [results, setResults] = useState(undefined)
 
     const calculate = ({ attackDice, defenseDice, surgeAbilities, bonus, rerolls }) => {

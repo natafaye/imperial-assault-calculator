@@ -382,7 +382,7 @@ export const UNITS = [
         name: "General Weiss",
         title: "Field Commander",
         affiliation: IMPERIAL,
-        deploymentCost: 0,
+        deploymentCost: 16,
         reinforceCost: null,
 		traits: [VEHICLE, LEADER, HEAVY_WEAPON],
         size: MASSIVE,
