@@ -1,7 +1,7 @@
 import React from 'react'
-import { SUR } from '../../data/dice';
 import SurgeCostLabel from './SurgeCostLabel';
 import ValueListLabels from './ValueListLabels';
+import { SUR } from '../../../data/dice';
 
 export default function SurgeListLabels({ abilities }) {
   return (

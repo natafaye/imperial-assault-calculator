@@ -1,9 +1,9 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-import SurgeListLabels from './SurgeListLabels'
-import DiceListLabels from './DiceListLabels'
-import BonusListLabels from './BonusListLabels'
-import TierAndCostLabel from './TierAndCostLabel'
+import SurgeListLabels from './sub-labels/SurgeListLabels'
+import DiceListLabels from './sub-labels/DiceListLabels'
+import BonusListLabels from './sub-labels/BonusListLabels'
+import TierAndCostLabel from './sub-labels/TierAndCostLabel'
 
 export default function ModLabel({ mod }) {
     const popover = (

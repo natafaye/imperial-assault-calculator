@@ -1,11 +1,11 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-import SurgeListLabels from './SurgeListLabels'
-import DiceListLabels from './DiceListLabels'
-import BonusListLabels from './BonusListLabels'
-import TraitsListLabels from './TraitsListLabels'
-import AffiliationLabel from './AffiliationLabel'
-import AttackTypeLabel from './AttackTypeLabel'
+import SurgeListLabels from './sub-labels/SurgeListLabels'
+import DiceListLabels from './sub-labels/DiceListLabels'
+import BonusListLabels from './sub-labels/BonusListLabels'
+import TraitsListLabels from './sub-labels/TraitsListLabels'
+import AffiliationLabel from './sub-labels/AffiliationLabel'
+import AttackTypeLabel from './sub-labels/AttackTypeLabel'
 
 export default function UnitLabel({ unit }) {
     const popover = (

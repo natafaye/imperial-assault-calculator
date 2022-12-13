@@ -1,115 +1,126 @@
 import React, { useState } from 'react'
-import { faHandFist, faShield } from "@fortawesome/free-solid-svg-icons";
+import { faFistRaised, faHandFist, faShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Row, Col, Form, Card } from 'react-bootstrap'
-import UnitSelect from './selects/UnitSelect';
-import WeaponSelect from './selects/WeaponSelect';
-import ClassCardSelect from './selects/ClassCardSelect';
-import ModSelect from './selects/ModSelect';
-import SurgeAbilitiesInput from "./SurgeAbilitiesInput";
-import BonusInput from "./BonusInput";
-import DiceInput from './DiceInput'
-import RerollsInput from './RerollsInput'
+import { Row, Col, Accordion, Stack } from 'react-bootstrap'
+import UnitInfoPicker from './unit-info/UnitInfoPicker';
+import DiceListInput from './custom-info/dice/DiceListInput';
+import SurgeAbilitiesInput from "./custom-info/SurgeAbilitiesInput";
+import BonusInput from "./custom-info/BonusInput";
+import RerollsInput from './custom-info/RerollsInput'
 import { addValues } from '../../calculators/Attack';
-import { BLACK,GREEN } from '../../data/dice';
+import { BLACK, GREEN } from '../../data/dice';
 
 export default function AttackDataInput({ onCalculate }) {
     const [attackDice, setAttackDice] = useState([GREEN, GREEN])
-    const [defenseDice, setDefenseDice] = useState([BLACK])
     const [surgeAbilities, setSurgeAbilities] = useState([])
     const [attackBonus, setAttackBonus] = useState([0, 0, 0, 0, 0, 0])
-    const [defenseBonus, setDefenseBonus] = useState([0, 0, 0, 0, 0, 0])
-    const [focused, setFocused] = useState(false)
-    const [attackUnit, setAttackUnit] = useState(null);
-    const [attackWeapon, setAttackWeapon] = useState(null);
-    const [attackMods, setAttackMods] = useState(null);
-    const [attackClassCards, setAttackClassCards] = useState([])
-    const [defenseUnit, setDefenseUnit] = useState(null);
-    const [defenseClassCards, setDefenseClassCards] = useState([])
     const [attackRerolls, setAttackRerolls] = useState(0)
+
+    const [defenseDice, setDefenseDice] = useState([BLACK])
+    const [defenseBonus, setDefenseBonus] = useState([0, 0, 0, 0, 0, 0])
     const [defenseRerolls, setDefenseRerolls] = useState(0)
 
     const onCalculateClick = () => {
         onCalculate({ attackDice, defenseDice, surgeAbilities, attackRerolls, bonus: addValues(attackBonus, defenseBonus) })
     }
 
-    const onAttackUnitChange = (newUnit) => {
-        setAttackUnit(newUnit);
-        setAttackDice(newUnit?.attackDice || []);
-        setSurgeAbilities(newUnit?.surgeAbilities || []);
-        setDefenseBonus(newUnit?.attackBonus || [0, 0, 0, 0, 0, 0])
-        setAttackRerolls(newUnit?.attackRerolls || 0)
+    const onAttackUnitDataChange = ({ dice, abilities, bonus, rerolls }) => {
+        setAttackDice(dice)
+        setSurgeAbilities(abilities)
+        setAttackBonus(bonus)
+        setAttackRerolls(rerolls)
     }
 
-    const onDefenseUnitChange = (newUnit) => {
-        setDefenseUnit(newUnit);
-        setDefenseDice(newUnit?.defenseDice || []);
-        setDefenseBonus(newUnit?.defenseBonus || [0, 0, 0, 0, 0, 0])
-        setDefenseRerolls(newUnit?.defenseRerolls || 0)
+    const onDefenseUnitDataChange = ({ dice, bonus, rerolls }) => {
+        setDefenseDice(dice)
+        setDefenseBonus(bonus)
+        setDefenseRerolls(rerolls)
     }
 
-    const onAttackWeaponChange = (newWeapon) => {
-        setAttackWeapon(newWeapon);
-        setAttackDice(newWeapon?.attackDice || [])
-        setSurgeAbilities(newWeapon?.surgeAbilities.concat(attackUnit?.surgeAbilities || []) || attackUnit?.surgeAbilities || []);
-        setAttackBonus(addValues(newWeapon?.permanentBonus, attackUnit?.permanentBonus))
+    const clearAttackBonusRerolls = () => {
+        setAttackBonus([0, 0, 0, 0, 0, 0])
+        setAttackRerolls(0)
     }
 
-    const onAttackClassCardsChange = (newClassCards) => {
-        setAttackClassCards(newClassCards);
-    }
-
-    const onDefenseClassCardsChange = (newClassCards) => {
-        setDefenseClassCards(newClassCards);
-    }
-
-    const onAttackModsChange = (newMods) => {
-        setAttackMods(newMods)
+    const clearDefenseBonusRerolls = () => {
+        setDefenseBonus([0, 0, 0, 0, 0, 0])
+        setDefenseRerolls(0)
     }
 
     return (
         <>
-            <Row className="mt-4">
+            <Row className="mt-4 text-center">
                 <Col>
-                    <UnitSelect value={attackUnit} onChange={onAttackUnitChange} />
-                    <WeaponSelect value={attackWeapon} onChange={onAttackWeaponChange} />
-                    <ModSelect value={attackMods} onChange={onAttackModsChange} />
-                    <ClassCardSelect value={attackClassCards} onChange={onAttackClassCardsChange} />
+                    <h3>
+                        <FontAwesomeIcon icon={faFistRaised} className="me-3" />
+                        Attack
+                    </h3>
                 </Col>
                 <Col>
-                    <UnitSelect value={defenseUnit} onChange={onDefenseUnitChange} />
-                    <ClassCardSelect value={defenseClassCards} onChange={onDefenseClassCardsChange} />
+                    <h3>
+                        <FontAwesomeIcon icon={faShield} className="me-3" />
+                        Defense
+                    </h3>
                 </Col>
             </Row>
-            <Row>
-                <Col xs={12} xl={6} className="d-flex align-items-center mt-4">
-                    <FontAwesomeIcon icon={faHandFist} size="3x" className="me-3" title="Attack" fixedWidth />
+            <Row className="mt-4">
+                <Col xs={6} className="d-flex align-items-center text-muted my-3">
+                    <hr className="flex-grow-1" />
+                    <h6 className="mx-2">PREFILLED</h6>
+                    <hr className="flex-grow-1" />
+                </Col>
+                <Col xs={6} className="d-flex align-items-center text-muted my-3">
+                    <hr className="flex-grow-1" />
+                    <h6 className="mx-2">PREFILLED</h6>
+                    <hr className="flex-grow-1" />
+                </Col>
+                <Col>
+                    <UnitInfoPicker isAttack onChange={onAttackUnitDataChange} />
+                </Col>
+                <Col>
+                    <UnitInfoPicker onChange={onDefenseUnitDataChange} />
+                </Col>
+            </Row>
+            <Row className="mt-3">
+                <Col xs={6} className="d-flex align-items-center text-muted my-3">
+                    <hr className="flex-grow-1" />
+                    <h6 className="mx-2">CUSTOM</h6>
+                    <hr className="flex-grow-1" />
+                </Col>
+                <Col xs={6} className="d-flex align-items-center text-muted my-3">
+                    <hr className="flex-grow-1" />
+                    <h6 className="mx-2">CUSTOM</h6>
+                    <hr className="flex-grow-1" />
+                </Col>
+                <Col className="d-flex align-items-center">
                     <div className="d-flex flex-wrap flex-grow-1 align-items-center">
-                        <DiceInput values={attackDice} onChange={setAttackDice} />
+                        <DiceListInput values={attackDice} onChange={setAttackDice} />
                     </div>
                 </Col>
-                <Col xs={12} xl={6} className="d-flex align-items-center mt-4">
-                    <FontAwesomeIcon icon={faShield} size="3x" className="me-3" title="Defense" fixedWidth />
+                <Col className="d-flex align-items-center">
                     <div className="d-flex flex-wrap flex-grow-1 align-items-center">
-                        <DiceInput values={defenseDice} onChange={setDefenseDice} isDefense />
+                        <DiceListInput values={defenseDice} onChange={setDefenseDice} isDefense />
                     </div>
                 </Col>
             </Row>
             <Row className="mt-3">
                 <Col>
-                    <BonusInput idPrefix="defense" value={attackBonus} onChange={setAttackBonus} label="Attack Bonus" />
-                    <RerollsInput idPrefix="attack" label="Attack Rerolls" 
-                        value={attackRerolls} onChange={setAttackRerolls} className="my-3" 
-                    />
-                    <Form.Group className="mb-3" controlId="focused-checkbox">
-                        <Form.Check type="checkbox" label="Focused?" value={focused} onChange={(e) => setFocused(e.target.value)} />
-                    </Form.Group>
+                    <Stack direction="horizontal" gap={1}>
+                        <BonusInput idPrefix="attack" value={attackBonus} onChange={setAttackBonus} />
+                        <RerollsInput idPrefix="attack" label="Attack Rerolls"
+                            value={attackRerolls} onChange={setAttackRerolls} className="my-3"
+                        />
+                        <button className="btn btn-outline-secondary" onClick={clearAttackBonusRerolls}>X</button>
+                    </Stack>
                 </Col>
                 <Col xs={12} lg={6}>
-                    <BonusInput idPrefix="defense" value={defenseBonus} onChange={setDefenseBonus} label="Defense Bonus" />
-                    <RerollsInput idPrefix="defense" label="Defense Rerolls"
-                        value={defenseRerolls} onChange={setDefenseRerolls} className="my-3" 
-                    />
+                    <Stack direction="horizontal" gap={1}>
+                        <BonusInput idPrefix="defense" value={defenseBonus} onChange={setDefenseBonus} />
+                        <RerollsInput idPrefix="defense" label="Defense Rerolls"
+                            value={defenseRerolls} onChange={setDefenseRerolls} className="my-3"
+                        />
+                        <button className="btn btn-outline-secondary" onClick={clearDefenseBonusRerolls}>X</button>
+                    </Stack>
                 </Col>
             </Row>
             <Row className="mt-3 align-items-end">

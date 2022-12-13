@@ -2,10 +2,10 @@ import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFistRaised } from '@fortawesome/free-solid-svg-icons'
-import SurgeListLabels from './SurgeListLabels'
-import DiceListLabels from './DiceListLabels'
-import BonusListLabels from './BonusListLabels'
-import AffiliationLabel from './AffiliationLabel'
+import SurgeListLabels from './sub-labels/SurgeListLabels'
+import DiceListLabels from './sub-labels/DiceListLabels'
+import BonusListLabels from './sub-labels/BonusListLabels'
+import AffiliationLabel from './sub-labels/AffiliationLabel'
 
 export default function ClassCardLabel({ card }) {
     const popover = (

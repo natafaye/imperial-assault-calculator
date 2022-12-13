@@ -1,5 +1,5 @@
 import React from 'react'
-import { BLO, VALUE_LABELS } from '../../data/dice'
+import { BLO, VALUE_LABELS } from '../../../data/dice'
 
 export function ValueLabel({ value, property, isAttack = false, className = "" }) {
     if (!value) 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AttackDataInput from "../components/inputs/AttackDataInput";
-import AttackDataHistogram from "../components/histograms/AttackHistogram";
+import AttackHistogramList from "../components/histograms/AttackHistogramList";
 import Attack, { getAverage, getHistograms } from "../calculators/Attack";
 import { DAM, ACC } from "../data/dice";
 
@@ -19,7 +19,8 @@ export default function AttackPage() {
     return (
         <>
             <AttackDataInput onCalculate={calculate} />
-            <AttackDataHistogram results={results} />
+            <hr className="my-5"/>
+            <AttackHistogramList results={results} />
         </>
     )
 }

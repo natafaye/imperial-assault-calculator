@@ -1,7 +1,7 @@
 import { faSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { DICE_CLASSES } from '../../data/dice'
+import { DICE_CLASSES } from '../../../data/dice'
 
 export default function DiceListLabels({ dice }) {
     return (

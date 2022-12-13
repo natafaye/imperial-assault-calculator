@@ -6,8 +6,8 @@ import { DICE, ACC, DAM, SUR, BLO, EVA, DOD } from "../data/dice"
  * @param {number[]} b An array to add
  * @returns {number[]} An array of the sum of the values of the two arrays
  */
-export const addValues = (a = [0,0,0,0,0,0], b = [0,0,0,0,0,0]) => {
-    return a.map((value, index) => value + b[index])
+export const addValues = (a = [0,0,0,0,0,0], ...others) => {
+    return a.map((value, index) => value + others.reduce((total, b) => total + b[index], 0))
 }
 
 /**

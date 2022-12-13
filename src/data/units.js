@@ -25,6 +25,30 @@ export const SMUGGLER = "Smuggler"
 
 export const UNITS = [
     {
+        id: 300,
+        isHero: true,
+        name: "Some Hero",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [],
+        size: SMALL,
+        elite: false,
+        health: 0,
+        speed: 0,
+        defenseDice: [],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    }, 
+    {
         id: 500,
         name: "J4X-7",
         title: "",

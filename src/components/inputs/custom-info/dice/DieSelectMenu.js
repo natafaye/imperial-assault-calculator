@@ -1,7 +1,7 @@
 import React from 'react'
 import { faSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DICE_CLASSES } from '../../../data/dice'
+import { DICE_CLASSES } from '../../../../data/dice'
 
 export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
 

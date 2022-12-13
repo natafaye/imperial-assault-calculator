@@ -2,7 +2,7 @@ import { faGalacticRepublic, faRebel } from '@fortawesome/free-brands-svg-icons'
 import { faSpider } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { IMPERIAL, MERCENARY, REBEL } from '../../data/units'
+import { IMPERIAL, MERCENARY, REBEL } from '../../../data/units'
 
 const AFFILIATION_ICONS = {
     [REBEL]: faRebel,
