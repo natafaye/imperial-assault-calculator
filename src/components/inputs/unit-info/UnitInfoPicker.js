@@ -1,64 +1,12 @@
 import React, { useState } from 'react'
 import { Stack } from 'react-bootstrap'
-import { addValues } from '../../../calculators/Attack'
-import { GREEN } from '../../../data/dice'
+import { CLASS_CARD, cleanSelectedOptionalAbilities, getAttackData, getDefenseData, MOD, UNIT, WEAPON } from '../../../calculators/utilities'
 import ClassCardSelect from './ClassCardSelect'
 import FocusedInput from './FocusedInput'
 import ModSelect from './ModSelect'
+import OptionalAbilitiesInput from './OptionalAbilitiesInput'
 import UnitSelect from './UnitSelect'
 import WeaponSelect from './WeaponSelect'
-
-const getAttackData = ({ unit, classCards, weapon, mods, focused }) => {
-    console.log(focused)
-    return {
-        dice: []
-            .concat(
-                unit?.attackDice, 
-                classCards.flatMap(c => c.attackDice), 
-                weapon?.attackDice, 
-                mods.flatMap(m => m.attackDice),
-                (focused ? GREEN : null)
-            )
-            .filter(d => d),
-        abilities: []
-            .concat(
-                unit?.surgeAbilities,
-                classCards.flatMap(c => c.surgeAbilities),
-                weapon?.surgeAbilities,
-                mods.flatMap(m => m.surgeAbilities))
-            .filter(a => a),
-        bonus: addValues(
-            ...[
-                unit?.attackBonus, 
-                ...classCards.map(c => c.attackBonus), 
-                weapon?.permanentBonus, 
-                ...mods.map(m => m.permanentBonus)
-            ].filter(b => b)
-        ),
-        rerolls: 
-            (unit?.attackRerolls || 0) + 
-            classCards.reduce((total, c) => total + c.attackRerolls, 0)
-    }
-}
-
-const getDefenseData = ({ unit, classCards }) => {
-    return {
-        dice: []
-            .concat(
-                unit?.defenseDice, 
-                classCards.flatMap(c => c.defenseDice))
-            .filter(d => d),
-        bonus: addValues(
-            ...[
-                unit?.defenseBonus, 
-                ...classCards.map(c => c.defenseBonus)
-            ].filter(b => b)
-        ),
-        rerolls: 
-            (unit?.defenseRerolls || 0) + 
-            classCards.reduce((total, c) => total + c.defenseRerolls, 0)
-    }
-}
 
 export default function UnitInfoPicker({ onChange, isAttack = false }) {
     const [focused, setFocused] = useState(false)
@@ -66,16 +14,16 @@ export default function UnitInfoPicker({ onChange, isAttack = false }) {
     const [classCards, setClassCards] = useState([])
     const [weapon, setWeapon] = useState(null);
     const [mods, setMods] = useState([]);
+    const [selectedOptionalIds, setSelectedOptionalIds] = useState([])
 
     const onAnyChange = (changedData) => {
-        const unitData = { unit, classCards, weapon, mods, focused, ...changedData }
-        console.log(unitData);
+        const unitData = { unit, classCards, weapon, mods, focused, selectedOptionalIds, ...changedData }
         onChange(isAttack ? getAttackData(unitData) : getDefenseData(unitData))
-        console.log(getAttackData(unitData));
     }
 
     const onUnitChange = (newUnit) => {
         setUnit(newUnit);
+        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, [newUnit], UNIT))
         onAnyChange({ unit: newUnit })
     }
     
@@ -86,17 +34,25 @@ export default function UnitInfoPicker({ onChange, isAttack = false }) {
 
     const onCardsChange = (newCards) => {
         setClassCards(newCards);
+        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, newCards, CLASS_CARD))
         onAnyChange({ classCards: newCards })
     }
 
     const onWeaponChange = (newWeapon) => {
         setWeapon(newWeapon);
+        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, [newWeapon], WEAPON))
         onAnyChange({ weapon: newWeapon })
     }
 
     const onModsChange = (newMods) => {
         setMods(newMods);
+        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, newMods, MOD))
         onAnyChange({ mods: newMods })
+    }
+
+    const onOptionalChange = (newSelectedIds) => {
+        setSelectedOptionalIds(newSelectedIds);
+        onAnyChange({ selectedOptionalIds: newSelectedIds })
     }
 
     return (
@@ -112,6 +68,12 @@ export default function UnitInfoPicker({ onChange, isAttack = false }) {
                     <ModSelect value={mods} onChange={onModsChange} />
                 </Stack>
             )}
+            <OptionalAbilitiesInput 
+                values={selectedOptionalIds} 
+                onChange={onOptionalChange} 
+                unitData={{ unit, classCards, weapon, mods }}
+                isAttack={isAttack} 
+            />
         </Stack>
     )
 }

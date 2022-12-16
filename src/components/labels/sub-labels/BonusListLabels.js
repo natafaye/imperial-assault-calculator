@@ -1,13 +1,11 @@
 import React from 'react'
 import ValueListLabels from './ValueListLabels'
 
-export default function BonusListLabels({ bonus, isAttack = false }) {
+export default function BonusListLabels({ bonus, showHRBelow = true, isAttack = false }) {
     return (
         <>
-            <div className="my-1">
-                <ValueListLabels values={bonus} isAttack={isAttack} />
-            </div>
-            {bonus.some(b => b) && <hr />}
+            <ValueListLabels values={bonus} isAttack={isAttack} />
+            {showHRBelow && bonus.some(b => b) && <hr />}
         </>
     )
 }

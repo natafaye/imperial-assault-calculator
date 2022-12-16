@@ -1,14 +1,5 @@
+import { getAverage, addValues } from "./utilities"
 import { DICE, ACC, DAM, SUR, BLO, EVA, DOD } from "../data/dice"
-
-/**
- * Adds the values of two arrays together to produce a new array
- * @param {number[]} a An array to add
- * @param {number[]} b An array to add
- * @returns {number[]} An array of the sum of the values of the two arrays
- */
-export const addValues = (a = [0,0,0,0,0,0], ...others) => {
-    return a.map((value, index) => value + others.reduce((total, b) => total + b[index], 0))
-}
 
 /**
  * Checks if two sets are equal to each other with one level deep equals
@@ -20,54 +11,6 @@ const isEqualSet = (a, b) => {
     return a.size === b.size && [...a].every(item => b.has(item))
 }
 
-/**
- * Gets an average from a list of rolls
- * @param {number[][]} results A list of possible results from rolls
- * @returns {number[]} The average of all the results
- */
-export const getAverage = (results) => {
-    let total = [0, 0, 0, 0, 0, 0]
-    for (const result of results) {
-        total = addValues(total, result)
-    }
-    return total.map(num => num / results.length)
-}
-
-/**
- * Creates multiple histograms for a specified list of properties (or indexes into an array)
- * @param {number[][]|Object[]} data an array of data points (either arrays or objects)
- * @param {number[]|string[]} properties a list of properties or array indexes to make histograms for
- * @returns {{value: *, amount: number}[][]} An array of histograms, in the same order as the properties array
- */
-export const getHistograms = (data, properties) => {
-    const histograms = properties.map(_ => [])
-    // For each datapoint, add the data to the histograms for each property
-    data.forEach((dataPoint) => {
-        properties.forEach((property, index) => {
-            let item = histograms[index].find(i => i.value === dataPoint[property]);
-            // If there's not already an item in the histogram for that property value, make one
-            if(!item) {
-                item = { value: dataPoint[property], amount: 0}
-                histograms[index].push(item)
-            }
-            // Count this data point in the histogram
-            item.amount++
-        })
-    })
-    histograms.forEach(histogram => {
-        // Sort the histograms by property value
-        histogram.sort((a,b) => a.value - b.value)
-        // Calculate percentage of getting the value
-        histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
-        // Calculate percentage of getting at least the value
-        for(let i = histogram.length - 1; i >= 0; i--) {
-            histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
-                histogram[i].percentage :
-                histogram[i].percentage + histogram[i + 1].atLeastPercentage
-        }
-    })
-    return histograms;
-}
 
 /**
  * Ensures that blocks, evades, and dodges aren't below zero
@@ -78,6 +21,7 @@ const defensefloor = (result) => {
     result[EVA] = Math.max(0, result[EVA])
     result[DOD] = Math.max(0, result[DOD])
 }
+
 
 /**
  * Holds data about an attack

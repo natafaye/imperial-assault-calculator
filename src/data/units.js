@@ -25,53 +25,6 @@ export const SMUGGLER = "Smuggler"
 
 export const UNITS = [
     {
-        id: 300,
-        isHero: true,
-        name: "Some Hero",
-        title: "",
-        affiliation: REBEL,
-        deploymentCost: 0,
-        reinforceCost: null,
-		traits: [],
-        size: SMALL,
-        elite: false,
-        health: 0,
-        speed: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
-		surgeAbilities: [
-            
-        ]
-    }, 
-    {
-        id: 500,
-        name: "J4X-7",
-        title: "",
-        affiliation: REBEL,
-        deploymentCost: null,
-        reinforceCost: null,
-        traits: [DROID],
-        size: SMALL,
-        elite: false,
-        health: 4,
-        speed: 3,
-        defenseDice: [],
-        attackDice: [BLUE],
-        attackType: RANGED,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-        defenseRerolls: 0,
-        surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
-        ]
-    },
-    {
         id: 0,
         name: "0-0-0",
         title: "Specialized in Pain",
@@ -2012,6 +1965,58 @@ export const UNITS = [
             [0, 2, -1, 0, 0, 0]
         ]
     },// TODO: can reroll an attack die if adjacent to friendly TROOPER
+    {
+        id: 82,
+        isHero: true,
+        name: "Biv Bodhrik",
+        title: "Vengeful Guerrilla",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 13,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, GREEN, YELLOW],
+            [BLUE],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED, BLUE, GREEN],
+            [RED],
+            [RED, BLUE]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: []
+    }, // ?????
+    {
+        id: 200,
+        name: "J4X-7",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 3,
+        defenseDice: [],
+        attackDice: [BLUE],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+        defenseRerolls: 0,
+        surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    }, 
     {
         id: 0,
         name: "",

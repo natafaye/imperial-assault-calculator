@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AttackDataInput from "../components/inputs/AttackDataInput";
 import AttackHistogramList from "../components/histograms/AttackHistogramList";
-import Attack, { getAverage, getHistograms } from "../calculators/Attack";
+import Attack from "../calculators/Attack";
 import { DAM, ACC } from "../data/dice";
+import { getAverage, getHistograms } from "../calculators/utilities";
 
 export default function AttackPage() {
     const [results, setResults] = useState(undefined)

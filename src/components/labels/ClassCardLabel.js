@@ -6,6 +6,7 @@ import SurgeListLabels from './sub-labels/SurgeListLabels'
 import DiceListLabels from './sub-labels/DiceListLabels'
 import BonusListLabels from './sub-labels/BonusListLabels'
 import AffiliationLabel from './sub-labels/AffiliationLabel'
+import OptionalAbilityLabel from './sub-labels/OptionalAbilityLabel'
 
 export default function ClassCardLabel({ card }) {
     const popover = (
@@ -46,6 +47,18 @@ export default function ClassCardLabel({ card }) {
                     )}
                     <BonusListLabels bonus={card.attackBonus} isAttack />
                     <BonusListLabels bonus={card.defenseBonus} />
+                    { card.optionalAttack && card.optionalAttack.map((a, index) => 
+                        <React.Fragment key={index}>
+                            <OptionalAbilityLabel ability={a} isSelected={true} selectedClass=""/>
+                            <hr/>
+                        </React.Fragment>
+                    )}
+                    { card.optionalDefense && card.optionalDefense.map((a, index) => 
+                        <React.Fragment key={index}>
+                            <OptionalAbilityLabel ability={a} isSelected={true} selectedClass=""/>
+                            <hr/>
+                        </React.Fragment>
+                    )}
                     <SurgeListLabels abilities={card.surgeAbilities} />
                     <div className="mt-1">
                         {card.cost !== 0 && <>{card.cost} <span style={{ fontSize: "0.7rem" }}>XP</span></>}

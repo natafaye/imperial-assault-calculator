@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { faFistRaised, faHandFist, faShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Row, Col, Accordion, Stack } from 'react-bootstrap'
+import { Row, Col, Stack } from 'react-bootstrap'
 import UnitInfoPicker from './unit-info/UnitInfoPicker';
 import DiceListInput from './custom-info/dice/DiceListInput';
 import SurgeAbilitiesInput from "./custom-info/SurgeAbilitiesInput";
 import BonusInput from "./custom-info/BonusInput";
 import RerollsInput from './custom-info/RerollsInput'
-import { addValues } from '../../calculators/Attack';
+import { addValues } from '../../calculators/utilities';
 import { BLACK, GREEN } from '../../data/dice';
 
 export default function AttackDataInput({ onCalculate }) {

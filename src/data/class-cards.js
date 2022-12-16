@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, WILD } from "./dice"
 import { REBEL, IMPERIAL } from "./units"
 
 // Hero names
@@ -24,6 +24,9 @@ export const VINTO = "Vinto Hreeda"
 // Droid name
 export const J4X7 = "JFX-7"
 
+// TODO: Brute Strength attribute test helper
+// TODO: Put back in Desperado?
+
 /**
  * All the class cards (reward and upgrades) that the heros can use
  */
@@ -38,24 +41,38 @@ export const CLASS_CARDS = [
         defenseDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [
+            { 
+                cost: "Ranged attack, spend 1 style token", 
+                bonus: [0, 0, 0, 2, 0, 0] 
+            }
+        ],
+        optionalAttack: [],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Choose to spend 1 style token to get +2 block
+    },
     {
         id: 1,
         name: "Adrenal Vapor",
         affiliation: REBEL,
 		availableTo: [REBEL],
         cost: 3,
-        attackDice: [YELLOW],
+        attackDice: [],
         defenseDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Within 2 spaces, MHD-19 spend 2 strain", 
+                dice: [YELLOW] 
+            }
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Choose to use surge to recover?
+    },
     {
         id: 2,
         name: "All-Out Attack",
@@ -64,12 +81,19 @@ export const CLASS_CARDS = [
         cost: 1,
         attackDice: [],
         defenseDice: [],
-        attackBonus: [0, 1, -1, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Melee attack, exhaust All-Out Attack", 
+                bonus: [0, 1, -1, 0, 0, 0] 
+            }
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Only for melee? Pick to trigger?
+    },
     {
         id: 3,
         name: "Alliance Efficiency",
@@ -80,10 +104,22 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 1,
+        optionalDefense: [
+            { 
+                cost: "Exhaust Alliance Efficiency", 
+                rerolls: 1 
+            }
+        ],
+        optionalAttack: [
+            { 
+                cost: "Exhaust Alliance Efficiency", 
+                rerolls: 1 
+            }
+        ],
+        attackRerolls: 0,
+		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Turn off reroll if already used
+    },
     {
         id: 4,
         name: "Auxiliary Training",
@@ -94,10 +130,22 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 1,
+        optionalDefense: [
+            { 
+                cost: "Exhaust Auxiliary Training, spend power token", 
+                rerolls: 1 
+            }
+        ],
+        optionalAttack: [
+            { 
+                cost: "Exhaust Auxiliary Training, spend power token", 
+                rerolls: 1 
+            }
+        ],
+        attackRerolls: 0,
+		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: If spent a power token
+    },
     {
         id: 5,
         name: "Bank Shot",
@@ -108,6 +156,8 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
@@ -120,12 +170,19 @@ export const CLASS_CARDS = [
         cost: 0,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            {
+                cost: "Attacking figure adjacent to figure with recon token", 
+                bonus: [0, 1, 0, 0, 0, 0] 
+            }
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: checkbox for adjacent to a figure with a recon token
+    },
     {
         id: 7,
         name: "Battlefield Experience",
@@ -136,10 +193,17 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
+        optionalDefense: [],
+        optionalAttack: [
+            {  
+                cost: "Exhaust Battlefield Experience", 
+                rerolls: 1 
+            }
+        ],
+        attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: trigger // TODO: Brute Strength attribute test helper
+    },
     {
         id: 8,
         name: "Bullseye!",
@@ -148,26 +212,43 @@ export const CLASS_CARDS = [
         cost: 0,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 0, -2, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Ranged attack, exhaust Bullseye!", 
+                bonus: [0, 0, 0, -2, 0, 0] },
+            { 
+                cost: "Ranged attack, deplete Bullseye!", 
+                bonus: [0, 0, 0, 0, 0, -1] 
+            }
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Deplete and trigger -1 dodge instead
+    },
     {
         id: 9,
         name: "Called Shot",
         affiliation: REBEL,
-		availableTo: [GIDEON],
+		availableTo: [REBEL],
         cost: 1,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 1, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "In Gideon line of sight, exhaust Called Shot", 
+                bonus: [0, 0, 1, 0, 0, 0] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: say is in line of sight
+    },
     {
         id: 10,
         name: "Cheap Shot (Jyn)",
@@ -176,26 +257,40 @@ export const CLASS_CARDS = [
         cost: 2,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Using Quick Draw", 
+                bonus: [0, 1, 0, 0, 0, 0] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Trigger quick draw happened // TODO: prioritize stun
+    },
     {
         id: 11,
         name: "Coordinated Attack (Loku)",
         affiliation: REBEL,
-		availableTo: [LOKU],
+		availableTo: [REBEL],
         cost: 4,
         defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Attacking figure with recon token, spend 2 strain, exhaust Coordinated Attack", 
+                dice: [WILD] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Choose to exhaust and add 1 dice of choice to attack
+    },
     {
         id: 12,
         name: "Covering Fire (CT-1701)",
@@ -204,12 +299,19 @@ export const CLASS_CARDS = [
         cost: 1,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, -1, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Ranged attack, to gain damage token for someone within 3 spaces",
+                bonus: [0, -1, 0, 0, 0, 0] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Apply
+    },
     {
         id: 13,
         name: "Covert Operative",
@@ -219,11 +321,18 @@ export const CLASS_CARDS = [
         defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [
+            { 
+                cost: "Discard Hidden condition", 
+                bonus: [0, 0, 0, 1, 0, 0] 
+            },
+        ],
+        optionalAttack: [],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Discard hidden to trigger
+    },
     {
         id: 14,
         name: "Create Opening",
@@ -234,10 +343,21 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Defender adjacent to Verena, spend 1 strain (pick one)", 
+                bonus: [0, 0, 0, -1, 0, 0] 
+            },
+            { 
+                cost: "Defender adjacent to Verena, spend 1 strain (pick one)", 
+                bonus: [0, 0, 0, 0, -1, 0] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: pick -1 block or -1 evade to defender of your attack
+    },
     {
         id: 15,
         name: "Crushing Blow",
@@ -248,11 +368,16 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: 'Using Melee attack of "Close and Personal"', 
+                surgeAbilities: [[0, 2, -1, 0, 0, 0]] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
-		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
-        ]
+		surgeAbilities: []
     },
     {
         id: 16,
@@ -261,14 +386,20 @@ export const CLASS_CARDS = [
 		availableTo: [DIALA],
         cost: 4,
         defenseDice: [],
-        attackDice: [BLUE],
+        attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Spend move and strain, Ranged attack with Melee weapon", 
+                dice: [BLUE], 
+                surgeAbilities: [[2, 1, -1, 0, 0, 0]] 
+            },
+        ],
         attackRerolls: 0,
 		defenseRerolls: 0,
-		surgeAbilities: [
-            [2, 1, -1, 0, 0, 0]
-        ]
+		surgeAbilities: []
     },
     {
         id: 17,
@@ -278,12 +409,23 @@ export const CLASS_CARDS = [
         cost: 3,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [],
+        optionalAttack: [
+            { 
+                cost: "Exhaust Dead On", 
+                bonus: [0, 1, 0, 0, 0, 0] 
+            },
+            { 
+                cost: 'Using "Pinpoint Shot", exhaust Dead On', 
+                bonus: [0, 1, 0, 0, 0, 0] 
+            }, 
+        ], // TODO: make sure still applied with pinpoint shot
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // TODO: Choose to use
+    },
     {
         id: 18,
         name: "Deadly Grace",
@@ -294,6 +436,8 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
+        optionalDefense: [],
+        optionalAttack: [],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
@@ -307,25 +451,18 @@ export const CLASS_CARDS = [
         defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
-		surgeAbilities: []
-    }, // TODO: Triggered when using foresight
-    {
-        id: 20,
-        name: "Desperado",
-        affiliation: REBEL,
-		availableTo: [VINTO],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
+        optionalDefense: [
+            { 
+                cost: 'Using "Foresight"', 
+                bonus: [0, 0, 0, 1, 0, 0] 
+            }, 
+        ],
+        optionalAttack: [],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: []
-    }, // Attacking +1 surge for each figure, defending +1 evade
+    }, // TODO: STOPPED CONVERTING HERE
     {
         id: 21,
         name: "Dig In",

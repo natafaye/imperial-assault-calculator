@@ -5,6 +5,10 @@ export const BLO = 3 // Blocks
 export const EVA = 4 // Evades
 export const DOD = 5 // Dodges
 
+export const STRENGTH = 0
+export const INSIGHT = 1
+export const TECH = 2
+
 export const VALUE_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge"]
 
 export const BLUE = "Blue"
@@ -13,6 +17,7 @@ export const GREEN = "Green"
 export const YELLOW = "Yellow"
 export const BLACK = "Black"
 export const WHITE = "White"
+export const WILD = "Wild"
 
 export const ATTACK_DICE = [RED, GREEN, BLUE, YELLOW]
 export const DEFENSE_DICE = [BLACK, WHITE]
