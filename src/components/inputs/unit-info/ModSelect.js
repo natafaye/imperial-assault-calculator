@@ -1,9 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
+import ModLabel from '../../labels/ModLabel'
+import { getNumAtEnd, search, searchArray } from '../../../calculators/utilities'
 import { MELEE, RANGED } from '../../../data/weapons'
 import { MODS } from '../../../data/mods'
-import { getNumAtEnd, search, searchArray } from './selectUtilities'
-import ModLabel from '../../labels/ModLabel'
 
 const MOD_OPTIONS = [MELEE, RANGED].map(type => ({
     label: type,

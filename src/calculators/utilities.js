@@ -1,5 +1,7 @@
 import { GREEN } from '../data/dice'
 
+/***** Data Analysis *****/
+
 /**
  * Adds the values of two arrays together to produce a new array
  * @param {number[]} a An array to add
@@ -58,6 +60,7 @@ export const getHistograms = (data, properties) => {
     return histograms;
 }
 
+/***** Unit Data *****/
 
 /**
  * Combines all the unit & class cards & weapon & mods data to make one set of attack data
@@ -106,7 +109,6 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
     }
 }
 
-
 /**
  * Combines all the unit & class cards to make one set of attack data
  * @param {{ unit: object, classCards: object[], selectedOptionalIds: string[] }} unitData The data to combine
@@ -136,17 +138,17 @@ export const getDefenseData = ({ unit, classCards, selectedOptionalIds }) => {
 }
 
 
+/***** Optional Abilities *****/
+
 export const UNIT = "unit"
 export const CLASS_CARD = "classcard"
 export const WEAPON = "weapon"
 export const MOD = "mod"
 
-
 const getOptionalAbilities = (entity, property, type) => {
     if(!entity || !entity[property]) return []
     return entity[property].map((ability, index) => ({...ability, id: `${type}-${entity.id}-${index}` }))
 }
-
 
 export const getAllOptionalAbilities = ({ unit, classCards, weapon, mods, isAttack}) => {
     const property = isAttack ? "optionalAttack" : "optionalDefense"
@@ -158,7 +160,14 @@ export const getAllOptionalAbilities = ({ unit, classCards, weapon, mods, isAtta
     )
 }
 
-
 export const cleanSelectedOptionalAbilities = (selected, updatedEntities, type) => {
     return selected.filter(id => !id.startsWith(type) || updatedEntities.some(e => id.startsWith(`${type}-${e.id}-`)))
 }
+
+
+/***** Search *****/
+
+export const search = (toCheck, input) => toCheck?.toLowerCase().includes(input.toLowerCase())
+export const searchArray = (toCheck, input) => toCheck?.some(item => search(item, input))
+
+export const getNumAtEnd = (str) => parseInt(str.slice(str.search(/\d+$/)))

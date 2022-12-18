@@ -20,7 +20,6 @@ export default function AttackPage() {
     return (
         <>
             <AttackDataInput onCalculate={calculate} />
-            <hr className="my-5"/>
             <AttackHistogramList results={results} />
         </>
     )

@@ -5,7 +5,7 @@ import DiceListLabels from './sub-labels/DiceListLabels'
 import BonusListLabels from './sub-labels/BonusListLabels'
 import TierAndCostLabel from './sub-labels/TierAndCostLabel'
 
-export default function ModLabel({ mod }) {
+export default function ModLabel({ mod, placement = "top" }) {
     const popover = (
         <Popover id={`mod-popover-${mod.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{mod.name}</Popover.Header>
@@ -34,7 +34,7 @@ export default function ModLabel({ mod }) {
     )
 
     return (
-        <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
+        <OverlayTrigger trigger={["hover", "focus"]} placement={placement} overlay={popover}>
             <span className="d-inline-block w-100">{mod.name}</span>
         </OverlayTrigger>
     )

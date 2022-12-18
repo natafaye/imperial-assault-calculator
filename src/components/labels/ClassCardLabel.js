@@ -8,7 +8,7 @@ import BonusListLabels from './sub-labels/BonusListLabels'
 import AffiliationLabel from './sub-labels/AffiliationLabel'
 import OptionalAbilityLabel from './sub-labels/OptionalAbilityLabel'
 
-export default function ClassCardLabel({ card }) {
+export default function ClassCardLabel({ card, placement = "top" }) {
     const popover = (
         <Popover id={`class-card-popover-${card.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header className="fs-5 d-flex justify-content-between align-items-center">
@@ -70,7 +70,7 @@ export default function ClassCardLabel({ card }) {
     )
 
     return (
-        <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
+        <OverlayTrigger trigger={["hover", "focus"]} placement={placement} overlay={popover}>
             <span className="d-inline-block w-100">{card.name}</span>
         </OverlayTrigger>
     )
