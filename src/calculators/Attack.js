@@ -1,5 +1,5 @@
 import { getAverage, addValues } from "./utilities"
-import { DICE, ACC, DAM, SUR, BLO, EVA, DOD } from "../data/dice"
+import { DICE, ACC, DAM, SUR, BLO, EVA, DOD, BLACK, WHITE } from "../data/dice"
 
 /**
  * Checks if two sets are equal to each other with one level deep equals
@@ -237,6 +237,6 @@ export default class Attack {
      * @returns {number[]} The average result for accuracy and damages
      */
     damageaverages(bonus=false) {
-        return [this.calcaverage(['black'], bonus)[DAM], this.calcaverage(['white'], bonus)[DAM]]
+        return [this.calcaverage([BLACK], bonus)[DAM], this.calcaverage([WHITE], bonus)[DAM]]
     }
 }

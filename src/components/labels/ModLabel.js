@@ -22,7 +22,7 @@ export default function ModLabel({ mod, placement = "top" }) {
                         )}
                     </div>
                     <hr />
-                    <BonusListLabels bonus={mod.permanentBonus} isAttack />
+                    <BonusListLabels bonus={mod.attackBonus} isAttack />
                     <SurgeListLabels abilities={mod.surgeAbilities} />
                     <div className="my-1"><em>{mod.description}</em></div>
                     <div className="d-flex mt-1">

@@ -22,7 +22,7 @@ export default function WeaponLabel({ weapon, placement = "top" }) {
                         </div>
                     </div>
                     <hr />
-                    <BonusListLabels bonus={weapon.permanentBonus} isAttack />
+                    <BonusListLabels bonus={weapon.attackBonus} isAttack />
                     <SurgeListLabels abilities={weapon.surgeAbilities} />
                     {weapon.description && <div className="my-1"><em>{weapon.description}</em></div>}
                     <div className="d-flex mt-1">

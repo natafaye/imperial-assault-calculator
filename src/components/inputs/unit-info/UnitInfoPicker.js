@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Stack } from 'react-bootstrap'
-import { CLASS_CARD, cleanSelectedOptionalAbilities, getAttackData, getDefenseData, MOD, UNIT, WEAPON } from '../../../calculators/utilities'
 import CollapsableDataArea from '../../CollapsableDataArea'
 import ClassCardSelect from './ClassCardSelect'
 import FocusedInput from './FocusedInput'
@@ -8,86 +7,38 @@ import ModSelect from './ModSelect'
 import OptionalAbilitiesInput from './OptionalAbilitiesInput'
 import UnitSelect from './UnitSelect'
 import WeaponSelect from './WeaponSelect'
+import { CLASS_CARD, cleanSelectedOptional, getAttackData, getDefenseData, MOD, 
+    summarizeUnitData, UNIT, WEAPON } from '../../../calculators/utilities'
 
-const summarizeUnitData = ({ unit, classCards, weapon, mods, focused }) => {
-    let collapsedData = unit?.name || "No unit";
-    const allAdditions = (weapon ? [weapon] : []).concat(mods).concat(classCards).map(i => i.name)
-    if(focused)
-        allAdditions.push("Focused")
-    
-    if (allAdditions.length > 2)
-        collapsedData += " with " + allAdditions.slice(0, -2).join(", ") + ", " + allAdditions.slice(-2).join(" and ")
-    else if (allAdditions.length > 0)
-        collapsedData += " with " + allAdditions.join(" and ")
-    
-    return collapsedData;
-}
+export default function UnitInfoPicker({ values, onChange, isAttack = false }) {
 
-export default function UnitInfoPicker({ onChange, isAttack = false }) {
-    const [focused, setFocused] = useState(false)
-    const [unit, setUnit] = useState(null);
-    const [classCards, setClassCards] = useState([])
-    const [weapon, setWeapon] = useState(null);
-    const [mods, setMods] = useState([]);
-    const [selectedOptionalIds, setSelectedOptionalIds] = useState([])
-
-    const onAnyChange = (changedData) => {
-        const unitData = { unit, classCards, weapon, mods, focused, selectedOptionalIds, ...changedData }
-        onChange(isAttack ? getAttackData(unitData) : getDefenseData(unitData))
-    }
-
-    const onUnitChange = (newUnit) => {
-        setUnit(newUnit);
-        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, [newUnit], UNIT))
-        onAnyChange({ unit: newUnit })
-    }
-
-    const onFocusedChange = (newValue) => {
-        setFocused(newValue);
-        onAnyChange({ focused: newValue })
-    }
-
-    const onCardsChange = (newCards) => {
-        setClassCards(newCards);
-        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, newCards, CLASS_CARD))
-        onAnyChange({ classCards: newCards })
-    }
-
-    const onWeaponChange = (newWeapon) => {
-        setWeapon(newWeapon);
-        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, [newWeapon], WEAPON))
-        onAnyChange({ weapon: newWeapon })
-    }
-
-    const onModsChange = (newMods) => {
-        setMods(newMods);
-        setSelectedOptionalIds(cleanSelectedOptionalAbilities(selectedOptionalIds, newMods, MOD))
-        onAnyChange({ mods: newMods })
-    }
-
-    const onOptionalChange = (newSelectedIds) => {
-        setSelectedOptionalIds(newSelectedIds);
-        onAnyChange({ selectedOptionalIds: newSelectedIds })
+    const onDataChange = (property) => (newValue) => {
+        const newValues = { 
+            ...values, 
+            selectedOptionalIds: cleanSelectedOptional(values.selectedOptionalIds, newValue, property),
+            [property]: newValue,
+        }
+        onChange(isAttack ? getAttackData(newValues) : getDefenseData(newValues), newValues)
     }
 
     return (
-        <CollapsableDataArea label="Prefilled" collapsedData={summarizeUnitData({ unit, classCards, weapon, mods, focused })}>
+        <CollapsableDataArea label="Unit" collapsedData={summarizeUnitData(values)}>
             <Stack gap={2}>
                 <Stack direction="horizontal" gap={2}>
-                    <UnitSelect value={unit} onChange={onUnitChange} />
-                    {isAttack && <FocusedInput value={focused} onChange={onFocusedChange} />}
+                    <UnitSelect value={values.unit} onChange={onDataChange(UNIT)} />
+                    {isAttack && <FocusedInput value={values.focused} onChange={onDataChange("focused")} />}
                 </Stack>
-                <ClassCardSelect value={classCards} onChange={onCardsChange} />
-                {isAttack && unit?.isHero && (
+                <ClassCardSelect value={values.classCards} onChange={onDataChange(CLASS_CARD)} />
+                {isAttack && values.unit?.isHero && (
                     <Stack direction="horizontal" gap={2}>
-                        <WeaponSelect value={weapon} onChange={onWeaponChange} />
-                        <ModSelect value={mods} onChange={onModsChange} />
+                        <WeaponSelect value={values.weapon} onChange={onDataChange(WEAPON)} />
+                        <ModSelect value={values.mods} onChange={onDataChange(MOD)} />
                     </Stack>
                 )}
                 <OptionalAbilitiesInput
-                    values={selectedOptionalIds}
-                    onChange={onOptionalChange}
-                    unitData={{ unit, classCards, weapon, mods }}
+                    values={values.selectedOptionalIds}
+                    onChange={onDataChange("selectedOptionalIds")}
+                    unitData={values}
                     isAttack={isAttack}
                 />
             </Stack>

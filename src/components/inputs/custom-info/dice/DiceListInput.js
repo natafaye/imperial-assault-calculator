@@ -18,7 +18,7 @@ function useClickOutside(targetRef, onClickOutside) {
     }, [targetRef, onClickOutside]);
   }
 
-export default function DiceListInput({ values, onChange, isDefense }) {
+export default function DiceListInput({ values, onChange, isAttack = false }) {
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
 
     const menuRef = useRef(null)
@@ -44,7 +44,7 @@ export default function DiceListInput({ values, onChange, isDefense }) {
                 <button className="btn btn-outline-secondary flex-shrink-0" onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}>
                     <FontAwesomeIcon icon={faPlus} size="2x" />
                 </button>
-                <DieSelectMenu isOpen={isAddMenuOpen} colors={(isDefense) ? DEFENSE_DICE : ATTACK_DICE} onChange={addDie} />
+                <DieSelectMenu isOpen={isAddMenuOpen} colors={(isAttack) ? ATTACK_DICE : DEFENSE_DICE} onChange={addDie} />
             </div>
         </>
     )

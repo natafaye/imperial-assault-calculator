@@ -3,15 +3,17 @@ import SurgeCostLabel from './SurgeCostLabel';
 import ValueListLabels from './ValueListLabels';
 import { SUR } from '../../../data/dice';
 
-export default function SurgeListLabels({ abilities, showHRBelow = true }) {
+export default function SurgeListLabels({ abilities, className = "", showHRBelow = true }) {
   return (
     <>
       {abilities.map((ability, index) => (
-        <React.Fragment key={index}>
-          <SurgeCostLabel num={Math.abs(ability[SUR])} className="me-2" />
-          <ValueListLabels values={ ability.map((value, i) => i === SUR ? 0 : value) } isAttack />
+        <span className={className + " text-nowrap"} key={index}>
+          <SurgeCostLabel num={Math.abs(ability[SUR])} className="me-1" />
+          <span className="me-3">
+            <ValueListLabels values={ ability.map((value, i) => i === SUR ? 0 : value) } isAttack />
+          </span>
           {showHRBelow && <hr />}
-        </React.Fragment>
+        </span>
       ))}
     </>
   )

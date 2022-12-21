@@ -15,12 +15,12 @@ export function ValueLabel({ value, property, isAttack = false, className = "" }
     return <span className={className}>{value > 0 ? "+" : ""}{value} <ValueIcon valueIndex={property}/></span>
 }
 
-export default function ValueListLabels({ values, isAttack = false }) {
+export default function ValueListLabels({ values, className = "", isAttack = false }) {
     return (
         <>
             { values.map((value, index) => (
                 <React.Fragment key={index}>
-                    <ValueLabel value={value} property={index} isAttack={isAttack}/>
+                    <ValueLabel value={value} property={index} className={className} isAttack={isAttack}/>
                     { value !== 0 && values.slice(index + 1).some(v => v) && <span className="me-2">,</span> }
                 </React.Fragment>
             ))}
