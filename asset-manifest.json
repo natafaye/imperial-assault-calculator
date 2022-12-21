@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3d2c3403.css",
+    "main.js": "/static/js/main.20069bc8.js",
+    "static/js/787.49da4a57.chunk.js": "/static/js/787.49da4a57.chunk.js",
+    "index.html": "/index.html",
+    "static/media/dodge-icon.webp": "/static/media/dodge-icon.a9b4d0cb548f5379d490.webp",
+    "static/media/evade-icon.webp": "/static/media/evade-icon.1334311461f64e4a73a1.webp",
+    "main.3d2c3403.css.map": "/static/css/main.3d2c3403.css.map",
+    "main.20069bc8.js.map": "/static/js/main.20069bc8.js.map",
+    "787.49da4a57.chunk.js.map": "/static/js/787.49da4a57.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d2c3403.css",
+    "static/js/main.20069bc8.js"
+  ]
+}
