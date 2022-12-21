@@ -82,7 +82,7 @@ export default function ComparePage() {
           <Button variant="outline-success" className="me-2 mb-2" onClick={() => setShowAddForm(true)}>
             <FontAwesomeIcon icon={faPlus} /> Add Attack
           </Button>
-          <Dropdown className="d-inline-block">
+          <Dropdown className="d-inline-block mb-2">
             <Dropdown.Toggle variant="outline-success" id="add-all-dropdown">
               <FontAwesomeIcon icon={faPlus} /> Add All
             </Dropdown.Toggle>
@@ -97,7 +97,7 @@ export default function ComparePage() {
         </Col>
         <Col className="text-end">
           <ColumnVisibilityPicker table={table} className="me-2 mb-2"/>
-          <Button variant="outline-danger" onClick={() => setAttackList([])}>
+          <Button variant="outline-danger" className="mb-2" onClick={() => setAttackList([])}>
             <FontAwesomeIcon icon={faTrash} /> Clear Table
           </Button>
         </Col>
