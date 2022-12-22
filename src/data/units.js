@@ -1,5 +1,5 @@
 import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice";
-import { MELEE, RANGED } from "./weapons";
+import { HEAVY, MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"
 export const MERCENARY = "Mercenary"
@@ -22,6 +22,7 @@ export const FORCE_USER = "Force User"
 export const BRAWLER = "Brawler"
 export const GUARDIAN = "Guardian"
 export const SMUGGLER = "Smuggler"
+export const WOOKIEE = "Wookiee"
 
 export const UNITS = [
     {
@@ -1965,8 +1966,1174 @@ export const UNITS = [
             [0, 2, -1, 0, 0, 0]
         ]
     },// TODO: can reroll an attack die if adjacent to friendly TROOPER
+    
+    {
+        id: 200,
+        name: "J4X-7",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 3,
+        defenseDice: [],
+        attackDice: [BLUE],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+        defenseRerolls: 0,
+        surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    }, 
     {
         id: 82,
+        name: "Ahsoka Tano",
+        title: "Rebel Instigator",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [FORCE_USER, LEADER, SPY],
+        size: SMALL,
+        elite: true,
+        health: 12,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, GREEN, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, // TODO: Reroll all attack dice or force defender to reroll all
+    {
+        id: 83,
+        name: "Alliance Ranger",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 9,
+        reinforceCost: 3,
+		traits: [TROOPER, HUNTER],
+        size: SMALL,
+        elite: false,
+        health: 5,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, BLUE],
+        attackType: RANGED,
+        attackBonus: [1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Target 5 or more spaces away", 
+                rerolls: 1
+            }
+        ]
+    },
+    {
+        id: 84,
+        name: "Alliance Ranger (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 12,
+        reinforceCost: 4,
+		traits: [TROOPER, HUNTER],
+        size: SMALL,
+        elite: true,
+        health: 7,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, BLUE],
+        attackType: RANGED,
+        attackBonus: [1, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0],
+            [3, 0, -1, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Target 5 or more spaces away", 
+                rerolls: 2
+            }
+        ],
+    }, 
+    {
+        id: 85,
+        name: "Alliance Smuggler",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 2,
+        reinforceCost: null,
+		traits: [SMUGGLER],
+        size: SMALL,
+        elite: false,
+        health: 3,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [-2, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -1, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 86,
+        name: "Alliance Smuggler (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 4,
+        reinforceCost: null,
+		traits: [SMUGGLER],
+        size: SMALL,
+        elite: true,
+        health: 5,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0],
+            [3, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 87,
+        name: "Biv Bodhrik",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 9,
+        reinforceCost: null,
+		traits: [HUNTER, BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 8,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, RED, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [2, 1, -1, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0]
+        ],
+        optionalDefense: [
+            { 
+                cost: "Within 3 spaces of 2+ hostiles", 
+                bonus: [0, 0, 0, 1, 0, 0] 
+            }
+        ],
+    }, 
+    {
+        id: 88,
+        name: "C-3PO",
+        title: "Human Cyborg Relations=",
+        affiliation: REBEL,
+        deploymentCost: 2,
+        reinforceCost: null,
+		traits: [DROID],
+        size: SMALL,
+        elite: true,
+        health: 4,
+        speed: 3,
+        defenseDice: [WHITE],
+        attackDice: [],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ],
+        optionalDefense: [
+            { 
+                cost: "while defending and adjacent to friend", 
+                rerolls: 1
+            }
+        ],
+    }, 
+    {
+        id: 89,
+        name: "C1-10P",
+        title: "Chopper",
+        affiliation: REBEL,
+        deploymentCost: 3,
+        reinforceCost: null,
+		traits: [DROID],
+        size: SMALL,
+        elite: true,
+        health: 5,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0]
+        ]
+    }, 
+    {
+        id: 90,
+        name: "Chewbacca",
+        title: "Loyal Wookiee",
+        affiliation: REBEL,
+        deploymentCost: 15,
+        reinforceCost: null,
+		traits: [SMUGGLER, WOOKIEE, GUARDIAN],
+        size: SMALL,
+        elite: true,
+        health: 14,
+        speed: 4,
+        defenseDice: [BLACK, WHITE],
+        attackDice: [BLUE, RED, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 91,
+        name: "CT-1701",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [TROOPER, GUARDIAN],
+        size: SMALL,
+        elite: false,
+        health: 12,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 92,
+        name: "Davith Elso",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 6,
+        reinforceCost: null,
+		traits: [SPY, FORCE_USER],
+        size: SMALL,
+        elite: false,
+        health: 10,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 93,
+        name: "Diala Passil",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [FORCE_USER, BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 8,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 1,
+		surgeAbilities: [
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 94,
+        name: "Drokkatta",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 9,
+        reinforceCost: null,
+		traits: [WOOKIEE, HEAVY_WEAPON],
+        size: SMALL,
+        elite: false,
+        health: 12,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [1, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 95,
+        name: "Echo Base Trooper",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 6,
+        reinforceCost: 3,
+		traits: [TROOPER],
+        size: SMALL,
+        elite: false,
+        health: 5,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
+    {
+        id: 96,
+        name: "Echo Base Trooper (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: 4,
+		traits: [TROOPER],
+        size: SMALL,
+        elite: true,
+        health: 8,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0]
+        ] //TODO: a reverse pierce, reduce pierce value by one up to zero
+    }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
+    {
+        id: 97,
+        name: "Ezra Bridger",
+        title: "Spectre-6",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [FORCE_USER, SMUGGLER],
+        size: SMALL,
+        elite: true,
+        health: 10,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, YELLOW, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 98,
+        name: "Fenn Signis",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 9,
+        reinforceCost: null,
+		traits: [TROOPER, LEADER],
+        size: SMALL,
+        elite: false,
+        health: 10,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, RED, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 99,
+        name: "Gaarkhan",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [WOOKIEE, GUARDIAN, BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 10,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -1, 0, 0]
+        ]
+    }, 
+    {
+        id: 100,
+        name: "Gideon Argus",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 3,
+        reinforceCost: null,
+		traits: [LEADER],
+        size: SMALL,
+        elite: false,
+        health: 5,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 101,
+        name: "Han Solo",
+        title: "Scoundrel",
+        affiliation: REBEL,
+        deploymentCost: 12,
+        reinforceCost: null,
+		traits: [SMUGGLER, LEADER],
+        size: SMALL,
+        elite: true,
+        health: 12,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, GREEN, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [2, 1, -1, 0, 0, 0]
+        ]//: TODO: While defending apply +1 Block to defense for each evade
+    }, //TODO: add Classcard "Distracting"
+    {
+        id: 102,
+        name: "Hera Syndulla",
+        title: "Spectre-2",
+        affiliation: REBEL,
+        deploymentCost: 4,
+        reinforceCost: null,
+		traits: [LEADER, SMUGGLER],
+        size: SMALL,
+        elite: true,
+        health: 7,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [0, 0, -2, -2, 0, 0]
+        ]
+    }, 
+    {
+        id: 103,
+        name: "Jarrod Kelvin",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 5,
+        reinforceCost: null,
+		traits: [BRAWLER, LEADER, SPY],
+        size: SMALL,
+        elite: false,
+        health: 7,
+        speed: 5,
+        defenseDice: [BLACK],
+        attackDice: [YELLOW, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -2, 0, 0]
+        ]
+    }, 
+    {
+        id: 104,
+        name: "Jyn Odan",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 5,
+        reinforceCost: null,
+		traits: [SMUGGLER],
+        size: SMALL,
+        elite: false,
+        health: 6,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [2, 2, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0]
+        ]
+    }, //TODO: Apply +1 Block for each Evade result while defending
+    {
+        id: 105,
+        name: "Kanan Jarrus",
+        title: "Spectre-1",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [FORCE_USER, LEADER],
+        size: SMALL,
+        elite: true,
+        health: 14,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [GREEN, GREEN, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 106,
+        name: "Ko-Tun Feralo",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [LEADER, TROOPER],
+        size: SMALL,
+        elite: false,
+        health: 9,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, BLUE, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 1,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 107,
+        name: "Lando Calrissian",
+        title: "Charming Gambler",
+        affiliation: REBEL,
+        deploymentCost: 6,
+        reinforceCost: null,
+		traits: [LEADER, SMUGGLER],
+        size: SMALL,
+        elite: true,
+        health: 8,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 1,
+		defenseRerolls: 1,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 108,
+        name: "Leia Organa",
+        title: "Rebel Commander",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [LEADER, SPY],
+        size: SMALL,
+        elite: true,
+        health: 8,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, YELLOW, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 109,
+        name: "Loku Kanoloa",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 4,
+        reinforceCost: null,
+		traits: [SPY],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, RED],
+        attackType: RANGED,
+        attackBonus: [2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0]
+        ]
+    }, 
+    {
+        id: 110,
+        name: "Luke Skywalker",
+        title: "Hero of the Rebellion",
+        affiliation: REBEL,
+        deploymentCost: 10,
+        reinforceCost: null,
+		traits: [FORCE_USER],
+        size: SMALL,
+        elite: true,
+        health: 10,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, //TODO: add saber strike as a weapon (Melee attack with 1 red and 1 yellow and pierce 3)
+    {
+        id: 111,
+        name: "Luke Skywalker (Jedi Knight)",
+        title: "Jedi Knight",
+        affiliation: REBEL,
+        deploymentCost: 12,
+        reinforceCost: null,
+		traits: [FORCE_USER, LEADER, BRAWLER],
+        size: SMALL,
+        elite: true,
+        health: 16,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, GREEN, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    },
+    {
+        id: 112,
+        name: "Mak Eshka'rey",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 3,
+        reinforceCost: null,
+		traits: [SPY],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, BLUE],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [2, 0, -1, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0],
+            [0, 0, -1, -2, 0, 0]
+        ]
+    }, 
+    {
+        id: 113,
+        name: "MHD-19",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 5,
+        reinforceCost: null,
+		traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 7,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 114,
+        name: "Murne Rin",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 4,
+        reinforceCost: null,
+		traits: [LEADER, SPY],
+        size: SMALL,
+        elite: false,
+        health: 6,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 115,
+        name: "Obi-Wan Kenobi (Campaign)",
+        title: "Jedi Knight",
+        affiliation: REBEL,
+        deploymentCost: 10,
+        reinforceCost: null,
+		traits: [FORCE_USER],
+        size: SMALL,
+        elite: true,
+        health: 12,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 116,
+        name: "Obi-Wan Kenobi (Skirmish)",
+        title: "Jedi Knight",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [FORCE_USER],
+        size: SMALL,
+        elite: true,
+        health: 12,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -3, 0, 0]
+        ]
+    }, 
+    {
+        id: 117,
+        name: "R2-D2",
+        title: "Loyal Astromech",
+        affiliation: REBEL,
+        deploymentCost: 3,
+        reinforceCost: null,
+		traits: [DROID],
+        size: SMALL,
+        elite: true,
+        health: 6,
+        speed: 3,
+        defenseDice: [WHITE],
+        attackDice: [YELLOW],
+        attackType: RANGED,
+        attackBonus: [2, 0, 1, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0]
+        ]
+    }, //TODO: if you roll blank, you can add +1 dodge
+    {
+        id: 118,
+        name: "Rebel Saboteur",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 5,
+        reinforceCost: 3,
+		traits: [SPY, HEAVY_WEAPON],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [RED, YELLOW],
+        attackType: RANGED,
+        attackBonus: [2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -1, 0, 0]
+        ]
+    }, // TODO: Overload cna trigger same surge ability twice per attack
+    {
+        id: 119,
+        name: "Rebel Saboteur (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: 4,
+		traits: [SPY, HEAVY_WEAPON],
+        size: SMALL,
+        elite: true,
+        health: 6,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [RED, YELLOW],
+        attackType: RANGED,
+        attackBonus: [3, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0]
+        ]
+    }, // TODO: Overload cna trigger same surge ability twice per attack
+    {
+        id: 120,
+        name: "Rebel Trooper",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 6,
+        reinforceCost: 2,
+		traits: [TROOPER],
+        size: SMALL,
+        elite: false,
+        health: 3,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -1, 0, 0],
+            [1, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 121,
+        name: "Rebel Trooper (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 9,
+        reinforceCost: 3,
+		traits: [TROOPER],
+        size: SMALL,
+        elite: true,
+        health: 5,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, YELLOW],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    }, 
+    {
+        id: 122,
+        name: "Sabine Wren",
+        title: "Spectre-5",
+        affiliation: REBEL,
+        deploymentCost: 7,
+        reinforceCost: null,
+		traits: [HUNTER],
+        size: SMALL,
+        elite: true,
+        health: 11,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [BLUE, GREEN, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 0, -1, -2, 0, 0],
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },  
+    {
+        id: 123,
+        name: "Saska Teft",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 6,
+        reinforceCost: null,
+		traits: [SMUGGLER, SPY],
+        size: SMALL,
+        elite: false,
+        health: 7,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, YELLOW],
+        attackType: RANGED,
+        attackBonus: [1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [1, 1, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0],
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },  
+    {
+        id: 124,
+        name: "Tress Hacnua",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 5,
+        reinforceCost: null,
+		traits: [BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 9,
+        speed: 5,
+        defenseDice: [WHITE],
+        attackDice: [GREEN, RED, YELLOW],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            
+        ]
+    },  
+    {
+        id: 125,
+        name: "Verena Talos",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [SPY, BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 11,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [BLUE, GREEN],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [0, 0, -1, -1, 0, 0],
+        ]
+    },  //TODO: Add weapon Fighting Knife- melee using 1 red die +1 damage
+    {
+        id: 126,
+        name: "Wookiee Warrior",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: 4,
+		traits: [WOOKIEE, BRAWLER],
+        size: SMALL,
+        elite: false,
+        health: 11,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },  
+    {
+        id: 127,
+        name: "Wookiee Warrior (Elite)",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: 11,
+        reinforceCost: 6,
+		traits: [BRAWLER, WOOKIEE],
+        size: SMALL,
+        elite: true,
+        health: 13,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0]
+        ]
+    },  
+    {
+        id: 128,
+        name: "Zeb Orrelios",
+        title: "Spectre-4",
+        affiliation: REBEL,
+        deploymentCost: 8,
+        reinforceCost: null,
+		traits: [BRAWLER, GUARDIAN],
+        size: SMALL,
+        elite: true,
+        health: 15,
+        speed: 4,
+        defenseDice: [BLACK],
+        attackDice: [RED, GREEN],
+        attackType: RANGED,
+        attackBonus: [3, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [
+            [0, 2, -1, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0]
+        ]
+    },  //TODO: Add Weapon- Bo-Rifle Staff Strike- Melee attack 2 red dice 
+    {
+        id: 300,
         isHero: true,
         name: "Biv Bodhrik",
         title: "Vengeful Guerrilla",
@@ -1995,49 +3162,34 @@ export const UNITS = [
 		surgeAbilities: []
     }, // ?????
     {
-        id: 200,
-        name: "J4X-7",
-        title: "",
-        affiliation: REBEL,
-        deploymentCost: null,
-        reinforceCost: null,
-        traits: [DROID],
-        size: SMALL,
-        elite: false,
-        health: 4,
-        speed: 3,
-        defenseDice: [],
-        attackDice: [BLUE],
-        attackType: RANGED,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-        defenseRerolls: 0,
-        surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
-        ]
-    }, 
-    {
         id: 0,
+        isHero: true,
         name: "",
         title: "",
         affiliation: REBEL,
-        deploymentCost: 0,
-        reinforceCost: null,
-		traits: [],
         size: SMALL,
-        elite: false,
         health: 0,
+        endurance: 0,
         speed: 0,
+        woundedEndurance: 0,
+        woundedSpeed: 0,
         defenseDice: [],
-        attackDice: [],
-        attackType: RANGED,
+        attributeDice: [
+            [BLUE, GREEN, YELLOW],
+            [BLUE],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED, BLUE, GREEN],
+            [RED],
+            [RED, BLUE]
+        ],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
 		surgeAbilities: [
-            
+
         ]
-    }, 
+    },
 ]
