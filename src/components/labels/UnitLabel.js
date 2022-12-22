@@ -7,15 +7,15 @@ import TraitsListLabels from './sub-labels/TraitsListLabels'
 import AffiliationLabel from './sub-labels/AffiliationLabel'
 import AttackTypeLabel from './sub-labels/AttackTypeLabel'
 
-export default function UnitLabel({ unit }) {
+export default function UnitLabel({ unit, placement = "top" }) {
     const popover = (
-        <Popover id={`unit-popover-${unit.id}`} style={{ zIndex: 1200 }}>
+        <Popover id={`unit-popover-${unit.id}`} style={{ zIndex: 1200, minWidth: "300px" }}>
             <Popover.Header className={"fs-5 d-flex justify-content-between align-items-center " + ((unit.elite) ? "border-bottom border-danger border-2" : "")}>
                 {unit.deploymentCost && <div className="border-end border-light py-1 pe-3 fs-5 align-self-stretch d-flex align-items-center">{unit.deploymentCost}</div>}
-                {unit.reinforceCost && <div className="border-end border-light px-2 py-1 align-self-stretch d-flex align-items-center" style={{ fontSize: "0.9rem" }}>{unit.reinforceCost}</div>}
+                {unit.reinforceCost && <div className="border-end border-light px-2 py-1 fs-7 align-self-stretch d-flex align-items-center">{unit.reinforceCost}</div>}
                 <div className="text-center flex-grow-1 px-3">
                     {unit.name}
-                    {unit.title && <h6 style={{ fontSize: "0.8rem" }}><em>{unit.title}</em></h6>}
+                    {unit.title && <h6 className="fs-7"><em>{unit.title}</em></h6>}
                 </div>
                 <div>
                     <AffiliationLabel affiliation={unit.affiliation} size="lg" />
@@ -35,37 +35,37 @@ export default function UnitLabel({ unit }) {
                     {unit.defenseRerolls !== 0 && <div>Defense Rerolls: {unit.defenseRerolls}</div>}
                     <div className="d-flex mt-1 text-center align-items-stretch">
                         <div className="flex-fill">
-                            <div className="bg-secondary rounded-top p-1" style={{ fontSize: "0.7rem" }}>
+                            <div className="bg-secondary rounded-top p-1 fs-8">
                                 HEALTH
                             </div>
-                            <div className="rounded-bottom p-1" style={{ backgroundColor: "#606060" }}>
+                            <div className="rounded-bottom p-1 bg-lighter-dark">
                                 {unit.health}
                             </div>
                         </div>
                         <div className="ms-1 flex-fill">
-                            <div className="bg-secondary rounded-top p-1" style={{ fontSize: "0.7rem" }}>
+                            <div className="bg-secondary rounded-top p-1 fs-8">
                                 SPEED
                             </div>
-                            <div className="rounded-bottom p-1" style={{ backgroundColor: "#606060" }}>
+                            <div className="rounded-bottom p-1 bg-lighter-dark">
                                 {unit.speed}
                             </div>
                         </div>
                         {unit.defenseDice && (
                             <div className="ms-1 flex-fill d-flex flex-column">
-                                <div className="bg-secondary rounded-top p-1" style={{ fontSize: "0.7rem" }}>
+                                <div className="bg-secondary rounded-top p-1 fs-8">
                                     DEFENSE
                                 </div>
-                                <div className="flex-fill rounded-bottom p-1" style={{ backgroundColor: "#606060" }}>
+                                <div className="flex-fill rounded-bottom p-1 bg-lighter-dark">
                                     <DiceListLabels dice={unit.defenseDice} />
                                 </div>
                             </div>
                         )}
                         {unit.attackDice && (
                             <div className="ms-1 flex-fill">
-                                <div className="bg-secondary rounded-top p-1" style={{ fontSize: "0.7rem" }}>
+                                <div className="bg-secondary rounded-top p-1 fs-8">
                                     ATTACK
                                 </div>
-                                <div className="rounded-bottom p-1" style={{ backgroundColor: "#606060" }}>
+                                <div className="rounded-bottom p-1 bg-lighter-dark">
                                     <AttackTypeLabel type={unit.attackType} />{" "}
                                     <DiceListLabels dice={unit.attackDice} />
                                 </div>
@@ -78,7 +78,7 @@ export default function UnitLabel({ unit }) {
     )
 
     return (
-        <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
+        <OverlayTrigger trigger={["hover", "focus"]} placement={placement} overlay={popover}>
             <span className="d-inline-block w-100">{unit.name}</span>
         </OverlayTrigger>
     )

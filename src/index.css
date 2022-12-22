@@ -1,0 +1,19 @@
+.bg-lighter-dark {
+    background-color: #606060;
+}
+
+.bg-medium-dark {
+    background-color: #494949;
+}
+
+.border-light-gray {
+    --bs-border-color: #666;
+}
+
+.fs-7 {
+    font-size: 0.8rem
+}
+
+.fs-8 {
+    font-size: 0.7rem
+}

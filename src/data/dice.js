@@ -1,3 +1,4 @@
+
 export const ACC = 0 // Accuracy
 export const DAM = 1 // Damages
 export const SUR = 2 // Surges
@@ -5,11 +6,13 @@ export const BLO = 3 // Blocks
 export const EVA = 4 // Evades
 export const DOD = 5 // Dodges
 
+export const RER = 6 // Rerolls
+
 export const STRENGTH = 0
 export const INSIGHT = 1
 export const TECH = 2
 
-export const VALUE_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge"]
+export const VALUE_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
 
 export const BLUE = "Blue"
 export const RED = "Red"
@@ -28,7 +31,7 @@ export const DICE_CLASSES = {
     [BLUE]: "info", 
     [YELLOW]: "warning", 
     [RED]: "danger", 
-    [BLACK]: "dark", 
+    [BLACK]: "dark border border-light-gray", 
     [WHITE]: "white"
 }
 

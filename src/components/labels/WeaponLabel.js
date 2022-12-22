@@ -8,7 +8,7 @@ import TierAndCostLabel from './sub-labels/TierAndCostLabel'
 import TraitsListLabels from './sub-labels/TraitsListLabels'
 import AttackTypeLabel from './sub-labels/AttackTypeLabel'
 
-export default function WeaponLabel({ weapon }) {
+export default function WeaponLabel({ weapon, placement = "top" }) {
     const popover = (
         <Popover id={`weapon-popover-${weapon.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{weapon.name}</Popover.Header>
@@ -22,7 +22,7 @@ export default function WeaponLabel({ weapon }) {
                         </div>
                     </div>
                     <hr />
-                    <BonusListLabels bonus={weapon.permanentBonus} isAttack />
+                    <BonusListLabels bonus={weapon.attackBonus} isAttack />
                     <SurgeListLabels abilities={weapon.surgeAbilities} />
                     {weapon.description && <div className="my-1"><em>{weapon.description}</em></div>}
                     <div className="d-flex mt-1">
@@ -35,7 +35,7 @@ export default function WeaponLabel({ weapon }) {
     )
 
     return (
-        <OverlayTrigger trigger={["hover", "focus"]} placement="right" overlay={popover}>
+        <OverlayTrigger trigger={["hover", "focus"]} placement={placement} overlay={popover}>
             <span className="d-inline-block w-100">{weapon.name}</span>
         </OverlayTrigger>
     )

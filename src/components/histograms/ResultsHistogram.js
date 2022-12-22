@@ -57,8 +57,8 @@ export default function ResultsHistogram({ data, totalNum, showAtLeast = false, 
             margin={{ top: 10, right: 0, bottom: 30, left: 0 }}
             padding={0.2}
             borderRadius="5px"
-            minValue={showWithRelativeScale ? "auto" : 0}
-            maxValue={showWithRelativeScale ? "auto" : 100}
+            minValue={showWithRelativeScale ? null : 0}
+            maxValue={showWithRelativeScale ? null : 100}
             theme={{
                 textColor: "white",
                 fontSize: "0.9rem"

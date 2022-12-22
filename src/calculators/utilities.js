@@ -1,5 +1,7 @@
 import { GREEN } from '../data/dice'
 
+/***** Data Analysis *****/
+
 /**
  * Adds the values of two arrays together to produce a new array
  * @param {number[]} a An array to add
@@ -58,6 +60,27 @@ export const getHistograms = (data, properties) => {
     return histograms;
 }
 
+/***** Custom Data *****/
+
+export const getEmptyData = (changes) => ({ 
+    dice: [], 
+    bonus: [0, 0, 0, 0, 0, 0], 
+    rerolls: 0, 
+    surgeAbilities: [], 
+    ...changes 
+})
+
+/***** Unit Data *****/
+
+export const getEmptyUnitData = (changes) => ({ 
+    unit: null, 
+    classCards: [],
+    weapon: null,
+    mods: [],
+    focused: false,
+    selectedOptionalIds: [],
+    ...changes 
+})
 
 /**
  * Combines all the unit & class cards & weapon & mods data to make one set of attack data
@@ -84,7 +107,7 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
                 optionals.flatMap(a => a.dice)
             )
             .filter(d => d),
-        abilities: [].concat(
+        surgeAbilities: [].concat(
                 unit?.surgeAbilities,
                 classCards.flatMap(c => c.surgeAbilities),
                 weapon?.surgeAbilities,
@@ -95,8 +118,8 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
         bonus: addValues(
             unit?.attackBonus, 
             ...classCards.map(c => c.attackBonus), 
-            weapon?.permanentBonus, 
-            ...mods.map(m => m.permanentBonus),
+            weapon?.attackBonus, 
+            ...mods.map(m => m.attackBonus),
             ...optionals.map(a => a.bonus)
         ),
         rerolls: 
@@ -105,7 +128,6 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
             optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
     }
 }
-
 
 /**
  * Combines all the unit & class cards to make one set of attack data
@@ -135,18 +157,32 @@ export const getDefenseData = ({ unit, classCards, selectedOptionalIds }) => {
     }
 }
 
+export const summarizeUnitData = ({ unit, classCards, weapon, mods, focused }) => {
+    let collapsedData = unit?.name || "No unit";
+    const allAdditions = (weapon ? [weapon] : []).concat(mods).concat(classCards).map(i => i.name)
+    if(focused)
+        allAdditions.push("Focused")
+    
+    if (allAdditions.length > 2)
+        collapsedData += " with " + allAdditions.slice(0, -2).join(", ") + ", " + allAdditions.slice(-2).join(" and ")
+    else if (allAdditions.length > 0)
+        collapsedData += " with " + allAdditions.join(" and ")
+    
+    return collapsedData;
+}
+
+
+/***** Optional Abilities *****/
 
 export const UNIT = "unit"
-export const CLASS_CARD = "classcard"
+export const CLASS_CARD = "classCards"
 export const WEAPON = "weapon"
-export const MOD = "mod"
-
+export const MOD = "mods"
 
 const getOptionalAbilities = (entity, property, type) => {
     if(!entity || !entity[property]) return []
     return entity[property].map((ability, index) => ({...ability, id: `${type}-${entity.id}-${index}` }))
 }
-
 
 export const getAllOptionalAbilities = ({ unit, classCards, weapon, mods, isAttack}) => {
     const property = isAttack ? "optionalAttack" : "optionalDefense"
@@ -158,7 +194,15 @@ export const getAllOptionalAbilities = ({ unit, classCards, weapon, mods, isAtta
     )
 }
 
-
-export const cleanSelectedOptionalAbilities = (selected, updatedEntities, type) => {
-    return selected.filter(id => !id.startsWith(type) || updatedEntities.some(e => id.startsWith(`${type}-${e.id}-`)))
+export const cleanSelectedOptional = (selected, updatedEntities, type) => {
+    let updated = [].concat(updatedEntities)
+    return selected.filter(id => !id.startsWith(type) || updated.some(e => id.startsWith(`${type}-${e.id}-`)))
 }
+
+
+/***** Search *****/
+
+export const search = (toCheck, input) => toCheck?.toLowerCase().includes(input.toLowerCase())
+export const searchArray = (toCheck, input) => toCheck?.some(item => search(item, input))
+
+export const getNumAtEnd = (str) => parseInt(str.slice(str.search(/\d+$/)))

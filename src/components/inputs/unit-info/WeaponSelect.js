@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import WeaponLabel from '../../labels/WeaponLabel'
 import { MELEE, RANGED, WEAPONS } from '../../../data/weapons'
-import { search, searchArray, getNumAtEnd } from './selectUtilities'
+import { search, searchArray, getNumAtEnd } from '../../../calculators/utilities'
 
 const WEAPON_OPTIONS = [MELEE, RANGED].map(type => ({
     label: type,

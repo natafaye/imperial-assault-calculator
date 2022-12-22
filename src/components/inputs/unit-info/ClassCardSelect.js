@@ -1,9 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
+import ClassCardLabel from '../../labels/ClassCardLabel'
+import { search, searchArray, getNumAtEnd } from '../../../calculators/utilities'
 import { CLASS_CARDS } from '../../../data/class-cards'
 import { IMPERIAL, REBEL } from '../../../data/units'
-import ClassCardLabel from '../../labels/ClassCardLabel'
-import { search, searchArray, getNumAtEnd } from './selectUtilities'
 
 const CLASS_CARD_OPTIONS = [REBEL, IMPERIAL].map(affiliation => ({
     label: affiliation,

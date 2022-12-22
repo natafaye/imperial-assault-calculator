@@ -1,8 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
-import { IMPERIAL, MERCENARY, REBEL, UNITS } from '../../../data/units'
 import UnitLabel from '../../labels/UnitLabel'
-import { search, searchArray } from './selectUtilities'
+import { IMPERIAL, MERCENARY, REBEL, UNITS } from '../../../data/units'
+import { search, searchArray } from '../../../calculators/utilities'
 
 const UNIT_OPTIONS = [REBEL, IMPERIAL, MERCENARY].map(affiliation => ({
     label: affiliation,
