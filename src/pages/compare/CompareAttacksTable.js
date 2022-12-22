@@ -16,6 +16,8 @@ export default function CompareAttacksTable({ table }) {
                   <th key={header.id} colSpan={header.colSpan} role="button">
                     {header.isPlaceholder ? null : (
                       <div
+                        type="button"
+                        title="Sort By"
                         className={header.column.getCanSort() ? 'cursor-pointer select-none' : ''}
                         onClick={header.column.getToggleSortingHandler()}
                       >
@@ -23,8 +25,8 @@ export default function CompareAttacksTable({ table }) {
                           {flexRender(header.column.columnDef.header, header.getContext())}
                         </span>
                         {{
-                          asc: <FontAwesomeIcon icon={faCaretUp} />,
-                          desc: <FontAwesomeIcon icon={faCaretDown} />,
+                          asc: <FontAwesomeIcon icon={faCaretDown} />,
+                          desc: <FontAwesomeIcon icon={faCaretUp} />,
                         }[header.column.getIsSorted()] || null}
                       </div>
                     )}

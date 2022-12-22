@@ -1,5 +1,15 @@
+
+
 .bg-lighter-dark {
     background-color: #606060;
+}
+
+.text-darker-secondary {
+    color: #404040
+}
+
+.bg-darker-dark {
+    background-color: #292929;
 }
 
 .bg-medium-dark {
@@ -16,4 +26,9 @@
 
 .fs-8 {
     font-size: 0.7rem
+}
+
+.btn-gradient-hover:hover {
+    background: rgb(178,118,12);
+    background: linear-gradient(90deg, rgba(178,118,12,1) 0%, rgba(243,157,18,1) 32%, rgba(228,159,25,1) 51%, rgba(0,188,140,1) 100%);
 }

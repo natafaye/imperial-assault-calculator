@@ -1,5 +1,5 @@
 import React from 'react'
-import DieIcon from '../../../labels/sub-labels/DieIcon';
+import DieIcon from '../../labels/sub-labels/DieIcon';
 
 export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
 
@@ -10,8 +10,10 @@ export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
         }
     };
 
+    const menuClasses = "position-absolute bg-secondary list-unstyled text-center py-1 px-2 ms-1 rounded-bottom border-top-0"
+
     return (
-        <ul className={`list-unstyled text-center py-1 px-2 ms-1 rounded-bottom border-top-0 bg-secondary position-absolute ${isOpen ? "" : "d-none"}`}
+        <ul className={`${menuClasses} ${isOpen ? "" : "d-none"}`}
             tabIndex={-1}
             style={{ zIndex: 1000 }}
             role="listbox"

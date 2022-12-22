@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import UnitInfoPicker from '../../components/inputs/unit-info/UnitInfoPicker'
-import CustomInfoPicker from '../../components/inputs/custom-info/CustomInfoPicker'
+import CustomInfoPicker from '../../components/inputs/CustomInfoPicker/CustomInfoPicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightToBracket, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { getEmptyData, getEmptyUnitData, summarizeUnitData } from '../../calculators/utilities'

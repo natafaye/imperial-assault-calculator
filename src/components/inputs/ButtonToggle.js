@@ -1,9 +1,11 @@
 import React from 'react'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
-export default function ButtonToggle({ id, value, onChange, trueLabel, falseLabel, size = "", variant = "outline-primary" }) {
+export default function ButtonToggle({ 
+    id, value, onChange, trueLabel, falseLabel, size = "", variant = "outline-primary", className = "" 
+}) {
     return (
-        <ButtonGroup>
+        <ButtonGroup className={className}>
             <ToggleButton
                 id={"switch-false-" + id}
                 type="radio"

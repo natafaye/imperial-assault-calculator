@@ -14,7 +14,7 @@ export default function AttackHistogramList({ results: { histograms, averages, t
         <>
             <Row>
                 <Col xs={12} lg={6}>
-                    <h3 className="d-inline-flex align-items-center my-4">
+                    <h3 className="d-flex align-items-center justify-content-center my-4">
                         <span>Damage</span>
                         <span className="badge text-bg-secondary fs-5 fw-normal ms-3">
                             Avg: {averages[DAM]?.toFixed(2)}
@@ -31,7 +31,7 @@ export default function AttackHistogramList({ results: { histograms, averages, t
                     </div>
                 </Col>
                 <Col xs={12} lg={6}>
-                    <h3 className="d-inline-flex align-items-center my-4">
+                    <h3 className="d-flex align-items-center justify-content-center my-4">
                         <span>Accuracy</span>
                         <span className="badge text-bg-secondary fs-5 fw-normal ms-3">
                             Avg: {averages[ACC]?.toFixed(2)}
