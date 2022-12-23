@@ -1,10 +1,19 @@
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { flexRender } from '@tanstack/react-table'
+import { useTransition, animated } from '@react-spring/web'
 import React from 'react'
 import { Table } from 'react-bootstrap';
 
 export default function CompareAttacksTable({ table }) {
+
+  const transitions = useTransition(table.getRowModel().rows, {
+    trail: 20,
+    from: { opacity: 0, scale: 0 },
+    enter: { opacity: 1, scale: 1 },
+    leave: { opacity: 0, scale: 0 },
+  })
+
   return (
     <>
       <Table striped responsive>
@@ -37,14 +46,16 @@ export default function CompareAttacksTable({ table }) {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
+          {transitions((style, row) => (
+            <animated.tr style={style}>
+              {
+                row.getVisibleCells().map(cell => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))
+              }
+            </animated.tr>
           ))}
         </tbody>
       </Table>
