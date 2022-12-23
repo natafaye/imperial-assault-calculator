@@ -5,7 +5,7 @@ import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function CollapsableDataArea({ label, children, collapsedData }) {
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     const [expandedRef, expandedBounds] = useMeasure()
     const [collapsedRef, collapsedBounds] = useMeasure()

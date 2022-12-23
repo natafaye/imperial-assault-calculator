@@ -42,7 +42,6 @@ export default function ComparePage() {
 
   const addAttack = (attack) => {
     setAttackList([getCompareAttackData(attack), ...attackList])
-    setShowAddForm(false);
   }
 
   const addAllAttacks = (filter) => {

@@ -17,14 +17,18 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
 
     const onClickSubmit = () => {
         onSubmit({ name: nameValue, ...attackDataValues })
-        onHide()
+        clearAndHide()
+    }
+
+    const clearAndHide = () => {
         setNameValue("")
-        setAttackUnit(getEmptyUnitData)
-        setAttackDataValues(getEmptyData)
+        setAttackUnit(() => getEmptyUnitData())
+        setAttackDataValues(() => getEmptyData())
+        onHide()
     }
 
     return (
-        <Modal show={show} onHide={onHide} size="lg">
+        <Modal show={show} onHide={clearAndHide} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>Add Attack</Modal.Title>
             </Modal.Header>
@@ -50,7 +54,7 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onHide}>Cancel</Button>
+                <Button variant="secondary" onClick={clearAndHide}>Cancel</Button>
                 <Button variant="primary" onClick={onClickSubmit}>
                     <FontAwesomeIcon icon={faPlus} /> Add
                 </Button>

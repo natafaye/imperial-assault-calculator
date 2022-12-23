@@ -1,17 +1,26 @@
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { flexRender } from '@tanstack/react-table'
-import { useTransition, animated } from '@react-spring/web'
+import { useTransition, animated, config } from '@react-spring/web'
 import React from 'react'
 import { Table } from 'react-bootstrap';
 
 export default function CompareAttacksTable({ table }) {
 
   const transitions = useTransition(table.getRowModel().rows, {
-    trail: 20,
-    from: { opacity: 0, scale: 0 },
-    enter: { opacity: 1, scale: 1 },
-    leave: { opacity: 0, scale: 0 },
+    keys: row => row.original.id,
+    trail: 0,
+    from: { opacity: 0, transform: "translateX(-20%)" },
+    enter: { opacity: 1, transform: "translateX(0%)" },
+    leave: { opacity: 0, transform: "translateX(-100%)" },
+    config: (_, state) => ({
+      mass: 0.3,
+      tension: 120,
+      friction: 14,
+      precision: 0.01,
+      velocity: 0.009,
+      clamp: state === "leave"
+    })
   })
 
   return (
@@ -57,6 +66,9 @@ export default function CompareAttacksTable({ table }) {
               }
             </animated.tr>
           ))}
+          {table.getRowModel().rows.length === 0 && (
+            <tr><td colSpan={10} className="text-muted text-center">Add an attack to compare stats</td></tr>
+          )}
         </tbody>
       </Table>
     </>
