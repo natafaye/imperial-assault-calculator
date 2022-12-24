@@ -22,7 +22,7 @@ export default function UnitLabel({ unit, placement = "top" }) {
                 </div>
             </Popover.Header>
             <Popover.Body>
-                <div style={{ minWidth: "200px" }}>
+                <div className="min-width-200">
                     <div className="d-flex">
                         <div className="text-muted me-2 flex-grow-1">{unit.size}</div>
                         {unit.traits && <TraitsListLabels className="text-end flex-grow-1" traits={unit.traits} />}

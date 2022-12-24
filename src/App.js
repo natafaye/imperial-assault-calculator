@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { useReducedMotion } from '@react-spring/web';
 import TopBar from "./pages/TopBar";
 import StatsPage, { useStatsData } from "./pages/StatsPage";
 import ComparePage, { useCompareData } from './pages/ComparePage';
@@ -8,6 +9,8 @@ import ComparePage, { useCompareData } from './pages/ComparePage';
 function App() {
   const [statsData, statsUpdaters] = useStatsData();
   const [compareData, compareUpdaters] = useCompareData();
+
+  useReducedMotion()
   
   return (
     <>

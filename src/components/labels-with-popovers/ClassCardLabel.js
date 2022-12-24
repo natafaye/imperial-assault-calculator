@@ -20,7 +20,7 @@ export default function ClassCardLabel({ card, placement = "top" }) {
                 </div>
             </Popover.Header>
             <Popover.Body>
-                <div style={{ minWidth: "200px" }}>
+                <div className="min-width-200">
                     <div className="d-flex">
                         <div className="flex-grow-1 me-2 text-muted">
                             { card.availableTo.join(" - ") }
@@ -61,8 +61,8 @@ export default function ClassCardLabel({ card, placement = "top" }) {
                     )}
                     <SurgeListLabels abilities={card.surgeAbilities} />
                     <div className="mt-1">
-                        {card.cost !== 0 && <>{card.cost} <span style={{ fontSize: "0.7rem" }}>XP</span></>}
-                        {card.cost === 0 && <span style={{ fontSize: "0.7rem" }}>REWARD</span>}
+                        {card.cost !== 0 && <>{card.cost} <span className="fs-8">XP</span></>}
+                        {card.cost === 0 && <span className="fs-8">REWARD</span>}
                     </div>
                 </div>
             </Popover.Body>

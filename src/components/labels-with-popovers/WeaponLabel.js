@@ -13,7 +13,7 @@ export default function WeaponLabel({ weapon, placement = "top" }) {
         <Popover id={`weapon-popover-${weapon.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{weapon.name}</Popover.Header>
             <Popover.Body>
-                <div style={{ minWidth: "200px" }}>
+                <div className="min-width-200">
                     <div className="d-flex">
                         <TraitsListLabels className="flex-grow-1 me-3" traits={weapon.traits} />
                         <div className="flex-grow-1 text-end">

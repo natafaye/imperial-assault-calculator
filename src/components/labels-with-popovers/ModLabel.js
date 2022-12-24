@@ -10,7 +10,7 @@ export default function ModLabel({ mod, placement = "top" }) {
         <Popover id={`mod-popover-${mod.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{mod.name}</Popover.Header>
             <Popover.Body>
-                <div style={{ minWidth: "200px" }}>
+                <div className="min-width-200">
                     <div className="d-flex">
                         <div className="flex-grow-1 me-2 text-muted">
                             { mod.weaponType} - { mod.modType }
