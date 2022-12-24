@@ -1,0 +1,26 @@
+import React from 'react'
+import { Form } from 'react-bootstrap'
+import PropertyIcon from '../icons/PropertyIcon'
+import { PROPERTY_LABELS } from '../../data/dice'
+
+export default function PropertyInput({ property, value, onChange, idPrefix, min = -15, max = 15 }) {
+    return (
+        <span 
+            style={{ flexBasis: "70px", maxWidth: "120px" }} 
+            className="flex-shrink-0 flex-grow-1 d-inline-flex align-items-center me-2"
+        >
+            <Form.Label htmlFor={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} className="mx-1 mb-0">
+                <PropertyIcon property={property} size="sm"/>
+            </Form.Label>
+            <Form.Control 
+                type="number" 
+                min={min} 
+                max={max} 
+                size="sm" 
+                id={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} 
+                name={property} 
+                value={value ? value : ""}
+                onChange={onChange} />
+        </span>
+    )
+}

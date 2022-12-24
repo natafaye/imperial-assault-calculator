@@ -1,0 +1,12 @@
+.logo {
+    color: #404040;
+    margin-top: -20px;
+    margin-bottom: -40px;
+    margin-right: -50px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    font-family: Oswald;
+}

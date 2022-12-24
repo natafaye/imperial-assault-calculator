@@ -26,7 +26,15 @@
     font-size: 0.7rem
 }
 
-.btn-gradient-hover:hover {
+.red-orange-green-gradient {
     background: rgb(178, 78, 12);
-    background: linear-gradient(90deg, rgba(178, 78, 12, 1) 0%, rgba(243, 157, 18, 1) 39%, rgba(228, 159, 25, 1) 63%, rgba(0, 188, 140, 1) 100%);
+    background: linear-gradient(90deg, 
+        rgba(178, 78, 12, 1) 0%,
+        rgba(243, 157, 18, 1) 39%,
+        rgba(228, 159, 25, 1) 63%, 
+        rgba(0, 188, 140, 1) 100%);
 }
+
+.no-background { background: none !important; }
+.no-background:hover { background: none !important; }
+.no-background:active { background: none !important; }

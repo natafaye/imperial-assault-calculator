@@ -12,7 +12,7 @@ export const STRENGTH = 0
 export const INSIGHT = 1
 export const TECH = 2
 
-export const VALUE_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
+export const PROPERTY_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
 
 export const BLUE = "Blue"
 export const RED = "Red"
