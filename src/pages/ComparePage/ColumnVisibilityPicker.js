@@ -14,10 +14,10 @@ export default function ColumnVisibilityPicker({ table, className = "" }) {
                 />
             </Button>
             <Dropdown.Toggle split variant="outline-info" id="column-visibility-dropdown" />
-            <Dropdown.Menu>
+            <Dropdown.Menu style={{ "--bs-dropdown-min-width": "180px"}}>
                 {table.getAllLeafColumns().map(column => (
                     <Dropdown.ItemText key={column.id}>
-                        <Form.Check id={column.id + "-column-visibility"}>
+                        <Form.Check id={column.id + "-column-visibility text-nowrap"}>
                             <Form.Check.Input
                                 type="checkbox"
                                 className="me-3"

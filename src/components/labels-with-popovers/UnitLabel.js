@@ -8,6 +8,8 @@ import AffiliationLabel from '../icons/AffiliationIcon'
 import AttackTypeLabel from '../icons/AttackTypeIcon'
 
 export default function UnitLabel({ unit, placement = "top" }) {
+    if(!unit) return null;
+    
     const popover = (
         <Popover id={`unit-popover-${unit.id}`} style={{ zIndex: 1200, minWidth: "300px" }}>
             <Popover.Header className={"fs-5 d-flex justify-content-between align-items-center " + ((unit.elite) ? "border-bottom border-danger border-2" : "")}>

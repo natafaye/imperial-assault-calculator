@@ -21,14 +21,19 @@ export default function ComparePage({ data, updaters }) {
   }
 
   const addAllAttacks = (filter) => {
-    let additions = ((filter === RANGED || filter === MELEE) 
-      ? WEAPONS.filter(w => w.type === filter) 
+    const isWeapon = (filter === RANGED || filter === MELEE) 
+    let additions = (isWeapon ?
+      WEAPONS.filter(w => w.type === filter) 
       : UNITS.filter(u => u.affiliation === filter && !u.isHero)
     ).map(a => getCompareResults({
       name: a.name,
       dice: a.attackDice,
       bonus: a.attackBonus,
-      surgeAbilities: a.surgeAbilities
+      surgeAbilities: a.surgeAbilities,
+      unitData: {
+        unit: isWeapon ? null : a,
+        weapon: isWeapon ? a : null
+      }
     }))
     setAttackList([...additions, ...attackList])
   }

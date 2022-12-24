@@ -9,6 +9,8 @@ import TraitsListLabels from './TraitsListLabels'
 import AttackTypeIcon from '../icons/AttackTypeIcon'
 
 export default function WeaponLabel({ weapon, placement = "top" }) {
+    if(!weapon) return null;
+    
     const popover = (
         <Popover id={`weapon-popover-${weapon.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{weapon.name}</Popover.Header>

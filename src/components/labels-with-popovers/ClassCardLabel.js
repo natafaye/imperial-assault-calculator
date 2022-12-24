@@ -9,6 +9,8 @@ import AffiliationLabel from '../icons/AffiliationIcon'
 import OptionalAbilityLabel from '../labels/OptionalAbilityLabel'
 
 export default function ClassCardLabel({ card, placement = "top" }) {
+    if(!card) return null;
+    
     const popover = (
         <Popover id={`class-card-popover-${card.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header className="fs-5 d-flex justify-content-between align-items-center">

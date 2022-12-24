@@ -6,6 +6,8 @@ import BonusListLabels from '../labels/BonusListLabels'
 import TierAndCostLabel from './TierAndCostLabel'
 
 export default function ModLabel({ mod, placement = "top" }) {
+    if(!mod) return null;
+    
     const popover = (
         <Popover id={`mod-popover-${mod.id}`} style={{ zIndex: 1200 }}>
             <Popover.Header as="h5" className="fs-5">{mod.name}</Popover.Header>
