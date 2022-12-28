@@ -5,6 +5,7 @@ export const MOD = "mods"
 
 /**
  * Gets all the optional abilities from an entity and gives each an identifying id
+ * of the form: [type of entity]-[id of entity]-[index of optional ability in array]
  * 
  * @param {object} entity The entity (unit, class card, weapon, mod)
  * @param {string} property The name of the property that has the optional abilities
@@ -27,8 +28,8 @@ export const getAllOptionalAbilities = ({ unit, classCards, weapon, mods, isAtta
     return [].concat(
         getOptionalAbilities(unit, property, UNIT),
         classCards.flatMap(c => getOptionalAbilities(c, property, CLASS_CARD)),
-        getOptionalAbilities(weapon, "optional", WEAPON),
-        mods ? mods.flatMap(m => getOptionalAbilities(m, "optional", MOD)) : []
+        getOptionalAbilities(weapon, property, WEAPON),
+        mods ? mods.flatMap(m => getOptionalAbilities(m, property, MOD)) : []
     )
 }
 

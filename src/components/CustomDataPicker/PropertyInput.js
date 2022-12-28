@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import PropertyIcon from '../icons/PropertyIcon'
-import { PROPERTY_LABELS } from '../../data/dice'
+import { PROPERTY_LABELS } from '../../data'
 
 export default function PropertyInput({ property, value, onChange, idPrefix, min = -15, max = 15 }) {
     return (

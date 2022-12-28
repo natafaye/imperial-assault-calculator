@@ -8,8 +8,7 @@ import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
-import { IMPERIAL, MERCENARY, REBEL, UNITS } from '../../data/units'
-import { WEAPONS, MELEE, RANGED } from '../../data/weapons'
+import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED } from '../../data'
 
 export default function ComparePage({ data, updaters }) {
   const { attackList, sorting, columnVisibility } = data

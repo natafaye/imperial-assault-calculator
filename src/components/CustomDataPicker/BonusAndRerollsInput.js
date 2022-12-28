@@ -3,7 +3,7 @@ import { Stack } from 'react-bootstrap'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropertyInput from './PropertyInput'
-import { ACC, BLO, EVA, DAM, SUR, DOD, RER } from '../../data/dice'
+import { ACC, BLO, EVA, DAM, SUR, DOD, RER } from '../../data'
 import { clearBonus, updateBonus, updateRerolls } from './useCustomData'
 
 export default function BonusAndRerollsInput({ bonus, rerolls, dispatch, idPrefix }) {

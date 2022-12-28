@@ -1,6 +1,6 @@
 import React from 'react'
-import { ACC, BLO, PROPERTY_LABELS } from '../../data/dice'
 import PropertyIcon from '../icons/PropertyIcon'
+import { ACC, BLO, PROPERTY_LABELS } from '../../data'
 
 export function PropertyLabel({ value, property, isAttack = false, className = "" }) {
     if (!value) 

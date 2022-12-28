@@ -1,7 +1,7 @@
 import React from 'react'
 import SurgeCostIcon from '../icons/SurgeCostIcon';
 import PropertyListLabels from './PropertyListLabels';
-import { SUR } from '../../data/dice';
+import { SUR } from '../../data';
 
 export default function SurgeListLabels({ abilities, className = "", showHRBelow = true }) {
   return (

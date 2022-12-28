@@ -2,8 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import { ClassCardLabel } from '../labels-with-popovers'
 import { search, searchArray, getNumAtEnd } from '../../utilities'
-import { CLASS_CARDS } from '../../data/class-cards'
-import { IMPERIAL, REBEL } from '../../data/units'
+import { IMPERIAL, REBEL, CLASS_CARDS } from '../../data'
 
 const CLASS_CARD_OPTIONS = [REBEL, IMPERIAL].map(affiliation => ({
     label: affiliation,

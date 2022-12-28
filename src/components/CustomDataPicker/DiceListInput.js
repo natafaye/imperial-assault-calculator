@@ -6,7 +6,7 @@ import DieSelectMenu from './DieSelectMenu'
 import DieIcon from '../icons/DieIcon'
 import { addDie, deleteDie } from './useCustomData'
 import { useClickOutside } from '../../utilities'
-import { ATTACK_DICE, DEFENSE_DICE } from '../../data/dice'
+import { ATTACK_DICE, DEFENSE_DICE } from '../../data'
 
 export default function DiceListInput({ values, dispatch, isAttack = false }) {
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);

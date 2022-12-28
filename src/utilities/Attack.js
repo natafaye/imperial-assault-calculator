@@ -1,5 +1,5 @@
 import { getAverage, addValues } from "./analysisUtilities"
-import { DICE, ACC, DAM, SUR, BLO, EVA, DOD, BLACK, WHITE } from "../data/dice"
+import { DICE, ACC, DAM, SUR, BLO, EVA, DOD, BLACK, WHITE } from "../data"
 
 /**
  * Checks if two sets are equal to each other with one level deep equals

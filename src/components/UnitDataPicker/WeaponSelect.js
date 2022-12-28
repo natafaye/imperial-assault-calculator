@@ -1,8 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
 import { WeaponLabel } from '../labels-with-popovers'
-import { MELEE, RANGED, WEAPONS } from '../../data/weapons'
 import { search, searchArray, getNumAtEnd } from '../../utilities'
+import { MELEE, RANGED, WEAPONS } from '../../data'
 
 const WEAPON_OPTIONS = [MELEE, RANGED].map(type => ({
     label: type,

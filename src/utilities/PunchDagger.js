@@ -1,5 +1,5 @@
 import Attack from "./Attack"
-import { DICE, DAM, SUR } from "../data/dice"
+import { DICE, DAM, SUR } from "../data"
 
 /**
  * Extends Attack to handle Punch Dagger attacks correctly

@@ -1,7 +1,5 @@
 import { addValues, getAttackData, getAverage, getDefenseData, getHistograms } from "./analysisUtilities"
-import { UNITS } from "../data/units"
-import { CLASS_CARDS } from "../data/class-cards"
-import { BLACK, BLUE, GREEN, YELLOW } from "../data/dice"
+import { UNITS, CLASS_CARDS, BLACK, BLUE, GREEN, YELLOW, RED, WEAPONS, WHITE } from "../data"
 
 const a = [0, 1, 0, 4, 0, 6]
 const b = [1, 1, 1, 1, 1, 1]
@@ -105,31 +103,37 @@ describe("getHistograms", () => {
 
 const j4x7Unit = UNITS.find(u => u.name === "J4X-7")
 const agentBlaise = UNITS.find(u => u.name === "Agent Blaise")
-
 const x8Upgrade = CLASS_CARDS.find(c => c.name === "X-8 Upgrade")
+const loku = UNITS.find(u => u.name === "Loku Kanoloa (Hero)")
+const lokuOptional = "unit-301-0"
+const a280 = WEAPONS.find(w => w.name === "A280")
+const coordinatedAttack = CLASS_CARDS.find(c => c.name === "Coordinated Attack (Loku)")
+const coordinatedAttackOptional = "classCards-11-0"
+const auxiliaryTraining = CLASS_CARDS.find(c => c.name === "Auxiliary Training")
+const auxiliaryTrainingOptional = "classCards-4-0"
 
 describe("getAttackData", () => {
     it("works with no data", () => {
         expect(getAttackData({ classCards: [], mods: [] }))
-            .toEqual({ dice: [], abilities: [], bonus: [0, 0, 0, 0, 0, 0], rerolls: 0 })
+            .toEqual({ dice: [], surgeAbilities: [], bonus: [0, 0, 0, 0, 0, 0], rerolls: 0 })
     })
     
     it("works with just a unit", () => {
-        expect(getAttackData({ unit: j4x7Unit, classCards: [], mods: [] })).toEqual({ 
+        expect(getAttackData({ unit: j4x7Unit })).toEqual({ 
             dice: [BLUE], 
-            abilities: [[0, 1, -1, 0, 0, 0]], 
+            surgeAbilities: [[0, 1, -1, 0, 0, 0]], 
             bonus: [0, 0, 0, -1, 0, 0], 
             rerolls: 0 
         })
-        expect(getAttackData({ unit: j4x7Unit, classCards: [], mods: [], focused: true })).toEqual({ 
+        expect(getAttackData({ unit: j4x7Unit, focused: true })).toEqual({ 
             dice: [BLUE, GREEN], 
-            abilities: [[0, 1, -1, 0, 0, 0]], 
+            surgeAbilities: [[0, 1, -1, 0, 0, 0]], 
             bonus: [0, 0, 0, -1, 0, 0], 
             rerolls: 0 
         })
-        expect(getAttackData({ unit: agentBlaise, classCards: [], mods: [] })).toEqual({ 
+        expect(getAttackData({ unit: agentBlaise })).toEqual({ 
             dice: [GREEN, YELLOW, YELLOW], 
-            abilities: [
+            surgeAbilities: [
                 [0, 1, -1, 0, 0, 0],
                 [0, 1, -1, 0, 0, 0],
                 [0, 0, -1, -2, 0, 0],
@@ -141,28 +145,29 @@ describe("getAttackData", () => {
     })
     
     it("works with a unit and class cards", () => {
-        expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade], mods: [] }))
-            .toEqual({ dice: [BLUE], abilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
-        expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade], mods: [], focused: true }))
-            .toEqual({ dice: [BLUE, GREEN], abilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
-    })
-    
-    it("works with a unit and class cards and a weapon", () => {
-        
+        expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade] }))
+            .toEqual({ dice: [BLUE], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
+        expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade], focused: true }))
+            .toEqual({ dice: [BLUE, GREEN], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
     })
     
     it("works with a unit and class cards and a weapon and mods", () => {
-
+        expect(getAttackData({ 
+            unit: loku, 
+            weapon: a280,
+            classCards: [coordinatedAttack], 
+            selectedOptionalIds: [lokuOptional, coordinatedAttackOptional]
+        })).toEqual({ dice: [BLUE, GREEN, RED], surgeAbilities: [[0,2,-1,0,0,0],[0,0,-1,-2,0,0]], bonus: [3,1,0,0,0,0], rerolls: 0 })
     })
 })
 
 describe("getDefenseData", () => {
     it("works with no data", () => {
-        expect(getDefenseData({ classCards: [] })).toEqual({ dice: [], bonus: [0,0,0,0,0,0], rerolls: 0 })
+        expect(getDefenseData({ })).toEqual({ dice: [], bonus: [0,0,0,0,0,0], rerolls: 0 })
     })
     
     it("works with just a unit", () => {
-        expect(getDefenseData({ unit: agentBlaise, classCards: [] })).toEqual({ 
+        expect(getDefenseData({ unit: agentBlaise })).toEqual({ 
             dice: [BLACK], 
             bonus: [0,0,0,0,0,0], 
             rerolls: 0 
@@ -170,6 +175,7 @@ describe("getDefenseData", () => {
     })
     
     it("works with a unit and class cards", () => {
-
+        expect(getDefenseData({ unit: loku, classCards: [auxiliaryTraining], selectedOptionalIds: [auxiliaryTrainingOptional] }))
+            .toEqual({ dice: [WHITE], bonus: [0,0,0,0,0,0], rerolls: 1 })
     })
 })

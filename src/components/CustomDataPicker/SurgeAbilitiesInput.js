@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SurgeAbilityForm from './SurgeAbilityForm'
 import SurgeCostIcon from '../icons/SurgeCostIcon'
 import PropertyListLabels from '../labels/PropertyListLabels'
-import { SUR } from '../../data/dice'
 import { addSurgeAbility, deleteSurgeAbility, updateSurgeAbility } from './useCustomData'
+import { SUR } from '../../data'
 
 export default function SurgeAbilitiesInput({ values, dispatch }) {
   const [showAddForm, setShowAddForm] = useState(false)

@@ -132,6 +132,18 @@ export const WEAPONS = [
         ]
     }, // TODO: Use damage token?
     {
+        id: 300,
+        name: "Close and Personal",
+        type: MELEE,
+        traits: [],
+        attackDice: [RED, YELLOW],
+        modSpots: 0,
+        tier: 0,
+        cost: 0,
+        attackBonus: [0, 0, 0, 0, 0, 0],
+        surgeAbilities: []
+    },
+    {
         id: 7,
         name: "DC-15S Blaster",
         description: "CT-1701 starter weapon",

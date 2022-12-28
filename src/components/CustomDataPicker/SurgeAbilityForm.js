@@ -5,7 +5,7 @@ import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import SurgeCostIcon from '../icons/SurgeCostIcon'
 import ButtonToggle from '../ButtonToggle'
 import PropertyInput from './PropertyInput'
-import { ACC, DAM, SUR, BLO, EVA, DOD } from '../../data/dice'
+import { ACC, DAM, SUR, BLO, EVA, DOD } from '../../data'
 
 export default function SurgeAbilityForm({ idPrefix, ability = [0, 0, -1, 0, 0, 0], onSave, onCancel }) {
     const [formData, setFormData] = useState(ability)

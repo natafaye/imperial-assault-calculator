@@ -2,8 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import { ModLabel } from '../labels-with-popovers'
 import { getNumAtEnd, search, searchArray } from '../../utilities'
-import { MELEE, RANGED } from '../../data/weapons'
-import { MODS } from '../../data/mods'
+import { MELEE, RANGED, MODS } from '../../data'
 
 const MOD_OPTIONS = [MELEE, RANGED].map(type => ({
     label: type,

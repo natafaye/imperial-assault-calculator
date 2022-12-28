@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
 import PunchDagger from './PunchDagger'
 import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, DAM, GREEN, WHITE } from '../data/dice'
+import { ACC, BLACK, DAM, GREEN, WHITE } from '../data'
 
 /**
  * Gets either an Attack object, or the subclass PunchDagger object
@@ -18,8 +18,7 @@ export const getAttackObject = (unitAttack, attack, defense) => {
         attack.surgeAbilities,
         attack.rerolls
     ]
-    const isPunchDagger = (unitAttack?.weapon?.name === "Punch Dagger")
-    return (isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
+    return (unitAttack?.weapon?.isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
 }
 
 /**
@@ -118,23 +117,30 @@ export const getHistograms = (data, properties) => {
     return histograms;
 }
 
+const remove = (toRemove, array) => {
+    let newArray = [...array]
+    toRemove.forEach(item => newArray.splice(newArray.indexOf(item), 1))
+    return newArray // TODO: breaks if not there?
+}
+
 /**
  * Combines all the unit & class cards & weapon & mods data to make one set of attack data
  * @param {{ 
- *  unit: object, 
- *  classCards: object[], 
- *  weapon: object, 
- *  mods: object[], 
- *  focused: boolean, 
- *  selectedOptionalIds: string[]}} unitData The data to combine
+ *  unit: object?, 
+ *  classCards: object[]?, 
+ *  weapon: object?, 
+ *  mods: object[]?, 
+ *  focused: boolean?, 
+ *  selectedOptionalIds: string[]?}} unitData The data to combine
  * @returns {{ dice: string[], surgeAbilities: number[][], bonus: [], rerolls: number }} The combined attack data
  */
-export const getAttackData = ({ unit, classCards, weapon, mods, focused, selectedOptionalIds }) => {
+export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focused = false, selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ unit, classCards, weapon, mods, isAttack: true })
         .filter(a => selectedOptionalIds.includes(a.id));
     
     return {
-        dice: [].concat(
+        dice: remove(optionals.flatMap(a => a.negativeAttackDice).filter(d => d),
+            [].concat(
                 unit?.attackDice, 
                 classCards.flatMap(c => c.attackDice), 
                 weapon?.attackDice, 
@@ -142,7 +148,8 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
                 (focused ? GREEN : null),
                 optionals.flatMap(a => a.dice)
             )
-            .filter(d => d),
+            .filter(d => d)
+        ),
         surgeAbilities: [].concat(
                 unit?.surgeAbilities,
                 classCards.flatMap(c => c.surgeAbilities),
@@ -170,7 +177,7 @@ export const getAttackData = ({ unit, classCards, weapon, mods, focused, selecte
  * @param {{ unit: object, classCards: object[], selectedOptionalIds: string[] }} unitData The data to combine
  * @returns {{ dice: string[], bonus: [], rerolls: number }} The combined defense data
  */
-export const getDefenseData = ({ unit, classCards, selectedOptionalIds }) => {
+export const getDefenseData = ({ unit, classCards = [], selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ unit, classCards })
         .filter(a => selectedOptionalIds.includes(a.id));
 

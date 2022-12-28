@@ -3162,6 +3162,41 @@ export const UNITS = [
 		surgeAbilities: []
     }, // ?????
     {
+        id: 301,
+        isHero: true,
+        name: "Loku Kanoloa (Hero)",
+        title: "Deadly Marksman",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 10,
+        endurance: 5,
+        speed: 5,
+        woundedEndurance: 4,
+        woundedSpeed: 4,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN, YELLOW],
+            [BLUE]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [RED, BLUE, GREEN],
+            [RED]
+        ],
+        attackBonus: [2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackRerolls: 0,
+		defenseRerolls: 0,
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Target has recon token",
+                bonus: [0,1,0,0,0,0]
+            }
+        ]
+    },
+    {
         id: 0,
         isHero: true,
         name: "",

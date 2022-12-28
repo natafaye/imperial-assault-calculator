@@ -8,7 +8,7 @@ import SummarizedDataLabel from "../../components/labels/SummarizedDataLabel";
 import SurgeListLabels from "../../components/labels/SurgeListLabels";
 import PropertyIcon from "../../components/icons/PropertyIcon";
 import DieIcon from "../../components/icons/DieIcon";
-import { ACC, BLACK, DAM, WHITE } from "../../data/dice";
+import { ACC, BLACK, DAM, WHITE } from "../../data";
 
 const AverageHeader = ({ die, property }) => (
     <span className="d-inline-flex align-items-center">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DICE_CLASSES } from '../../data/dice';
+import { DICE_CLASSES } from '../../data';
 
 export default function DieIcon({ color, size = "1", className = ""}) {
   return (

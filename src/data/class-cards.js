@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, WILD } from "./dice"
+import { BLUE, RED, YELLOW, WHITE, GREEN } from "./dice"
 import { REBEL, IMPERIAL } from "./units"
 
 // Hero names
@@ -283,8 +283,20 @@ export const CLASS_CARDS = [
         optionalDefense: [],
         optionalAttack: [
             { 
-                cost: "Attacking figure with recon token, spend 2 strain, exhaust Coordinated Attack", 
-                dice: [WILD] 
+                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                dice: [RED] 
+            },
+            { 
+                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                dice: [YELLOW] 
+            },
+            { 
+                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                dice: [GREEN] 
+            },
+            { 
+                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                dice: [BLUE] 
             },
         ],
         attackRerolls: 0,
@@ -540,12 +552,18 @@ export const CLASS_CARDS = [
 		availableTo: [DAVITH],
         cost: 2,
         defenseDice: [],
-        attackDice: [YELLOW],
+        attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
-		surgeAbilities: []
+		surgeAbilities: [],
+        optionalAttack: [
+            { 
+                cost: 'Melee attack, exhaust Falling Leaf, spend 1 strain', 
+                dice: [YELLOW]
+            }, 
+        ],
     },
     {
         id: 28,
@@ -697,11 +715,31 @@ export const CLASS_CARDS = [
         cost: 3,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 0, -1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         attackRerolls: 0,
 		defenseRerolls: 0,
-		surgeAbilities: []
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Attacking with pistol targeting adjacent figure, replace Yellow with Red",
+                bonus: [0,0,0,-1,0,0],
+                dice: [RED],
+                negativeAttackDice: [YELLOW]
+            },
+            {
+                cost: "Attacking with pistol targeting adjacent figure, replace Green with Red",
+                bonus: [0,0,0,-1,0,0],
+                dice: [RED],
+                negativeAttackDice: [GREEN]
+            },
+            {
+                cost: "Attacking with pistol targeting adjacent figure, replace Blue with Red",
+                bonus: [0,0,0,-1,0,0],
+                dice: [RED],
+                negativeAttackDice: [BLUE]
+            },
+        ]
     }, // TODO: Replace one die with red die, trigger adjacent & pistol
     {
         id: 36,

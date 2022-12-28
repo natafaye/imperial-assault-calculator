@@ -1,5 +1,5 @@
-import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION } from "./weapons";
-import { GREEN } from "./dice"
+import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION, BLADE } from "./weapons";
+import { GREEN, RED, YELLOW, BLUE } from "./dice"
 
 export const MODS = [
     {
@@ -41,7 +41,7 @@ export const MODS = [
         ]
     },
     {
-        id: 0,
+        id: 301,
         name: 'Disruption Cell',
         weaponType: RANGED,
         modType: ENERGY,
@@ -50,8 +50,25 @@ export const MODS = [
         description: "When you declare an attack, replace 1 die in your attack pool with a red die.",
         attackDice: [],
         attackBonus: [2, 0, 0, 0, 0, 0],
-        surgeAbilities: []
-    }, // TODO: Replace one die with red die
+        surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Replace a Yellow die with a Red die",
+                dice: [RED],
+                negativeAttackDice: [YELLOW]
+            },
+            {
+                cost: "Replace a Green die with a Red die",
+                dice: [RED],
+                negativeAttackDice: [GREEN]
+            },
+            {
+                cost: "Replace a Blue die with a Red die",
+                dice: [RED],
+                negativeAttackDice: [BLUE] // TODO: What's wrong with this one? Don't apply if can't?
+            },
+        ]
+    },
     {
         id: 4,
         name: 'Energized Hilt',
@@ -100,8 +117,8 @@ export const MODS = [
         attackBonus: [0, 0, 0, 0, 0, 0],
         surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
-        ]
-    },
+        ],
+    }, // TODO: handle defending ability
     {
         id: 8,
         name: 'Marksman Barrel',
@@ -214,6 +231,24 @@ export const MODS = [
     }, // TODO: Indicate blast damage?
     {
         id: 17,
+        name: 'Vibrobayonet',
+        weaponType: MELEE,
+        modType: BLADE,
+        cost: 0,
+        tier: 0,
+        description: 'While performing "Close and Personal", the Melee attack gains: +1 Damage, Pierce 1, Bleed 1',
+        attackDice: [],
+        attackBonus: [0,0,0,0,0,0],
+        surgeAbilities: [],
+        optionalAttack: [
+            { 
+                cost: 'Using Melee attack of "Close and Personal"', 
+                bonus: [0, 1, 0, -1, 0, 0] 
+            },
+        ],
+    },
+    {
+        id: 18,
         name: 'Vibrogenerator',
         weaponType: MELEE,
         modType: ENERGY,
@@ -227,7 +262,7 @@ export const MODS = [
         ]
     }, // TODO: Choose to use?
     {
-        id: 18,
+        id: 19,
         name: 'Weighted Head',
         weaponType: MELEE,
         modType: BALANCE,

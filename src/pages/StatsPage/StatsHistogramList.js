@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Row, Stack } from 'react-bootstrap';
 import ButtonToggle from "../../components/ButtonToggle";
 import ResultsHistogram from "../../components/ResultsHistogram";
-import { ACC, DAM } from '../../data/dice';
+import { ACC, DAM } from '../../data';
 
 export default function StatsHistogramList({ results: { histograms, averages, totalNum }, settings, setSettings }) {
     return (
