@@ -8,10 +8,13 @@ import { CollapseProvider } from '../../components/CollapsableDataArea';
 import HoverPeekButton from '../../components/HoverPeekButton';
 import SectionHeader from "./SectionHeader"
 import { getAttackData, getDefenseData } from '../../utilities';
+import PriorityPicker from './PriorityPicker';
 
 export default function StatsDataInput({ data, updaters, onCalculate }) {
-  const { customAttack, customDefense, unitAttack, unitDefense } = data
-  const { customAttackDispatch, customDefenseDispatch, setUnitAttack, setUnitDefense } = updaters
+  const { customAttack, customDefense, unitAttack, unitDefense, 
+    attackPriority, defensePriority } = data
+  const { customAttackDispatch, customDefenseDispatch, setUnitAttack, 
+    setUnitDefense, setAttackPriority, setDefensePriority } = updaters
 
   const clear = (customDispatch, setUnit) => {
     customDispatch(clearCustomData())
@@ -44,6 +47,14 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
           </SectionHeader>
           <UnitDataPicker data={unitDefense} setData={updateDefense}/>
           <CustomDataPicker data={customDefense} dispatch={customDefenseDispatch} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <PriorityPicker value={attackPriority} onChange={setAttackPriority} isAttack/>
+        </Col>
+        <Col>
+          <PriorityPicker value={defensePriority} onChange={setDefensePriority} />
         </Col>
       </Row>
       <Row>

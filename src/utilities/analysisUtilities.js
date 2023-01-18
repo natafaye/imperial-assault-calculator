@@ -9,29 +9,39 @@ import { ACC, BLACK, DAM, GREEN, WHITE } from '../data'
  * @param {object} unitAttack Data about the unit attack
  * @param {object} attack Data about the attack
  * @param {object?} defense Optional data about the defense (for adding the defense bonus in)
+ * @param {number[]} attackPriority Order of properties to prioritize for attack
+ * @param {number[]} defensePriority Order of properties to prioritize for defense
  * @returns {Attack | PunchDagger} Either an Attack or PunchDagger object
  */
-export const getAttackObject = (unitAttack, attack, defense) => {
+export const getAttackObject = (unitAttack, attack, defense, attackPriority, defensePriority) => {
     const args = [
         attack.dice,
         addValues(attack.bonus, defense?.bonus),
         attack.surgeAbilities,
-        attack.rerolls
+        attack.rerolls,
+        attackPriority,
+        defensePriority
     ]
     return (unitAttack?.weapon?.isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
 }
 
 /**
  * Interface function for getting the stats data of an attack and defense
- * @param {{ customAttack: object, customDefense: object, unitAttack: object }} data The attack and defense data
+ * @param {{ 
+ *  customAttack: object, 
+ *  customDefense: object, 
+ *  unitAttack: object, 
+ *  attackPriority: number[], 
+ *  defensePriority: number[] 
+ * }} data The attack and defense data
  * @returns {{ 
  *  averages: number[], 
  *  histograms: {value: *, amount: number, percentage: number, atLeastPercentage: number }[][], 
  *  totalNum: number 
  * }} All the stats data
  */
-export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack }) => {
-    let allResults = getAttackObject(unitAttack, attack, defense).calcresults(defense.dice);
+export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, attackPriority, defensePriority }) => {
+    let allResults = getAttackObject(unitAttack, attack, defense, attackPriority, defensePriority).calcresults(defense.dice);
     return {
         averages: getAverage(allResults),
         histograms: getHistograms(allResults, [ACC, DAM]),

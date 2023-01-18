@@ -35,12 +35,15 @@ export default class Attack {
      * @param {number[]} permanent Permanent bonuses to accuracy, damages, surges, blocks, evades, dodges
      * @param {number[][]} surge Available surge abilities
      * @param {number} [rerolls=0] How many rerolls are available
+     * @param {number[]} attackPriority Order of properties to prioritize for attack
+     * @param {number[]} defensePriority Order of properties to prioritize for defense
      */
-    constructor(attack, permanent, surge, rerolls=0) {
+    constructor(attack, permanent, surge, rerolls=0, attackPriority=[DAM, ACC], defensePriority=[BLO, EVA]) {
         this.attackdice = attack;
         this.permanentabilities = permanent
         this.surgeabilities = surge
-        this.surgepriorities = [DAM, ACC]
+        this.surgepriorities = attackPriority
+        this.defensePriority = defensePriority
         this.rerolls = rerolls
     }
 

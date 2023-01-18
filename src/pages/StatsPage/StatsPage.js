@@ -7,8 +7,6 @@ export default function StatsPage({ data, updaters }) {
     const { results, settings, ...inputData } = data
     const { setResults, setSettings, ...inputUpdaters } = updaters
 
-    console.log(inputData)
-
     const calculate = () => setResults(getStatsResults(inputData))
 
     return (
