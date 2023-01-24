@@ -3,24 +3,23 @@ import Attack from './Attack'
 import PunchDagger from './PunchDagger'
 import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
 import { ACC, BLACK, DAM, GREEN, WHITE } from '../data'
+import { DICE_MAX, DICE_MIN } from '../data/dice'
 
 /**
  * Gets either an Attack object, or the subclass PunchDagger object
  * @param {object} unitAttack Data about the unit attack
  * @param {object} attack Data about the attack
  * @param {object?} defense Optional data about the defense (for adding the defense bonus in)
- * @param {number[]} attackPriority Order of properties to prioritize for attack
- * @param {number[]} defensePriority Order of properties to prioritize for defense
+ * @param {number} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
  * @returns {Attack | PunchDagger} Either an Attack or PunchDagger object
  */
-export const getAttackObject = (unitAttack, attack, defense, attackPriority, defensePriority) => {
+export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) => {
     const args = [
         attack.dice,
         addValues(attack.bonus, defense?.bonus),
         attack.surgeAbilities,
         attack.rerolls,
-        attackPriority,
-        defensePriority
+        requiredAccuracy
     ]
     return (unitAttack?.weapon?.isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
 }
@@ -31,8 +30,7 @@ export const getAttackObject = (unitAttack, attack, defense, attackPriority, def
  *  customAttack: object, 
  *  customDefense: object, 
  *  unitAttack: object, 
- *  attackPriority: number[], 
- *  defensePriority: number[] 
+ *  requiredAccuracy: number
  * }} data The attack and defense data
  * @returns {{ 
  *  averages: number[], 
@@ -40,8 +38,8 @@ export const getAttackObject = (unitAttack, attack, defense, attackPriority, def
  *  totalNum: number 
  * }} All the stats data
  */
-export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, attackPriority, defensePriority }) => {
-    let allResults = getAttackObject(unitAttack, attack, defense, attackPriority, defensePriority).calcresults(defense.dice);
+export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, requiredAccuracy }) => {
+    let allResults = getAttackObject(unitAttack, attack, defense, requiredAccuracy).calcresults(defense.dice);
     return {
         averages: getAverage(allResults),
         histograms: getHistograms(allResults, [ACC, DAM]),
@@ -208,4 +206,21 @@ export const getDefenseData = ({ unit, classCards = [], selectedOptionalIds = []
             classCards.reduce((total, c) => (c.defenseRerolls ? total + c.defenseRerolls : total), 0) +
             optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
     }
+}
+
+/**
+ * Gets the minimum and maximum possible accuracy for a given attack against a given defense
+ * @param {{ dice: string[], surgeAbilities: number[][], bonus: [], rerolls: number }} attack The combined attack data
+ * @param {{ dice: string[], bonus: [], rerolls: number }} defense The combined defense data
+ * @returns {[number, number]} An array with the min and max accuracy, in that order
+ */
+export const getMinMaxAccuracy = (attack, defense) => {
+    let min = attack.dice.reduce((total, die) => DICE_MIN[die] + total, 0)
+        + attack.bonus[ACC]
+        + defense.bonus[ACC]
+    let max = attack.dice.reduce((total, die) => DICE_MAX[die] + total, 0) 
+        + attack.bonus[ACC] 
+        + defense.bonus[ACC] 
+        + attack.surgeAbilities.reduce((total, ability) => total + ability[ACC], 0)
+    return [min, max]
 }

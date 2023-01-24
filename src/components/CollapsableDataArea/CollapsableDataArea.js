@@ -5,8 +5,8 @@ import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useCollapseData } from './CollapseProvider';
 
-export default function CollapsableDataArea({ label, children, collapsedData }) {
-    const [isCollapsed, setIsCollapsed] = useCollapseData();
+export default function CollapsableDataArea({ label, children, collapsedData, startCollapsed = false }) {
+    const [isCollapsed, setIsCollapsed] = useCollapseData(startCollapsed);
 
     const [expandedRef, expandedBounds] = useMeasure()
     const [collapsedRef, collapsedBounds] = useMeasure()

@@ -35,6 +35,24 @@ export const DICE_CLASSES = {
     [WHITE]: "white"
 }
 
+// The minimum and maximum possible accuracy for each dice
+export const DICE_MIN = {
+    [GREEN]: 1, 
+    [BLUE]: 2, 
+    [YELLOW]: 0, 
+    [RED]: 0, 
+    [BLACK]: 0, 
+    [WHITE]: 0
+}
+export const DICE_MAX = {
+    [GREEN]: 3, 
+    [BLUE]: 5, 
+    [YELLOW]: 2, 
+    [RED]: 0, 
+    [BLACK]: 0, 
+    [WHITE]: 0
+}
+
 /**
  * The sides of all dice by color
  * In order of: Accuracy, Damages, Surges, Blocks, Evades, Dodges
