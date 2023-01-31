@@ -4,10 +4,6 @@
     display: inline-block;
 }
 
-.button:active {
-    color: white
-}
-
 .peek {
     position: absolute;
     top: 0;

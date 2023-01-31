@@ -20,10 +20,16 @@ export default function HoverPeekButton({ children, as = "button", onClick, clas
             onClick={onClick}
             {...props}
         >
-            <animated.div style={{ transform: y.to(v => `translateY(${v}%)`) }} className={`${styles.peek} ${peekClassName}`}/>
-            <span className={styles.content}>
+            <animated.div 
+                style={{ transform: y.to(v => `translateY(${v}%)`) }} 
+                className={`${styles.peek} ${peekClassName}`}
+            />
+            <animated.span 
+                className={styles.content} 
+                style={{ color: y.to(v => v < 50 ? "white" : "" )}}
+            >
                 {children}
-            </span>
+            </animated.span>
         </Component>
     )
 }
