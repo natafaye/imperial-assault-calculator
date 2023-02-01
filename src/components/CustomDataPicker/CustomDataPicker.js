@@ -1,6 +1,6 @@
 import React from 'react'
 import { CollapsableDataArea } from '../CollapsableDataArea'
-import SummarizedDataLabel from '../labels/SummarizedDataLabel'
+import { SummarizedDataLabel } from '../_labels'
 import DiceListInput from './DiceListInput'
 import BonusAndRerollsInput from './BonusAndRerollsInput'
 import SurgeAbilitiesInput from './SurgeAbilitiesInput'

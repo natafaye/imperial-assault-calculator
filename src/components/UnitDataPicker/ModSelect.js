@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { ModLabel } from '../labels-with-popovers'
+import { ModLabel } from '../_labels'
 import { getNumAtEnd, search, searchArray } from '../../utilities'
 import { MELEE, RANGED, MODS } from '../../data'
 

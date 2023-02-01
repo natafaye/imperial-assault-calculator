@@ -1,12 +1,12 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-import SurgeListLabels from '../labels/SurgeListLabels'
-import DiceListLabels from '../labels/DiceListLabels'
-import BonusListLabels from '../labels/BonusListLabels'
+import SurgeListLabels from './SurgeListLabels'
+import DiceListLabels from './DiceListLabels'
+import BonusListLabels from './BonusListLabels'
 import ModSpotsLabel from './ModSpotsLabel'
 import TierAndCostLabel from './TierAndCostLabel'
 import TraitsListLabels from './TraitsListLabels'
-import AttackTypeIcon from '../icons/AttackTypeIcon'
+import AttackTypeIcon from '../_icons/AttackTypeIcon'
 
 export default function WeaponLabel({ weapon, placement = "top" }) {
     if(!weapon) return null;

@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { ClassCardLabel } from '../labels-with-popovers'
+import { ClassCardLabel } from '../_labels'
 import { search, searchArray, getNumAtEnd } from '../../utilities'
 import { IMPERIAL, REBEL, CLASS_CARDS } from '../../data'
 

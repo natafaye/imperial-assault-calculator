@@ -1,5 +1,5 @@
 import React from 'react'
-import SurgeCostIcon from '../icons/SurgeCostIcon';
+import SurgeCostIcon from '../_icons/SurgeCostIcon';
 import PropertyListLabels from './PropertyListLabels';
 import { SUR } from '../../data';
 

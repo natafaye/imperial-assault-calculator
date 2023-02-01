@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightToBracket, faPlus } from '@fortawesome/free-solid-svg-icons'
-import UnitInfoPicker, { getEmptyUnitData, useUnitData } from '../../components/UnitDataPicker'
-import CustomInfoPicker, { clearCustomData, replaceCustomData, useCustomData } from '../../components/CustomDataPicker'
+import UnitInfoPicker, { getEmptyUnitData, useUnitData } from '../UnitDataPicker'
+import CustomInfoPicker, { clearCustomData, replaceCustomData, useCustomData } from '../CustomDataPicker'
 import { getAttackData, summarizeUnitData } from '../../utilities'
 
 export default function AddAttackForm({ show, onHide, onSubmit }) {

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useReducedMotion } from '@react-spring/web';
-import TopBar from "./pages/TopBar";
-import StatsPage, { useStatsData } from "./pages/StatsPage";
-import ComparePage, { useCompareData } from './pages/ComparePage';
+import TopBar from "./components/TopBar";
+import StatsPage, { useStatsData } from "./components/StatsPage";
+import ComparePage, { useCompareData } from './components/ComparePage';
 
 function App() {
   const [statsData, statsUpdaters] = useStatsData();

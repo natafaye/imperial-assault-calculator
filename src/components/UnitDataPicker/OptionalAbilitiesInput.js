@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import { getAllOptionalAbilities } from '../../utilities'
-import OptionalAbilityLabel from '../labels/OptionalAbilityLabel'
+import { OptionalAbilityLabel } from '../_labels'
 
 export default function OptionalAbilitiesInput({ values, onChange, unitData, isAttack = false }) {
     const optionalAbilities = getAllOptionalAbilities({ ...unitData, isAttack })

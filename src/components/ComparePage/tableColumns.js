@@ -2,12 +2,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Button } from "react-bootstrap";
-import UnitLabel from "../../components/labels-with-popovers/UnitLabel"
-import WeaponLabel from "../../components/labels-with-popovers/WeaponLabel"
-import SummarizedDataLabel from "../../components/labels/SummarizedDataLabel";
-import SurgeListLabels from "../../components/labels/SurgeListLabels";
-import PropertyIcon from "../../components/icons/PropertyIcon";
-import DieIcon from "../../components/icons/DieIcon";
+import { UnitLabel, WeaponLabel, SummarizedDataLabel, SurgeListLabels } from "../../components/_labels"
+import PropertyIcon from "../../components/_icons/PropertyIcon";
+import DieIcon from "../../components/_icons/DieIcon";
 import { ACC, BLACK, DAM, WHITE } from "../../data";
 
 const AverageHeader = ({ die, property }) => (

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropertyIcon from '../icons/PropertyIcon'
+import PropertyIcon from '../_icons/PropertyIcon'
 import { ACC, BLO, PROPERTY_LABELS } from '../../data'
 
 export function PropertyLabel({ value, property, isAttack = false, className = "" }) {
