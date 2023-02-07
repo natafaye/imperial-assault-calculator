@@ -4,10 +4,23 @@ import DiceListLabels from './DiceListLabels'
 import SurgeListLabels from './SurgeListLabels'
 import { pluralize } from '../../utilities'
 
-function SummarizedDataLabel({ data: { dice, bonus, rerolls, surgeAbilities }, isAttack = false, expandSurges = true, labelAttack = true }) {
+const DiceContainer = ({ children }) => {
+
+}
+
+function SummarizedDataLabel({ 
+    data: { dice, bonus, rerolls, surgeAbilities, negativeAttackDice, negativeDefenseDice }, 
+    isAttack = false, expandSurges = true, labelAttack = true 
+}) {
     return (
         <span className="d-inline-flex align-items-center flex-wrap">
-            {dice && <span className="me-2 d-inline-flex align-items-center"><DiceListLabels dice={dice} /></span>}
+
+            {(dice || negativeAttackDice) && <span className="me-2 d-inline-flex align-items-center">
+                <DiceListLabels dice={negativeAttackDice} negative />
+                <DiceListLabels dice={dice} />
+            </span>}
+
+            {negativeDefenseDice && <span className="me-2 d-inline-flex align-items-center"><DiceListLabels dice={negativeDefenseDice} negative /></span>}
 
             {bonus?.some(b => b) && <BonusListLabels bonus={bonus} showHRBelow={false} isAttack={isAttack} className="flex-shrink-0" />}
             {bonus?.some(b => b) && (rerolls || surgeAbilities?.length) ? <span className="me-2">,</span> : ""}
