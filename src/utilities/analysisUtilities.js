@@ -2,8 +2,7 @@ import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
 import PunchDagger from './PunchDagger'
 import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, DAM, GREEN, WHITE } from '../data'
-import { DICE_MAX, DICE_MIN } from '../data/dice'
+import { ACC, BLACK, DAM, GREEN, WHITE, DICE_MAX, DICE_MIN, SUR, BLO, EVA, DOD } from '../data'
 
 /**
  * Gets either an Attack object, or the subclass PunchDagger object
@@ -42,7 +41,7 @@ export const getStatsResults = ({ customAttack: attack, customDefense: defense, 
     let allResults = getAttackObject(unitAttack, attack, defense, requiredAccuracy).calcresults(defense.dice);
     return {
         averages: getAverage(allResults),
-        histograms: getHistograms(allResults, [ACC, DAM]),
+        histograms: getHistograms(allResults, [ACC, DAM, SUR, BLO, EVA, DOD]),
         totalNum: allResults.length
     }
 }

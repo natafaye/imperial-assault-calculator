@@ -1,45 +1,34 @@
 import React from 'react'
+import { useState } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 import ButtonToggle from "../../components/ButtonToggle";
 import ResultsHistogram from "../../components/ResultsHistogram";
-import { ACC, DAM } from '../../data';
+import { DAM, ACC, PROPERTY_LABELS } from '../../data';
+import PropertyPicker from './PropertyPicker';
 
 export default function StatsHistogramList({ results: { histograms, averages, totalNum }, settings, setSettings }) {
+    const [propertiesToDisplay, setPropertiesToDisplay] = useState([DAM, ACC])
     return (
         <>
             <Row>
-                <Col xs={12} lg={6}>
-                    <h3 className="d-flex align-items-center justify-content-center my-4">
-                        <span>Damage</span>
-                        <span className="badge text-bg-secondary fs-5 fw-normal ms-3">
-                            Avg: {averages[DAM]?.toFixed(2)}
-                        </span>
-                    </h3>
-                    <div style={{ height: "300px" }}>
-                        <ResultsHistogram
-                            data={histograms[DAM]}
-                            totalNum={totalNum}
-                            settings={settings}
-                            ariaLabel="Histogram of damage"
-                        />
-                    </div>
-                </Col>
-                <Col xs={12} lg={6}>
-                    <h3 className="d-flex align-items-center justify-content-center my-4">
-                        <span>Accuracy</span>
-                        <span className="badge text-bg-secondary fs-5 fw-normal ms-3">
-                            Avg: {averages[ACC]?.toFixed(2)}
-                        </span>
-                    </h3>
-                    <div style={{ height: "300px" }}>
-                        <ResultsHistogram
-                            data={histograms[ACC]}
-                            totalNum={totalNum}
-                            settings={settings}
-                            ariaLabel="Histogram of accuracy"
-                        />
-                    </div>
-                </Col>
+                {propertiesToDisplay.map((property) => (
+                    <Col xs={12} lg={6} key={property}>
+                        <h3 className="d-flex align-items-center justify-content-center my-4">
+                            <span>{PROPERTY_LABELS[property]}</span>
+                            <span className="badge text-bg-secondary fs-5 fw-normal ms-3">
+                                Avg: {averages[property]?.toFixed(2)}
+                            </span>
+                        </h3>
+                        <div style={{ height: "300px" }}>
+                            <ResultsHistogram
+                                data={histograms[property]}
+                                totalNum={totalNum}
+                                settings={settings}
+                                ariaLabel={"Histogram of " + PROPERTY_LABELS[property]}
+                            />
+                        </div>
+                    </Col>
+                ))}
             </Row>
             <Row className="gy-3 mt-3 border-secondary rounded pb-3">
                 <Col xs={12} className="d-flex align-items-center text-muted mt-3">
@@ -65,6 +54,7 @@ export default function StatsHistogramList({ results: { histograms, averages, to
                             trueLabel="Relative Scale"
                             falseLabel="Fixed Scale"
                         />
+                        <PropertyPicker values={propertiesToDisplay} onChange={setPropertiesToDisplay}/>
                     </Stack>
                 </Col>
             </Row>

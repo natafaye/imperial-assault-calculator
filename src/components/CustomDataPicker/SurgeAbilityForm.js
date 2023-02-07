@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Button, Stack } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
-import SurgeCostIcon from '../icons/SurgeCostIcon'
 import ButtonToggle from '../ButtonToggle'
 import PropertyInput from './PropertyInput'
+import SurgeCostIcon from '../_icons/SurgeCostIcon'
 import { ACC, DAM, SUR, BLO, EVA, DOD } from '../../data'
 
 export default function SurgeAbilityForm({ idPrefix, ability = [0, 0, -1, 0, 0, 0], onSave, onCancel }) {

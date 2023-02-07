@@ -1,5 +1,5 @@
 import React from 'react'
-import DieIcon from '../icons/DieIcon';
+import DieIcon from '../_icons/DieIcon';
 
 export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
 

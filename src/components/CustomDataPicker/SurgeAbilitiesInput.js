@@ -3,8 +3,8 @@ import { Stack, Button } from "react-bootstrap"
 import { faPencil, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SurgeAbilityForm from './SurgeAbilityForm'
-import SurgeCostIcon from '../icons/SurgeCostIcon'
-import PropertyListLabels from '../labels/PropertyListLabels'
+import SurgeCostIcon from '../_icons/SurgeCostIcon'
+import { PropertyListLabels } from '../_labels'
 import { addSurgeAbility, deleteSurgeAbility, updateSurgeAbility } from './useCustomData'
 import { SUR } from '../../data'
 
