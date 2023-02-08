@@ -57,10 +57,10 @@ export const getStatsResults = ({ customAttack: attack, customDefense: defense, 
  * @returns {object} comparison data for the attack
  */
 export const getCompareResults = ({ name, unitData, ...customData }) => {
-   const attack = getAttackObject(unitData, customData)
-   const [blackAvgAcc, blackAvgDam] = attack.calcaverage([BLACK])
-   const [whiteAvgAcc, whiteAvgDam] = attack.calcaverage([WHITE])
-   return { id: uuid(), name, ...customData, unitData, blackAvgDam, blackAvgAcc, whiteAvgDam, whiteAvgAcc }
+    const attack = getAttackObject(unitData, customData)
+    const [blackAvgAcc, blackAvgDam] = attack.calcaverage([BLACK])
+    const [whiteAvgAcc, whiteAvgDam] = attack.calcaverage([WHITE])
+    return { id: uuid(), name, ...customData, unitData, blackAvgDam, blackAvgAcc, whiteAvgDam, whiteAvgAcc }
 }
 
 /**
@@ -69,7 +69,7 @@ export const getCompareResults = ({ name, unitData, ...customData }) => {
  * @param {number[][]} others Any other arrays to add (of the same length as a)
  * @returns {number[]} An array of the sum of the values of all the arrays
  */
-export const addValues = (a = [0,0,0,0,0,0], ...others) => {
+export const addValues = (a = [0, 0, 0, 0, 0, 0], ...others) => {
     return a.map((value, index) => value + others.reduce((total, b) => b ? total + b[index] : total, 0))
 }
 
@@ -79,7 +79,7 @@ export const addValues = (a = [0,0,0,0,0,0], ...others) => {
  * @returns {number[]} The average of all the results
  */
 export const getAverage = (results) => {
-    if(results.length === 0) return [0, 0, 0, 0, 0, 0]
+    if (results.length === 0) return [0, 0, 0, 0, 0, 0]
     return addValues([0, 0, 0, 0, 0, 0], ...results).map(num => num / results.length)
 }
 
@@ -101,8 +101,8 @@ export const getHistograms = (data, properties) => {
         properties.forEach((property, index) => {
             let item = histograms[index].find(i => i.value === dataPoint[property]);
             // If there's not already an item in the histogram for that property value, make one
-            if(!item) {
-                item = { value: dataPoint[property], amount: 0}
+            if (!item) {
+                item = { value: dataPoint[property], amount: 0 }
                 histograms[index].push(item)
             }
             // Count this data point in the histogram
@@ -111,11 +111,11 @@ export const getHistograms = (data, properties) => {
     })
     histograms.forEach(histogram => {
         // Sort the histograms by property value
-        histogram.sort((a,b) => a.value - b.value)
+        histogram.sort((a, b) => a.value - b.value)
         // Calculate percentage of getting the value
         histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
         // Calculate percentage of getting at least the value
-        for(let i = histogram.length - 1; i >= 0; i--) {
+        for (let i = histogram.length - 1; i >= 0; i--) {
             histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
                 histogram[i].percentage :
                 histogram[i].percentage + histogram[i + 1].atLeastPercentage
@@ -124,10 +124,14 @@ export const getHistograms = (data, properties) => {
     return histograms;
 }
 
-const remove = (toRemove, array) => {
+const removeFromArray = (array, toRemove) => {
     let newArray = [...array]
-    toRemove.forEach(item => newArray.splice(newArray.indexOf(item), 1))
-    return newArray // TODO: breaks if not there?
+    toRemove.forEach(item => {
+        if (newArray.indexOf(item) !== -1) {
+            newArray.splice(newArray.indexOf(item), 1)
+        }
+    })
+    return newArray
 }
 
 /**
@@ -144,36 +148,36 @@ const remove = (toRemove, array) => {
 export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focused = false, selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ unit, classCards, weapon, mods, isAttack: true })
         .filter(a => selectedOptionalIds.includes(a.id));
-    
+
     return {
-        dice: remove(optionals.flatMap(a => a.negativeAttackDice).filter(d => d),
+        dice: removeFromArray(
             [].concat(
-                unit?.attackDice, 
-                classCards.flatMap(c => c.attackDice), 
-                weapon?.attackDice, 
+                unit?.attackDice,
+                classCards.flatMap(c => c.attackDice),
+                weapon?.attackDice,
                 mods.flatMap(m => m.attackDice),
                 (focused ? GREEN : null),
                 optionals.flatMap(a => a.dice)
-            )
-            .filter(d => d)
+            ).filter(d => d),
+            optionals.flatMap(a => a.negativeAttackDice).filter(d => d)
         ),
         surgeAbilities: [].concat(
-                unit?.surgeAbilities,
-                classCards.flatMap(c => c.surgeAbilities),
-                weapon?.surgeAbilities,
-                mods.flatMap(m => m.surgeAbilities),
-                optionals.flatMap(a => a.surgeAbilities)
-            )
+            unit?.surgeAbilities,
+            classCards.flatMap(c => c.surgeAbilities),
+            weapon?.surgeAbilities,
+            mods.flatMap(m => m.surgeAbilities),
+            optionals.flatMap(a => a.surgeAbilities)
+        )
             .filter(a => a),
         bonus: addValues(
-            unit?.attackBonus, 
-            ...classCards.map(c => c.attackBonus), 
-            weapon?.attackBonus, 
+            unit?.attackBonus,
+            ...classCards.map(c => c.attackBonus),
+            weapon?.attackBonus,
             ...mods.map(m => m.attackBonus),
             ...optionals.map(a => a.bonus)
         ),
-        rerolls: 
-            (unit?.attackRerolls || 0) + 
+        rerolls:
+            (unit?.attackRerolls || 0) +
             classCards.reduce((total, c) => (c.attackRerolls ? total + c.attackRerolls : total), 0) +
             optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
     }
@@ -190,18 +194,17 @@ export const getDefenseData = ({ unit, classCards = [], selectedOptionalIds = []
 
     return {
         dice: [].concat(
-                unit?.defenseDice, 
-                classCards.flatMap(c => c.defenseDice),
-                optionals.flatMap(a => a.dice)
-            )
-            .filter(d => d),
+            unit?.defenseDice,
+            classCards.flatMap(c => c.defenseDice),
+            optionals.flatMap(a => a.dice)
+        ).filter(d => d),
         bonus: addValues(
-            unit?.defenseBonus, 
+            unit?.defenseBonus,
             ...classCards.map(c => c.defenseBonus),
             ...optionals.map(a => a.bonus)
         ),
-        rerolls: 
-            (unit?.defenseRerolls || 0) + 
+        rerolls:
+            (unit?.defenseRerolls || 0) +
             classCards.reduce((total, c) => (c.defenseRerolls ? total + c.defenseRerolls : total), 0) +
             optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
     }
@@ -217,9 +220,9 @@ export const getMinMaxAccuracy = (attack, defense) => {
     let min = attack.dice.reduce((total, die) => DICE_MIN[die] + total, 0)
         + attack.bonus[ACC]
         + defense.bonus[ACC]
-    let max = attack.dice.reduce((total, die) => DICE_MAX[die] + total, 0) 
-        + attack.bonus[ACC] 
-        + defense.bonus[ACC] 
+    let max = attack.dice.reduce((total, die) => DICE_MAX[die] + total, 0)
+        + attack.bonus[ACC]
+        + defense.bonus[ACC]
         + attack.surgeAbilities.reduce((total, ability) => total + ability[ACC], 0)
     return [min, max]
 }
