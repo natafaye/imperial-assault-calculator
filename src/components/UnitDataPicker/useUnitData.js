@@ -6,6 +6,7 @@ export const getEmptyUnitData = (changes) => ({
     weapon: null,
     mods: [],
     focused: false,
+    hidden: false,
     selectedOptionalIds: [],
     ...changes 
 })

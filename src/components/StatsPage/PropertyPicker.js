@@ -20,6 +20,7 @@ export default function PropertyPicker({ values, onChange, className = "" }) {
             variant="outline-secondary"
             id="histogram-properties"
             minWidth={180}
+            checkAllLabel="View All"
             allChecked={values.length === allProperties.length}
             allOnChange={allOnChange}
             options={allProperties}

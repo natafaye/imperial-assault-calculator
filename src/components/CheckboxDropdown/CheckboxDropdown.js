@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Dropdown, Form } from 'react-bootstrap'
 
 export default function CheckboxDropdown({ 
     variant = "outline-info", id = "checkbox-dropdown", className = "", 
-    minWidth = 180, allChecked, allOnChange,
+    minWidth = 180, checkAllLabel = "Toggle All", allChecked, allOnChange,
     options, getOptionKey = (option) => option.id,
     getOptionChecked, getOptionOnChange, getOptionLabel, 
 }) {
@@ -13,7 +13,7 @@ export default function CheckboxDropdown({
                 <Form.Check
                     type="checkbox"
                     id={id + "-all-checkbox"}
-                    label="Toggle All"
+                    label={checkAllLabel}
                     checked={allChecked}
                     onChange={allOnChange}
                 />

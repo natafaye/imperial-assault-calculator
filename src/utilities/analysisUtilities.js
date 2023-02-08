@@ -145,7 +145,7 @@ const removeFromArray = (array, toRemove) => {
  *  selectedOptionalIds: string[]?}} unitData The data to combine
  * @returns {{ dice: string[], surgeAbilities: number[][], bonus: [], rerolls: number }} The combined attack data
  */
-export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focused = false, selectedOptionalIds = [] }) => {
+export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focused = false, hidden = false, selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ unit, classCards, weapon, mods, isAttack: true })
         .filter(a => selectedOptionalIds.includes(a.id));
 
@@ -174,7 +174,8 @@ export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focuse
             ...classCards.map(c => c.attackBonus),
             weapon?.attackBonus,
             ...mods.map(m => m.attackBonus),
-            ...optionals.map(a => a.bonus)
+            ...optionals.map(a => a.bonus),
+            (hidden ? [0,0,1,0,0,0] : null)
         ),
         rerolls:
             (unit?.attackRerolls || 0) +
@@ -188,7 +189,7 @@ export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focuse
  * @param {{ unit: object, classCards: object[], selectedOptionalIds: string[] }} unitData The data to combine
  * @returns {{ dice: string[], bonus: [], rerolls: number }} The combined defense data
  */
-export const getDefenseData = ({ unit, classCards = [], selectedOptionalIds = [] }) => {
+export const getDefenseData = ({ unit, hidden = false, classCards = [], selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ unit, classCards })
         .filter(a => selectedOptionalIds.includes(a.id));
 
@@ -201,7 +202,8 @@ export const getDefenseData = ({ unit, classCards = [], selectedOptionalIds = []
         bonus: addValues(
             unit?.defenseBonus,
             ...classCards.map(c => c.defenseBonus),
-            ...optionals.map(a => a.bonus)
+            ...optionals.map(a => a.bonus),
+            (hidden ? [-2,0,0,0,0,0] : null)
         ),
         rerolls:
             (unit?.defenseRerolls || 0) +
@@ -224,5 +226,5 @@ export const getMinMaxAccuracy = (attack, defense) => {
         + attack.bonus[ACC]
         + defense.bonus[ACC]
         + attack.surgeAbilities.reduce((total, ability) => total + ability[ACC], 0)
-    return [min, max]
+    return [min < 0 ? 0 : min, max < 0 ? 0 : max]
 }
