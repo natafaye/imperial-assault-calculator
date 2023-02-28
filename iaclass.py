@@ -80,17 +80,22 @@ class Attack:
                 hitslist = []
                 # use an ability
                 for abilityid, ability in enumerate(abilities[playerid]):
-                    sets = []
-                    branches = [set()]
-                    while branches:
-                        branch = branches.pop()
+                    if ability[0] == 2:  # Ahsoka's ability instead of attack or defense dice specification
+                        sets = [set(), set()]  # all attack dice or all defense dice
                         for diceid in diceleft:
-                            if self.dicetype(diceid) == ability[0] and diceid not in branch:
-                                newbranch = branch.union({diceid})
-                                if newbranch not in sets:
-                                    sets.append(newbranch)
-                                    if len(newbranch) < ability[1]:
-                                        branches.append(newbranch)
+                            sets[self.dicetype(diceid)].add(diceid)
+                    else:
+                        sets = []
+                        branches = [set()]
+                        while branches:
+                            branch = branches.pop()
+                            for diceid in diceleft:
+                                if self.dicetype(diceid) == ability[0] and diceid not in branch:
+                                    newbranch = branch.union({diceid})
+                                    if newbranch not in sets:
+                                        sets.append(newbranch)
+                                        if len(newbranch) < ability[1]:
+                                            branches.append(newbranch)
                     for s in sets:
                         probabilities2 = self.reroll(rollid, s, p)
                         abilities2 = deepcopy(abilities)
