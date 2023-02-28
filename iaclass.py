@@ -21,7 +21,7 @@ def defensefloor(result):
 
 class Attack:
 
-    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []]):
+    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []], special=''):
         self.dice = dice
         self.surgeabilities = []
         for ability in surge:
@@ -31,6 +31,7 @@ class Attack:
         self.rerollabilities = rerollabilities
         # attacker's reroll abilities are first list, defender's are second list
         # each reroll ability is [type of dice (0 for attack), max number of dice]
+        self.special = special
         self.genrolls()
         self.average = self.calcaverage(self.probabilities)
 
@@ -55,6 +56,8 @@ class Attack:
                 baseresult += dice[color][sideid]
                 finalresult = self.rollresult(baseresult)
                 self.rolls[rollid] = finalresult[hit]
+        if self.special == 'punchdagger':
+            self.punchdagger()
         # Step 3 rerolls
         diceleft = set(range(len(self.dice)))
         self.probabilities = self.genrerolls(self.probabilities, self.rerollabilities, diceleft)
@@ -77,17 +80,22 @@ class Attack:
                 hitslist = []
                 # use an ability
                 for abilityid, ability in enumerate(abilities[playerid]):
-                    sets = []
-                    branches = [set()]
-                    while branches:
-                        branch = branches.pop()
+                    if ability[0] == 2:  # Ahsoka's ability instead of attack or defense dice specification
+                        sets = [set(), set()]  # all attack dice or all defense dice
                         for diceid in diceleft:
-                            if self.dicetype(diceid) == ability[0] and diceid not in branch:
-                                newbranch = branch.union({diceid})
-                                if newbranch not in sets:
-                                    sets.append(newbranch)
-                                    if len(newbranch) < ability[1]:
-                                        branches.append(newbranch)
+                            sets[self.dicetype(diceid)].add(diceid)
+                    else:
+                        sets = []
+                        branches = [set()]
+                        while branches:
+                            branch = branches.pop()
+                            for diceid in diceleft:
+                                if self.dicetype(diceid) == ability[0] and diceid not in branch:
+                                    newbranch = branch.union({diceid})
+                                    if newbranch not in sets:
+                                        sets.append(newbranch)
+                                        if len(newbranch) < ability[1]:
+                                            branches.append(newbranch)
                     for s in sets:
                         probabilities2 = self.reroll(rollid, s, p)
                         abilities2 = deepcopy(abilities)
@@ -189,3 +197,22 @@ class Attack:
 
     def calchist(self):
         return np.histogram(self.rolls, list(range(max(self.rolls) + 2)), weights=self.probabilities, density=True)
+
+    def punchdagger(self):
+        newrolls = np.copy(self.rolls)
+        for rollid in range(self.rolls.size):
+            rollbyte = self.id2byte(rollid)
+            potentials = []
+            for diceid, sideid in enumerate(rollbyte):
+                if self.dicetype(diceid) == 0:  # attack dice
+                    color = self.dice[diceid]
+                    side = dice[color][sideid]
+                    if side[hit] + side[sur] == 1:  # only one attack symbol
+                        for newsideid in range(6):
+                            newrollbyte = rollbyte[:]
+                            newrollbyte[diceid] = newsideid
+                            newhits = self.rolls[byte2id(newrollbyte)]
+                            potentials.append(newhits)
+            if potentials:
+                newrolls[rollid] = max(potentials)
+        self.rolls = newrolls
