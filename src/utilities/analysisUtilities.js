@@ -5,22 +5,22 @@ import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
 import { ACC, BLACK, DAM, GREEN, WHITE, DICE_MAX, DICE_MIN, SUR, BLO, EVA, DOD } from '../data'
 
 /**
- * Gets either an Attack object, or the subclass PunchDagger object
+ * Gets an Attack object with the right data
  * @param {object} unitAttack Data about the unit attack
  * @param {object} attack Data about the attack
  * @param {object?} defense Optional data about the defense (for adding the defense bonus in)
  * @param {number} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
- * @returns {Attack | PunchDagger} Either an Attack or PunchDagger object
+ * @returns {Attack} An Attack object
  */
 export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) => {
-    const args = [
+    return new Attack(
         attack.dice,
         attack.surgeAbilities,
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
-        [[attack.rerolls], [defense.rerolls]] // TODO: fix
-    ]
-    return (unitAttack?.weapon?.isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
+        [[attack.rerolls], [defense.rerolls]], // TODO: fix this to this shape [[[0, 2], [1, 1]], []]
+        (unitAttack?.weapon?.isPunchDagger) ? "punchdagger" : ""
+    )
 }
 
 /**

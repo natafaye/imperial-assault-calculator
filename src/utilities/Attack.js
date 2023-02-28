@@ -17,7 +17,7 @@ const defensefloor = (result) => {
 
 export default class Attack {
     
-    constructor(dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []]) {
+    constructor(dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []], special = '') {
         this.dice = dice
         this.surgeabilities = []
         for (const ability of surge)
@@ -25,6 +25,7 @@ export default class Attack {
         this.bonus = bonus
         this.distance = distance
         this.rerollabilities = rerollabilities
+        this.special = special
         // attacker's reroll abilities are first list, defender's are second list
         // each reroll ability is [type of dice (0 for attack), max number of dice]
         this.genrolls()
@@ -55,6 +56,8 @@ export default class Attack {
                 this.rolls[rollid] = finalresult[hit]
             })
         }
+        if (this.special == 'punchdagger')
+            this.punchdagger()
         // Step 3 rerolls
         const diceleft = new Set(range(this.dice.length))
         this.probabilities = this.genrerolls(this.probabilities, this.rerollabilities, diceleft)
@@ -79,17 +82,23 @@ export default class Attack {
                 const hitslist = []
                 // use an ability
                 abilities[playerid].forEach((ability, abilityid) => {
-                    const sets = []
-                    const branches = [new Set()]
-                    while (branches.length) {
-                        const branch = branches.pop()
-                        for( const diceid of diceleft ) {
-                            if (this.dicetype(diceid) === ability[0] && !branch.has(diceid)) {
-                                const newbranch = union(branch, diceid)
-                                if (!setInArray(sets, newbranch)) {
-                                    sets.push(newbranch)
-                                    if (newbranch.length < ability[1]) {
-                                        branches.append(newbranch)
+                    if (ability[0] == 2) {  // Ahsoka's ability instead of attack or defense dice specification
+                        const sets = [new Set(), new Set()]  // all attack dice or all defense dice
+                        for (const diceid of diceleft)
+                            sets[this.dicetype(diceid)].add(diceid)
+                    } else {
+                        const sets = []
+                        const branches = [new Set()]
+                        while (branches.length) {
+                            const branch = branches.pop()
+                            for( const diceid of diceleft ) {
+                                if (this.dicetype(diceid) === ability[0] && !branch.has(diceid)) {
+                                    const newbranch = union(branch, diceid)
+                                    if (!setInArray(sets, newbranch)) {
+                                        sets.push(newbranch)
+                                        if (newbranch.length < ability[1]) {
+                                            branches.append(newbranch)
+                                        }
                                     }
                                 }
                             }
@@ -214,5 +223,30 @@ export default class Attack {
 
     calcaverage(probabilities) {
         return dot(this.rolls, probabilities) / sum(probabilities)
+    }
+
+    punchdagger() {
+        const newrolls = [...this.rolls]
+        for (const rollid of range(this.rolls.length)) {
+            const rollbyte = this.id2byte(rollid)
+            const potentials = []
+            rollbyte.forEach((sideid, diceid) => {
+                if (this.dicetype(diceid) === 0) { // attack dice
+                    const color = this.dice[diceid]
+                    const side = dice[color][sideid]
+                    if (side[hit] + side[sur] == 1) { // only one attack symbol
+                        for (const newsideid of range(6)) {
+                            const newrollbyte = [...rollbyte]
+                            newrollbyte[diceid] = newsideid
+                            const newhits = this.rolls[byte2id(newrollbyte)]
+                            potentials.push(newhits) // TODO: array or item?
+                        }
+                    }
+                }
+            })
+            if (potentials.length)
+                newrolls[rollid] = Math.max(...potentials)
+        }
+        this.rolls = newrolls
     }
 }

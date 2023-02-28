@@ -24,6 +24,8 @@ export const GUARDIAN = "Guardian"
 export const SMUGGLER = "Smuggler"
 export const WOOKIEE = "Wookiee"
 
+// TODO: Convert all rerolls to arrays with abilities
+
 export const UNITS = [
     {
         id: 0,
@@ -2007,8 +2009,8 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        attackRerolls: [[2]],
+		defenseRerolls: [],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]

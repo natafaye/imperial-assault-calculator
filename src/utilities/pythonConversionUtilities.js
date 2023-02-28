@@ -10,9 +10,11 @@
  * condition and condition                      ->      condition && condition
  * condition or condition                       ->      condition || condition
  * 
+ * #                                            ->      //
  * self                                         ->      this
  * __init__                                     ->      constructor
  * num ** power                                 ->      Math.pow(num, power)
+ * ==                                           ->      ===
  * np.base_repr(num, base)                      ->      num.toString(base)
  * 
  * array.append(value)                          ->      array.push(value)
@@ -25,6 +27,7 @@
  * array1 += array2                             ->      array1.push(...array2)
  * array.sum()                                  ->      sum(array)
  * array.pop(index)                             ->      array.splice(index, 1)
+ * max(array)                                   ->      Math.max(...array)
  * 
  * np.argmax(array)                             ->      argmax(array)
  * np.argmin(array)                             ->      argmin(array)
