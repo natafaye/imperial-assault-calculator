@@ -1,8 +1,8 @@
-import { DAM as hit, BLO as blo, EVA as eva, DOD as dod, BLACK, WHITE } from "../data"
-import { full, deepcopy, union, setInArray, sum, range, argmax, argmin, dot } from "./pythonConversionUtilities"
+import { ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, DICE as dice } from "../data"
+import { full, deepcopy, union, difference, setInArray, sum, range, argmax, argmin, dot } from "./pythonConversionUtilities"
 
 function byte2id(byte) {
-    id = 0
+    let id = 0
     byte.slice().reverse().forEach((bit, bitid) => {
         id += bit * Math.pow(6, bitid)
     })
@@ -33,7 +33,7 @@ export default class Attack {
     }
 
     id2byte(id) {
-        byte = []
+        const byte = []
         for (const index of id.toString(6))
             byte.push(parseInt(byte[index]))
         while (byte.length < this.dice.length)
@@ -56,7 +56,7 @@ export default class Attack {
                 this.rolls[rollid] = finalresult[hit]
             })
         }
-        if (this.special == 'punchdagger')
+        if (this.special === 'punchdagger')
             this.punchdagger()
         // Step 3 rerolls
         const diceleft = new Set(range(this.dice.length))
@@ -66,6 +66,7 @@ export default class Attack {
     genrerolls(probabilities, abilities, diceleft) {
         // assumes players know which set of dice is best to reroll for each ability and which order to use abilities
         // use reroll abilities for attacker and then defender
+        let playerid
         if (abilities[0].length)  // attacker uses an ability
             playerid = 0
         else if (abilities[1].length) // defender uses an ability
@@ -82,12 +83,13 @@ export default class Attack {
                 const hitslist = []
                 // use an ability
                 abilities[playerid].forEach((ability, abilityid) => {
-                    if (ability[0] == 2) {  // Ahsoka's ability instead of attack or defense dice specification
-                        const sets = [new Set(), new Set()]  // all attack dice or all defense dice
+                    let sets
+                    if (ability[0] === 2) {  // Ahsoka's ability instead of attack or defense dice specification
+                        sets = [new Set(), new Set()]  // all attack dice or all defense dice
                         for (const diceid of diceleft)
                             sets[this.dicetype(diceid)].add(diceid)
                     } else {
-                        const sets = []
+                        sets = []
                         const branches = [new Set()]
                         while (branches.length) {
                             const branch = branches.pop()
@@ -97,7 +99,7 @@ export default class Attack {
                                     if (!setInArray(sets, newbranch)) {
                                         sets.push(newbranch)
                                         if (newbranch.length < ability[1]) {
-                                            branches.append(newbranch)
+                                            branches.push(newbranch)
                                         }
                                     }
                                 }
@@ -105,7 +107,7 @@ export default class Attack {
                         }
                     }
                     for (const s in sets) {
-                        const probabilities2 = this.reroll(rollid, s, p)
+                        let probabilities2 = this.reroll(rollid, s, p)
                         const abilities2 = deepcopy(abilities)
                         abilities2[playerid].splice(abilityid, 1)
                         const diceleft2 = difference(diceleft, s)
@@ -115,7 +117,7 @@ export default class Attack {
                     }
                 })
                 // or skip rest of this player's abilities
-                const probabilities0 = this.reroll(rollid, new Set(), p)
+                let probabilities0 = this.reroll(rollid, new Set(), p)
                 const abilities0 = deepcopy(abilities)
                 abilities0[playerid] = []
                 probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
@@ -123,7 +125,7 @@ export default class Attack {
                 hitslist.push(this.calcaverage(probabilities0))
                 let probabilitiesid;
                 // now choose best for player
-                if (playerid == 0)  // attacker chooses max
+                if (playerid === 0)  // attacker chooses max
                     probabilitiesid = argmax(hitslist)
                 else  // defender chooses min
                     probabilitiesid = argmin(hitslist)
@@ -143,7 +145,7 @@ export default class Attack {
     }
     
     reroll(rollid, s, ptot) {  // spreads out probability based on dice rerolled
-        rollbytes = [this.id2byte(rollid)]
+        let rollbytes = [this.id2byte(rollid)] // TODO: Check this
         for (const diceid of s) {
             const newrollbytes = []
             for (const rollbyte of rollbytes) {
@@ -165,6 +167,7 @@ export default class Attack {
     rollresult(baseresult) {
         // floor of 0 for defense results
         defensefloor(baseresult)
+        let possibleresults
         // spend excess surges
         if (baseresult[sur] > baseresult[eva]) {
             baseresult[sur] -= baseresult[eva]
@@ -180,7 +183,7 @@ export default class Attack {
                         const newsurgebranch = union(surgebranch, surgeindex)
                         if (!setInArray(surgesets, newsurgebranch)) {
                             surgesets.push(newsurgebranch)
-                            const newresult = [...baseresult]
+                            let newresult = [...baseresult]
                             for (const sindex of newsurgebranch)
                                 newresult += this.surgeabilities[sindex]
                             if (newresult[sur] >= 0) {
@@ -234,7 +237,7 @@ export default class Attack {
                 if (this.dicetype(diceid) === 0) { // attack dice
                     const color = this.dice[diceid]
                     const side = dice[color][sideid]
-                    if (side[hit] + side[sur] == 1) { // only one attack symbol
+                    if (side[hit] + side[sur] === 1) { // only one attack symbol
                         for (const newsideid of range(6)) {
                             const newrollbyte = [...rollbyte]
                             newrollbyte[diceid] = newsideid

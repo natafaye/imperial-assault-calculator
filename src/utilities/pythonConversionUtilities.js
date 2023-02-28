@@ -49,7 +49,7 @@
 export function full(size, value) {
     let array = new Array(size)
     for (let i = 0; i < size; ++i) {
-        a[i] = value
+        array[i] = value
     }
     return array
 }
@@ -86,7 +86,7 @@ export function sum(array) {
 export function range(size, start = 0) {
     let array = new Array(size)
     for (let i = 0; i < size; ++i) {
-        a[i] = start + i
+        array[i] = start + i
     }
     return array
 }
