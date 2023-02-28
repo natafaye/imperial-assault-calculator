@@ -15,10 +15,10 @@ import { ACC, BLACK, DAM, GREEN, WHITE, DICE_MAX, DICE_MIN, SUR, BLO, EVA, DOD }
 export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) => {
     const args = [
         attack.dice,
-        addValues(attack.bonus, defense?.bonus),
         attack.surgeAbilities,
-        attack.rerolls,
-        requiredAccuracy
+        addValues(attack.bonus, defense?.bonus),
+        requiredAccuracy,
+        [[attack.rerolls], [defense.rerolls]] // TODO: fix
     ]
     return (unitAttack?.weapon?.isPunchDagger) ? new PunchDagger(...args) : new Attack(...args)
 }

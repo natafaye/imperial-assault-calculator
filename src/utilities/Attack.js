@@ -1,167 +1,183 @@
-import { getAverage, addValues } from "./analysisUtilities"
-import { DICE, ACC, DAM, SUR, BLO, EVA, DOD, BLACK, WHITE } from "../data"
+import { DAM as hit, BLO as blo, EVA as eva, DOD as dod, BLACK, WHITE } from "../data"
+import { full, deepcopy, union, setInArray, sum, range, argmax, argmin, dot } from "./pythonConversionUtilities"
 
-/**
- * Checks if two sets are equal to each other with one level deep equals
- * @param {Set<number>} a A set to check
- * @param {Set<number>} b A set to check
- * @returns {boolean} true if they are equal, false if not
- */
-const isEqualSet = (a, b) => {
-    return a.size === b.size && [...a].every(item => b.has(item))
+function byte2id(byte) {
+    id = 0
+    byte.slice().reverse().forEach((bit, bitid) => {
+        id += bit * Math.pow(6, bitid)
+    })
+    return id
 }
 
-
-/**
- * Ensures that blocks, evades, and dodges aren't below zero
- * @param {number[]} result A result that may have negative values
- */
 const defensefloor = (result) => {
-    result[BLO] = Math.max(0, result[BLO])
-    result[EVA] = Math.max(0, result[EVA])
-    result[DOD] = Math.max(0, result[DOD])
+    result[blo] = Math.max(0, result[blo])
+    result[eva] = Math.max(0, result[eva])
+    result[dod] = Math.max(0, result[dod])
 }
 
-
-/**
- * Holds data about an attack
- * Can run stats for the attack against different kinds of defenses
- */
 export default class Attack {
-
-    /**
-     * Constructor
-     * @param {string[]} attack Colors of the attack dice
-     * @param {number[]} permanent Permanent bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @param {number[][]} surge Available surge abilities
-     * @param {number} [rerolls=0] How many rerolls are available
-     * @param {number} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
-     */
-    constructor(attack, permanent, surge, rerolls=0, requiredAccuracy) {
-        this.attackdice = attack;
-        this.permanentabilities = permanent
-        this.surgeabilities = surge
-        this.rerolls = rerolls
-        this.surgepriorities = [DAM, ACC]
-        this.requiredAccuracy = requiredAccuracy
+    
+    constructor(dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []]) {
+        this.dice = dice
+        this.surgeabilities = []
+        for (const ability of surge)
+            this.surgeabilities.push(ability) // QUESTION: Add array or items in array?
+        this.bonus = bonus
+        this.distance = distance
+        this.rerollabilities = rerollabilities
+        // attacker's reroll abilities are first list, defender's are second list
+        // each reroll ability is [type of dice (0 for attack), max number of dice]
+        this.genrolls()
+        this.average = this.calcaverage(this.probabilities)
     }
 
-    /**
-     * Generate all the possible rolls of attack and defense die, with smart rerolls
-     * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @returns {number[][][]} All the possible rolls of the attack and defense die
-     */
-    genrolls(defense, bonus=false) {
-        // build list of step 2 rolls
-        let rolls = [[]]
-        for (const color of this.attackdice.concat(defense)) {
-            const sides = DICE[color]
-            const newrolls = []
-            for (const roll of rolls) {
-                for (const side of sides) {
-                    newrolls.push(roll.concat([side]))
-                }
-            }
-            rolls = newrolls.slice()
+    id2byte(id) {
+        byte = []
+        for (const index of id.toString(6))
+            byte.push(parseInt(byte[index]))
+        while (byte.length < this.dice.length)
+            byte.unshift(0)
+        return byte
+    }
+
+    genrolls() {
+        // enumerate all possible rolls
+        this.rolls = full(Math.pow(6, this.dice.length), 0)
+        this.probabilities = full(Math.pow(6, this.dice.length), Math.pow(6, this.dice.length))  
+        // np.uint means max 12 dice, min probability is 6 ** (-2 * ndice) because of rerolls
+        for (const rollid of range(this.rolls.length)) {
+            let baseresult = [...this.bonus]
+            const rollbyte = this.id2byte(rollid)
+            rollbyte.forEach((sideid, diceid) => {
+                const color = this.dice[diceid]
+                baseresult += dice[color][sideid]
+                const finalresult = this.rollresult(baseresult)
+                this.rolls[rollid] = finalresult[hit]
+            })
         }
-        // generate new list of rolls after step 3 rerolls
-        // (assumes player knows which rerolls will, on average, increase priority result the most)
-        if (this.rerolls) {
-            let priority;
-            if (this.surgepriorities.length) {
-                priority = this.surgepriorities[0]
-            }
-            else {
-                priority = DAM
-            }
-            const step3rolls = []
-            // expand each step 2 roll
-            for (const roll of rolls) {
-                let rerolls = this.rerolls  // max number of rerolls for step 3 of attacking after this roll from step 2
-                const currentresult = this.rollresult(roll, bonus)
-                const rerollpotential = this.attackdice.map(_ => 0) // potential improvement of priority for each dice
-                this.attackdice.forEach((color, num) => {
-                    const rerollresults = []
-                    for (const side of DICE[color]) {
-                        const reroll = roll.slice()
-                        reroll[num] = side.slice()
-                        rerollresults.push(this.rollresult(reroll, bonus))
-                    }
-                    const averesult = getAverage(rerollresults)
-                    if (averesult[priority] > currentresult[priority]) {
-                        rerollpotential[num] = averesult[priority]
-                    }
-                })
-                let newrolls = [roll]
-                // While there's any dice that can be rerolled, and the character has rerolls to use
-                while (Math.max(...rerollpotential) && rerolls) {  // assumes all dice are rerolled at the same time
-                    const numToReroll = rerollpotential.reduce(
-                        (highestIndex, num, index, array) => (num > array[highestIndex]) ? index : highestIndex, 
-                        0
-                    )  // dice number to reroll
-                    const oldrolls = newrolls.slice()
-                    newrolls = []
-                    for (const oldroll of oldrolls) {
-                        for (const side of DICE[this.attackdice[numToReroll]]) {
-                            const newroll = oldroll.slice()
-                            newroll[numToReroll] = side.slice()
-                            newrolls.push(newroll)
+        // Step 3 rerolls
+        const diceleft = new Set(range(this.dice.length))
+        this.probabilities = this.genrerolls(this.probabilities, this.rerollabilities, diceleft)
+    }
+
+    genrerolls(probabilities, abilities, diceleft) {
+        // assumes players know which set of dice is best to reroll for each ability and which order to use abilities
+        // use reroll abilities for attacker and then defender
+        if (abilities[0].length)  // attacker uses an ability
+            playerid = 0
+        else if (abilities[1].length) // defender uses an ability
+            playerid = 1
+        else  // no abilities left
+            return probabilities
+        if (!diceleft.size)  // no dice left
+            return probabilities
+        
+        const newprobabilities = full(Math.pow(6, this.dice.length), 0)
+        probabilities.forEach((p, rollid) => {
+            if(p) {
+                const probabilitieslist = []
+                const hitslist = []
+                // use an ability
+                abilities[playerid].forEach((ability, abilityid) => {
+                    const sets = []
+                    const branches = [new Set()]
+                    while (branches.length) {
+                        const branch = branches.pop()
+                        for( const diceid of diceleft ) {
+                            if (this.dicetype(diceid) === ability[0] && !branch.has(diceid)) {
+                                const newbranch = union(branch, diceid)
+                                if (!setInArray(sets, newbranch)) {
+                                    sets.push(newbranch)
+                                    if (newbranch.length < ability[1]) {
+                                        branches.append(newbranch)
+                                    }
+                                }
+                            }
                         }
                     }
-                    rerollpotential[numToReroll] = 0  // because each dice can be rerolled at most once
-                    rerolls -= 1
-                }
-                step3rolls.push(...newrolls)
+                    for (const s in sets) {
+                        const probabilities2 = this.reroll(rollid, s, p)
+                        const abilities2 = deepcopy(abilities)
+                        abilities2[playerid].splice(abilityid, 1)
+                        const diceleft2 = difference(diceleft, s)
+                        probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2)
+                        probabilitieslist.push(...probabilities2)
+                        hitslist.push(this.calcaverage(probabilities2))
+                    }
+                })
+                // or skip rest of this player's abilities
+                const probabilities0 = this.reroll(rollid, new Set(), p)
+                const abilities0 = deepcopy(abilities)
+                abilities0[playerid] = []
+                probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
+                probabilitieslist.push(...probabilities0)
+                hitslist.push(this.calcaverage(probabilities0))
+                let probabilitiesid;
+                // now choose best for player
+                if (playerid == 0)  // attacker chooses max
+                    probabilitiesid = argmax(hitslist)
+                else  // defender chooses min
+                    probabilitiesid = argmin(hitslist)
+                newprobabilities.push(...probabilitieslist[probabilitiesid])
             }
-            rolls = step3rolls.slice()
-        }
-        return rolls
+        })
+
+        return newprobabilities
     }
 
-    /**
-     * Get the damage and accuracy results of an attack roll against a defense roll
-     * @param {number[][]} roll A particular roll of attack and defense die
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @returns {number[]} The best result the player could get with that roll, using surges, based on surgepriorities
-     */
-    rollresult(roll, bonus=false) {
-        let baseresult = this.permanentabilities.slice()
-        if (bonus) {
-            baseresult = addValues(baseresult, bonus)
+    dicetype(diceid) {
+        const color = this.dice[diceid]
+        if (color in [BLACK, WHITE])
+            return 1  // defense dice
+        else
+            return 0  // attack dice
+    }
+    
+    reroll(rollid, s, ptot) {  // spreads out probability based on dice rerolled
+        rollbytes = [this.id2byte(rollid)]
+        for (const diceid of s) {
+            const newrollbytes = []
+            for (const rollbyte of rollbytes) {
+                for (const sideid of range(6)) {
+                    const newrollbyte = [...rollbyte]
+                    newrollbyte[diceid] = sideid
+                    newrollbytes.push(...newrollbyte)
+                }
+            }
+            rollbytes = newrollbytes
         }
-        // add up dice
-        for (const side of roll) {
-            baseresult = addValues(baseresult, side)
-        }
+        const p = ptot / Math.pow(6, s.length)
+        const probabilities = full(Math.pow(6, this.dice.length), 0)
+        for (const rollbyte of rollbytes)
+            probabilities[byte2id(rollbyte)] = p
+        return probabilities
+    }
+
+    rollresult(baseresult) {
         // floor of 0 for defense results
         defensefloor(baseresult)
-        let possibleresults;
         // spend excess surges
-        if (baseresult[SUR] > baseresult[EVA]) {
-            baseresult[SUR] -= baseresult[EVA]
-            baseresult[EVA] = 0
+        if (baseresult[sur] > baseresult[eva]) {
+            baseresult[sur] -= baseresult[eva]
+            baseresult[eva] = 0
             possibleresults = [baseresult]
             // generate all possible results from spending surges
             const surgesets = [new Set()]
             const surgebranches = [new Set()]
             while (surgebranches.length) {
                 const surgebranch = surgebranches.pop()
-                for (let surgeindex = 0; surgeindex < this.surgeabilities.length; surgeindex++) {
+                for (const surgeindex of range(this.surgeabilities.length)) {
                     if (!surgebranch.has(surgeindex)) {
-                        const newsurgebranch = new Set(surgebranch)
-                        newsurgebranch.add(surgeindex)
-                        if (!surgesets.some(set => isEqualSet(set, newsurgebranch))) {
+                        const newsurgebranch = union(surgebranch, surgeindex)
+                        if (!setInArray(surgesets, newsurgebranch)) {
                             surgesets.push(newsurgebranch)
-                            let newresult = baseresult.slice()
-                            for (const sindex of newsurgebranch) {
-                                newresult = addValues(newresult, this.surgeabilities[sindex])
-                            }
-                            if (newresult[SUR] >= 0) {
-                                possibleresults.push(newresult.slice())
-                                if (newresult[SUR]) {
+                            const newresult = [...baseresult]
+                            for (const sindex of newsurgebranch)
+                                newresult += this.surgeabilities[sindex]
+                            if (newresult[sur] >= 0) {
+                                possibleresults.push([...newresult])
+                                if (newresult[sur])
                                     surgebranches.push(newsurgebranch)
-                                }
                             }
                         }
                     }
@@ -169,76 +185,34 @@ export default class Attack {
             }
         }
         else {
-            baseresult[EVA] -= baseresult[SUR]
-            baseresult[SUR] = 0
+            baseresult[eva] -= baseresult[sur]
+            baseresult[sur] = 0
             possibleresults = [baseresult]
         }
         // calculate damage for each possible result
         for (const result of possibleresults) {
             defensefloor(result)
-            if (result[DAM] > result[BLO]) {
-                if (result[DOD]) {
-                    result[DAM] = 0
-                }
-                else {
-                    result[DAM] -= result[BLO]
-                }
-                result[BLO] = 0
+            if (result[hit] > result[blo]) {
+                if (result[dod] || result[acc] < this.distance)
+                    result[hit] = 0
+                else
+                    result[hit] -= result[blo]
+                result[blo] = 0
             }
             else {
-                result[BLO] -= result[DAM]
-                result[DAM] = 0
+                result[blo] -= result[hit]
+                result[hit] = 0
             }
         }
-        let bestresult = possibleresults.pop()
-        while (possibleresults.length) {
-            const result = possibleresults.pop()
-            if (result[DAM] > 0) {
-                for (const priority of this.surgepriorities) {
-                    if (result[priority] < bestresult[priority]) {
-                        break
-                    }
-                    else if (result[priority] > bestresult[priority]) {
-                        bestresult = result
-                        break
-                    }
-                }
-            }
+        let bestresult = possibleresults[0]
+        for (const result of possibleresults) {
+            if (result[hit] > bestresult[hit])
+                bestresult = result
         }
         return bestresult
     }
 
-    /**
-     * Calculates all the results for all the possible rolls of this attack against a particular defense
-     * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @returns {number[][]} All the possible results for accuracy and damages
-     */
-    calcresults(defense, bonus=false) {
-        const results = []
-        const rolls = this.genrolls(defense, bonus)
-        for (const roll of rolls) {
-            results.push(this.rollresult(roll, bonus))
-        }
-        return results
-    }
-
-    /**
-     * Calculates the average result of this attack against a particular defense
-     * @param {string[]} defense Colors of the defense dice
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @returns {number[]} The average result for accuracy and damages
-     */
-    calcaverage(defense, bonus=false) {
-        return getAverage(this.calcresults(defense, bonus))
-    }
-
-    /**
-     * Calculates the average result of this attack against one black die and against one white die
-     * @param {number[]|boolean} [bonus=false] Any extra bonuses to accuracy, damages, surges, blocks, evades, dodges
-     * @returns {number[]} The average result for accuracy and damages
-     */
-    damageaverages(bonus=false) {
-        return [this.calcaverage([BLACK], bonus)[DAM], this.calcaverage([WHITE], bonus)[DAM]]
+    calcaverage(probabilities) {
+        return dot(this.rolls, probabilities) / sum(probabilities)
     }
 }

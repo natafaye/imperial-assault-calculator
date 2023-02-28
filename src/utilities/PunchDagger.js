@@ -1,4 +1,4 @@
-import Attack from "./Attack"
+import Attack from "./old-Attack"
 import { DICE, DAM, SUR } from "../data"
 
 /**
