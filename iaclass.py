@@ -21,7 +21,7 @@ def defensefloor(result):
 
 class Attack:
 
-    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []]):
+    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []], special=''):
         self.dice = dice
         self.surgeabilities = []
         for ability in surge:
@@ -31,6 +31,7 @@ class Attack:
         self.rerollabilities = rerollabilities
         # attacker's reroll abilities are first list, defender's are second list
         # each reroll ability is [type of dice (0 for attack), max number of dice]
+        self.special = special
         self.genrolls()
         self.average = self.calcaverage(self.probabilities)
 
@@ -55,6 +56,8 @@ class Attack:
                 baseresult += dice[color][sideid]
                 finalresult = self.rollresult(baseresult)
                 self.rolls[rollid] = finalresult[hit]
+        if self.special == 'punchdagger':
+            self.punchdagger()
         # Step 3 rerolls
         diceleft = set(range(len(self.dice)))
         self.probabilities = self.genrerolls(self.probabilities, self.rerollabilities, diceleft)
@@ -189,3 +192,22 @@ class Attack:
 
     def calchist(self):
         return np.histogram(self.rolls, list(range(max(self.rolls) + 2)), weights=self.probabilities, density=True)
+
+    def punchdagger(self):
+        newrolls = np.copy(self.rolls)
+        for rollid in range(self.rolls.size):
+            rollbyte = self.id2byte(rollid)
+            potentials = []
+            for diceid, sideid in enumerate(rollbyte):
+                if self.dicetype(diceid) == 0:  # attack dice
+                    color = self.dice[diceid]
+                    side = dice[color][sideid]
+                    if side[hit] + side[sur] == 1:  # only one attack symbol
+                        for newsideid in range(6):
+                            newrollbyte = rollbyte[:]
+                            newrollbyte[diceid] = newsideid
+                            newhits = self.rolls[byte2id(newrollbyte)]
+                            potentials.append(newhits)
+            if potentials:
+                newrolls[rollid] = max(potentials)
+        self.rolls = newrolls
