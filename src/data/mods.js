@@ -1,5 +1,5 @@
 import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION, BLADE } from "./weapons";
-import { GREEN, RED, YELLOW, BLUE } from "./dice"
+import { GREEN, RED, YELLOW, BLUE } from "./constants"
 
 export const MODS = [
     {

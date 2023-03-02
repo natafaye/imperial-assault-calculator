@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./constants";
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"

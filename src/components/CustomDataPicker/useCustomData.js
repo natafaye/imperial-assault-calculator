@@ -3,11 +3,12 @@ import { useReducer } from "react"
 const getInitialValue = () => ({
     dice: [],
     bonus: [0,0,0,0,0,0],
-    rerolls: 0,
+    rerollAbilities: [],
     surgeAbilities: []
 })
 
 const reducer = (state, action) => {
+    const property = action.payload.type + "Abilities" // used for surge and reroll
     switch(action.type) {
         case "add-die":
             return {
@@ -31,25 +32,20 @@ const reducer = (state, action) => {
                 ...state,
                 bonus: [0,0,0,0,0,0]
             }
-        case "update-rerolls":
+        case "add-ability":
             return {
                 ...state,
-                rerolls: action.payload
+                [property]: state[property].concat([action.payload.ability])
             }
-        case "add-surge-ability":
+        case "delete-ability":
             return {
                 ...state,
-                surgeAbilities: state.surgeAbilities.concat([action.payload])
+                [property]: state[property].filter((_, i) => i !== action.payload.index)
             }
-        case "delete-surge-ability":
+        case "update-ability":
             return {
                 ...state,
-                surgeAbilities: state.surgeAbilities.filter((_, i) => i !== action.payload)
-            }
-        case "update-surge-ability":
-            return {
-                ...state,
-                surgeAbilities: state.surgeAbilities.map(
+                [property]: state[property].map(
                     (ability, i) => i === action.payload.property ? action.payload.value : ability
                 )
             }
@@ -66,10 +62,9 @@ export const addDie = (payload) => ({ type: "add-die", payload })
 export const deleteDie = (payload) => ({ type: "delete-die", payload })
 export const updateBonus = (payload) => ({ type: "update-bonus", payload })
 export const clearBonus = () => ({ type: "clear-bonus" })
-export const updateRerolls = (payload) => ({ type: "update-rerolls", payload })
-export const addSurgeAbility = (payload) => ({ type: "add-surge-ability", payload })
-export const deleteSurgeAbility = (payload) => ({ type: "delete-surge-ability", payload })
-export const updateSurgeAbility = (payload) => ({ type: "update-surge-ability", payload })
+export const addAbility = (payload) => ({ type: "add-ability", payload })
+export const deleteAbility = (payload) => ({ type: "delete-ability", payload })
+export const updateAbility = (payload) => ({ type: "update-ability", payload })
 export const clear = () => ({ type: "clear" })
 export const replace = (payload) => ({ type: "replace", payload })
 

@@ -2,11 +2,12 @@ import React from 'react'
 import { CollapsableDataArea } from '../CollapsableDataArea'
 import { SummarizedDataLabel } from '../_labels'
 import DiceListInput from './DiceListInput'
-import BonusAndRerollsInput from './BonusAndRerollsInput'
-import SurgeAbilitiesInput from './SurgeAbilitiesInput'
+import BonusInput from './BonusInput'
+import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
+import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
 
 export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
-    const { dice, bonus, rerolls, surgeAbilities } = data
+    const { dice, bonus, rerollAbilities, surgeAbilities } = data
     const idPrefix = isAttack ? "Attack" : "Defense"
 
     return (
@@ -14,7 +15,7 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
             label="Custom"
             collapsedData={
                 <SummarizedDataLabel
-                    data={{ dice, bonus, rerolls, surgeAbilities }}
+                    data={{ dice, bonus, rerollAbilities, surgeAbilities }}
                     expandSurges={false}
                     labelAttack={false}
                     isAttack={isAttack}
@@ -24,14 +25,14 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
             <div className="d-flex flex-wrap align-items-center">
                 <DiceListInput values={dice} dispatch={dispatch} isAttack={isAttack} />
             </div>
-            <BonusAndRerollsInput
+            <BonusInput
                 idPrefix={idPrefix} 
                 bonus={bonus} 
-                rerolls={rerolls}
                 dispatch={dispatch} 
             />
+            <RerollAbilitiesInput values={rerollAbilities} dispatch={dispatch} />
             { isAttack && 
-                <SurgeAbilitiesInput values={surgeAbilities} dispatch={dispatch} /> 
+                <SurgeAbilitiesInput values={surgeAbilities} dispatch={dispatch} className="mt-3" /> 
             }
         </CollapsableDataArea>
     )

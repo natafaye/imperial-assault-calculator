@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { Stack, Button } from "react-bootstrap"
 import { faPencil, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import SurgeAbilityForm from './SurgeAbilityForm'
-import SurgeCostIcon from '../_icons/SurgeCostIcon'
-import { PropertyListLabels } from '../_labels'
-import { addSurgeAbility, deleteSurgeAbility, updateSurgeAbility } from './useCustomData'
-import { SUR } from '../../data'
+import AbilityForm from './AbilityForm'
+import { addAbility, deleteAbility, updateAbility } from '../useCustomData'
 
-export default function SurgeAbilitiesInput({ values, dispatch }) {
+export default function AbilitiesInput({ 
+  values, dispatch, type, addLabel, renderFormLayoutGroups, 
+  displayComponent, defaultValue, className = '' 
+}) {
   const [showAddForm, setShowAddForm] = useState(false)
   const [editIndex, setEditIndex] = useState(null)
 
@@ -22,26 +22,29 @@ export default function SurgeAbilitiesInput({ values, dispatch }) {
     setShowAddForm(false);
   }
 
-  const onAddAbility = (newAbility) => {
-    dispatch(addSurgeAbility(newAbility))
+  const onAddAbility = (ability) => {
+    dispatch(addAbility({ type, ability }))
     setShowAddForm(false)
   }
 
-  const onUpdateAbility = (index) => (updatedValue) => {
-    dispatch(updateSurgeAbility({ property: index, value: updatedValue }))
+  const onUpdateAbility = (property) => (value) => {
+    dispatch(updateAbility({ type, property, value }))
     setEditIndex(null);
   }
 
-  const onDeleteAbility = (index) => dispatch(deleteSurgeAbility(index))
+  const onDeleteAbility = (index) => dispatch(deleteAbility({ type, index }))
+
+  const Display = displayComponent
 
   return (
-    <Stack gap={2}>
+    <Stack gap={2} className={className}>
       {values.map((ability, index) => (
         (index === editIndex) ? (
-          <SurgeAbilityForm
+          <AbilityForm
             key={index}
             idPrefix="edit"
-            ability={ability}
+            value={ability}
+            renderFormLayoutGroups={renderFormLayoutGroups}
             onSave={onUpdateAbility(index)}
             onCancel={() => setEditIndex(null)}
           />
@@ -53,21 +56,22 @@ export default function SurgeAbilitiesInput({ values, dispatch }) {
             <Button variant="outline-info" size="sm" className="ms-2 me-2" onClick={() => startEditAbility(index)}>
               <FontAwesomeIcon icon={faPencil} />
             </Button>
-            <SurgeCostIcon num={Math.abs(ability[SUR])} className="me-2" />
-            <PropertyListLabels properties={ability.map((value, i) => i === SUR ? 0 : value)} isAttack />
+            <Display ability={ability}/>
           </div>
         )
       ))}
       {showAddForm ? (
-        <SurgeAbilityForm
+        <AbilityForm
           idPrefix="create"
+          renderFormLayoutGroups={renderFormLayoutGroups}
+          defaultValue={defaultValue}
           onSave={onAddAbility}
           onCancel={() => setShowAddForm(false)}
         />
       ) : (
         < button className="btn btn-outline-secondary my-1" onClick={startAddAbility}>
           <FontAwesomeIcon icon={faPlus} className="me-1" />
-          Surge Ability
+          { addLabel }
         </button>
       )}
     </Stack>

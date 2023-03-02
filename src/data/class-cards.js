@@ -1,4 +1,4 @@
-import { BLUE, RED, YELLOW, WHITE, GREEN } from "./dice"
+import { BLUE, RED, YELLOW, WHITE, GREEN } from "./constants"
 import { REBEL, IMPERIAL } from "./units"
 
 // Hero names

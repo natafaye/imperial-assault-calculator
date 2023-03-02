@@ -7,8 +7,10 @@ import CustomDataPicker, { clearCustomData, replaceCustomData } from '../../comp
 import { CollapsableDataArea, CollapseProvider } from '../../components/CollapsableDataArea';
 import HoverPeekButton from '../../components/HoverPeekButton';
 import RequiredAccuracyPicker from './RequiredAccuracyPicker';
-import SectionHeader from "./SectionHeader"
+import SectionHeader from "./SectionHeader";
+import PlayerTypeIcon from "../_icons/PlayerTypeIcon";
 import { getAttackData, getDefenseData, getMinMaxAccuracy } from '../../utilities';
+import { ATTACK, DEFENSE } from '../../data';
 
 const getCollapsedAdvancedData = ({ requiredAccuracy }) => {
   let collapsedData = []
@@ -53,7 +55,7 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
       <Row>
         <Col xs={12} xl={6} className="mt-4 pe-4">
           <SectionHeader onClear={() => clear(customAttackDispatch, setUnitAttack)}>
-            <FontAwesomeIcon icon={faFistRaised} className="me-3" />Attack
+          <PlayerTypeIcon type={ATTACK} className="me-3" />Attack
           </SectionHeader>
           <UnitDataPicker data={unitAttack} setData={updateAttack} isAttack/>
           <CustomDataPicker data={customAttack} dispatch={customAttackDispatch} isAttack />
@@ -63,7 +65,7 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
         </Col>
         <Col xs={12} xl={6} className="mt-4 ps-4">
           <SectionHeader onClear={() => clear(customDefenseDispatch, setUnitDefense)}>
-            <FontAwesomeIcon icon={faShield} className="me-3" />Defense
+            <PlayerTypeIcon type={DEFENSE} className="me-3" />Defense
           </SectionHeader>
           <UnitDataPicker data={unitDefense} setData={updateDefense}/>
           <CustomDataPicker data={customDefense} dispatch={customDefenseDispatch} />

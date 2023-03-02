@@ -8,9 +8,24 @@ export const DOD = 5 // Dodges
 
 export const RER = 6 // Rerolls
 
+// Ability checks
 export const STRENGTH = 0
 export const INSIGHT = 1
 export const TECH = 2
+
+// Reroll type indexes
+export const ATTACK = 0
+export const DEFENSE = 1
+
+// Reroll ability indexes
+export const PLAYER = 0
+export const AMOUNT = 1
+
+// Reroll player type labels
+export const PLAYER_TYPE_LABELS = {
+    [ATTACK]: "Attack",
+    [DEFENSE]: "Defense"
+}
 
 export const PROPERTY_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
 
