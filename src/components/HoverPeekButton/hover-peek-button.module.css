@@ -2,6 +2,11 @@
     position: relative;
     overflow: hidden;
     display: inline-block;
+    transition: all .2s ease-in-out;
+}
+
+.button:not(:disabled):active {
+    transform: translateY(1px);
 }
 
 .peek {

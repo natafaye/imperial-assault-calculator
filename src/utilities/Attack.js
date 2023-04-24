@@ -1,5 +1,5 @@
 import { ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, DICE as dice } from "../data"
-import { full, deepcopy, union, difference, setInArray, sum, range, argmax, argmin, dot } from "./pythonConversionUtilities"
+import { full, deepcopy, union, difference, setInArray, sum, range, argmax, argmin, dot, addArrays } from "./pythonConversionUtilities"
 
 function byte2id(byte) {
     let id = 0
@@ -35,7 +35,7 @@ export default class Attack {
     id2byte(id) {
         const byte = []
         for (const index of id.toString(6))
-            byte.push(parseInt(byte[index]))
+            byte.push(parseInt(index))
         while (byte.length < this.dice.length)
             byte.unshift(0)
         return byte
@@ -43,7 +43,7 @@ export default class Attack {
 
     genrolls() {
         // enumerate all possible rolls
-        this.rolls = full(Math.pow(6, this.dice.length), 0)
+        this.rolls = full(this.dice.length ? Math.pow(6, this.dice.length) : 0, 0)
         this.probabilities = full(Math.pow(6, this.dice.length), Math.pow(6, this.dice.length))  
         // np.uint means max 12 dice, min probability is 6 ** (-2 * ndice) because of rerolls
         for (const rollid of range(this.rolls.length)) {
@@ -51,7 +51,7 @@ export default class Attack {
             const rollbyte = this.id2byte(rollid)
             rollbyte.forEach((sideid, diceid) => {
                 const color = this.dice[diceid]
-                baseresult += dice[color][sideid]
+                baseresult = addArrays(baseresult, dice[color][sideid])
                 const finalresult = this.rollresult(baseresult)
                 this.rolls[rollid] = finalresult[hit]
             })
@@ -76,7 +76,7 @@ export default class Attack {
         if (!diceleft.size)  // no dice left
             return probabilities
         
-        const newprobabilities = full(Math.pow(6, this.dice.length), 0)
+        let newprobabilities = full(Math.pow(6, this.dice.length), 0)
         probabilities.forEach((p, rollid) => {
             if(p) {
                 const probabilitieslist = []
@@ -129,7 +129,7 @@ export default class Attack {
                     probabilitiesid = argmax(hitslist)
                 else  // defender chooses min
                     probabilitiesid = argmin(hitslist)
-                newprobabilities.push(...probabilitieslist[probabilitiesid])
+                newprobabilities = addArrays(newprobabilities, probabilitieslist[probabilitiesid])
             }
         })
 
@@ -185,7 +185,7 @@ export default class Attack {
                             surgesets.push(newsurgebranch)
                             let newresult = [...baseresult]
                             for (const sindex of newsurgebranch)
-                                newresult += this.surgeabilities[sindex]
+                                newresult = addArrays(newresult, this.surgeabilities[sindex])
                             if (newresult[sur] >= 0) {
                                 possibleresults.push([...newresult])
                                 if (newresult[sur])

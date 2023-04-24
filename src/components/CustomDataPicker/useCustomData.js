@@ -8,7 +8,7 @@ const getInitialValue = () => ({
 })
 
 const reducer = (state, action) => {
-    const property = action.payload.type + "Abilities" // used for surge and reroll
+    const property = action.payload?.type + "Abilities" // used for surge and reroll
     switch(action.type) {
         case "add-die":
             return {

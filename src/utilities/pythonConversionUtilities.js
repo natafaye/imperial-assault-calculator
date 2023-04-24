@@ -24,7 +24,7 @@
  * np.copy(array)                               ->      [...array]
  * array[::-1]                                  ->      array.slice().reverse()
  * not array                                    ->      !array.length
- * array1 += array2                             ->      array1.push(...array2)
+ * array1 += array2                             ->      array1 = addArrays(array1, array2) NOT array1.push(...array2)
  * array.sum()                                  ->      sum(array)
  * array.pop(index)                             ->      array.splice(index, 1)
  * max(array)                                   ->      Math.max(...array)
@@ -100,7 +100,11 @@ export function argmin(array) {
 }
 
 export function dot(a, b) {
-    return a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
+    return a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n, 0);
+}
+
+export function addArrays(a, b) {
+    return a.map((numA, index) => numA + (b[index] || 0))
 }
 
 /**

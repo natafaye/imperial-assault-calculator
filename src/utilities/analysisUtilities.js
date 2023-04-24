@@ -13,11 +13,11 @@ import { ACC, BLACK, DAM, GREEN, WHITE, DICE_MAX, DICE_MIN, SUR, BLO, EVA, DOD }
  */
 export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) => {
     return new Attack(
-        attack.dice,
+        attack.dice.concat(defense.dice),
         attack.surgeAbilities,
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
-        [[attack.rerolls], [defense.rerolls]], // TODO: fix this to this shape [[[0, 2], [1, 1]], []]
+        [attack.rerollAbilities, defense.rerollAbilities], // TODO: fix this to this shape [[[0, 2], [1, 1]], []]
         (unitAttack?.weapon?.isPunchDagger) ? "punchdagger" : ""
     )
 }
@@ -37,11 +37,12 @@ export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) =
  * }} All the stats data
  */
 export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, requiredAccuracy }) => {
-    let allResults = getAttackObject(unitAttack, attack, defense, requiredAccuracy).calcresults(defense.dice);
+    const attackData = getAttackObject(unitAttack, attack, defense, requiredAccuracy)
+    console.log(attackData)
     return {
-        averages: getAverage(allResults),
-        histograms: getHistograms(allResults, [ACC, DAM, SUR, BLO, EVA, DOD]),
-        totalNum: allResults.length
+        averages: [0, attackData.average, 0, 0, 0, 0],
+        histograms: getHistograms(attackData.rolls.map(num => [0, num]), [ACC, DAM]),
+        totalNum: attackData.rolls.length
     }
 }
 
@@ -56,7 +57,7 @@ export const getStatsResults = ({ customAttack: attack, customDefense: defense, 
  * @returns {object} comparison data for the attack
  */
 export const getCompareResults = ({ name, unitData, ...customData }) => {
-    const attack = getAttackObject(unitData, customData)
+    const attack = getAttackObject(unitData, customData) // TODO: fix
     const [blackAvgAcc, blackAvgDam] = attack.calcaverage([BLACK])
     const [whiteAvgAcc, whiteAvgDam] = attack.calcaverage([WHITE])
     return { id: uuid(), name, ...customData, unitData, blackAvgDam, blackAvgAcc, whiteAvgDam, whiteAvgAcc }
