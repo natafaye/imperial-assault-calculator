@@ -73,7 +73,7 @@ export default class Attack {
             playerid = 1
         else  // no abilities left
             return probabilities
-        if (!diceleft.size)  // no dice left
+        if (!diceleft.length)  // no dice left
             return probabilities
         
         let newprobabilities = full(Math.pow(6, this.dice.length), 0)

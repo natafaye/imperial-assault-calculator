@@ -80,7 +80,7 @@ export function setInArray(array, set) {
 }
 
 export function sum(array) {
-    return array.reduce((total, item) => total + item)
+    return array.reduce((total, item) => total + item, 0)
 }
 
 export function range(size, start = 0) {
