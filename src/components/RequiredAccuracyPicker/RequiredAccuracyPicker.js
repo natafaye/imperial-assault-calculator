@@ -1,15 +1,27 @@
 import React from 'react'
-import NumberSlider from '../../components/NumberSlider'
+import NumberSlider from '../NumberSlider'
 import { ACC, PROPERTY_LABELS } from '../../data'
+import { getMinMaxAccuracy } from '../../utilities'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
-function getClass(min, max, value) {
+function getSliderClass(min, max, value) {
     if(max === min) return "bg-info"
     if(value === min) return "bg-success"
     const percentage = (value - min) / (max - min)
     return (percentage <= .5) ? "bg-warning" : "bg-danger"
 }
 
-export default function MinimumAccuracyPicker({ value, onChange, minMaxAccuracy: [min, max] }) {
+export default function RequiredAccuracyPicker({ value, onChange, customAttack, customDefense }) {
+    const [[min, max], setMinMaxAccuracy] = useState([0, 10])
+
+    // Update accuracy min, max, and required value when the attack or defense data changes
+    useEffect(() => {
+      const [newMin, newMax] = getMinMaxAccuracy(customAttack, customDefense)
+      setMinMaxAccuracy([newMin, newMax])
+      onChange(curr => curr > newMax ? newMax : curr)
+    }, [customAttack, customDefense, onChange])
+
     return (
         <div className="d-flex my-2 align-items-center">
             <label htmlFor="minimumAccuracyRange" className="form-label mx-2 text-muted">
@@ -21,7 +33,7 @@ export default function MinimumAccuracyPicker({ value, onChange, minMaxAccuracy:
                 value={value} 
                 onChange={onChange} 
                 className="flex-grow-1"
-                barClass={getClass(min, max, value)}
+                barClass={getSliderClass(min, max, value)}
                 ariaLabel="Required Accuracy"
             />
         </div>

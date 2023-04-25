@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
 import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, DAM, GREEN, WHITE, DICE_MAX, DICE_MIN, SUR, BLO, EVA, DOD } from '../data'
+import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN } from '../data'
 
 /**
  * Gets an Attack object with the right data
@@ -17,7 +17,7 @@ export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) =
         attack.surgeAbilities,
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
-        [attack.rerollAbilities, defense.rerollAbilities], // TODO: fix this to this shape [[[0, 2], [1, 1]], []]
+        [attack.rerollAbilities || [], defense?.rerollAbilities || []],
         (unitAttack?.weapon?.isPunchDagger) ? "punchdagger" : ""
     )
 }
@@ -38,10 +38,9 @@ export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) =
  */
 export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, requiredAccuracy }) => {
     const attackData = getAttackObject(unitAttack, attack, defense, requiredAccuracy)
-    console.log(attackData)
     return {
-        averages: [0, attackData.average, 0, 0, 0, 0],
-        histograms: getHistograms(attackData.rolls.map(num => [0, num]), [ACC, DAM]),
+        average: attackData.average,
+        histogram: getHistogram(attackData.rolls),
         totalNum: attackData.rolls.length
     }
 }
@@ -53,14 +52,15 @@ export const getStatsResults = ({ customAttack: attack, customDefense: defense, 
  * @param {{ 
  *  name: string, dice: string[], bonus: number[], 
  *  unitData: { unit: object?, classCards: object[], weapon: object?, mods: object[], focused: boolean } 
+ *  requiredAccuracy: number,
  * }} attackData Data about an attack
  * @returns {object} comparison data for the attack
  */
-export const getCompareResults = ({ name, unitData, ...customData }) => {
-    const attack = getAttackObject(unitData, customData) // TODO: fix
-    const [blackAvgAcc, blackAvgDam] = attack.calcaverage([BLACK])
-    const [whiteAvgAcc, whiteAvgDam] = attack.calcaverage([WHITE])
-    return { id: uuid(), name, ...customData, unitData, blackAvgDam, blackAvgAcc, whiteAvgDam, whiteAvgAcc }
+export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...customData }) => {
+    const blackAttack = getAttackObject(unitData, customData, { dice: [BLACK] }, requiredAccuracy)
+    const whiteAttack = getAttackObject(unitData, customData, { dice: [WHITE] }, requiredAccuracy)
+    const [min, max] = getMinMaxAccuracy(customData)
+    return { id: uuid(), name, ...customData, unitData, whiteAvgDam: whiteAttack.average, blackAvgDam: blackAttack.average, minAcc: min, maxAcc: max }
 }
 
 /**
@@ -74,54 +74,39 @@ export const addValues = (a = [0, 0, 0, 0, 0, 0], ...others) => {
 }
 
 /**
- * Gets an average from a list of rolls
- * @param {number[][]} results A list of possible results from rolls
- * @returns {number[]} The average of all the results
- */
-export const getAverage = (results) => {
-    if (results.length === 0) return [0, 0, 0, 0, 0, 0]
-    return addValues([0, 0, 0, 0, 0, 0], ...results).map(num => num / results.length)
-}
-
-/**
- * Creates multiple histograms for a specified list of properties (or indexes into an array)
- * @param {number[][]|Object[]} data an array of data points (either arrays or objects)
- * @param {number[]|string[]} properties a list of properties or array indexes to make histograms for
+ * Creates histogram data for damage
+ * @param {number[]} data an array of damage numbers for all possible rolls
  * @returns {{
  *  value: *, 
  *  amount: number, 
  *  percentage: number, 
- *  atLeastPercentage: number }[][]
- * } An array of histograms, in the same order as the properties array
+ *  atLeastPercentage: number }[]
+ * } An array of histogram data
  */
-export const getHistograms = (data, properties) => {
-    const histograms = properties.map(_ => [])
+export const getHistogram = (data) => {
+    const histogram = []
     // For each datapoint, add the data to the histograms for each property
     data.forEach((dataPoint) => {
-        properties.forEach((property, index) => {
-            let item = histograms[index].find(i => i.value === dataPoint[property]);
-            // If there's not already an item in the histogram for that property value, make one
-            if (!item) {
-                item = { value: dataPoint[property], amount: 0 }
-                histograms[index].push(item)
-            }
-            // Count this data point in the histogram
-            item.amount++
-        })
-    })
-    histograms.forEach(histogram => {
-        // Sort the histograms by property value
-        histogram.sort((a, b) => a.value - b.value)
-        // Calculate percentage of getting the value
-        histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
-        // Calculate percentage of getting at least the value
-        for (let i = histogram.length - 1; i >= 0; i--) {
-            histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
-                histogram[i].percentage :
-                histogram[i].percentage + histogram[i + 1].atLeastPercentage
+        let item = histogram.find(i => i.value === dataPoint);
+        // If there's not already an item in the histogram for that property value, make one
+        if (!item) {
+            item = { value: dataPoint, amount: 0 }
+            histogram.push(item)
         }
+        // Count this data point in the histogram
+        item.amount++
     })
-    return histograms;
+    // Sort the histogram by property value
+    histogram.sort((a, b) => a.value - b.value)
+    // Calculate percentage of getting the value
+    histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
+    // Calculate percentage of getting at least the value
+    for (let i = histogram.length - 1; i >= 0; i--) {
+        histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
+            histogram[i].percentage :
+            histogram[i].percentage + histogram[i + 1].atLeastPercentage
+    }
+    return histogram;
 }
 
 const removeFromArray = (array, toRemove) => {
@@ -215,16 +200,17 @@ export const getDefenseData = ({ unit, hidden = false, classCards = [], selected
 /**
  * Gets the minimum and maximum possible accuracy for a given attack against a given defense
  * @param {{ dice: string[], surgeAbilities: number[][], bonus: [], rerolls: number }} attack The combined attack data
- * @param {{ dice: string[], bonus: [], rerolls: number }} defense The combined defense data
+ * @param {{ dice: string[], bonus: [], rerolls: number }?} defense The combined defense data
  * @returns {[number, number]} An array with the min and max accuracy, in that order
  */
 export const getMinMaxAccuracy = (attack, defense) => {
+    console.log(attack, defense)
     let min = attack.dice.reduce((total, die) => DICE_MIN[die] + total, 0)
         + attack.bonus[ACC]
-        + defense.bonus[ACC]
+        + (defense?.bonus[ACC] || 0)
     let max = attack.dice.reduce((total, die) => DICE_MAX[die] + total, 0)
         + attack.bonus[ACC]
-        + defense.bonus[ACC]
+        + (defense?.bonus[ACC] || 0)
         + attack.surgeAbilities.reduce((total, ability) => total + ability[ACC], 0)
     return [min < 0 ? 0 : min, max < 0 ? 0 : max]
 }

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
-import { faChartSimple, faFistRaised, faShield } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UnitDataPicker, { getEmptyUnitData } from '../../components/UnitDataPicker';
 import CustomDataPicker, { clearCustomData, replaceCustomData } from '../../components/CustomDataPicker';
 import { CollapsableDataArea, CollapseProvider } from '../../components/CollapsableDataArea';
 import HoverPeekButton from '../../components/HoverPeekButton';
-import RequiredAccuracyPicker from './RequiredAccuracyPicker';
+import RequiredAccuracyPicker from '../RequiredAccuracyPicker';
 import SectionHeader from "./SectionHeader";
 import PlayerTypeIcon from "../_icons/PlayerTypeIcon";
-import { getAttackData, getDefenseData, getMinMaxAccuracy } from '../../utilities';
+import { getAttackData, getDefenseData } from '../../utilities';
 import { ATTACK, DEFENSE } from '../../data';
 
 const getCollapsedAdvancedData = ({ requiredAccuracy }) => {
@@ -25,7 +25,6 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
     requiredAccuracy } = data
   const { customAttackDispatch, customDefenseDispatch, setUnitAttack, 
     setUnitDefense, setRequiredAccuracy } = updaters
-  const [minMaxAccuracy, setMinMaxAccuracy] = useState([0, 10])
 
   const clear = (customDispatch, setUnit) => {
     customDispatch(clearCustomData())
@@ -42,14 +41,6 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
     customDefenseDispatch(replaceCustomData(getDefenseData(unitData)))
   }
 
-  // Update accuracy min, max, and required values when the attack or defense data changes
-  useEffect(() => {
-    const [min, max] = getMinMaxAccuracy(customAttack, customDefense)
-    setMinMaxAccuracy([min, max])
-    setRequiredAccuracy(curr => curr > max ? max : curr)
-  }, [customAttack, customDefense, setRequiredAccuracy])
-  
-
   return (
     <CollapseProvider>
       <Row>
@@ -60,7 +51,7 @@ export default function StatsDataInput({ data, updaters, onCalculate }) {
           <UnitDataPicker data={unitAttack} setData={updateAttack} isAttack/>
           <CustomDataPicker data={customAttack} dispatch={customAttackDispatch} isAttack />
           <CollapsableDataArea label="Advanced" collapsedData={getCollapsedAdvancedData({ requiredAccuracy })} startCollapsed>
-            <RequiredAccuracyPicker value={requiredAccuracy} onChange={setRequiredAccuracy} minMaxAccuracy={minMaxAccuracy}/>
+            <RequiredAccuracyPicker value={requiredAccuracy} onChange={setRequiredAccuracy} customAttack={customAttack} customDefense={customDefense}/>
           </CollapsableDataArea>
         </Col>
         <Col xs={12} xl={6} className="mt-4 ps-4">

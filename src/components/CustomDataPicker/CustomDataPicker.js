@@ -5,6 +5,7 @@ import DiceListInput from './DiceListInput'
 import BonusInput from './BonusInput'
 import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
 import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
+import { ATTACK, DEFENSE } from '../../data'
 
 export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
     const { dice, bonus, rerollAbilities, surgeAbilities } = data
@@ -30,7 +31,7 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
                 bonus={bonus} 
                 dispatch={dispatch} 
             />
-            <RerollAbilitiesInput values={rerollAbilities} dispatch={dispatch} />
+            <RerollAbilitiesInput values={rerollAbilities} dispatch={dispatch} defaultValue={[ isAttack ? ATTACK : DEFENSE, 1]} />
             { isAttack && 
                 <SurgeAbilitiesInput values={surgeAbilities} dispatch={dispatch} className="mt-3" /> 
             }

@@ -5,12 +5,14 @@ import { faArrowRightToBracket, faPlus } from '@fortawesome/free-solid-svg-icons
 import UnitInfoPicker, { getEmptyUnitData, useUnitData } from '../UnitDataPicker'
 import CustomInfoPicker, { clearCustomData, replaceCustomData, useCustomData } from '../CustomDataPicker'
 import { getAttackData, summarizeUnitData } from '../../utilities'
+import RequiredAccuracyPicker from '../RequiredAccuracyPicker'
 
 export default function AddAttackForm({ show, onHide, onSubmit }) {
     const [nameValue, setNameValue] = useState("")
     const [nameErrors, setNameErrors] = useState(null)
     const [unitData, setUnitData] = useUnitData()
     const [customData, customDataDispatch] = useCustomData()
+    const [requiredAccuracy, setRequiredAccuracy] = useState(0)
 
     const handleNameChange = ({ target }) => {
         setNameValue(target.value)
@@ -33,7 +35,7 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
     const onClickSubmit = () => {
         const errors = validateName(nameValue);
         if(errors) return;
-        onSubmit({ name: nameValue, ...customData, unitData })
+        onSubmit({ name: nameValue, ...customData, unitData, requiredAccuracy })
         clearAndHide()
     }
 
@@ -61,6 +63,7 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
                 </Form.Group>
                 <UnitInfoPicker data={unitData} setData={updateData} isAttack />
                 <CustomInfoPicker data={customData} dispatch={customDataDispatch} isAttack />
+                <RequiredAccuracyPicker value={requiredAccuracy} onChange={setRequiredAccuracy} customAttack={customData}/>
             </Modal.Body>
             <Modal.Footer>
                 { nameErrors && <span className="text-danger text-right me-2">{nameErrors}</span> }

@@ -21,7 +21,7 @@ export default class Attack {
         this.dice = dice
         this.surgeabilities = []
         for (const ability of surge)
-            this.surgeabilities.push(ability) // QUESTION: Add array or items in array?
+            this.surgeabilities.push(ability)
         this.bonus = bonus
         this.distance = distance
         this.rerollabilities = rerollabilities
@@ -106,13 +106,13 @@ export default class Attack {
                             }
                         }
                     }
-                    for (const s in sets) {
+                    for (const s of sets) {
                         let probabilities2 = this.reroll(rollid, s, p)
                         const abilities2 = deepcopy(abilities)
                         abilities2[playerid].splice(abilityid, 1)
                         const diceleft2 = difference(diceleft, s)
                         probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2)
-                        probabilitieslist.push(...probabilities2)
+                        probabilitieslist.push(probabilities2)
                         hitslist.push(this.calcaverage(probabilities2))
                     }
                 })
@@ -121,7 +121,7 @@ export default class Attack {
                 const abilities0 = deepcopy(abilities)
                 abilities0[playerid] = []
                 probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
-                probabilitieslist.push(...probabilities0)
+                probabilitieslist.push(probabilities0)
                 hitslist.push(this.calcaverage(probabilities0))
                 let probabilitiesid;
                 // now choose best for player
@@ -138,7 +138,7 @@ export default class Attack {
 
     dicetype(diceid) {
         const color = this.dice[diceid]
-        if (color in [BLACK, WHITE])
+        if ([BLACK, WHITE].includes(color))
             return 1  // defense dice
         else
             return 0  // attack dice
@@ -152,7 +152,7 @@ export default class Attack {
                 for (const sideid of range(6)) {
                     const newrollbyte = [...rollbyte]
                     newrollbyte[diceid] = sideid
-                    newrollbytes.push(...newrollbyte)
+                    newrollbytes.push(newrollbyte)
                 }
             }
             rollbytes = newrollbytes

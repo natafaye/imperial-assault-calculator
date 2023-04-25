@@ -15,9 +15,16 @@ const AverageHeader = ({ die, property }) => (
     </span>
 )
 
-const AverageCell = ({ value, property }) => (
+const AccuracyHeader = ({ type }) => (
     <span className="d-inline-flex align-items-center">
-        <span className="me-1">{value.toFixed(2)}</span>
+        <span className="mx-1">{type}</span>
+        <PropertyIcon property={ACC} />
+    </span>
+)
+
+const ValueCell = ({ value, property, decimalPoints = 2 }) => (
+    <span className="d-inline-flex align-items-center">
+        <span className="me-1">{value.toFixed(decimalPoints)}</span>
         <PropertyIcon property={property} />
     </span>
 )
@@ -73,19 +80,19 @@ export const getTableColumns = (onDelete) => [
     }),
     columnHelper.accessor('blackAvgDam', {
         header: <AverageHeader die={BLACK} property={DAM} />,
-        cell: info => <AverageCell value={info.getValue()} property={DAM} />
+        cell: info => <ValueCell value={info.getValue()} property={DAM} />
     }),
     columnHelper.accessor('whiteAvgDam', {
         header: <AverageHeader die={WHITE} property={DAM} />,
-        cell: info => <AverageCell value={info.getValue()} property={DAM} />
+        cell: info => <ValueCell value={info.getValue()} property={DAM} />
     }),
-    columnHelper.accessor('blackAvgAcc', {
-        header: <AverageHeader die={BLACK} property={ACC} />,
-        cell: info => <AverageCell value={info.getValue()} property={ACC} />
+    columnHelper.accessor('minAcc', {
+        header: <AccuracyHeader type="Min" />,
+        cell: info => <ValueCell value={info.getValue()} property={ACC} decimalPoints={0} />
     }),
-    columnHelper.accessor('whiteAvgAcc', {
-        header: <AverageHeader die={WHITE} property={ACC} />,
-        cell: info => <AverageCell value={info.getValue()} property={ACC} />
+    columnHelper.accessor('maxAcc', {
+        header: <AccuracyHeader type="Max" />,
+        cell: info => <ValueCell value={info.getValue()} property={ACC} decimalPoints={0} />
     }),
     columnHelper.display({
         id: 'actions',
@@ -95,8 +102,8 @@ export const getTableColumns = (onDelete) => [
 ]
 
 export const getInitialColumnVisibility = () => ({
-    "blackAvgAcc": false,
-    "whiteAvgAcc": false,
+    "minAcc": false,
+    "maxAcc": false,
     "Surges": false,
     "Unit": false,
     "Weapon": false,

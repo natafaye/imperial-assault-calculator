@@ -36,7 +36,7 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => [
   </>
 ]
 
-export default function RerollAbilitiesInput({ values, dispatch }) {
+export default function RerollAbilitiesInput({ values, dispatch, defaultValue }) {
   return (
     <AbilitiesInput
       values={values}
@@ -45,7 +45,7 @@ export default function RerollAbilitiesInput({ values, dispatch }) {
       addLabel="Reroll Ability"
       renderFormLayoutGroups={renderRerollFormLayoutGroups}
       displayComponent={RerollAbilityLabel}
-      defaultValue={[0, 1]}
+      defaultValue={defaultValue}
     />
   )
 }

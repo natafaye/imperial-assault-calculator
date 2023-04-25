@@ -1,6 +1,6 @@
 import React from 'react'
 import StatsDataInput from "./StatsDataInput";
-import StatsHistogramList from "./StatsHistogramList";
+import StatsHistogram from './StatsHistogram';
 import { getStatsResults } from '../../utilities';
 
 export default function StatsPage({ data, updaters }) {
@@ -12,7 +12,7 @@ export default function StatsPage({ data, updaters }) {
     return (
         <>
             <StatsDataInput data={inputData} updaters={inputUpdaters} onCalculate={calculate} />
-            <StatsHistogramList results={results} settings={settings} setSettings={setSettings} />
+            <StatsHistogram results={results} settings={settings} setSettings={setSettings} />
         </>
     )
 }

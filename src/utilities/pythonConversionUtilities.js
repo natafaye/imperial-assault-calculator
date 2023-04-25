@@ -18,7 +18,7 @@
  * np.base_repr(num, base)                      ->      num.toString(base)
  * 
  * array.append(value)                          ->      array.push(value)
- * array.append(array2)                         ->      array.push(...array2)
+ * array.append(array2)                         ->      array.push(array2) NOT array.push(...array2)
  * len(array)                                   ->      array.length
  * array[:]                                     ->      [...array]
  * np.copy(array)                               ->      [...array]
@@ -68,9 +68,9 @@ export function union(a, b) {
 }
 
 export function difference(a, b) {
-    const c = new Set(1)
+    const c = new Set(a)
     for(const item of b) {
-        a.delete(item)
+        c.delete(item)
     }
     return c
 }
@@ -104,6 +104,8 @@ export function dot(a, b) {
 }
 
 export function addArrays(a, b) {
+    if(!a) return b
+    if(!b) return a
     return a.map((numA, index) => numA + (b[index] || 0))
 }
 
