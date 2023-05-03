@@ -1,5 +1,5 @@
 import { addValues, getAttackData, getAverage, getDefenseData, getHistograms } from "./analysisUtilities"
-import { UNITS, CLASS_CARDS, BLACK, BLUE, GREEN, YELLOW, RED, WEAPONS, WHITE } from "../data"
+import { UNITS, CLASS_CARDS, BLACK, BLUE, GREEN, YELLOW, RED, WEAPONS, WHITE, DEFENSE } from "../data"
 
 const a = [0, 1, 0, 4, 0, 6]
 const b = [1, 1, 1, 1, 1, 1]
@@ -47,60 +47,6 @@ describe("addValues", () => {
     })
 })
 
-describe("getAverage", () => {
-    it("works with an array with one item", () => {
-        expect(getAverage([[1, 1, 1, 1, 1, 1]])).toEqual([1, 1, 1, 1, 1, 1])
-    })
-
-    it("works with an array with four items", () => {
-        expect(getAverage([b, b, b, b])).toEqual([1, 1, 1, 1, 1, 1])
-        expect(getAverage([a, b, c, d])).toEqual([3/4, 5/4, 5/4, 10/4, 7/4, 14/4])
-    })
-
-    it("works with an empty array", () => {
-        expect(getAverage([])).toEqual([0, 0, 0, 0, 0, 0])
-    })
-})
-
-describe("getHistograms", () => {
-    it("works with a normal set of data", () => {
-        expect(getHistograms([a, a, b, c, d], [0, 1, 2, 3, 4, 5])).toEqual([
-            [
-                { value: 0, amount: 3, atLeastPercentage: 100, percentage: 60 }, 
-                { value: 1, amount: 1, atLeastPercentage: 40, percentage: 20 }, 
-                { value: 2, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ],
-            [
-                { value: 0, amount: 1, atLeastPercentage: 100, percentage: 20 }, 
-                { value: 1, amount: 3, atLeastPercentage: 80, percentage: 60 }, 
-                { value: 3, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ],
-            [
-                { value: 0, amount: 3, atLeastPercentage: 100, percentage: 60 }, 
-                { value: 1, amount: 1, atLeastPercentage: 40, percentage: 20 }, 
-                { value: 4, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ],
-            [
-                { value: 0, amount: 1, atLeastPercentage: 100, percentage: 20 }, 
-                { value: 1, amount: 1, atLeastPercentage: 80, percentage: 20 }, 
-                { value: 4, amount: 2, atLeastPercentage: 60, percentage: 40 }, 
-                { value: 5, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ],
-            [
-                { value: 0, amount: 3, atLeastPercentage: 100, percentage: 60 }, 
-                { value: 1, amount: 1, atLeastPercentage: 40, percentage: 20 }, 
-                { value: 6, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ],
-            [
-                { value: 0, amount: 1, atLeastPercentage: 100, percentage: 20 }, 
-                { value: 1, amount: 1, atLeastPercentage: 80, percentage: 20 }, 
-                { value: 6, amount: 2, atLeastPercentage: 60, percentage: 40 }, 
-                { value: 7, amount: 1, atLeastPercentage: 20, percentage: 20 }
-            ]
-        ])
-    })
-})
-
 const j4x7Unit = UNITS.find(u => u.name === "J4X-7")
 const agentBlaise = UNITS.find(u => u.name === "Agent Blaise")
 const x8Upgrade = CLASS_CARDS.find(c => c.name === "X-8 Upgrade")
@@ -114,8 +60,8 @@ const auxiliaryTrainingOptional = "classCards-4-0"
 
 describe("getAttackData", () => {
     it("works with no data", () => {
-        expect(getAttackData({ classCards: [], mods: [] }))
-            .toEqual({ dice: [], surgeAbilities: [], bonus: [0, 0, 0, 0, 0, 0], rerolls: 0 })
+        expect(getAttackData({}))
+            .toEqual({ dice: [], surgeAbilities: [], bonus: [0, 0, 0, 0, 0, 0], rerollAbilities: [] })
     })
     
     it("works with just a unit", () => {
@@ -123,13 +69,13 @@ describe("getAttackData", () => {
             dice: [BLUE], 
             surgeAbilities: [[0, 1, -1, 0, 0, 0]], 
             bonus: [0, 0, 0, -1, 0, 0], 
-            rerolls: 0 
+            rerollAbilities: [] 
         })
         expect(getAttackData({ unit: j4x7Unit, focused: true })).toEqual({ 
             dice: [BLUE, GREEN], 
             surgeAbilities: [[0, 1, -1, 0, 0, 0]], 
             bonus: [0, 0, 0, -1, 0, 0], 
-            rerolls: 0 
+            rerollAbilities: []
         })
         expect(getAttackData({ unit: agentBlaise })).toEqual({ 
             dice: [GREEN, YELLOW, YELLOW], 
@@ -140,15 +86,15 @@ describe("getAttackData", () => {
                 [3, 0, -1, 0, 0, 0]
             ], 
             bonus: [0, 0, 0, 0, 0, 0], 
-            rerolls: 0 
+            rerollAbilities: [] 
         })
     })
     
     it("works with a unit and class cards", () => {
         expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade] }))
-            .toEqual({ dice: [BLUE], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
+            .toEqual({ dice: [BLUE], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerollAbilities: [] })
         expect(getAttackData({ unit: j4x7Unit, classCards: [x8Upgrade], focused: true }))
-            .toEqual({ dice: [BLUE, GREEN], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerolls: 0 })
+            .toEqual({ dice: [BLUE, GREEN], surgeAbilities: [[0, 1, -1, 0, 0, 0]], bonus: [0, 1, 0, 0, 0, 0], rerollAbilities: [] })
     })
     
     it("works with a unit and class cards and a weapon and mods", () => {
@@ -157,25 +103,25 @@ describe("getAttackData", () => {
             weapon: a280,
             classCards: [coordinatedAttack], 
             selectedOptionalIds: [lokuOptional, coordinatedAttackOptional]
-        })).toEqual({ dice: [BLUE, GREEN, RED], surgeAbilities: [[0,2,-1,0,0,0],[0,0,-1,-2,0,0]], bonus: [3,1,0,0,0,0], rerolls: 0 })
+        })).toEqual({ dice: [BLUE, GREEN, RED], surgeAbilities: [[0,2,-1,0,0,0],[0,0,-1,-2,0,0]], bonus: [3,1,0,0,0,0], rerollAbilities: [] })
     })
 })
 
 describe("getDefenseData", () => {
     it("works with no data", () => {
-        expect(getDefenseData({ })).toEqual({ dice: [], bonus: [0,0,0,0,0,0], rerolls: 0 })
+        expect(getDefenseData({ })).toEqual({ dice: [], bonus: [0,0,0,0,0,0], rerollAbilities: [] })
     })
     
     it("works with just a unit", () => {
         expect(getDefenseData({ unit: agentBlaise })).toEqual({ 
             dice: [BLACK], 
             bonus: [0,0,0,0,0,0], 
-            rerolls: 0 
+            rerollAbilities: [] 
         })
     })
     
     it("works with a unit and class cards", () => {
         expect(getDefenseData({ unit: loku, classCards: [auxiliaryTraining], selectedOptionalIds: [auxiliaryTrainingOptional] }))
-            .toEqual({ dice: [WHITE], bonus: [0,0,0,0,0,0], rerolls: 1 })
+            .toEqual({ dice: [WHITE], bonus: [0,0,0,0,0,0], rerollAbilities: [[DEFENSE, 1]] })
     })
 })

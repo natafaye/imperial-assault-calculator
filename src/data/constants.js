@@ -13,19 +13,27 @@ export const STRENGTH = 0
 export const INSIGHT = 1
 export const TECH = 2
 
-// Reroll type indexes
-export const ATTACK = 0
-export const DEFENSE = 1
-
-// Reroll ability indexes
-export const PLAYER = 0
+// Reroll ability data indexes
+export const TYPE = 0
 export const AMOUNT = 1
 
-// Reroll player type labels
-export const PLAYER_TYPE_LABELS = {
+// Player/Reroll types
+export const ATTACK = 0
+export const DEFENSE = 1
+export const ATTACK_OR_DEFENSE = 2
+export const ATTACK_AND_DEFENSE = 3
+export const TURN_ATTACK_DIE = 4
+
+// Reroll type labels
+export const REROLL_TYPE_LABELS = {
     [ATTACK]: "Attack",
-    [DEFENSE]: "Defense"
+    [DEFENSE]: "Defense",
+    [ATTACK_OR_DEFENSE]: "All attack or all defense",
+    [ATTACK_AND_DEFENSE]: "All attack and all defense",
+    [TURN_ATTACK_DIE]: "Turn 1 attack die with 1 attack symbol"
 }
+
+export const PLAYER_TYPE_LABELS = REROLL_TYPE_LABELS
 
 export const PROPERTY_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
 

@@ -1,5 +1,5 @@
-import { BLUE, RED, YELLOW, WHITE, GREEN } from "./constants"
-import { REBEL, IMPERIAL } from "./units"
+import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE } from "./constants"
+import { REBEL } from "./units"
 
 // Hero names
 export const BIV = "Biv Bodhrik"
@@ -48,8 +48,7 @@ export const CLASS_CARDS = [
             }
         ],
         optionalAttack: [],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -69,8 +68,7 @@ export const CLASS_CARDS = [
                 dice: [YELLOW] 
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -90,8 +88,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 1, -1, 0, 0, 0] 
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -107,17 +104,16 @@ export const CLASS_CARDS = [
         optionalDefense: [
             { 
                 cost: "Exhaust Alliance Efficiency", 
-                rerolls: 1 
+                rerollAbilities: [[], [[1, 1]]] 
             }
         ],
         optionalAttack: [
             { 
                 cost: "Exhaust Alliance Efficiency", 
-                rerolls: 1 
+                rerollAbilities: [[[0, 1]], []]
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -133,17 +129,16 @@ export const CLASS_CARDS = [
         optionalDefense: [
             { 
                 cost: "Exhaust Auxiliary Training, spend power token", 
-                rerolls: 1 
+                rerollAbilities: [[], [[1, 1]]] 
             }
         ],
         optionalAttack: [
             { 
                 cost: "Exhaust Auxiliary Training, spend power token", 
-                rerolls: 1 
+                rerollAbilities: [[[0, 1]], []]
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -158,8 +153,7 @@ export const CLASS_CARDS = [
         defenseBonus: [0, 0, 0, 0, 0, 0],
         optionalDefense: [],
         optionalAttack: [],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -179,8 +173,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 1, 0, 0, 0, 0] 
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -197,11 +190,10 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {  
                 cost: "Exhaust Battlefield Experience", 
-                rerolls: 1 
+                rerollAbilities: [[], [[1, 1]]] 
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -224,8 +216,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 0, 0, 0, 0, -1] 
             }
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -245,8 +236,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 0, 1, 0, 0, 0] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -266,8 +256,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 1, 0, 0, 0, 0] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -299,8 +288,7 @@ export const CLASS_CARDS = [
                 dice: [BLUE] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -320,8 +308,7 @@ export const CLASS_CARDS = [
                 bonus: [0, -1, 0, 0, 0, 0] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -341,8 +328,7 @@ export const CLASS_CARDS = [
             },
         ],
         optionalAttack: [],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -366,8 +352,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 0, 0, 0, -1, 0] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -387,8 +372,7 @@ export const CLASS_CARDS = [
                 surgeAbilities: [[0, 2, -1, 0, 0, 0]] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -409,8 +393,7 @@ export const CLASS_CARDS = [
                 surgeAbilities: [[2, 1, -1, 0, 0, 0]] 
             },
         ],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -434,8 +417,7 @@ export const CLASS_CARDS = [
                 bonus: [0, 1, 0, 0, 0, 0] 
             }, 
         ], // TODO: make sure still applied with pinpoint shot
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -450,8 +432,7 @@ export const CLASS_CARDS = [
         defenseBonus: [0, 0, 0, 0, 1, 0],
         optionalDefense: [],
         optionalAttack: [],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -471,8 +452,7 @@ export const CLASS_CARDS = [
             }, 
         ],
         optionalAttack: [],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: STOPPED CONVERTING HERE
     {
@@ -485,8 +465,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 2, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -499,8 +478,7 @@ export const CLASS_CARDS = [
         attackDice: [RED],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -513,8 +491,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Choose to exhaust
     {
@@ -527,8 +504,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Allow removing all dice from target's defense pool
     {
@@ -541,8 +517,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // Replace 1 die with another die of your choice
     {
@@ -555,8 +530,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [],
         optionalAttack: [
             { 
@@ -575,8 +549,7 @@ export const CLASS_CARDS = [
         attackDice: [RED],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Trigger if focused instead of green die
     {
@@ -589,8 +562,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Remove 1 dice from defense pool
     {
@@ -603,8 +575,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
         ]
     }, // TODO: add blue die for attribute test
@@ -618,8 +589,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: Allow using surge abilities from other pistols
@@ -633,8 +603,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Convert 1 damage to 1 surge, or 1 block to 1 evade
     {
@@ -647,8 +616,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 1],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Choose to use
     {
@@ -661,8 +629,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 1, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: while attacking an imperial TROOPER
     {
@@ -675,8 +642,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -689,8 +655,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -703,8 +668,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Remove all results except accuracy, then add 1
     {
@@ -717,8 +681,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [],
         optionalAttack: [
             {
@@ -751,8 +714,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // Replace 1 die in your attack pool with a different attack die of your choice
     {
@@ -765,11 +727,16 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
+        optionalAttack: [
+            {
+                cost: "Attacking with a Melee weapon, exhaust Proximity Strike", 
+                rerollAbilities: [[1, 1]]
+            }
+        ],
 		surgeAbilities: [
         ]
-    }, // Force defense to reroll one defense die
+    },
     {
         id: 34,
         name: "Rapid Fire",
@@ -780,11 +747,16 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
+        ],
+        optionalAttack: [
+            {
+                cost: "Attacking with a Ranged weapon",
+                rerollAbilities: [[[ATTACK_AND_DEFENSE]], []]
+            }
         ]
-    }, // Rerolls for ranged, all attack and all defense
+    },
     {
         id: 33,
         name: "Roll With It",
@@ -795,8 +767,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: Choose to use, Convert 1 or more block to evade
@@ -810,8 +781,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     },
     {
@@ -824,8 +794,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: applies to attribute tests
@@ -839,8 +808,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     },
@@ -854,8 +822,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [1, 1, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: trigger to use, if object apply additional +1 damage and pierce 1
     {
@@ -868,8 +835,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [5, 0, -1, 0, 0, 0]
@@ -885,8 +851,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: Remove 1 die from attack pool
@@ -900,8 +865,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: turn on
@@ -915,8 +879,7 @@ export const CLASS_CARDS = [
         attackDice: [YELLOW],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: trigger or not for strain with ranged weapon
     {
@@ -929,8 +892,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
     }, // TODO: Either remove one defense die or apply +1 damage
@@ -944,8 +906,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [2, 0, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Choose to use
     {
@@ -958,8 +919,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Add green die for attribute tests, choose to use while defending
     {
@@ -972,8 +932,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 1, 0, 1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Supporting fire does +1 damage insted of pierce 1
 ]

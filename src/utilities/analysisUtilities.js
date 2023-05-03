@@ -1,47 +1,43 @@
 import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
 import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN } from '../data'
+import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE } from '../data'
 
 /**
- * Gets an Attack object with the right data
+ * Interface function that gets an Attack object with the right data
  * @param {object} unitAttack Data about the unit attack
  * @param {object} attack Data about the attack
  * @param {object?} defense Optional data about the defense (for adding the defense bonus in)
- * @param {number} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
+ * @param {number?} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
  * @returns {Attack} An Attack object
  */
-export const getAttackObject = (unitAttack, attack, defense, requiredAccuracy) => {
+export const getAttackObject = (attack, defense, requiredAccuracy = 0) => {
     return new Attack(
-        attack.dice.concat(defense.dice),
+        attack.dice.concat(defense?.dice || []),
         attack.surgeAbilities,
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
-        [attack.rerollAbilities || [], defense?.rerollAbilities || []],
-        (unitAttack?.weapon?.isPunchDagger) ? "punchdagger" : ""
+        [ attack.rerollAbilities || [], defense?.rerollAbilities || [] ]
     )
 }
 
 /**
- * Interface function for getting the stats data of an attack and defense
+ * Gets the average damage and histogram for an attack and defense
  * @param {{ 
  *  customAttack: object, 
- *  customDefense: object, 
- *  unitAttack: object, 
+ *  customDefense: object,
  *  requiredAccuracy: number
  * }} data The attack and defense data
  * @returns {{ 
- *  averages: number[], 
- *  histograms: {value: *, amount: number, percentage: number, atLeastPercentage: number }[][], 
- *  totalNum: number 
+ *  average: number, 
+ *  histogram: {value: number, amount: number, percentage: number, atLeastPercentage: number }[],
  * }} All the stats data
  */
-export const getStatsResults = ({ customAttack: attack, customDefense: defense, unitAttack, requiredAccuracy }) => {
-    const attackData = getAttackObject(unitAttack, attack, defense, requiredAccuracy)
+export const getStatsResults = ({ customAttack, customDefense, requiredAccuracy }) => {
+    const attackData = getAttackObject(customAttack, customDefense, requiredAccuracy)
     return {
         average: attackData.average,
-        histogram: getHistogram(attackData.rolls),
-        totalNum: attackData.rolls.length
+        histogram: getHistogram(attackData.rolls, attackData.probabilities)
     }
 }
 
@@ -57,10 +53,21 @@ export const getStatsResults = ({ customAttack: attack, customDefense: defense, 
  * @returns {object} comparison data for the attack
  */
 export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...customData }) => {
-    const blackAttack = getAttackObject(unitData, customData, { dice: [BLACK] }, requiredAccuracy)
-    const whiteAttack = getAttackObject(unitData, customData, { dice: [WHITE] }, requiredAccuracy)
+    const blackAttack = getAttackObject(customData, { dice: [BLACK] }, requiredAccuracy)
+    const whiteAttack = getAttackObject(customData, { dice: [WHITE] }, requiredAccuracy)
     const [min, max] = getMinMaxAccuracy(customData)
-    return { id: uuid(), name, ...customData, unitData, whiteAvgDam: whiteAttack.average, blackAvgDam: blackAttack.average, minAcc: min, maxAcc: max }
+    return { 
+        id: uuid(), 
+        name, 
+        ...customData, 
+        unitData, 
+        whiteAvgDam: whiteAttack.average, 
+        blackAvgDam: blackAttack.average, 
+        whiteHistogram: getHistogram(whiteAttack.rolls, whiteAttack.probabilities), 
+        blackHistogram: getHistogram(blackAttack.rolls, blackAttack.probabilities), 
+        minAcc: min, 
+        maxAcc: max 
+    }
 }
 
 /**
@@ -75,31 +82,33 @@ export const addValues = (a = [0, 0, 0, 0, 0, 0], ...others) => {
 
 /**
  * Creates histogram data for damage
- * @param {number[]} data an array of damage numbers for all possible rolls
+ * @param {number[]} damageOfRolls an array of damage numbers for all possible rolls
+ * @param {number[]} probabilityOfRolls an array of probabilities for all possible rolls
  * @returns {{
- *  value: *, 
+ *  value: number, 
  *  amount: number, 
  *  percentage: number, 
  *  atLeastPercentage: number }[]
  * } An array of histogram data
  */
-export const getHistogram = (data) => {
+export const getHistogram = (damageOfRolls, probabilityOfRolls) => {
+    const probabilityTotal = probabilityOfRolls.reduce((total, p) => p + total, 0)
     const histogram = []
-    // For each datapoint, add the data to the histograms for each property
-    data.forEach((dataPoint) => {
-        let item = histogram.find(i => i.value === dataPoint);
+    // For each possible roll, add the data to the histogram
+    for(let rollIndex = 0; rollIndex < damageOfRolls.length; rollIndex++) {
+        let item = histogram.find(item => item.value === damageOfRolls[rollIndex]);
         // If there's not already an item in the histogram for that property value, make one
         if (!item) {
-            item = { value: dataPoint, amount: 0 }
+            item = { value: damageOfRolls[rollIndex], amount: 0 }
             histogram.push(item)
         }
         // Count this data point in the histogram
-        item.amount++
-    })
+        item.amount += probabilityOfRolls[rollIndex]
+    }
     // Sort the histogram by property value
     histogram.sort((a, b) => a.value - b.value)
     // Calculate percentage of getting the value
-    histogram.forEach(item => item.percentage = 100 * item.amount / data.length)
+    histogram.forEach(item => item.percentage = 100 * item.amount / probabilityTotal)
     // Calculate percentage of getting at least the value
     for (let i = histogram.length - 1; i >= 0; i--) {
         histogram[i].atLeastPercentage = (i === histogram.length - 1) ?
@@ -162,10 +171,13 @@ export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focuse
             ...optionals.map(a => a.bonus),
             (hidden ? [0,0,1,0,0,0] : null)
         ),
-        rerolls:
-            (unit?.attackRerolls || 0) +
-            classCards.reduce((total, c) => (c.attackRerolls ? total + c.attackRerolls : total), 0) +
-            optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
+        rerollAbilities: [].concat(
+            unit?.rerollAbilities[ATTACK] || [], 
+            (weapon?.rerollAbilities && weapon.rerollAbilities[ATTACK]) || [],
+            mods.flatMap(m => (m.rerollAbilities && m.rerollAbilities[ATTACK]) || []),
+            classCards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[ATTACK]) || []),
+            optionals.flatMap(o => (o.rerollAbilities && o.rerollAbilities[ATTACK]) || [])
+        )
     }
 }
 
@@ -190,10 +202,11 @@ export const getDefenseData = ({ unit, hidden = false, classCards = [], selected
             ...optionals.map(a => a.bonus),
             (hidden ? [-2,0,0,0,0,0] : null)
         ),
-        rerolls:
-            (unit?.defenseRerolls || 0) +
-            classCards.reduce((total, c) => (c.defenseRerolls ? total + c.defenseRerolls : total), 0) +
-            optionals.reduce((total, a) => (a.rerolls ? total + a.rerolls : total), 0)
+        rerollAbilities:  [].concat(
+            unit?.rerollAbilities[DEFENSE] || [], 
+            classCards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[DEFENSE]) || []),
+            optionals.flatMap(o => (o.rerollAbilities && o.rerollAbilities[DEFENSE]) || [])
+        )
     }
 }
 

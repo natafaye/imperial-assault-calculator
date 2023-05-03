@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./constants";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE } from "./constants";
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"
@@ -24,8 +24,6 @@ export const GUARDIAN = "Guardian"
 export const SMUGGLER = "Smuggler"
 export const WOOKIEE = "Wookiee"
 
-// TODO: Convert all rerolls to arrays with abilities
-
 export const UNITS = [
     {
         id: 0,
@@ -44,8 +42,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
         ]
@@ -67,8 +64,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0],
@@ -93,8 +89,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -117,8 +112,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ],
@@ -140,8 +134,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -163,8 +156,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -187,8 +179,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 1,
+        rerollAbilities: [[], [[1, 1]]],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -211,8 +202,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [4, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, -1, 0, 0]
@@ -235,8 +225,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, -1, 0, 0]
@@ -259,8 +248,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0],
@@ -284,8 +272,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -307,8 +294,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [1, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -330,8 +316,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, -3, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -353,8 +338,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -376,8 +360,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -399,8 +382,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -422,8 +404,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -445,8 +426,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -469,8 +449,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -493,8 +472,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -517,8 +495,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0],
             [0, 2, -1, 0, 0, 0],
@@ -543,8 +520,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -567,8 +543,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -591,8 +566,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -615,8 +589,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -639,8 +612,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -663,8 +635,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -687,8 +658,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -711,8 +681,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0]
         ]
@@ -734,8 +703,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -757,8 +725,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [0, 2, -1, 0, 0, 0]
@@ -781,8 +748,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -805,8 +771,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -830,8 +795,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -855,8 +819,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -879,8 +842,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -903,8 +865,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -927,8 +888,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -951,8 +911,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0],
@@ -976,8 +935,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 3, -2, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -1000,8 +958,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -1024,8 +981,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0],
         ]
@@ -1047,8 +1003,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 2, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
         ]
@@ -1070,8 +1025,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
 
         ]
@@ -1093,8 +1047,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
 
         ]
@@ -1116,8 +1069,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
         ]
@@ -1139,8 +1091,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, -1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
 
         ]
@@ -1162,8 +1113,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
 
         ]
@@ -1185,8 +1135,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0],
@@ -1209,8 +1158,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, -1],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -1234,8 +1182,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, -1],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -1258,8 +1205,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -1282,8 +1228,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0],
@@ -1307,8 +1252,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0],
@@ -1331,8 +1275,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -1354,8 +1297,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
 
         ]
@@ -1377,8 +1319,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -1401,8 +1342,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -1426,8 +1366,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -1449,8 +1388,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -1472,8 +1410,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -3, 0, 0]
         ]
@@ -1495,8 +1432,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -1518,8 +1454,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -1541,8 +1476,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [-2, 2, -1, 0, 0, 0],
             [-1, 1, -1, 0, 0, 0]
@@ -1565,8 +1499,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 1, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 3, -1, 0, 0, 0]
         ]
@@ -1588,8 +1521,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -1611,8 +1543,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -1635,8 +1566,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -1658,8 +1588,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -1681,8 +1610,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ]
@@ -1704,8 +1632,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ]
@@ -1727,8 +1654,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0]
         ]
@@ -1750,8 +1676,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0]
         ]
@@ -1773,8 +1698,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -1796,8 +1720,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -1819,8 +1742,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -1844,8 +1766,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ]
@@ -1867,8 +1788,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 2, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ]
@@ -1890,8 +1810,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [1, 0, -1, 0, 0, 0]
@@ -1914,8 +1833,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -1939,8 +1857,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -1962,8 +1879,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -1986,8 +1902,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-        defenseRerolls: 0,
+        rerollAbilities: [[], []],
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -2009,13 +1924,12 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: [[2]],
-		defenseRerolls: [],
+        rerollAbilities: [[[ATTACK_OR_DEFENSE]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
         ]
-    }, // TODO: Reroll all attack dice or force defender to reroll all
+    },
     {
         id: 83,
         name: "Alliance Ranger",
@@ -2033,8 +1947,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -2043,7 +1956,7 @@ export const UNITS = [
         optionalAttack: [
             {
                 cost: "Target 5 or more spaces away", 
-                rerolls: 1
+                rerollAbilities: [[[0, 1]], []]
             }
         ]
     },
@@ -2064,8 +1977,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 0, 0, -1, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -2074,8 +1986,8 @@ export const UNITS = [
         optionalAttack: [
             {
                 cost: "Target 5 or more spaces away", 
-                rerolls: 2
-            }
+                rerollAbilities: [[[0, 2]], []]
+            } // TODO: Confirm that Attack.js considers this up to 2
         ],
     }, 
     {
@@ -2095,8 +2007,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [-2, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2119,8 +2030,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -2143,8 +2053,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [2, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -2173,15 +2082,14 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ],
         optionalDefense: [
             { 
-                cost: "while defending and adjacent to friend", 
-                rerolls: 1
+                cost: "Adjacent to friendly figure", 
+                rerollAbilities: [[], [[1, 1]]]
             }
         ],
     }, 
@@ -2202,8 +2110,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -2225,8 +2132,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2249,8 +2155,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2273,8 +2178,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2297,8 +2201,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 1,
+        rerollAbilities: [[], [[1, 1]]],
 		surgeAbilities: [
             [0, 0, -1, -3, 0, 0]
         ]
@@ -2320,8 +2223,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -2343,8 +2245,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2367,8 +2268,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -2391,8 +2291,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2415,8 +2314,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [1, 0, -1, 0, 0, 0]
@@ -2439,8 +2337,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0]
         ]
@@ -2462,8 +2359,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -2485,8 +2381,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 1, -1, 0, 0, 0]
@@ -2509,8 +2404,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -2, -2, 0, 0]
@@ -2533,8 +2427,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -2557,8 +2450,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [2, 2, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -2581,8 +2473,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2605,8 +2496,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 0,
+        rerollAbilities: [[[0, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [1, 0, -1, 0, 0, 0]
@@ -2629,12 +2519,11 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 1,
-		defenseRerolls: 1,
+        rerollAbilities: [[[0, 1]], [[1, 1]]],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
-    }, 
+    },  // TODO: replace die instead of reroll?
     {
         id: 108,
         name: "Leia Organa",
@@ -2652,8 +2541,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [3, 0, -1, 0, 0, 0]
@@ -2676,8 +2564,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -2700,8 +2587,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 1, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2724,8 +2610,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 1, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2748,8 +2633,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [2, 0, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0],
@@ -2773,8 +2657,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -2796,8 +2679,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2820,8 +2702,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2844,8 +2725,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -2868,8 +2748,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 1, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -2891,8 +2770,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0]
         ]
@@ -2914,8 +2792,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ]
@@ -2937,8 +2814,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -1, 0, 0],
             [1, 0, -1, 0, 0, 0]
@@ -2961,8 +2837,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -2985,8 +2860,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -3009,8 +2883,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [1, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -3034,8 +2907,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             
         ]
@@ -3057,8 +2929,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 1, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0],
@@ -3081,8 +2952,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0]
         ]
@@ -3104,8 +2974,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
@@ -3127,8 +2996,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -3159,8 +3027,7 @@ export const UNITS = [
         ],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // ?????
     {
@@ -3188,8 +3055,7 @@ export const UNITS = [
         ],
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [],
         optionalAttack: [
             {
@@ -3223,8 +3089,7 @@ export const UNITS = [
         ],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        attackRerolls: 0,
-		defenseRerolls: 0,
+        rerollAbilities: [[], []],
 		surgeAbilities: [
 
         ]

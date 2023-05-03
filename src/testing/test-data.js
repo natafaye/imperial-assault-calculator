@@ -245,12 +245,12 @@ export const TEST_DATA = {
     },
     "Shrouded Lightsaber": {
         "High-Impact Guard and Falling Leaf and classCards-27-0 and Hidden": {
-            [BLACK]: [undefined, 5.43],
-            [WHITE]: [undefined, 4.44]
-        },
-        "High-Impact Guard and Falling Leaf and classCards-27-0 and Hidden and Surge": {
             [BLACK]: [undefined, 6.91],
             [WHITE]: [undefined, 5.59]
+        },
+        "High-Impact Guard and Falling Leaf and classCards-27-0 and Hidden and Surge": {
+            [BLACK]: [undefined, 8.00],
+            [WHITE]: [undefined, 6.48]
         }
     },
     "Sporting Blaster": {

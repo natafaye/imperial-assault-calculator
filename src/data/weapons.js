@@ -1,4 +1,4 @@
-import { BLUE, GREEN, RED, YELLOW } from "./constants";
+import { BLUE, GREEN, RED, TURN_ATTACK_DIE, YELLOW } from "./constants";
 
 // WEAPON TYPES
 export const RANGED = "Ranged"
@@ -831,13 +831,13 @@ export const WEAPONS = [
         id: 53,
         name: "Punch Dagger",
         type: MELEE,
-        isPunchDagger: true,
         traits: [BLADE, FIST],
         attackDice: [BLUE, YELLOW],
         modSpots: 1,
         tier: 1,
         cost: 400,
         attackBonus: [0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[[TURN_ATTACK_DIE]],[]],
         surgeAbilities: [
             [0, 3, -2, 0, 0, 0]
         ]

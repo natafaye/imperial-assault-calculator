@@ -12,7 +12,7 @@ export default function useStatsData() {
     const [requiredAccuracy, setRequiredAccuracy] = useState(0)
     const [results, setResults] = useState(getEmptyResults())
     const [settings, setSettings] = useState({
-        showAtLeast: false,
+        showAtLeast: true,
         showWithRelativeScale: false
     })
 

@@ -65,7 +65,7 @@ export const MODS = [
             {
                 cost: "Replace a Blue die with a Red die",
                 dice: [RED],
-                negativeAttackDice: [BLUE] // TODO: What's wrong with this one? Don't apply if can't?
+                negativeAttackDice: [BLUE]
             },
         ]
     },

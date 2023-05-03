@@ -1,4 +1,4 @@
 import { TEST_DATA } from "./test-data";
-import { getWeaponAttack, getWeaponWithSurgeAttack } from "./test-utilities";
+import { getWeaponAttackAvgDamage, getWeaponWithSurgeAttack } from "./test-utilities";
 
-export { TEST_DATA, getWeaponAttack, getWeaponWithSurgeAttack }
+export { TEST_DATA, getWeaponAttackAvgDamage, getWeaponWithSurgeAttack }

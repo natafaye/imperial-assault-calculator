@@ -1,13 +1,17 @@
-import { WEAPONS, MODS, RER, SUR, CLASS_CARDS, UNITS } from "../data"
+import { WEAPONS, MODS, RER, SUR, CLASS_CARDS, UNITS, ATTACK, DEFENSE } from "../data"
 import { getAttackData, getAttackObject } from "../utilities"
 
 const addToProperty = (attackData, property, toAdd) => {
     if(property === RER)
-        return { ...attackData, rerolls: attackData.rerolls + toAdd }
+        return { 
+            ...attackData, 
+            rerollAbilities: attackData.rerollAbilities.concat([[ATTACK, toAdd]])
+        }
     return {...attackData, bonus: attackData.bonus.map((val, index) => index === property ? val + toAdd : val )}
 }
 
-export const getWeaponAttack = (name, additionsString, dice, property ) => {
+export const getWeaponAttackAvgDamage = (name, additionsString, dice) => {
+    // Get the unit data from the test string
     const additionsNames = additionsString.split(" and ")
     let unitData = { 
         unit: UNITS.find(u => additionsNames.includes(u.name)),
@@ -15,12 +19,19 @@ export const getWeaponAttack = (name, additionsString, dice, property ) => {
         mods: MODS.filter(m => additionsNames.includes(m.name)),
         classCards: CLASS_CARDS.filter(c => additionsNames.includes(c.name)),
         focused: additionsNames.includes("Focused"),
+        hidden: additionsNames.includes("Hidden"),
         selectedOptionalIds: additionsNames
     }
     let attackData = getAttackData(unitData)
-    if(additionsNames.includes("Surge")) attackData = addToProperty(attackData, SUR, 1)
-    if(additionsNames.includes("Reroll")) attackData = addToProperty(attackData, RER, 1)
-    // TODO: What does hidden mean?
-    //if(additionsNames.includes("Hidden")) attackData = addToProperty(attackData, SUR, 1)
-    return getAttackObject(unitData, attackData).calcaverage(dice)[property]
+
+    // Add surge and/or reroll if included
+    if(additionsNames.includes("Surge"))
+        attackData = addToProperty(attackData, SUR, 1)
+    if(additionsNames.includes("Reroll"))
+        attackData = addToProperty(attackData, RER, 1)
+
+    // Add defense dice
+    attackData.dice = attackData.dice.concat(dice)
+
+    return getAttackObject(attackData).average
 }

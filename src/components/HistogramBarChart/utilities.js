@@ -6,7 +6,7 @@ export const BAR_TEXT_COLORS = ["#FFF", "#222", "#222", "#222", "#222", "#FFF"]
 export const getColor = (colorArray, index) => colorArray[index] || colorArray[colorArray.length - 1]
 
 // Generates aria label for a bar
-export const getAriaLabel = (item, totalNum) => `${item.value} - Exactly: ${item.percentage.toFixed(2)}%, At Least: ${item.atLeastPercentage.toFixed(2)}%, ${item.amount} / ${totalNum}`
+export const getAriaLabel = (item) => `${item.value} - Exactly: ${item.percentage.toFixed(0)}%, At Least: ${item.atLeastPercentage.toFixed(0)}%`
 
 /**
  * Generates an array of numbers to use for the gridYValues or gridXValues property of a Nivo chart
@@ -46,12 +46,11 @@ export const renderDamageTicks = (tick) => (
  *     Exactly: 17.75%
  *     At Least: 32.18%
  */
-export function HistogramTooltip({ item, totalNum }) {
+export function HistogramTooltip({ item }) {
     return (
         <div className="bg-light p-2 rounded text-dark">
-            <strong>{item.amount}</strong> / {totalNum}<br />
-            Exactly: {item.percentage.toFixed(2)}%<br />
-            At Least: {item.atLeastPercentage.toFixed(2)}%
+            Exactly: {item.percentage.toFixed(0)}%<br />
+            At Least: {item.atLeastPercentage.toFixed(0)}%
         </div>
     )
 }

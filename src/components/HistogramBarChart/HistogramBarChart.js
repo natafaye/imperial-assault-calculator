@@ -4,7 +4,7 @@ import { BAR_COLORS, BAR_TEXT_COLORS, HistogramTooltip, getAriaLabel, getColor, 
 /**
  * A histogram bar chart
  */
-export default function HistogramBarChart({ data, totalNum, settings, ariaLabel = "Histogram of attack results" }) {
+export default function HistogramBarChart({ data, settings, ariaLabel = "Histogram of attack results" }) {
     const { showAtLeast = false, showWithRelativeScale = false } = settings
 
     return (
@@ -13,8 +13,8 @@ export default function HistogramBarChart({ data, totalNum, settings, ariaLabel 
             keys={[(showAtLeast) ? "atLeastPercentage" : "percentage"]}
             indexBy="value"
             label={(d) => ((showAtLeast) ? d.data.atLeastPercentage.toFixed(0) : d.data.percentage.toFixed(0)) + "%"}
-            tooltip={(d) => <HistogramTooltip item={d.data} totalNum={totalNum} />}
-            barAriaLabel={(d) => getAriaLabel(d.data, totalNum)}
+            tooltip={(d) => <HistogramTooltip item={d.data} />}
+            barAriaLabel={(d) => getAriaLabel(d.data)}
             ariaLabel={ariaLabel}
             animate={true}
             role="application"
