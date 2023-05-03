@@ -1,5 +1,6 @@
 import { ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, 
-    DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, DEFENSE, AMOUNT } from "../data"
+    DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, 
+    DEFENSE, AMOUNT, ALL_ATTACK } from "../data"
 import { full, deepcopy, union, difference, setInArray, sum, range, 
     argmax, argmin, dot, addArrays } from "./pythonConversionUtilities"
 
@@ -150,6 +151,13 @@ export default class Attack {
                     // Or if it's Rapid Fire's ability, the one possible reroll combo is all the dice
                     } else if (ability[TYPE] === ATTACK_AND_DEFENSE) {
                         sets = [new Set(diceleft)] // TODO: Should this be this.dice instead of diceleft?
+                    // Or if it's Hair Trigger Pistol's ability
+                    } else if (ability[TYPE] === ALL_ATTACK) {
+                        sets = [new Set()]
+                        for (const diceid of diceleft) { // TODO: Should this be this.dice instead of diceleft?
+                            if(this.dicetype(diceid) === ATTACK)
+                                sets[0].add(diceid)
+                        }
                     // Or if it's a normal ability, build a list of all possible combos
                     } else {
                         sets = []

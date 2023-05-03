@@ -1,4 +1,4 @@
-import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE } from "./constants"
+import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE, DEFENSE, ATTACK } from "./constants"
 import { REBEL } from "./units"
 
 // Hero names
@@ -104,13 +104,13 @@ export const CLASS_CARDS = [
         optionalDefense: [
             { 
                 cost: "Exhaust Alliance Efficiency", 
-                rerollAbilities: [[], [[1, 1]]] 
+                rerollAbilities: [[], [[DEFENSE, 1]]] 
             }
         ],
         optionalAttack: [
             { 
                 cost: "Exhaust Alliance Efficiency", 
-                rerollAbilities: [[[0, 1]], []]
+                rerollAbilities: [[[ATTACK, 1]], []]
             }
         ],
         rerollAbilities: [[], []],
@@ -129,13 +129,13 @@ export const CLASS_CARDS = [
         optionalDefense: [
             { 
                 cost: "Exhaust Auxiliary Training, spend power token", 
-                rerollAbilities: [[], [[1, 1]]] 
+                rerollAbilities: [[], [[DEFENSE, 1]]] 
             }
         ],
         optionalAttack: [
             { 
                 cost: "Exhaust Auxiliary Training, spend power token", 
-                rerollAbilities: [[[0, 1]], []]
+                rerollAbilities: [[[ATTACK, 1]], []]
             }
         ],
         rerollAbilities: [[], []],
@@ -190,7 +190,7 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {  
                 cost: "Exhaust Battlefield Experience", 
-                rerollAbilities: [[], [[1, 1]]] 
+                rerollAbilities: [[ATTACK, 1], []] 
             }
         ],
         rerollAbilities: [[], []],
@@ -575,7 +575,7 @@ export const CLASS_CARDS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
         ]
     }, // TODO: add blue die for attribute test
@@ -731,12 +731,12 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {
                 cost: "Attacking with a Melee weapon, exhaust Proximity Strike", 
-                rerollAbilities: [[1, 1]]
+                rerollAbilities: [[], []]
             }
         ],
 		surgeAbilities: [
         ]
-    },
+    }, // TODO: force reroll one defense THEN reroll one attack
     {
         id: 34,
         name: "Rapid Fire",

@@ -23,14 +23,16 @@ export const DEFENSE = 1
 export const ATTACK_OR_DEFENSE = 2
 export const ATTACK_AND_DEFENSE = 3
 export const TURN_ATTACK_DIE = 4
+export const ALL_ATTACK = 5
 
 // Reroll type labels
 export const REROLL_TYPE_LABELS = {
     [ATTACK]: "Attack",
     [DEFENSE]: "Defense",
-    [ATTACK_OR_DEFENSE]: "All attack or all defense",
-    [ATTACK_AND_DEFENSE]: "All attack and all defense",
-    [TURN_ATTACK_DIE]: "Turn 1 attack die with 1 attack symbol"
+    [ATTACK_OR_DEFENSE]: "Reroll all attack or all defense dice",
+    [ATTACK_AND_DEFENSE]: "Reroll all attack and all defense dice",
+    [TURN_ATTACK_DIE]: "Turn 1 attack die with 1 attack symbol",
+    [ALL_ATTACK]: "Reroll all attack dice"
 }
 
 export const PLAYER_TYPE_LABELS = REROLL_TYPE_LABELS

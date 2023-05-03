@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE } from "./constants";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE, ATTACK, DEFENSE_DICE, DEFENSE } from "./constants";
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"
@@ -112,7 +112,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 0, -1, -2, 0, 0]
         ],
@@ -179,7 +179,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], [[1, 1]]],
+        rerollAbilities: [[], [[DEFENSE, 1]]],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]
@@ -612,7 +612,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0]
@@ -658,7 +658,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0]
@@ -771,7 +771,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -795,7 +795,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -2, 0, 0],
@@ -1113,7 +1113,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
 
         ]
@@ -1205,7 +1205,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 0, -1, -1, 0, 0]
@@ -1228,7 +1228,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [0, 1, -1, 0, 0, 0],
@@ -1956,7 +1956,7 @@ export const UNITS = [
         optionalAttack: [
             {
                 cost: "Target 5 or more spaces away", 
-                rerollAbilities: [[[0, 1]], []]
+                rerollAbilities: [[[ATTACK, 1]], []]
             }
         ]
     },
@@ -1986,8 +1986,8 @@ export const UNITS = [
         optionalAttack: [
             {
                 cost: "Target 5 or more spaces away", 
-                rerollAbilities: [[[0, 2]], []]
-            } // TODO: Confirm that Attack.js considers this up to 2
+                rerollAbilities: [[[ATTACK, 2]], []]
+            }
         ],
     }, 
     {
@@ -2068,7 +2068,7 @@ export const UNITS = [
     {
         id: 88,
         name: "C-3PO",
-        title: "Human Cyborg Relations=",
+        title: "Human Cyborg Relations",
         affiliation: REBEL,
         deploymentCost: 2,
         reinforceCost: null,
@@ -2089,7 +2089,7 @@ export const UNITS = [
         optionalDefense: [
             { 
                 cost: "Adjacent to friendly figure", 
-                rerollAbilities: [[], [[1, 1]]]
+                rerollAbilities: [[], [[DEFENSE, 1]]]
             }
         ],
     }, 
@@ -2201,7 +2201,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], [[1, 1]]],
+        rerollAbilities: [[], [[DEFENSE, 1]]],
 		surgeAbilities: [
             [0, 0, -1, -3, 0, 0]
         ]
@@ -2496,7 +2496,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], []],
+        rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [1, 0, -1, 0, 0, 0]
@@ -2519,7 +2519,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[0, 1]], [[1, 1]]],
+        rerollAbilities: [[[ATTACK, 1]], [[DEFENSE, 1]]],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]

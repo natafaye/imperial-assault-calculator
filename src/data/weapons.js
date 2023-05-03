@@ -1,4 +1,4 @@
-import { BLUE, GREEN, RED, TURN_ATTACK_DIE, YELLOW } from "./constants";
+import { ALL_ATTACK, ATTACK, BLUE, GREEN, RED, TURN_ATTACK_DIE, YELLOW } from "./constants";
 
 // WEAPON TYPES
 export const RANGED = "Ranged"
@@ -303,7 +303,7 @@ export const WEAPONS = [
         surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
-    }, // TODO: Use 2 strain to get 2 damage tokens?
+    },
     {
         id: 18,
         name: "EE-3 Carbine",
@@ -330,11 +330,12 @@ export const WEAPONS = [
         tier: 0,
         cost: 0,
         attackBonus: [0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[[ALL_ATTACK]], []],
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
         ]
-    }, // TODO: While attacking you can reroll all attack dice
+    },
     {
         id: 20,
         name: "Hand Cannon",
@@ -467,10 +468,11 @@ export const WEAPONS = [
         tier: 3,
         cost: 1000,
         attackBonus: [0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[[ATTACK, 1]], []],
         surgeAbilities: [
             [2, 1, -1, 0, 0, 0]
         ]
-    }, // TODO: Pick ability dice for wrench, also 1 reroll
+    }, // TODO: Pick ability dice for wrench
     {
         id: 29,
         name: "Off-Hand Blaster",
@@ -881,10 +883,17 @@ export const WEAPONS = [
         surgeAbilities: [
             [0, 0, -1, -3, 0, 0],
             [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 2, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Hidden",
+                surgeAbilities: [
+                    [0, 2, -1, 0, 0, 0]
+                ]
+            }
         ]
-    }, // TODO: +2 damage surge ability only available while hidden
+    },
     {
         id: 57,
         name: "Shu Yen's Lightsaber",
