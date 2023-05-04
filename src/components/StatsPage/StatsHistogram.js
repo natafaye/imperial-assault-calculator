@@ -1,5 +1,5 @@
 import { Col, Row, Stack } from 'react-bootstrap';
-import ButtonToggle from "../ButtonToggle";
+import { ButtonBooleanToggle } from "../ButtonToggle";
 import HistogramBarChart from "../HistogramBarChart";
 import { DAM, PROPERTY_LABELS } from '../../data';
 
@@ -32,7 +32,7 @@ export default function StatsHistogram({ results: { histogram, average, totalNum
                 </Col>
                 <Col>
                     <Stack direction="horizontal" gap={2}>
-                        <ButtonToggle
+                        <ButtonBooleanToggle
                             id="at-least"
                             variant="outline-secondary"
                             value={settings.showAtLeast}
@@ -40,7 +40,7 @@ export default function StatsHistogram({ results: { histogram, average, totalNum
                             trueLabel="At Least"
                             falseLabel="Exactly"
                         />
-                        <ButtonToggle
+                        <ButtonBooleanToggle
                             id="relative-scale"
                             variant="outline-secondary"
                             value={settings.showWithRelativeScale}

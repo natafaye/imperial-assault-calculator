@@ -7,7 +7,7 @@ import { addAbility, deleteAbility, updateAbility } from '../useCustomData'
 
 export default function AbilitiesInput({ 
   values, dispatch, type, addLabel, renderFormLayoutGroups, 
-  displayComponent, defaultValue, className = '' 
+  displayComponent, defaultValue, idPrefix = '', className = '' 
 }) {
   const [showAddForm, setShowAddForm] = useState(false)
   const [editIndex, setEditIndex] = useState(null)
@@ -42,7 +42,7 @@ export default function AbilitiesInput({
         (index === editIndex) ? (
           <AbilityForm
             key={index}
-            idPrefix="edit"
+            idPrefix={"edit-" + idPrefix}
             value={ability}
             renderFormLayoutGroups={renderFormLayoutGroups}
             onSave={onUpdateAbility(index)}
@@ -62,7 +62,7 @@ export default function AbilitiesInput({
       ))}
       {showAddForm ? (
         <AbilityForm
-          idPrefix="create"
+          idPrefix={"create-" + idPrefix}
           renderFormLayoutGroups={renderFormLayoutGroups}
           defaultValue={defaultValue}
           onSave={onAddAbility}

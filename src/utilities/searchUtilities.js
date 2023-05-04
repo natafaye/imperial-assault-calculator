@@ -4,7 +4,7 @@
  * @param {string?} string The string to be prepared for search
  * @returns {string} The prepared string
  */
-const prepareString = (string) => string?.toLowerCase().replaceAll(/[\s-&+!"'.,+$\(\)]/g, "") || ""
+const prepareString = (string) => string?.toLowerCase().replaceAll(/[\s-&+!"'.,+$()]/g, "") || ""
 
 /**
  * Search a string, case insensitively

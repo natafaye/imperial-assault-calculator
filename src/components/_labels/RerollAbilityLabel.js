@@ -8,7 +8,7 @@ export default function RerollAbilityLabel({ ability, prefix = "" }) {
         <span>
             {prefix}
             {(type !== TURN_ATTACK_DIE) ? (prefix ? "reroll " : "Reroll ") : ""}
-            {(type === ATTACK || type === DEFENSE) ?  amount + " " : ""}
+            {(type === ATTACK || type === DEFENSE) ?  "up to " + amount + " " : ""}
             {REROLL_TYPE_LABELS[type]}
             {(type !== TURN_ATTACK_DIE) ? " " + pluralize("die", amount) : ""}
         </span>

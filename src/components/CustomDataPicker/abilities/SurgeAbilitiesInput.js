@@ -18,10 +18,10 @@ const renderSurgeFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
     <>
       <ButtonToggle
         id={idPrefix + "-surge-cost"}
-        value={formData[SUR] === -2}
-        onChange={(isDouble) => onUpdate(SUR, (isDouble ? -2 : -1))}
-        trueLabel={<SurgeCostIcon num={2} />}
-        falseLabel={<SurgeCostIcon num={1} />}
+        value={formData[SUR]}
+        onChange={(newCost) => onUpdate(SUR, newCost)}
+        options={[-1, -2]}
+        labels={[<SurgeCostIcon num={1} />, <SurgeCostIcon num={2} />]}
         className="me-2"
         variant="outline-danger"
         size="sm"

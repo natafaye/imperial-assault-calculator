@@ -330,7 +330,7 @@ export const WEAPONS = [
         tier: 0,
         cost: 0,
         attackBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[ALL_ATTACK]], []],
+        rerollAbilities: [[[ALL_ATTACK, undefined]], []],
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0],
             [2, 0, -1, 0, 0, 0]
@@ -839,7 +839,7 @@ export const WEAPONS = [
         tier: 1,
         cost: 400,
         attackBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[TURN_ATTACK_DIE]],[]],
+        rerollAbilities: [[[TURN_ATTACK_DIE, undefined]],[]],
         surgeAbilities: [
             [0, 3, -2, 0, 0, 0]
         ]

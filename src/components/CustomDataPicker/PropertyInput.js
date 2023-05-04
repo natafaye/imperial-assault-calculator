@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 import PropertyIcon from '../_icons/PropertyIcon'
 import { PROPERTY_LABELS } from '../../data'
 
-export default function PropertyInput({ property, value, onChange, idPrefix, min = -15, max = 15 }) {
+export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false, min = -15, max = 15 }) {
     return (
         <span 
             style={{ flexBasis: "70px", maxWidth: "120px" }} 
@@ -19,7 +19,9 @@ export default function PropertyInput({ property, value, onChange, idPrefix, min
                 size="sm" 
                 id={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} 
                 name={property} 
+                disabled={disabled}
                 value={value ? value : ""}
+                className={disabled ? "bg-secondary" : ""}
                 onChange={onChange} />
         </span>
     )

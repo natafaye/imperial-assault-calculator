@@ -1,4 +1,4 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE, ATTACK, DEFENSE_DICE, DEFENSE } from "./constants";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE, ATTACK, DEFENSE } from "./constants";
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"
@@ -1924,7 +1924,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[ATTACK_OR_DEFENSE]], []],
+        rerollAbilities: [[[ATTACK_OR_DEFENSE, undefined]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0],
             [0, 0, -1, -3, 0, 0]

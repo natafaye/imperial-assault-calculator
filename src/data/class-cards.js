@@ -753,7 +753,7 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {
                 cost: "Attacking with a Ranged weapon",
-                rerollAbilities: [[[ATTACK_AND_DEFENSE]], []]
+                rerollAbilities: [[[ATTACK_AND_DEFENSE, undefined]], []]
             }
         ]
     },

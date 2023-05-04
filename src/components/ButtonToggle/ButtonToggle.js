@@ -1,31 +1,28 @@
 import React from 'react'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
-export default function ButtonToggle({ 
-    id, value, onChange, trueLabel, falseLabel, size = "", variant = "outline-primary", className = "" 
+export default function ButtonToggle({
+    id, value, onChange, labels, options, tooltips = [], size = "", variant = "outline-primary", className = ""
 }) {
     return (
         <ButtonGroup className={className}>
-            <ToggleButton
-                id={"switch-false-" + id}
-                type="radio"
-                variant={variant}
-                size={size}
-                checked={!value}
-                onChange={() => onChange(false)}
-            >
-                {falseLabel}
-            </ToggleButton>
-            <ToggleButton
-                id={"switch-true-" + id}
-                type="radio"
-                variant={variant}
-                size={size}
-                checked={value}
-                onChange={() => onChange(true)}
-            >
-                {trueLabel}
-            </ToggleButton>
+            {options.map((option, index) => (
+                <ToggleButton
+                    id={"switch-" + option + "-" + id}
+                    type="radio"
+                    variant={variant}
+                    size={size}
+                    key={option}
+                    checked={value === option}
+                    title={tooltips[index]}
+                    onChange={() => {
+                        console.log({ value, option })
+                        onChange(option)
+                    }}
+                >
+                    {labels[index]}
+                </ToggleButton>
+            ))}
         </ButtonGroup>
     )
 }

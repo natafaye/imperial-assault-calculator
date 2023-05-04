@@ -8,8 +8,8 @@ const PLAYER_TYPE_ICONS = {
     [DEFENSE]: faShield
 }
 
-export default function PlayerTypeIcon({ type, className = "" }) {
+export default function PlayerTypeIcon({ type, className = "", showTitle = true }) {
   return (
-    <FontAwesomeIcon icon={PLAYER_TYPE_ICONS[type]} title={PLAYER_TYPE_LABELS[type]} className={className}/>
+    <FontAwesomeIcon icon={PLAYER_TYPE_ICONS[type]} title={showTitle ? PLAYER_TYPE_LABELS[type] : undefined} className={className}/>
   )
 }

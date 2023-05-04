@@ -31,7 +31,7 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
                 bonus={bonus} 
                 dispatch={dispatch} 
             />
-            <RerollAbilitiesInput values={rerollAbilities} dispatch={dispatch} defaultValue={[ isAttack ? ATTACK : DEFENSE, 1]} />
+            <RerollAbilitiesInput values={rerollAbilities} dispatch={dispatch} defaultValue={[ isAttack ? ATTACK : DEFENSE, 1]} idPrefix={idPrefix} />
             { isAttack && 
                 <SurgeAbilitiesInput values={surgeAbilities} dispatch={dispatch} className="mt-3" /> 
             }

@@ -15,8 +15,8 @@ const filterOption = (candidate, input) => input.split(" ").every(term =>
     || search(candidate.data.modType, term)
     || search(candidate.data.description, term)
     || searchArray(candidate.data.attackDice, term)
-    || (search(term, "tier") && candidate.data.tier === getNumAtEnd(term)
-    || (search(term, "reroll") && candidate.data.rerollAbilities.some(a => a.length)))
+    || (search(term, "tier") && candidate.data.tier === getNumAtEnd(term))
+    || (search(term, "reroll") && candidate.data.rerollAbilities?.some(a => a.length))
 )
 
 const noMatchesMessage = <>
