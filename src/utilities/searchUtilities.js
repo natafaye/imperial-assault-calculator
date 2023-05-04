@@ -1,10 +1,18 @@
+
+/**
+ * Prepares a string for search by removing spaces and punctuation and converting to all lowercase
+ * @param {string?} string The string to be prepared for search
+ * @returns {string} The prepared string
+ */
+const prepareString = (string) => string?.toLowerCase().replaceAll(/[\s-&+!"'.,+$\(\)]/g, "") || ""
+
 /**
  * Search a string, case insensitively
- * @param {string} toSearch The string to search
- * @param {string} term The search term to check for 
+ * @param {string?} toSearch The string to search
+ * @param {string?} term The search term to check for 
  * @returns {boolean} true if it was found, false if it was not
  */
-export const search = (toSearch, term) => toSearch?.toLowerCase().includes(term.toLowerCase())
+export const search = (toSearch, term) => prepareString(toSearch).includes(prepareString(term))
 
 /**
  * Search an array of strings, case insensitively

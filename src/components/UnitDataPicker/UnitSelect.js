@@ -20,7 +20,7 @@ const filterOption = (candidate, input) => input.split(" ").every(term =>
     || (search(term, "hero") && candidate.data.isHero)
     || (search(term, "elite") && candidate.data.elite)
     || ((search(term, "normal") || search(term, "regular")) && !candidate.data.elite)
-    || (search(term, "reroll") && (candidate.data.attackRerolls || candidate.data.defenseRerolls))
+    || (search(term, "reroll") && candidate.data.rerollAbilities.some(a => a.length))
 )
 
 const noMatchesMessage = <>
