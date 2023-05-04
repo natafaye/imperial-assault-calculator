@@ -37,8 +37,8 @@ export const TEST_DATA = {
             [WHITE]: [undefined, 6.54]
         },
         "Loku Kanoloa (Hero) and Disruption Cell and mods-301-2 and Reroll and Surge": {
-            [BLACK]: [undefined, 4.89],
-            [WHITE]: [undefined, 4.65]
+            [BLACK]: [undefined, 5.10],
+            [WHITE]: [undefined, 4.19]
         }
     },
     "All-Weather Rifle": {
@@ -91,8 +91,8 @@ export const TEST_DATA = {
     },
     "Close and Personal": {
         "Crushing Blow and classCards-15-0 and Vibrobayonet and mods-17-0 and Reroll and Surge": {
-            [BLACK]: [undefined, 5.56],
-            [WHITE]: [undefined, 5.76]
+            [BLACK]: [undefined, 5.72],
+            [WHITE]: [undefined, 5.13]
         }
     },
     "DC-15S Blaster": {
@@ -113,8 +113,8 @@ export const TEST_DATA = {
     },
     '434 "Deathhammer"': {
         "Reroll and Surge": {
-            [BLACK]: [undefined, 4.05],
-            [WHITE]: [undefined, 4.55]
+            [BLACK]: [undefined, 4.20],
+            [WHITE]: [undefined, 4.05]
         }
     },
     "DH-17": {
@@ -233,8 +233,8 @@ export const TEST_DATA = {
     },
     "Repeating Blaster": {
         "Reroll and Surge": {
-            [BLACK]: [undefined, 2.19],
-            [WHITE]: [undefined, 2.95]
+            [BLACK]: [undefined, 2.30],
+            [WHITE]: [undefined, 2.66]
         }
     },
     "Shu Yen's Lightsaber": {
