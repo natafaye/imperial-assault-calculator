@@ -16,7 +16,7 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
             label="Custom"
             collapsedData={
                 <SummarizedDataLabel
-                    data={{ dice, bonus, rerollAbilities, surgeAbilities }}
+                    data={{ dice, bonus, rerollAbilities: (isAttack) ? [rerollAbilities, []] : [[], rerollAbilities], surgeAbilities }}
                     expandSurges={false}
                     labelAttack={false}
                     isAttack={isAttack}

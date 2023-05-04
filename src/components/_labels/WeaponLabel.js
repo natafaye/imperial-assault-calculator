@@ -7,6 +7,7 @@ import ModSpotsLabel from './ModSpotsLabel'
 import TierAndCostLabel from './TierAndCostLabel'
 import TraitsListLabels from './TraitsListLabels'
 import AttackTypeIcon from '../_icons/AttackTypeIcon'
+import RerollListLabels from './RerollListLabels'
 
 export default function WeaponLabel({ weapon, placement = "top" }) {
     if(!weapon) return null;
@@ -26,6 +27,7 @@ export default function WeaponLabel({ weapon, placement = "top" }) {
                     <hr />
                     <BonusListLabels bonus={weapon.attackBonus} isAttack />
                     <SurgeListLabels abilities={weapon.surgeAbilities} />
+                    <RerollListLabels abilities={weapon.rerollAbilities} />
                     {weapon.description && <div className="my-1"><em>{weapon.description}</em></div>}
                     <div className="d-flex mt-1">
                         <TierAndCostLabel className="flex-grow-1" tier={weapon.tier} cost={weapon.cost} />

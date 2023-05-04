@@ -3,21 +3,8 @@ import AbilitiesInput from './AbilitiesInput'
 import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'
 import PlayerTypeIcon from '../../_icons/PlayerTypeIcon'
-import { pluralize } from '../../../utilities'
-import { ATTACK, DEFENSE, AMOUNT, RER, REROLL_TYPE_LABELS, TYPE } from '../../../data'
-
-function RerollAbilityLabel({ ability }) {
-  const type = ability[TYPE]
-  const amount = ability[AMOUNT]
-  return (
-    <span>
-      { (type === ATTACK || type === DEFENSE) ? "Reroll " + amount + " "  : "" }
-      {REROLL_TYPE_LABELS[ability[type]]}
-      {" "}
-      {pluralize("die", amount)}
-    </span>
-  )
-}
+import { ATTACK, DEFENSE, AMOUNT, RER, TYPE } from '../../../data'
+import { RerollAbilityLabel } from '../../_labels'
 
 const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => [
   <>

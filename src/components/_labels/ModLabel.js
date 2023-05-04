@@ -4,6 +4,7 @@ import SurgeListLabels from './SurgeListLabels'
 import DiceListLabels from './DiceListLabels'
 import BonusListLabels from './BonusListLabels'
 import TierAndCostLabel from './TierAndCostLabel'
+import RerollListLabels from './RerollListLabels'
 
 export default function ModLabel({ mod, placement = "top" }) {
     if(!mod) return null;
@@ -26,6 +27,7 @@ export default function ModLabel({ mod, placement = "top" }) {
                     <hr />
                     <BonusListLabels bonus={mod.attackBonus} isAttack />
                     <SurgeListLabels abilities={mod.surgeAbilities} />
+                    <RerollListLabels abilities={mod.rerollAbilities} />
                     <div className="my-1"><em>{mod.description}</em></div>
                     <div className="d-flex mt-1">
                         <TierAndCostLabel className="flex-grow-1" tier={mod.tier} cost={mod.cost} />

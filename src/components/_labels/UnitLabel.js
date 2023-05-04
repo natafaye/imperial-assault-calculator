@@ -6,6 +6,7 @@ import BonusListLabels from './BonusListLabels'
 import TraitsListLabels from './TraitsListLabels'
 import AffiliationLabel from '../_icons/AffiliationIcon'
 import AttackTypeLabel from '../_icons/AttackTypeIcon'
+import RerollListLabels from './RerollListLabels'
 
 export default function UnitLabel({ unit, placement = "top" }) {
     if(!unit) return null;
@@ -33,8 +34,7 @@ export default function UnitLabel({ unit, placement = "top" }) {
                     <BonusListLabels bonus={unit.attackBonus} isAttack />
                     <BonusListLabels bonus={unit.defenseBonus} />
                     <SurgeListLabels abilities={unit.surgeAbilities} />
-                    {unit.attackRerolls !== 0 && <div>Attack Rerolls: {unit.attackRerolls}</div>}
-                    {unit.defenseRerolls !== 0 && <div>Defense Rerolls: {unit.defenseRerolls}</div>}
+                    <RerollListLabels abilities={unit.rerollAbilities} />
                     <div className="d-flex mt-1 text-center align-items-stretch">
                         <div className="flex-fill">
                             <div className="bg-secondary rounded-top p-1 fs-8">

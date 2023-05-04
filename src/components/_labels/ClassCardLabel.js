@@ -7,6 +7,7 @@ import DiceListLabels from './DiceListLabels'
 import BonusListLabels from './BonusListLabels'
 import AffiliationLabel from '../_icons/AffiliationIcon'
 import OptionalAbilityLabel from './OptionalAbilityLabel'
+import RerollListLabels from './RerollListLabels'
 
 export default function ClassCardLabel({ card, placement = "top" }) {
     if(!card) return null;
@@ -62,6 +63,7 @@ export default function ClassCardLabel({ card, placement = "top" }) {
                         </React.Fragment>
                     )}
                     <SurgeListLabels abilities={card.surgeAbilities} />
+                    <RerollListLabels abilities={card.rerollAbilities} />
                     <div className="mt-1">
                         {card.cost !== 0 && <>{card.cost} <span className="fs-8">XP</span></>}
                         {card.cost === 0 && <span className="fs-8">REWARD</span>}
