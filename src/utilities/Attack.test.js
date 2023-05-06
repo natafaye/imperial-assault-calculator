@@ -12,4 +12,15 @@ describe("Attack", () => {
             })
         });
     })
+
+    it("works in a reasonable amount of time with 5 dice", () => {
+        expect(getWeaponAttackAvgDamage("Force Pike", "Dancing Weapon and classCards-16-0 and Reroll", [BLACK])).toBeCloseTo(6.06)
+        expect(getWeaponAttackAvgDamage("Force Pike", "Dancing Weapon and classCards-16-0 and Reroll", [BLACK])).toBeCloseTo(6.06)
+        expect(getWeaponAttackAvgDamage("Force Pike", "Dancing Weapon and classCards-16-0 and Reroll", [BLACK])).toBeCloseTo(6.06)
+        expect(getWeaponAttackAvgDamage("Force Pike", "Dancing Weapon and classCards-16-0 and Reroll", [BLACK])).toBeCloseTo(6.06)
+    })
+    
+    it.skip("works after a minute or two with 6 dice", () => {
+        expect(getWeaponAttackAvgDamage("Force Pike", "Dancing Weapon and classCards-16-0 and Focused and Reroll", [BLACK])).toBeCloseTo(7.79)
+    })
 })

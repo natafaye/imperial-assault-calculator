@@ -19,6 +19,7 @@
     "bootstrap": "^5.2.3",
     "bootswatch": "^5.2.2",
     "gh-pages": "^4.0.0",
+    "moize": "^6.1.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",

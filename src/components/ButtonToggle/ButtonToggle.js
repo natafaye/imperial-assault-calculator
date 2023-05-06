@@ -15,10 +15,7 @@ export default function ButtonToggle({
                     key={option}
                     checked={value === option}
                     title={tooltips[index]}
-                    onChange={() => {
-                        console.log({ value, option })
-                        onChange(option)
-                    }}
+                    onChange={() =>  onChange(option)}
                 >
                     {labels[index]}
                 </ToggleButton>

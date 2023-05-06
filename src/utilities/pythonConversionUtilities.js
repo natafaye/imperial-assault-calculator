@@ -25,14 +25,12 @@
  * array[::-1]                                  ->      array.slice().reverse()
  * not array                                    ->      !array.length
  * array1 += array2                             ->      array1 = addArrays(array1, array2) NOT array1.push(...array2)
- * array.sum()                                  ->      sum(array)
  * array.pop(index)                             ->      array.splice(index, 1)
  * max(array)                                   ->      Math.max(...array)
  * 
  * np.argmax(array)                             ->      argmax(array)
  * np.argmin(array)                             ->      argmin(array)
  * np.full(size, value, type)                   ->      full(size, value)
- * np.dot(array1, array2)                       ->      dot(array1, array2)
  * for rollid, p in enumerate(probabilities):   ->      probabilities.forEach((p, rollid) => {
  * for item in array:                           ->      for(const item of array) {
  * 
@@ -47,15 +45,11 @@
  */
 
 export function full(size, value) {
-    let array = new Array(size)
-    for (let i = 0; i < size; ++i) {
+    let array = Array(size)
+    for (let i = 0; i < size; i++) {
         array[i] = value
     }
     return array
-}
-
-export function deepcopy(array) {
-    return JSON.parse(JSON.stringify(array))
 }
 
 export function union(a, b) {
@@ -79,10 +73,6 @@ export function setInArray(array, set) {
     return array.some(item => isEqualSet(item, set))
 }
 
-export function sum(array) {
-    return array.reduce((total, item) => total + item, 0)
-}
-
 export function range(size, start = 0) {
     let array = new Array(size)
     for (let i = 0; i < size; ++i) {
@@ -99,14 +89,14 @@ export function argmin(array) {
     return array.indexOf(Math.min(...array))
 }
 
-export function dot(a, b) {
-    return a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n, 0);
-}
-
 export function addArrays(a, b) {
     if(!a) return b
     if(!b) return a
-    return a.map((numA, index) => numA + (b[index] || 0))
+    const sum = new Array(a.length)
+    for(let i = 0; i < a.length; i++) {
+        sum[i] = a[i] + b[i]
+    }
+    return sum
 }
 
 /**

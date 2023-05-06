@@ -9,7 +9,7 @@ function SummarizedDataLabel({
     data: { dice, bonus, rerollAbilities, surgeAbilities, negativeAttackDice }, 
     isAttack = false, expandSurges = true, labelAttack = false 
 }) {
-    const hasRerollAbilities = rerollAbilities.some(l => l.length)
+    const hasRerollAbilities = rerollAbilities?.some(l => l.length)
     return (
         <span className="d-inline-flex align-items-center flex-wrap">
 

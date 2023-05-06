@@ -62,7 +62,7 @@ class Attack:
         diceleft = set(range(len(self.dice)))
         self.probabilities = self.genrerolls(self.probabilities, self.rerollabilities, diceleft)
 
-    def genrerolls(self, probabilities, abilities, diceleft):
+    def genrerolls(self, probabilities, abilities, diceleft, finishingcoupledability = False):
         # assumes players know which set of dice is best to reroll for each ability and which order to use abilities
         # use reroll abilities for attacker and then defender
         if abilities[0]:  # attacker uses an ability
@@ -73,35 +73,49 @@ class Attack:
             return probabilities
         if not diceleft:  # no dice left
             return probabilities
+
+        setslistsforabilities = []
+        for abilityid, ability in enumerate(abilitiestocheck):
+            abilitydicetype = ability[0]
+            if ability[0] == 2:  # Ahsoka's ability instead of attack or defense dice specification
+                sets = [set(), set()]  # all attack dice or all defense dice
+                for diceid in diceleft:
+                    sets[self.dicetype(diceid)].add(diceid)
+            else:
+                sets = []
+                startingcoupledability = False
+                if(ability[0] == 7) # if it's the proximity strike ability
+                    sets = [set()] # don't have to do the defense reroll to get the attack one
+                    startingcoupledability = True # add attack to options of next ability check
+                    abilitydicetype = 1 # we're rerolling defense
+                branches = [set()]
+                while branches:
+                    branch = branches.pop()
+                    for diceid in diceleft:
+                        if self.dicetype(diceid) == abilitydicetype and diceid not in branch:
+                            newbranch = branch.union({diceid})
+                            if newbranch not in sets:
+                                sets.append(newbranch)
+                                if len(newbranch) < ability[1]:
+                                    branches.append(newbranch)
+            setslistsforabilities.append(sets)
+
         newprobabilities = np.full(6 ** len(self.dice), 0, np.uint)
         for rollid, p in enumerate(probabilities):
             if p:
                 probabilitieslist = []
                 hitslist = []
+                abilitiestocheck = abilities[playerid]
+                if(finishingcoupledability) # finishing proximity strike
+                    abilitiestocheck = abilitiestocheck + [[0, 1]]
                 # use an ability
-                for abilityid, ability in enumerate(abilities[playerid]):
-                    if ability[0] == 2:  # Ahsoka's ability instead of attack or defense dice specification
-                        sets = [set(), set()]  # all attack dice or all defense dice
-                        for diceid in diceleft:
-                            sets[self.dicetype(diceid)].add(diceid)
-                    else:
-                        sets = []
-                        branches = [set()]
-                        while branches:
-                            branch = branches.pop()
-                            for diceid in diceleft:
-                                if self.dicetype(diceid) == ability[0] and diceid not in branch:
-                                    newbranch = branch.union({diceid})
-                                    if newbranch not in sets:
-                                        sets.append(newbranch)
-                                        if len(newbranch) < ability[1]:
-                                            branches.append(newbranch)
+                for abilityid, sets in enumerate(setslistsforabilities):
                     for s in sets:
                         probabilities2 = self.reroll(rollid, s, p)
                         abilities2 = deepcopy(abilities)
                         abilities2[playerid].pop(abilityid)
                         diceleft2 = diceleft.copy() - s
-                        probabilities2 = self.genrerolls(probabilities2, abilities2, diceleft2)
+                        probabilities2 = self.genrerolls(probabilities2, abilities2, diceleft2, startingcoupledability)
                         probabilitieslist.append(probabilities2)
                         hitslist.append(self.calcaverage(probabilities2))
                 # or skip rest of this player's abilities

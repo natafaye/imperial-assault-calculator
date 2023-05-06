@@ -1,8 +1,9 @@
-import { ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, 
-    DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, 
-    DEFENSE, AMOUNT, ALL_ATTACK } from "../data"
-import { full, deepcopy, union, difference, setInArray, sum, range, 
-    argmax, argmin, dot, addArrays } from "./pythonConversionUtilities"
+import {
+    ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE,
+    DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE,
+    DEFENSE, AMOUNT, ALL_ATTACK
+} from "../data"
+import { full, union, difference, setInArray, range, argmax, argmin, addArrays } from "./pythonConversionUtilities"
 
 /**
  * Converts an array of side indexes into one number that would index into an array of all possible roll combos
@@ -11,9 +12,10 @@ import { full, deepcopy, union, difference, setInArray, sum, range,
  */
 function byte2id(byte) {
     let id = 0
-    byte.slice().reverse().forEach((bit, bitid) => {
-        id += bit * Math.pow(6, bitid)
-    })
+    const length = byte.length
+    for (let i = 0; i < length; i++) {
+        id += byte[length - 1 - i] * Math.pow(6, i)
+    }
     return id
 }
 
@@ -27,8 +29,11 @@ const defensefloor = (result) => {
     result[dod] = Math.max(0, result[dod])
 }
 
+/**
+ * Converted by Natalie Childs from python code by Jack Fuller
+ */
 export default class Attack {
-    
+
     /**
      * Takes in all attack and defense information and calculates three pieces of information:
      *   this.average = the average damage for this attack
@@ -41,14 +46,14 @@ export default class Attack {
      * @param {number?} distance The distance to the target, or the minimum required accuracy below which damage is zero
      * @param {[number[2][], number[2][]]} rerollabilities All the attacker's attack abilities and the defender's defend abilities
      */
-    constructor(dice=[], surge=[], bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []]) {
+    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []]) {
         this.dice = dice
-        this.surgeabilities = [...surge]
+        this.surgeabilities = surge
         this.bonus = bonus
         this.distance = distance
-        this.rerollabilities = rerollabilities
         // attacker's reroll abilities are first list, defender's are second list
         // each reroll ability is [type of dice, max number of dice]
+        this.rerollabilities = rerollabilities
         this.genrolls()
         this.average = this.calcaverage(this.probabilities)
     }
@@ -58,10 +63,11 @@ export default class Attack {
      * @param {number} id The index into the probabilities array
      * @returns {number[]} An array of side indexes that tell which dice side is up for each dice in this.dice
      */
-    id2byte(id) {
+    id2byte = function id2byte(id) {
         const byte = []
-        for (const index of id.toString(6))
-            byte.push(parseInt(index))
+        const stringId = id.toString(6)
+        for (let i = 0; i < stringId.length; i++)
+            byte.push(parseInt(stringId[i]))
         while (byte.length < this.dice.length)
             byte.unshift(0)
         return byte
@@ -77,15 +83,16 @@ export default class Attack {
         // Calculate the damage for every possible roll
         this.rolls = full(this.dice.length ? Math.pow(6, this.dice.length) : 0, 0)
         for (let rollid = 0; rollid < this.rolls.length; rollid++) {
-            let baseresult = [...this.bonus]
+            let baseresult = this.bonus.slice(0)
             // Get the indexes of the sides that are facing up on each dice
             const rollbyte = this.id2byte(rollid)
             // For each die, get the damage results and save it in the this.rolls array
-            rollbyte.forEach((sideid, diceid) => {
+            for (let diceid = 0; diceid < rollbyte.length; diceid++) {
+                const sideid = rollbyte[diceid]
                 const color = this.dice[diceid]
                 baseresult = addArrays(baseresult, dice[color][sideid])
-            })
-            const finalresult = this.rollresult(baseresult) // TODO: Should these lines be after the for each
+            }
+            const finalresult = this.rollresult(baseresult)
             this.rolls[rollid] = finalresult[hit]
         }
 
@@ -99,7 +106,7 @@ export default class Attack {
 
         // Calculate the likelihood of every possible roll, factoring in reroll abilities
         // min probability is 6 to the power of (-2 * number of dice) because of rerolls
-        this.probabilities = full(Math.pow(6, this.dice.length), Math.pow(6, this.dice.length))  
+        this.probabilities = full(this.rolls.length, this.rolls.length)
         const diceleft = new Set(range(this.dice.length))
         this.probabilities = this.genrerolls(this.probabilities, this.rerollabilities, diceleft)
     }
@@ -127,91 +134,101 @@ export default class Attack {
         // Also if there's no dice left to reroll, close out the recursion
         if (!diceleft.size)
             return probabilities
-        
-        // Fill an array with zeros for all the possible rolls
-        let newprobabilities = full(Math.pow(6, this.dice.length), 0)
 
-        // For every possible roll
-        probabilities.forEach((p, rollid) => {
-            // If there is a chance the player will get to this roll
-            if(p) {
-                const probabilitieslist = []
-                const hitslist = []
+        const listOfDiceSetsByAbility = new Array(abilities[playerid].length)
+        for (let abilityid = 0; abilityid < abilities[playerid].length; abilityid++) {
+            const ability = abilities[playerid][abilityid]
 
-                // Generate the probabilities for if each of this player's abilities was used next
-                abilities[playerid].forEach((ability, abilityid) => {
-
-                    // Make a list of all the possible reroll combos
-                    let sets
-                    // If it's Ahsoka's ability, the possible reroll combos are all the attack or all the defense
-                    if (ability[TYPE] === ATTACK_OR_DEFENSE) {
-                        sets = [new Set(), new Set()]
-                        for (const diceid of diceleft) // TODO: Should this be this.dice instead of diceleft?
-                            sets[this.dicetype(diceid)].add(diceid)
-                    // Or if it's Rapid Fire's ability, the one possible reroll combo is all the dice
-                    } else if (ability[TYPE] === ATTACK_AND_DEFENSE) {
-                        sets = [new Set(diceleft)] // TODO: Should this be this.dice instead of diceleft?
-                    // Or if it's Hair Trigger Pistol's ability
-                    } else if (ability[TYPE] === ALL_ATTACK) {
-                        sets = [new Set()]
-                        for (const diceid of diceleft) { // TODO: Should this be this.dice instead of diceleft?
-                            if(this.dicetype(diceid) === ATTACK)
-                                sets[0].add(diceid)
-                        }
-                    // Or if it's a normal ability, build a list of all possible combos
-                    } else {
-                        sets = []
-                        // Breadth first search to find all possible combos
-                        const branches = [new Set()]
-                        while (branches.length) {
-                            const branch = branches.pop()
-                            // For each dice
-                            for( const diceid of diceleft ) {
-                                // If the dice is the right player's and this combo hasn't already used this dice
-                                if (this.dicetype(diceid) === ability[TYPE] && !branch.has(diceid)) {
-                                    // Make a new combo with this dice on the end of it
-                                    const newbranch = union(branch, diceid)
-                                    // If we haven't already found this combo
-                                    if (!setInArray(sets, newbranch)) {
-                                        // Add this combo
-                                        sets.push(newbranch)
-                                        // If this ability isn't all used up, add it to the branches to go deeper on
-                                        // We already pushed the current combo to the list, so we're assuming
-                                        // this ability allows you to use less than the number specified
-                                        // TODO: Confirm this on all abilities
-                                        if (newbranch.size < ability[AMOUNT]) {
-                                            branches.push(newbranch)
-                                        }
-                                    }
+            // Make a list of all the possible reroll combos
+            let sets
+            // If it's Ahsoka's ability, the possible reroll combos are all the attack or all the defense
+            if (ability[TYPE] === ATTACK_OR_DEFENSE) {
+                sets = [new Set(), new Set()]
+                for (const diceid of diceleft)
+                    sets[this.dicetype(diceid)].add(diceid)
+                // Or if it's Rapid Fire's ability, the one possible reroll combo is all the dice
+            } else if (ability[TYPE] === ATTACK_AND_DEFENSE) {
+                sets = [new Set(diceleft)]
+                // Or if it's Hair Trigger Pistol's ability
+            } else if (ability[TYPE] === ALL_ATTACK) {
+                sets = [new Set()]
+                for (const diceid of diceleft) {
+                    if (this.dicetype(diceid) === ATTACK)
+                        sets[0].add(diceid)
+                }
+                // Or if it's a normal ability, build a list of all possible combos
+            } else {
+                sets = []
+                // Breadth first search to find all possible combos
+                const branches = [new Set()]
+                while (branches.length) {
+                    const branch = branches.pop()
+                    // For each dice
+                    for (const diceid of diceleft) {
+                        // If the dice is the right player's and this combo hasn't already used this dice
+                        if (this.dicetype(diceid) === ability[TYPE] && !branch.has(diceid)) {
+                            // Make a new combo with this dice on the end of it
+                            const newbranch = union(branch, diceid)
+                            // If we haven't already found this combo
+                            if (!setInArray(sets, newbranch)) {
+                                // Add this combo
+                                sets.push(newbranch)
+                                // If this ability isn't all used up, add it to the branches to go deeper on
+                                // We already pushed the current combo to the list, so we're assuming
+                                // this ability allows you to use less than the number specified
+                                // TODO: Confirm this on all abilities
+                                if (newbranch.size < ability[AMOUNT]) {
+                                    branches.push(newbranch)
                                 }
                             }
                         }
                     }
+                }
+            }
+            listOfDiceSetsByAbility[abilityid] = sets
+        }
 
+        // Fill an array with zeros for all the possible rolls
+        let newprobabilities = full(this.rolls.length, 0)
+
+        // For every possible roll
+        for (let rollid = 0; rollid < probabilities.length; rollid++) {
+            const p = probabilities[rollid]
+            // If there is a chance the player will get to this roll
+            if (p) {
+                const probabilitieslist = []
+                const hitslist = []
+
+                for (let abilityid = 0; abilityid < listOfDiceSetsByAbility.length; abilityid++) {
+                    const sets = listOfDiceSetsByAbility[abilityid]
                     // Loop over all the possible reroll combos for this ability
-                    for (const s of sets) {
+                    for (let setid = 0; setid < sets.length; setid++) {
                         // Reroll the reroll combo and get the new probabilites
-                        let probabilities2 = this.reroll(rollid, s, p)
+                        let probabilities2 = this.reroll(rollid, sets[setid], p)
 
                         // Recursively generate rerolls with the abilities minus the one just used and dice minus the ones just rerolled
-                        const abilities2 = deepcopy(abilities)
-                        abilities2[playerid].splice(abilityid, 1)
-                        const diceleft2 = difference(diceleft, s)
-                        probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2)
+                        if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
+                            const abilities2 = [abilities[0].slice(0), abilities[1].slice(0)]
+                            abilities2[playerid].splice(abilityid, 1)
+                            const diceleft2 = difference(diceleft, sets[setid])
+                            probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2)
+                        }
 
                         // Add the result to the list of probabilities and average hits
                         probabilitieslist.push(probabilities2)
                         hitslist.push(this.calcaverage(probabilities2))
                     }
-                })
+                }
 
                 // And generate the probabilites for if no more abilities for this player were used
                 let probabilities0 = this.reroll(rollid, new Set(), p)
 
-                // Recursively generate rerolls with the dice left and no more abilities for this player
-                const abilities0 = deepcopy(abilities)
-                abilities0[playerid] = []
-                probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
+                // Recursively generate rerolls with the dice left and no more abilities for this player 
+                if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
+                    const abilities0 = abilities.slice(0)
+                    abilities0[playerid] = []
+                    probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
+                }
 
                 // Add the result to the list of probabilities and average hits
                 probabilitieslist.push(probabilities0)
@@ -230,7 +247,7 @@ export default class Attack {
                 // Add the probabilities for the best rerolls choice for this particular original roll to the list of probabilities
                 newprobabilities = addArrays(newprobabilities, probabilitieslist[probabilitiesid])
             }
-        })
+        }
 
         return newprobabilities
     }
@@ -247,7 +264,9 @@ export default class Attack {
         else
             return ATTACK
     }
-    
+
+    allDiceCombos = []
+
     /**
      * Spreads out probability based on dice rerolled
      * @param {number} rollid index of roll in array of probabilities
@@ -261,25 +280,25 @@ export default class Attack {
         // For each dice to be rerolled
         for (const diceid of s) {
             const newrollbytes = []
-            // For every combo so far TODO: Does this need to happen?
-            for (const rollbyte of rollbytes) {
+            // For every combo that has been made by rerolling so far
+            for (let rollbyteid = 0; rollbyteid < rollbytes.length; rollbyteid++) {
                 // For every side on this dice (since rerolling has an equal chance of getting every side)
-                for (const sideid of range(6)) {
+                for (let sideid = 0; sideid < 6; sideid++) {
                     // Make a new roll combo for if this die was rerolled to this side
-                    const newrollbyte = [...rollbyte]
+                    const newrollbyte = rollbytes[rollbyteid].slice(0)
                     newrollbyte[diceid] = sideid
                     newrollbytes.push(newrollbyte)
                 }
             }
-            // Save all the rerolled combos
+            // Update all the rerolled combos
             rollbytes = newrollbytes
         }
 
         // Make a new array of probabilities with the likelihood redistributed based on rerolls and return it
         const p = ptot / Math.pow(6, s.size)
-        const probabilities = full(Math.pow(6, this.dice.length), 0)
-        for (const rollbyte of rollbytes)
-            probabilities[byte2id(rollbyte)] = p
+        const probabilities = full(this.rolls.length, 0)
+        for (let rollbyteid = 0; rollbyteid < rollbytes.length; rollbyteid++)
+            probabilities[byte2id(rollbytes[rollbyteid])] = p
         return probabilities
     }
 
@@ -312,7 +331,7 @@ export default class Attack {
                         // If we haven't already found this combo of surge abilities
                         if (!setInArray(surgesets, newsurgebranch)) {
                             surgesets.push(newsurgebranch)
-                            let newresult = [...baseresult]
+                            let newresult = baseresult.slice(0)
                             // Add the effects of each surge ability
                             for (const sindex of newsurgebranch)
                                 newresult = addArrays(newresult, this.surgeabilities[sindex])
@@ -351,7 +370,7 @@ export default class Attack {
                 result[hit] = 0
             }
         }
-        
+
         // Pick and return the result that has the most damage
         // We assume this is the choice the player would make
         let bestresult = possibleresults[0]
@@ -363,12 +382,18 @@ export default class Attack {
     }
 
     /**
-     * Uses matrix dot operator to multiply each possible roll's damage by the probability of getting that roll to get the average
+     * Uses dot product to multiply each possible roll's damage by the probability of getting that roll to get the average
      * @param {number[]} probabilities The likelihood of getting each possible roll
      * @returns {number} The average damage
      */
     calcaverage(probabilities) {
-        return dot(this.rolls, probabilities) / sum(probabilities)
+        let dotProduct = 0
+        let sumValue = 0
+        for (let i = 0; i < probabilities.length; i++) {
+            dotProduct += this.rolls[i] * probabilities[i]
+            sumValue += probabilities[i]
+        }
+        return dotProduct / sumValue
     }
 
     /**
@@ -376,14 +401,15 @@ export default class Attack {
      * "After any rerolls, you may turn 1 die showing any single attack icon to any other side"
      */
     punchdagger() {
-        const newrolls = [...this.rolls]
+        const newrolls = this.rolls.slice(0)
         // Loop over all the roll damage results
-        for (const rollid of range(this.rolls.length)) {
+        for (let rollid = 0; rollid < this.rolls.length; rollid++) {
             // Get the roll combo
             const rollbyte = this.id2byte(rollid)
             const potentials = []
             // For each die
-            rollbyte.forEach((sideid, diceid) => {
+            for (let diceid = 0; diceid < rollbyte.length; diceid++) {
+                const sideid = rollbyte[diceid]
                 // If it's an attack die
                 if (this.dicetype(diceid) === ATTACK) {
                     const color = this.dice[diceid]
@@ -391,15 +417,15 @@ export default class Attack {
                     // If there's only one attack symbol
                     if (side[hit] + side[sur] === 1) {
                         // Loop over all the sides and add what the damage could be to a list of potentials
-                        for (const newsideid of range(6)) {
-                            const newrollbyte = [...rollbyte]
+                        for (let newsideid = 0; newsideid < 6; newsideid++) {
+                            const newrollbyte = rollbyte.slice(0)
                             newrollbyte[diceid] = newsideid
                             const newhits = this.rolls[byte2id(newrollbyte)]
                             potentials.push(newhits)
                         }
                     }
                 }
-            })
+            }
             // Pick the die turning that will maximize the damage
             if (potentials.length)
                 newrolls[rollid] = Math.max(...potentials)

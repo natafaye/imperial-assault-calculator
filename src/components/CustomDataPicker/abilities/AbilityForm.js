@@ -7,7 +7,6 @@ export default function AbilityForm({ idPrefix, value, defaultValue, onSave, onC
     const [formData, setFormData] = useState(value || defaultValue)
 
     const onUpdate = (property, newValue) => {
-        console.log({ idPrefix, property, newValue, formData })
         setFormData(prevFormData => prevFormData.map((num, i) => (i === property) ? newValue : num))
     }
 
