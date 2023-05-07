@@ -14,10 +14,12 @@ export const getWeaponAttackAvgDamage = (name, additionsString, dice) => {
     // Get the unit data from the test string
     const additionsNames = additionsString.split(" and ")
     let unitData = { 
-        unit: UNITS.find(u => additionsNames.includes(u.name)),
-        weapon: WEAPONS.find(w => w.name === name), 
-        mods: MODS.filter(m => additionsNames.includes(m.name)),
-        classCards: CLASS_CARDS.filter(c => additionsNames.includes(c.name)),
+        cards: [
+            UNITS.find(u => additionsNames.includes(u.name)), 
+            WEAPONS.find(w => w.name === name),  
+            ...MODS.filter(m => additionsNames.includes(m.name)), 
+            ...CLASS_CARDS.filter(c => additionsNames.includes(c.name))
+        ].filter(c => c),
         focused: additionsNames.includes("Focused"),
         hidden: additionsNames.includes("Hidden"),
         selectedOptionalIds: additionsNames

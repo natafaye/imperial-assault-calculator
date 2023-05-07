@@ -2,7 +2,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Button } from "react-bootstrap";
-import { UnitLabel, WeaponLabel, SummarizedDataLabel, SurgeListLabels } from "../../components/_labels"
+import { SummarizedDataLabel, SurgeListLabels, CardLabel } from "../../components/_labels"
 import PropertyIcon from "../../components/_icons/PropertyIcon";
 import DieIcon from "../../components/_icons/DieIcon";
 import { ACC, BLACK, DAM, WHITE } from "../../data";
@@ -29,14 +29,6 @@ const ValueCell = ({ value, property, decimalPoints = 2 }) => (
     </span>
 )
 
-const CostCell = ({ weapon, unit }) => {
-    if(weapon && weapon.cost) 
-        return weapon.cost
-    else if(unit && unit.deploymentCost) 
-        return unit.deploymentCost + (unit.reinforceCost ? " | " + unit.reinforceCost : "")
-    return undefined
-}
-
 const RowActions = ({ id, onDelete }) => (
     <Button variant="outline-danger" size="sm" onClick={() => onDelete(id)}>
         <FontAwesomeIcon icon={faTrash} title="Delete Attack" />
@@ -49,21 +41,15 @@ export const getTableColumns = (onDelete) => [
     columnHelper.accessor('name', {
         header: "Name"
     }),
-    columnHelper.accessor(row => row.unitData.unit?.name, {
-        header: "Unit",
-        cell: info => <UnitLabel unit={info.row.original.unitData.unit} placement="right"/>
-    }),
-    columnHelper.accessor(row => row.unitData.weapon?.name, {
-        header: "Weapon",
-        cell: info => <WeaponLabel weapon={info.row.original.unitData.weapon} placement="right"/>
-    }),
-    columnHelper.accessor(row => row.unitData.unit?.deploymentCost, {
-        header: "Unit Cost",
-        cell: info => <CostCell unit={info.row.original.unitData.unit}/>
-    }),
-    columnHelper.accessor(row => row.unitData.weapon?.cost, {
-        header: "Weapon Cost",
-        cell: info => <CostCell weapon={info.row.original.unitData.weapon}/>
+    columnHelper.accessor(row => row.unitData?.cards?.map(c => c.name).join(", "), {
+        header: "Cards",
+        cell: info => <>
+            { info.row.original.unitData?.cards?.map(card => 
+                <span className="me-2" key={card.id}>
+                    <CardLabel card={card} placement="right"/>
+                </span>
+            )}
+        </>
     }),
     columnHelper.accessor(row => row.dice, {
         header: "Stats",

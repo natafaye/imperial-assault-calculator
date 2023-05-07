@@ -28,11 +28,12 @@ export const J4X7 = "JFX-7"
 // TODO: Put back in Desperado?
 
 /**
- * All the class cards (reward and upgrades) that the heros can use
+ * All the class cards (reward and upgrades) that the heroes and Imperials can use
+ * (All class card id's are in the 4000's)
  */
 export const CLASS_CARDS = [
     {
-        id: 0,
+        id: 4000,
         name: "Acklay Counter",
         affiliation: REBEL,
 		availableTo: [TRESS],
@@ -52,7 +53,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 1,
+        id: 4001,
         name: "Adrenal Vapor",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -72,7 +73,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 2,
+        id: 4002,
         name: "All-Out Attack",
         affiliation: REBEL,
 		availableTo: [SHYLA],
@@ -92,7 +93,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 3,
+        id: 4003,
         name: "Alliance Efficiency",
         affiliation: REBEL,
 		availableTo: [KOTUN],
@@ -117,7 +118,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 4,
+        id: 4004,
         name: "Auxiliary Training",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -142,7 +143,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 5,
+        id: 4005,
         name: "Bank Shot",
         affiliation: REBEL,
 		availableTo: [DROKKATTA],
@@ -157,7 +158,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 6,
+        id: 4006,
         name: "Battle Vision",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -177,7 +178,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 7,
+        id: 4007,
         name: "Battlefield Experience",
         affiliation: REBEL,
 		availableTo: [VINTO],
@@ -197,7 +198,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 8,
+        id: 4008,
         name: "Bullseye!",
         affiliation: REBEL,
 		availableTo: [CT1701],
@@ -220,7 +221,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 9,
+        id: 4009,
         name: "Called Shot",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -240,7 +241,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 10,
+        id: 4010,
         name: "Cheap Shot (Jyn)",
         affiliation: REBEL,
 		availableTo: [JYN],
@@ -260,7 +261,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 11,
+        id: 4011,
         name: "Coordinated Attack (Loku)",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -292,7 +293,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 12,
+        id: 4012,
         name: "Covering Fire (CT-1701)",
         affiliation: REBEL,
 		availableTo: [CT1701],
@@ -312,7 +313,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 13,
+        id: 4013,
         name: "Covert Operative",
         affiliation: REBEL,
 		availableTo: [DAVITH],
@@ -332,7 +333,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 14,
+        id: 4014,
         name: "Create Opening",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -356,7 +357,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 15,
+        id: 4015,
         name: "Crushing Blow",
         affiliation: REBEL,
 		availableTo: [BIV],
@@ -376,7 +377,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 16,
+        id: 4016,
         name: "Dancing Weapon",
         affiliation: REBEL,
 		availableTo: [DIALA],
@@ -397,7 +398,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 17,
+        id: 4017,
         name: "Dead On",
         affiliation: REBEL,
 		availableTo: [VINTO],
@@ -421,7 +422,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 18,
+        id: 4018,
         name: "Deadly Grace",
         affiliation: REBEL,
 		availableTo: [SHYLA],
@@ -436,7 +437,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 19,
+        id: 4019,
         name: "Defensive Stance",
         affiliation: REBEL,
 		availableTo: [DIALA],
@@ -456,7 +457,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: STOPPED CONVERTING HERE
     {
-        id: 21,
+        id: 4021,
         name: "Dig In",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -469,7 +470,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 22,
+        id: 4022,
         name: "Don't Make Me Hurt You",
         affiliation: REBEL,
 		availableTo: [ONAR],
@@ -482,7 +483,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 24,
+        id: 4024,
         name: "Embody the Force",
         affiliation: REBEL,
 		availableTo: [DAVITH],
@@ -495,7 +496,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Choose to exhaust
     {
-        id: 25,
+        id: 4025,
         name: "Execute",
         affiliation: REBEL,
 		availableTo: [MAK],
@@ -508,7 +509,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Allow removing all dice from target's defense pool
     {
-        id: 26,
+        id: 4026,
         name: "Explosive Reflexes",
         affiliation: REBEL,
 		availableTo: [JARROD, J4X7],
@@ -521,7 +522,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // Replace 1 die with another die of your choice
     {
-        id: 27,
+        id: 4027,
         name: "Falling Leaf",
         affiliation: REBEL,
 		availableTo: [DAVITH],
@@ -540,7 +541,7 @@ export const CLASS_CARDS = [
         ],
     },
     {
-        id: 28,
+        id: 4028,
         name: "Ferocity (Gaarkhan)",
         affiliation: REBEL,
 		availableTo: [GAARKHAN],
@@ -553,7 +554,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Trigger if focused instead of green die
     {
-        id: 29,
+        id: 4029,
         name: "Fire Support Specialist",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -566,7 +567,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Remove 1 dice from defense pool
     {
-        id: 30,
+        id: 4030,
         name: "Force Adept",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -580,7 +581,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: add blue die for attribute test
     {
-        id: 31,
+        id: 4031,
         name: "Gunslinger",
         affiliation: REBEL,
 		availableTo: [JYN],
@@ -594,7 +595,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Allow using surge abilities from other pistols
     {
-        id: 32,
+        id: 4032,
         name: "Military Efficiency",
         affiliation: REBEL,
 		availableTo: [GIDEON],
@@ -607,7 +608,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Convert 1 damage to 1 surge, or 1 block to 1 evade
     {
-        id: 53,
+        id: 4053,
         name: "Hondo's Treasure",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -620,7 +621,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Choose to use
     {
-        id: 54,
+        id: 4054,
         name: "Hunt Them Down (Reward)",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -633,7 +634,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: while attacking an imperial TROOPER
     {
-        id: 40,
+        id: 4040,
         name: "Mon Cala Special Forces",
         affiliation: REBEL,
 		availableTo: [LOKU],
@@ -646,7 +647,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 39,
+        id: 4039,
         name: "Mutual Progression",
         affiliation: REBEL,
 		availableTo: [JARROD, J4X7],
@@ -659,7 +660,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 38,
+        id: 4038,
         name: "Pinpoint Shot",
         affiliation: REBEL,
 		availableTo: [VINTO],
@@ -672,7 +673,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Remove all results except accuracy, then add 1
     {
-        id: 37,
+        id: 4037,
         name: "Point Blank Shot",
         affiliation: REBEL,
 		availableTo: [VERENA],
@@ -705,7 +706,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Replace one die with red die, trigger adjacent & pistol
     {
-        id: 36,
+        id: 4036,
         name: "Power Converter",
         affiliation: REBEL,
 		availableTo: [REBEL],
@@ -718,7 +719,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // Replace 1 die in your attack pool with a different attack die of your choice
     {
-        id: 35,
+        id: 4035,
         name: "Proximity Strike",
         affiliation: REBEL,
 		availableTo: [SHYLA],
@@ -738,7 +739,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: force reroll one defense THEN reroll one attack
     {
-        id: 34,
+        id: 4034,
         name: "Rapid Fire",
         affiliation: REBEL,
 		availableTo: [VINTO],
@@ -758,7 +759,7 @@ export const CLASS_CARDS = [
         ]
     },
     {
-        id: 33,
+        id: 4033,
         name: "Roll With It",
         affiliation: REBEL,
 		availableTo: [JYN],
@@ -772,7 +773,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Choose to use, Convert 1 or more block to evade
     {
-        id: 41,
+        id: 4041,
         name: "Sharpshooter",
         affiliation: REBEL,
 		availableTo: [VINTO],
@@ -785,7 +786,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 42,
+        id: 4042,
         name: "Smuggler's Luck",
         affiliation: REBEL,
 		availableTo: [JYN],
@@ -799,7 +800,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: applies to attribute tests
     {
-        id: 45,
+        id: 4045,
         name: "",
         affiliation: REBEL,
 		availableTo: [],
@@ -813,7 +814,7 @@ export const CLASS_CARDS = [
         ]
     },
     {
-        id: 46,
+        id: 4046,
         name: "Structural Exploitation",
         affiliation: REBEL,
 		availableTo: [DROKKATTA],
@@ -826,7 +827,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: trigger to use, if object apply additional +1 damage and pierce 1
     {
-        id: 47,
+        id: 4047,
         name: "Student of Battle",
         affiliation: REBEL,
 		availableTo: [VERENA],
@@ -842,7 +843,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Trigger or not
     {
-        id: 43,
+        id: 4043,
         name: "Swords Dance",
         affiliation: REBEL,
 		availableTo: [SHYLA],
@@ -856,7 +857,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Remove 1 die from attack pool
     {
-        id: 44,
+        id: 4044,
         name: "Take Cover",
         affiliation: REBEL,
 		availableTo: [FENN],
@@ -870,7 +871,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: turn on
     {
-        id: 48,
+        id: 4048,
         name: "Thermal Explosives",
         affiliation: REBEL,
 		availableTo: [DROKKATTA],
@@ -883,7 +884,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: trigger or not for strain with ranged weapon
     {
-        id: 49,
+        id: 4049,
         name: "Weakness Identified",
         affiliation: REBEL,
 		availableTo: [CT1701],
@@ -897,7 +898,7 @@ export const CLASS_CARDS = [
         ]
     }, // TODO: Either remove one defense die or apply +1 damage
     {
-        id: 50,
+        id: 4050,
         name: "Weapon Expert",
         affiliation: REBEL,
 		availableTo: [FENN],
@@ -910,7 +911,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Choose to use
     {
-        id: 51,
+        id: 4051,
         name: "Wholeness",
         affiliation: REBEL,
 		availableTo: [TRESS],
@@ -923,7 +924,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     }, // TODO: Add green die for attribute tests, choose to use while defending
     {
-        id: 52,
+        id: 4052,
         name: "X-8 Upgrade",
         affiliation: REBEL,
 		availableTo: [J4X7],

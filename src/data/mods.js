@@ -1,9 +1,13 @@
 import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION, BLADE } from "./weapons";
 import { GREEN, RED, YELLOW, BLUE } from "./constants"
 
+/**
+ * Mods for weapons in Imperial Assault
+ * (All mod ids in the 3000's)
+ */
 export const MODS = [
     {
-        id: 1,
+        id: 3001,
         name: 'Balanced Hilt',
         weaponType: MELEE,
         modType: BALANCE,
@@ -15,7 +19,7 @@ export const MODS = [
         surgeAbilities: []
     },
     {
-        id: 2,
+        id: 3002,
         name: 'Bolt Upgrade',
         weaponType:RANGED,
         modType: ENERGY,
@@ -27,7 +31,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Replace one die with another attack die of your choice
     {
-        id: 3,
+        id: 3003,
         name: 'Charged Ammo Pack',
         weaponType: RANGED,
         modType: AMMUNITION,
@@ -41,7 +45,7 @@ export const MODS = [
         ]
     },
     {
-        id: 301,
+        id: 3301,
         name: 'Disruption Cell',
         weaponType: RANGED,
         modType: ENERGY,
@@ -70,7 +74,7 @@ export const MODS = [
         ]
     },
     {
-        id: 4,
+        id: 3004,
         name: 'Energized Hilt',
         weaponType: MELEE,
         modType: ENERGY,
@@ -82,7 +86,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Replace one die with another attack die of your choice
     {
-        id: 5,
+        id: 3005,
         name: 'Extended Haft',
         weaponType: MELEE,
         modType: BALANCE,
@@ -94,7 +98,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Choose Pierce 1 or Reach
     {
-        id: 6,
+        id: 3006,
         name: 'Focusing Beam',
         weaponType: MELEE,
         modType: SIGHTS,
@@ -106,7 +110,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Choose Pierce 1 or -1 Dodge
     {
-        id: 7,
+        id: 3007,
         name: 'High-Impact Guard',
         weaponType: MELEE,
         modType: IMPACT,
@@ -120,7 +124,7 @@ export const MODS = [
         ],
     }, // TODO: handle defending ability
     {
-        id: 8,
+        id: 3008,
         name: 'Marksman Barrel',
         weaponType: RANGED,
         modType: BARREL,
@@ -132,7 +136,7 @@ export const MODS = [
         surgeAbilities: []
     },
     {
-        id: 9,
+        id: 3009,
         name: 'Overcharger',
         weaponType: RANGED,
         modType: ENERGY,
@@ -144,7 +148,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Remove 1 die from target's defense pool
     {
-        id: 10,
+        id: 3010,
         name: 'Plasma Cell',
         weaponType: RANGED,
         modType: ENERGY,
@@ -158,7 +162,7 @@ export const MODS = [
         ]
     },
     {
-        id: 11,
+        id: 3011,
         name: 'Shock Emitter',
         weaponType: MELEE,
         modType: IMPACT,
@@ -170,7 +174,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Choose to use? Chance of stunning?
     {
-        id: 12,
+        id: 3012,
         name: 'Sniper Scope',
         weaponType: RANGED,
         modType: SIGHTS,
@@ -182,7 +186,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Ask is target 5 or more spaces away?
     {
-        id: 13,
+        id: 3013,
         name: 'Spread Barrel',
         weaponType: RANGED,
         modType: BARREL,
@@ -194,7 +198,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Ask is target 3 or less spaces away?
     {
-        id: 14,
+        id: 3014,
         name: 'Tactical Display',
         weaponType: RANGED,
         modType: SIGHTS,
@@ -206,7 +210,7 @@ export const MODS = [
         surgeAbilities: []
     },
     {
-        id: 15,
+        id: 3015,
         name: 'Telescoping Sights',
         weaponType: RANGED,
         modType: SIGHTS,
@@ -218,7 +222,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Choose to use?
     {
-        id: 16,
+        id: 3016,
         name: 'Under-Barrel HH-4',
         weaponType: RANGED,
         modType: BARREL,
@@ -230,7 +234,7 @@ export const MODS = [
         surgeAbilities: []
     }, // TODO: Indicate blast damage?
     {
-        id: 17,
+        id: 3017,
         name: 'Vibrobayonet',
         weaponType: MELEE,
         modType: BLADE,
@@ -248,7 +252,7 @@ export const MODS = [
         ],
     },
     {
-        id: 18,
+        id: 3018,
         name: 'Vibrogenerator',
         weaponType: MELEE,
         modType: ENERGY,
@@ -262,7 +266,7 @@ export const MODS = [
         ]
     }, // TODO: Choose to use?
     {
-        id: 19,
+        id: 3019,
         name: 'Weighted Head',
         weaponType: MELEE,
         modType: BALANCE,

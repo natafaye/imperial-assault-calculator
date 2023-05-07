@@ -7,7 +7,15 @@
 const prepareString = (string) => string?.toLowerCase().replaceAll(/[\s-&+!"'.,+$()]/g, "") || ""
 
 /**
- * Search a string, case insensitively
+ * Search for an exact match, case insensitively
+ * @param {string?} toSearch The string to search
+ * @param {string?} term The search term to check for 
+ * @returns {boolean} true if it was found, false if it was not
+ */
+export const searchExact = (toSearch, term) => prepareString(toSearch) === prepareString(term)
+
+/**
+ * Searces for partial or full match inside a string, case insensitively
  * @param {string?} toSearch The string to search
  * @param {string?} term The search term to check for 
  * @returns {boolean} true if it was found, false if it was not
@@ -20,7 +28,7 @@ export const search = (toSearch, term) => prepareString(toSearch).includes(prepa
  * @param {string} term The search term to check for 
  * @returns {boolean} true if it was found somewhere in the array, false if it was not
  */
-export const searchArray = (toSearch, term) => toSearch?.some(item => search(item, term))
+export const searchArray = (toSearch, term) => toSearch?.some(item => searchExact(item, term))
 
 /**
  * Gets a number on the end of a string

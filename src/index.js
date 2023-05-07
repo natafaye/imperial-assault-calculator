@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import '../node_modules/bootswatch/dist/darkly/bootstrap.min.css';
 import './index.css';
-import { CLASS_CARD } from './utilities';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +16,3 @@ root.render(
 );
 
 reportWebVitals();
-
-
-// TODO: !!
-//console.log("Attack abilities", CLASS_CARD.flatMap(c => c.rerollAbilities[0]))

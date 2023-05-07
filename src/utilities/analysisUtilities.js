@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
-import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
+import { CLASS_CARD, MOD, UNIT, WEAPON, getAllOptionalAbilities } from "./optionalAbilityUtilities"
 import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE } from '../data'
 
 /**
@@ -131,80 +131,65 @@ const removeFromArray = (array, toRemove) => {
 /**
  * Combines all the unit & class cards & weapon & mods data to make one set of attack data
  * @param {{ 
- *  unit: object?, 
- *  classCards: object[]?, 
- *  weapon: object?, 
- *  mods: object[]?, 
- *  focused: boolean?, 
+ *  cards: object[]?, 
+ *  focused: boolean?,
+ *  hidden: boolean?, 
  *  selectedOptionalIds: string[]?}} unitData The data to combine
- * @returns {{ dice: string[], surgeAbilities: number[][], bonus: [], rerolls: number }} The combined attack data
+ * @returns {{ 
+ *  dice: string[], 
+ *  bonus: [], 
+ *  surgeAbilities: number[][], 
+ *  rerollAbilities: [number[], number[]] }} The combined attack data
  */
-export const getAttackData = ({ unit, classCards = [], weapon, mods = [], focused = false, hidden = false, selectedOptionalIds = [] }) => {
-    const optionals = getAllOptionalAbilities({ unit, classCards, weapon, mods, isAttack: true })
+export const getAttackData = ({ cards = [], focused = false, hidden = false, selectedOptionalIds = [] }) => {
+    const optionals = getAllOptionalAbilities({ cards, isAttack: true })
         .filter(a => selectedOptionalIds.includes(a.id));
 
     return {
         dice: removeFromArray(
             [].concat(
-                unit?.attackDice,
-                classCards.flatMap(c => c.attackDice),
-                weapon?.attackDice,
-                mods.flatMap(m => m.attackDice),
-                (focused ? GREEN : null),
-                optionals.flatMap(a => a.dice)
+                cards.flatMap(c => c.attackDice),
+                optionals.flatMap(a => a.dice),
+                (focused ? GREEN : undefined),
             ).filter(d => d),
             optionals.flatMap(a => a.negativeAttackDice).filter(d => d)
         ),
         surgeAbilities: [].concat(
-            unit?.surgeAbilities,
-            classCards.flatMap(c => c.surgeAbilities),
-            weapon?.surgeAbilities,
-            mods.flatMap(m => m.surgeAbilities),
-            optionals.flatMap(a => a.surgeAbilities)
-        )
-            .filter(a => a),
+            cards.flatMap(c => c.surgeAbilities || []),
+            optionals.flatMap(a => a.surgeAbilities || [])
+        ),
         bonus: addValues(
-            unit?.attackBonus,
-            ...classCards.map(c => c.attackBonus),
-            weapon?.attackBonus,
-            ...mods.map(m => m.attackBonus),
+            ...cards.map(c => c.attackBonus),
             ...optionals.map(a => a.bonus),
-            (hidden ? [0,0,1,0,0,0] : null)
+            (hidden ? [0,0,1,0,0,0] : undefined)
         ),
         rerollAbilities: [].concat(
-            unit?.rerollAbilities[ATTACK] || [], 
-            (weapon?.rerollAbilities && weapon.rerollAbilities[ATTACK]) || [],
-            mods.flatMap(m => (m.rerollAbilities && m.rerollAbilities[ATTACK]) || []),
-            classCards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[ATTACK]) || []),
+            cards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[ATTACK]) || []),
             optionals.flatMap(o => (o.rerollAbilities && o.rerollAbilities[ATTACK]) || [])
         )
     }
 }
 
 /**
- * Combines all the unit & class cards to make one set of attack data
- * @param {{ unit: object, classCards: object[], selectedOptionalIds: string[] }} unitData The data to combine
- * @returns {{ dice: string[], bonus: [], rerolls: number }} The combined defense data
+ * Combines all the unit & class cards to make one set of defense data
+ * @param {{ cards: object[]?, hidden: boolean?, selectedOptionalIds: string[]? }} unitData The data to combine
+ * @returns {{ dice: string[], bonus: [], rerollAbilities: [number[], number[]] }} The combined defense data
  */
-export const getDefenseData = ({ unit, hidden = false, classCards = [], selectedOptionalIds = [] }) => {
-    const optionals = getAllOptionalAbilities({ unit, classCards })
+export const getDefenseData = ({ cards = [], hidden = false, selectedOptionalIds = [] }) => {
+    const optionals = getAllOptionalAbilities({ cards })
         .filter(a => selectedOptionalIds.includes(a.id));
 
     return {
         dice: [].concat(
-            unit?.defenseDice,
-            classCards.flatMap(c => c.defenseDice),
+            cards.flatMap(c => c.defenseDice),
             optionals.flatMap(a => a.dice)
         ).filter(d => d),
         bonus: addValues(
-            unit?.defenseBonus,
-            ...classCards.map(c => c.defenseBonus),
-            ...optionals.map(a => a.bonus),
-            (hidden ? [-2,0,0,0,0,0] : null)
+            ...cards.map(c => c.defenseBonus),
+            (hidden ? [-2,0,0,0,0,0] : undefined)
         ),
-        rerollAbilities:  [].concat(
-            unit?.rerollAbilities[DEFENSE] || [], 
-            classCards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[DEFENSE]) || []),
+        rerollAbilities: [].concat(
+            cards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[DEFENSE]) || []),
             optionals.flatMap(o => (o.rerollAbilities && o.rerollAbilities[DEFENSE]) || [])
         )
     }
@@ -217,7 +202,6 @@ export const getDefenseData = ({ unit, hidden = false, classCards = [], selected
  * @returns {[number, number]} An array with the min and max accuracy, in that order
  */
 export const getMinMaxAccuracy = (attack, defense) => {
-    console.log(attack, defense)
     let min = attack.dice.reduce((total, die) => DICE_MIN[die] + total, 0)
         + attack.bonus[ACC]
         + (defense?.bonus[ACC] || 0)
@@ -226,4 +210,16 @@ export const getMinMaxAccuracy = (attack, defense) => {
         + (defense?.bonus[ACC] || 0)
         + attack.surgeAbilities.reduce((total, ability) => total + ability[ACC], 0)
     return [min < 0 ? 0 : min, max < 0 ? 0 : max]
+}
+
+/**
+ * Gets the type (unit, weapon, mod, or class card) of a card
+ * @param {object} card The card to get the type of
+ * @returns {string} The type of the card
+ */
+export const getCardType = (card) => {
+    if(card.id >= 4000) return CLASS_CARD
+    if(card.id >= 3000) return MOD
+    if(card.id >= 2000) return WEAPON
+    else return UNIT
 }

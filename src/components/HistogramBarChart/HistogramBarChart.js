@@ -24,8 +24,8 @@ export default function HistogramBarChart({ data, settings, ariaLabel = "Histogr
             margin={{ top: 10, right: 0, bottom: 30, left: 0 }}
             padding={0.2}
             borderRadius="5px"
-            minValue={showWithRelativeScale ? "auto" : 0}
-            maxValue={showWithRelativeScale ? "auto" : 100}
+            minValue={showWithRelativeScale && data.length ? "auto" : 0}
+            maxValue={showWithRelativeScale && data.length ? "auto" : 100}
             axisBottom={{ renderTick: renderDamageTicks }}
             theme={{
                 textColor: "white",

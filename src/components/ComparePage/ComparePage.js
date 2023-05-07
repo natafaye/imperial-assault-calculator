@@ -29,10 +29,7 @@ export default function ComparePage({ data, updaters }) {
       dice: a.attackDice,
       bonus: a.attackBonus,
       surgeAbilities: a.surgeAbilities,
-      unitData: {
-        unit: isWeapon ? null : a,
-        weapon: isWeapon ? a : null
-      }
+      unitData: { cards: [a] }
     }))
     setAttackList([...additions, ...attackList])
   }

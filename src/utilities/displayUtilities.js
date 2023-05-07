@@ -15,21 +15,16 @@ export const pluralize = (name, number) => {
 /**
  * Takes a set of unit data and creates a string summarizing the data
  * 
- * @param {{ unit: object?, classCards: object[], weapon: object?, mods: object[], focused: boolean }} unitData The data to summarize
+ * @param {{ cards: object[]?, focused: boolean?, hidden: boolean? }} cardData The data to summarize
  * @returns {string} A summary string
  */
-export const summarizeUnitData = ({ unit, classCards, weapon, mods, focused, hidden }) => {
-    let collapsedData = unit?.name || "No unit";
-    const allAdditions = (weapon ? [weapon] : []).concat(mods).concat(classCards).map(i => i.name)
+export const summarizeUnitData = ({ cards = [], focused = false, hidden = false }) => {
+    if(cards.length === 0) 
+        return "No cards"
+    const allData = cards?.map(c => c.name)
     if(focused)
-        allAdditions.push("Focused")
+        allData.push("Focused")
     if(hidden)
-        allAdditions.push("Hidden")
-    
-    if (allAdditions.length > 2)
-        collapsedData += " with " + allAdditions.slice(0, -2).join(", ") + ", " + allAdditions.slice(-2).join(" and ")
-    else if (allAdditions.length > 0)
-        collapsedData += " with " + allAdditions.join(" and ")
-    
-    return collapsedData;
+        allData.push("Hidden")
+    return (allData.length <= 2) ? allData.join(" and ") : allData.slice(0, -2).join(", ") + ", " + allData.slice(-2).join(" and ")
 }

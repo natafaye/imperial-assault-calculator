@@ -20,23 +20,23 @@ export const TEST_DATA = {
             [BLACK]: [undefined, 3.78],
             [WHITE]: [undefined, 3.08]
         },
-        "Loku Kanoloa (Hero) and unit-301-0 and Coordinated Attack (Loku) and classCards-11-0": {
+        "Loku Kanoloa (Hero) and 1301-0 and Coordinated Attack (Loku) and 4011-0": {
             [BLACK]: [undefined, 5.79],
             [WHITE]: [undefined, 5.00]
         },
-        "Loku Kanoloa (Hero) and unit-301-0 and Disruption Cell and mods-301-2 and Coordinated Attack (Loku) and classCards-11-0": {
+        "Loku Kanoloa (Hero) and 1301-0 and Disruption Cell and 3301-2 and Coordinated Attack (Loku) and 4011-0": {
             [BLACK]: [undefined, 6.53],
             [WHITE]: [undefined, 5.69]
         },
-        "Loku Kanoloa (Hero) and unit-301-0 and Coordinated Attack (Loku) and classCards-11-0 and Surge": {
+        "Loku Kanoloa (Hero) and 1301-0 and Coordinated Attack (Loku) and 4011-0 and Surge": {
             [BLACK]: [undefined, 7.04],
             [WHITE]: [undefined, 5.81]
         },
-        "Loku Kanoloa (Hero) and unit-301-0 and Disruption Cell and mods-301-2 and Coordinated Attack (Loku) and classCards-11-0 and Surge": {
+        "Loku Kanoloa (Hero) and 1301-0 and Disruption Cell and 3301-2 and Coordinated Attack (Loku) and 4011-0 and Surge": {
             [BLACK]: [undefined, 7.92],
             [WHITE]: [undefined, 6.54]
         },
-        "Loku Kanoloa (Hero) and Disruption Cell and mods-301-2 and Reroll and Surge": {
+        "Loku Kanoloa (Hero) and Disruption Cell and 3301-2 and Reroll and Surge": {
             [BLACK]: [undefined, 5.10],
             [WHITE]: [undefined, 4.19]
         }
@@ -90,7 +90,7 @@ export const TEST_DATA = {
         }
     },
     "Close and Personal": {
-        "Crushing Blow and classCards-15-0 and Vibrobayonet and mods-17-0 and Reroll and Surge": {
+        "Crushing Blow and 4015-0 and Vibrobayonet and 3017-0 and Reroll and Surge": {
             [BLACK]: [undefined, 5.72],
             [WHITE]: [undefined, 5.13]
         }
@@ -126,11 +126,11 @@ export const TEST_DATA = {
             [BLACK]: [undefined, 2.48],
             [WHITE]: [undefined, 2.50]
         },
-        "Disruption Cell and mods-301-1 and Point Blank Shot and classCards-37-0": {
+        "Disruption Cell and 3301-1 and Point Blank Shot and 4037-0": {
             [BLACK]: [undefined, 4.08],
             [WHITE]: [undefined, 3.73]
         },
-        "Disruption Cell and mods-301-1 and Point Blank Shot and classCards-37-0 and Surge": {
+        "Disruption Cell and 3301-1 and Point Blank Shot and 4037-0 and Surge": {
             [BLACK]: [undefined, 5.05],
             [WHITE]: [undefined, 4.10]
         }
@@ -158,11 +158,11 @@ export const TEST_DATA = {
         }
     },
     "Heirloom Dagger": {
-        "Falling Leaf and classCards-27-0": {
+        "Falling Leaf and 4027-0": {
             [BLACK]: [undefined, 3.01],
             [WHITE]: [undefined, 2.92]
         },
-        "Falling Leaf and classCards-27-0 and Surge": {
+        "Falling Leaf and 4027-0 and Surge": {
             [BLACK]: [undefined, 3.28],
             [WHITE]: [undefined, 3.20]
         }
@@ -244,11 +244,11 @@ export const TEST_DATA = {
         }
     },
     "Shrouded Lightsaber": {
-        "High-Impact Guard and Falling Leaf and classCards-27-0 and Hidden and weapon-56-0": {
+        "High-Impact Guard and Falling Leaf and 4027-0 and Hidden and 2056-0": {
             [BLACK]: [undefined, 6.91],
             [WHITE]: [undefined, 5.59]
         },
-        "High-Impact Guard and Falling Leaf and classCards-27-0 and Hidden and weapon-56-0 and Surge": {
+        "High-Impact Guard and Falling Leaf and 4027-0 and Hidden and 2056-0 and Surge": {
             [BLACK]: [undefined, 8.00],
             [WHITE]: [undefined, 6.48]
         }

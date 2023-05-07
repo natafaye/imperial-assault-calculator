@@ -24,9 +24,13 @@ export const GUARDIAN = "Guardian"
 export const SMUGGLER = "Smuggler"
 export const WOOKIEE = "Wookiee"
 
+/**
+ * Units in Imperial Assault, including heroes
+ * (all unit ids in the 1000's)
+ */
 export const UNITS = [
     {
-        id: 0,
+        id: 1000,
         name: "0-0-0",
         title: "Specialized in Pain",
         affiliation: IMPERIAL,
@@ -48,7 +52,7 @@ export const UNITS = [
         ]
     }, // TODO: Choose to use surge to recover 2 health
     {
-        id: 1,
+        id: 1001,
         name: "Agent Blaise",
         title: "ISB Interrogator",
         affiliation: IMPERIAL,
@@ -73,7 +77,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 2,
+        id: 1002,
         name: "AT-DP",
         title: "",
         affiliation: IMPERIAL,
@@ -96,7 +100,7 @@ export const UNITS = [
         ]
     }, // TODO: Trigger +1 damage and 1 reroll if has fewer than 9 damage
     {
-        id: 3,
+        id: 1003,
         name: "AT-ST",
         title: "",
         affiliation: IMPERIAL,
@@ -118,7 +122,7 @@ export const UNITS = [
         ],
     },
     {
-        id: 4,
+        id: 1004,
         name: "BT-1",
         title: "Destructive Assassin",
         affiliation: IMPERIAL,
@@ -140,7 +144,7 @@ export const UNITS = [
         ]
     }, // TODO: allow for 3 different attacks with each die and +3 accuracy
     {
-        id: 5,
+        id: 1005,
         name: "Captain Terro",
         title: "Wasteland Enforcer",
         affiliation: IMPERIAL,
@@ -163,7 +167,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 6,
+        id: 1006,
         name: "Darth Vader",
         title: "Lord of the Sith",
         affiliation: IMPERIAL,
@@ -186,7 +190,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 7,
+        id: 1007,
         name: "Death Trooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -209,7 +213,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 8,
+        id: 1008,
         name: "Death Trooper",
         title: "",
         affiliation: IMPERIAL,
@@ -232,7 +236,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 9,
+        id: 1009,
         name: "Dewback Rider",
         title: "",
         affiliation: IMPERIAL,
@@ -256,7 +260,7 @@ export const UNITS = [
         ]
     }, // TODO: shock lance
     {
-        id: 10,
+        id: 1010,
         name: "E-Web Engineer",
         title: "",
         affiliation: IMPERIAL,
@@ -278,7 +282,7 @@ export const UNITS = [
         ]
     }, // TODO: Pick to recover
     {
-        id: 11,
+        id: 1011,
         name: "E-Web Engineer (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -300,7 +304,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 12,
+        id: 1012,
         name: "Emperor Palpatine",
         title: "Sith Master",
         affiliation: IMPERIAL,
@@ -322,7 +326,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 13,
+        id: 1013,
         name: "General Sorin",
         title: "Vicious Tactician",
         affiliation: IMPERIAL,
@@ -344,7 +348,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 14,
+        id: 1014,
         name: "General Weiss",
         title: "Field Commander",
         affiliation: IMPERIAL,
@@ -366,7 +370,7 @@ export const UNITS = [
         ]
     }, // TODO: Pick 3 attack dice with no duplicates
     {
-        id: 15,
+        id: 1015,
         name: "Heavy Stormtrooper",
         title: "",
         affiliation: IMPERIAL,
@@ -388,7 +392,7 @@ export const UNITS = [
         ]
     }, // TODO: trigger defending +1 block bonus if 4 or more spaces away
     {
-        id: 16,
+        id: 1016,
         name: "Heavy Stormtrooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -410,7 +414,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 17,
+        id: 1017,
         name: "Imperial Officer",
         title: "",
         affiliation: IMPERIAL,
@@ -433,7 +437,7 @@ export const UNITS = [
         ]
     }, // TODO: Trigger defense reroll
     {
-        id: 18,
+        id: 1018,
         name: "Imperial Officer (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -456,7 +460,7 @@ export const UNITS = [
         ]
     }, // TODO: Trigger defense reroll
     {
-        id: 19,
+        id: 1019,
         name: "ISB Infiltrator",
         title: "",
         affiliation: IMPERIAL,
@@ -479,7 +483,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 20,
+        id: 1020,
         name: "ISB Infiltrator (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -504,7 +508,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 21,
+        id: 1021,
         name: "Jet Trooper",
         title: "",
         affiliation: IMPERIAL,
@@ -527,7 +531,7 @@ export const UNITS = [
         ]
     }, // TODO: While defending, you may convert 1 block to 1 evade
     {
-        id: 22,
+        id: 1022,
         name: "Jet Trooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -550,7 +554,7 @@ export const UNITS = [
         ] // TODO: While defending, you may convert 1 block to 1 evade
     }, // TODO: Trigger add blue die to attack pool if within 2 spaces
     {
-        id: 23,
+        id: 1023,
         name: "Kayn Somos",
         title: "Trooper Commander",
         affiliation: IMPERIAL,
@@ -573,7 +577,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 24,
+        id: 1024,
         name: "Probe Droid",
         title: "",
         affiliation: IMPERIAL,
@@ -596,7 +600,7 @@ export const UNITS = [
         ]
     },//TODO: Add in a recover recommendation/Prioritization
     {
-        id: 25,
+        id: 1025,
         name: "Probe Droid (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -619,7 +623,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 26,
+        id: 1026,
         name: "Riot Trooper",
         title: "",
         affiliation: IMPERIAL,
@@ -642,7 +646,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 27,
+        id: 1027,
         name: "Riot Trooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -665,7 +669,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 28,
+        id: 1028,
         name: "Royal Guard",
         title: "",
         affiliation: IMPERIAL,
@@ -687,7 +691,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 29,
+        id: 1029,
         name: "Royal Guard (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -709,7 +713,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 30,
+        id: 1030,
         name: "Royal Guard Champion",
         title: "",
         affiliation: IMPERIAL,
@@ -732,7 +736,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 31,
+        id: 1031,
         name: "SC2-M Repulsor Tank",
         title: "",
         affiliation: IMPERIAL,
@@ -755,7 +759,7 @@ export const UNITS = [
         ]
     },// TODO: Pick 1 Block or 1 Evade when defending for the tank
     {
-        id: 32,
+        id: 1032,
         name: "Sentry Droid",
         title: "",
         affiliation: IMPERIAL,
@@ -779,7 +783,7 @@ export const UNITS = [
         ]
     },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
     {
-        id: 33,
+        id: 1033,
         name: "Sentry Droid (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -803,7 +807,7 @@ export const UNITS = [
         ]
     },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
     {
-        id: 34,
+        id: 1034,
         name: "Snowtrooper",
         title: "",
         affiliation: IMPERIAL,
@@ -826,7 +830,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 35,
+        id: 1035,
         name: "Snowtrooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -849,7 +853,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 36,
+        id: 1036,
         name: "Stormtrooper",
         title: "",
         affiliation: IMPERIAL,
@@ -872,7 +876,7 @@ export const UNITS = [
         ]
     },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
     {
-        id: 37,
+        id: 1037,
         name: "Stormtrooper (Elite)",
         title: "",
         affiliation: IMPERIAL,
@@ -895,7 +899,7 @@ export const UNITS = [
         ]
     },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
     {
-        id: 38,
+        id: 1038,
         name: "The Grand Inquisitor",
         title: "Sith Loyalist",
         affiliation: IMPERIAL,
@@ -919,7 +923,7 @@ export const UNITS = [
         ]
     },// TODO: :Lightsaber throw doing a ranged attach with red die and yellow plus 3 accuracy, Defending if no block is rolled then add 1 block
     {
-        id: 39,
+        id: 1039,
         name: "Thrawn",
         title: "Grand Admiral",
         affiliation: IMPERIAL,
@@ -942,7 +946,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 40,
+        id: 1040,
         name: "Bantha Rider",
         title: "",
         affiliation: MERCENARY,
@@ -965,7 +969,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 41,
+        id: 1041,
         name: "Boba Fett",
         title: "Infamous Bounty Hunter",
         affiliation: MERCENARY,
@@ -987,7 +991,7 @@ export const UNITS = [
         ]
     },// TODO: Choose to apply 2 accuracy, 2 damage, or 2 recovery on attack
     {
-        id: 42,
+        id: 1042,
         name: "Bossk",
         title: "Born Hunter",
         affiliation: MERCENARY,
@@ -1009,7 +1013,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 43,
+        id: 1043,
         name: "Clawdite Shapeshifter",
         title: "",
         affiliation: MERCENARY,
@@ -1031,7 +1035,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 44,
+        id: 1044,
         name: "Clawdite Shapeshifter (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1053,7 +1057,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 45,
+        id: 1045,
         name: "Dengar",
         title: "Ruthless Killer",
         affiliation: MERCENARY,
@@ -1075,7 +1079,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 46,
+        id: 1046,
         name: "Gamorrean Guard",
         title: "",
         affiliation: MERCENARY,
@@ -1097,7 +1101,7 @@ export const UNITS = [
         ]
     },// TODO: Can reroll attack die with a surge token and can reroll a defense die if attacked by range
     {
-        id: 47,
+        id: 1047,
         name: "Gamorrean Guard (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1119,7 +1123,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 48,
+        id: 1048,
         name: "Greedo",
         title: "Ambitious Mercenary",
         affiliation: MERCENARY,
@@ -1142,7 +1146,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 49,
+        id: 1049,
         name: "Hired Gun",
         title: "",
         affiliation: MERCENARY,
@@ -1166,7 +1170,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 50,
+        id: 1050,
         name: "Hired Gun (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1189,7 +1193,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 51,
+        id: 1051,
         name: "HK Assassin Droid",
         title: "",
         affiliation: MERCENARY,
@@ -1212,7 +1216,7 @@ export const UNITS = [
         ]
     },// TODO: Can force defender to reroll their defense die
     {
-        id: 52,
+        id: 1052,
         name: "HK Assassin Droid (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1236,7 +1240,7 @@ export const UNITS = [
         ]
     },// TODO: Can force defender to reroll their defense die
     {
-        id: 53,
+        id: 1053,
         name: "Hondo Ohnaka",
         title: "Friend For Hire",
         affiliation: MERCENARY,
@@ -1259,7 +1263,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 54,
+        id: 1054,
         name: "IG-88",
         title: "Assassin Droid",
         affiliation: MERCENARY,
@@ -1281,7 +1285,7 @@ export const UNITS = [
         ]
     },// TODO: Can pick any combination of 2 attack dice
     {
-        id: 55,
+        id: 1055,
         name: "Jabba the Hutt",
         title: "Vile Gangster",
         affiliation: MERCENARY,
@@ -1303,7 +1307,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 56,
+        id: 1056,
         name: "Jawa Scavenger",
         title: "",
         affiliation: MERCENARY,
@@ -1326,7 +1330,7 @@ export const UNITS = [
         ]
     },// TODO: May apply 1 block and -1 evade while defending
     {
-        id: 57,
+        id: 1057,
         name: "Jawa Scavenger (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1350,7 +1354,7 @@ export const UNITS = [
         ]
     },// TODO: May apply 1 block and -1 evade while defending
     {
-        id: 58,
+        id: 1058,
         name: "Loth-cat",
         title: "",
         affiliation: MERCENARY,
@@ -1372,7 +1376,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 59,
+        id: 1059,
         name: "Loth-cat (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1394,7 +1398,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 60,
+        id: 1060,
         name: "Maul",
         title: "Seeker of Vengeance",
         affiliation: MERCENARY,
@@ -1416,7 +1420,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 61,
+        id: 1061,
         name: "Nexu",
         title: "",
         affiliation: MERCENARY,
@@ -1438,7 +1442,7 @@ export const UNITS = [
         ]
     },// TODO: add a block for every evade result while defending
     {
-        id: 62,
+        id: 1062,
         name: "Nexu (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1460,7 +1464,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 63,
+        id: 1063,
         name: "Onar Koma",
         title: "",
         affiliation: MERCENARY,
@@ -1483,7 +1487,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 64,
+        id: 1064,
         name: "Rancor (Campaign)",
         title: "",
         affiliation: MERCENARY,
@@ -1505,7 +1509,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 65,
+        id: 1065,
         name: "Rancor (Skirmish)",
         title: "",
         affiliation: MERCENARY,
@@ -1527,7 +1531,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 66,
+        id: 1066,
         name: "Shyla Varad",
         title: "",
         affiliation: MERCENARY,
@@ -1550,7 +1554,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 67,
+        id: 1067,
         name: "Trandoshan Hunter",
         title: "",
         affiliation: MERCENARY,
@@ -1572,7 +1576,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 68,
+        id: 1068,
         name: "Trandoshan Hunter (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1594,7 +1598,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 69,
+        id: 1069,
         name: "Tusken Raider",
         title: "",
         affiliation: MERCENARY,
@@ -1616,7 +1620,7 @@ export const UNITS = [
         ]
     },// TODO: Can perform a ranged attack instead with a blue and a red die
     {
-        id: 70,
+        id: 1070,
         name: "Tusken Raider (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1638,7 +1642,7 @@ export const UNITS = [
         ]
     },// TODO: Can perform a ranged attack instead with a blue and a red die
     {
-        id: 71,
+        id: 1071,
         name: "Ugnaught Tinkerer",
         title: "",
         affiliation: MERCENARY,
@@ -1660,7 +1664,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 72,
+        id: 1072,
         name: "Junk Droid",
         title: "",
         affiliation: MERCENARY,
@@ -1682,7 +1686,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 73,
+        id: 1073,
         name: "Ugnaught Tinkerer (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1704,7 +1708,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 74,
+        id: 1074,
         name: "Junk Droid (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1726,7 +1730,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 75,
+        id: 1075,
         name: "Vinto Hreeda",
         title: "",
         affiliation: MERCENARY,
@@ -1750,7 +1754,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 76,
+        id: 1076,
         name: "Wampa",
         title: "",
         affiliation: MERCENARY,
@@ -1772,7 +1776,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 77,
+        id: 1077,
         name: "Wampa (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1794,7 +1798,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 78,
+        id: 1078,
         name: "Weequay Pirate",
         title: "",
         affiliation: MERCENARY,
@@ -1817,7 +1821,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 79,
+        id: 1079,
         name: "Weequay Pirate (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1841,7 +1845,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 80,
+        id: 1080,
         name: "Wing Guard",
         title: "",
         affiliation: MERCENARY,
@@ -1863,7 +1867,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 81,
+        id: 1081,
         name: "Wing Guard (Elite)",
         title: "",
         affiliation: MERCENARY,
@@ -1883,32 +1887,9 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0]
         ]
-    },// TODO: can reroll an attack die if adjacent to friendly TROOPER
-    
+    },// TODO: can reroll an attack die if adjacent to friendly TROOPER 
     {
-        id: 200,
-        name: "J4X-7",
-        title: "",
-        affiliation: REBEL,
-        deploymentCost: null,
-        reinforceCost: null,
-        traits: [DROID],
-        size: SMALL,
-        elite: false,
-        health: 4,
-        speed: 3,
-        defenseDice: [],
-        attackDice: [BLUE],
-        attackType: RANGED,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-        surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
-        ]
-    }, 
-    {
-        id: 82,
+        id: 1082,
         name: "Ahsoka Tano",
         title: "Rebel Instigator",
         affiliation: REBEL,
@@ -1931,7 +1912,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 83,
+        id: 1083,
         name: "Alliance Ranger",
         title: "",
         affiliation: REBEL,
@@ -1961,7 +1942,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 84,
+        id: 1084,
         name: "Alliance Ranger (Elite)",
         title: "",
         affiliation: REBEL,
@@ -1991,7 +1972,7 @@ export const UNITS = [
         ],
     }, 
     {
-        id: 85,
+        id: 1085,
         name: "Alliance Smuggler",
         title: "",
         affiliation: REBEL,
@@ -2014,7 +1995,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 86,
+        id: 1086,
         name: "Alliance Smuggler (Elite)",
         title: "",
         affiliation: REBEL,
@@ -2037,7 +2018,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 87,
+        id: 1087,
         name: "Biv Bodhrik",
         title: "",
         affiliation: REBEL,
@@ -2066,7 +2047,7 @@ export const UNITS = [
         ],
     }, 
     {
-        id: 88,
+        id: 1088,
         name: "C-3PO",
         title: "Human Cyborg Relations",
         affiliation: REBEL,
@@ -2094,7 +2075,7 @@ export const UNITS = [
         ],
     }, 
     {
-        id: 89,
+        id: 1089,
         name: "C1-10P",
         title: "Chopper",
         affiliation: REBEL,
@@ -2116,7 +2097,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 90,
+        id: 1090,
         name: "Chewbacca",
         title: "Loyal Wookiee",
         affiliation: REBEL,
@@ -2139,7 +2120,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 91,
+        id: 1091,
         name: "CT-1701",
         title: "",
         affiliation: REBEL,
@@ -2162,7 +2143,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 92,
+        id: 1092,
         name: "Davith Elso",
         title: "",
         affiliation: REBEL,
@@ -2185,7 +2166,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 93,
+        id: 1093,
         name: "Diala Passil",
         title: "",
         affiliation: REBEL,
@@ -2207,7 +2188,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 94,
+        id: 1094,
         name: "Drokkatta",
         title: "",
         affiliation: REBEL,
@@ -2229,7 +2210,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 95,
+        id: 1095,
         name: "Echo Base Trooper",
         title: "",
         affiliation: REBEL,
@@ -2252,7 +2233,7 @@ export const UNITS = [
         ]
     }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
     {
-        id: 96,
+        id: 1096,
         name: "Echo Base Trooper (Elite)",
         title: "",
         affiliation: REBEL,
@@ -2275,7 +2256,7 @@ export const UNITS = [
         ] //TODO: a reverse pierce, reduce pierce value by one up to zero
     }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
     {
-        id: 97,
+        id: 1097,
         name: "Ezra Bridger",
         title: "Spectre-6",
         affiliation: REBEL,
@@ -2298,7 +2279,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 98,
+        id: 1098,
         name: "Fenn Signis",
         title: "",
         affiliation: REBEL,
@@ -2321,7 +2302,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 99,
+        id: 1099,
         name: "Gaarkhan",
         title: "",
         affiliation: REBEL,
@@ -2343,7 +2324,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 100,
+        id: 1100,
         name: "Gideon Argus",
         title: "",
         affiliation: REBEL,
@@ -2365,7 +2346,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 101,
+        id: 1101,
         name: "Han Solo",
         title: "Scoundrel",
         affiliation: REBEL,
@@ -2388,7 +2369,7 @@ export const UNITS = [
         ]//: TODO: While defending apply +1 Block to defense for each evade
     }, //TODO: add Classcard "Distracting"
     {
-        id: 102,
+        id: 1102,
         name: "Hera Syndulla",
         title: "Spectre-2",
         affiliation: REBEL,
@@ -2411,7 +2392,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 103,
+        id: 1103,
         name: "Jarrod Kelvin",
         title: "",
         affiliation: REBEL,
@@ -2434,7 +2415,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 104,
+        id: 1104,
         name: "Jyn Odan",
         title: "",
         affiliation: REBEL,
@@ -2457,7 +2438,7 @@ export const UNITS = [
         ]
     }, //TODO: Apply +1 Block for each Evade result while defending
     {
-        id: 105,
+        id: 1105,
         name: "Kanan Jarrus",
         title: "Spectre-1",
         affiliation: REBEL,
@@ -2480,7 +2461,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 106,
+        id: 1106,
         name: "Ko-Tun Feralo",
         title: "",
         affiliation: REBEL,
@@ -2503,7 +2484,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 107,
+        id: 1107,
         name: "Lando Calrissian",
         title: "Charming Gambler",
         affiliation: REBEL,
@@ -2525,7 +2506,7 @@ export const UNITS = [
         ]
     },  // TODO: replace die instead of reroll?
     {
-        id: 108,
+        id: 1108,
         name: "Leia Organa",
         title: "Rebel Commander",
         affiliation: REBEL,
@@ -2548,7 +2529,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 109,
+        id: 1109,
         name: "Loku Kanoloa",
         title: "",
         affiliation: REBEL,
@@ -2571,7 +2552,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 110,
+        id: 1110,
         name: "Luke Skywalker",
         title: "Hero of the Rebellion",
         affiliation: REBEL,
@@ -2594,7 +2575,7 @@ export const UNITS = [
         ]
     }, //TODO: add saber strike as a weapon (Melee attack with 1 red and 1 yellow and pierce 3)
     {
-        id: 111,
+        id: 1111,
         name: "Luke Skywalker (Jedi Knight)",
         title: "Jedi Knight",
         affiliation: REBEL,
@@ -2617,7 +2598,7 @@ export const UNITS = [
         ]
     },
     {
-        id: 112,
+        id: 1112,
         name: "Mak Eshka'rey",
         title: "",
         affiliation: REBEL,
@@ -2641,7 +2622,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 113,
+        id: 1113,
         name: "MHD-19",
         title: "",
         affiliation: REBEL,
@@ -2663,7 +2644,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 114,
+        id: 1114,
         name: "Murne Rin",
         title: "",
         affiliation: REBEL,
@@ -2686,7 +2667,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 115,
+        id: 1115,
         name: "Obi-Wan Kenobi (Campaign)",
         title: "Jedi Knight",
         affiliation: REBEL,
@@ -2709,7 +2690,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 116,
+        id: 1116,
         name: "Obi-Wan Kenobi (Skirmish)",
         title: "Jedi Knight",
         affiliation: REBEL,
@@ -2732,7 +2713,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 117,
+        id: 1117,
         name: "R2-D2",
         title: "Loyal Astromech",
         affiliation: REBEL,
@@ -2754,7 +2735,7 @@ export const UNITS = [
         ]
     }, //TODO: if you roll blank, you can add +1 dodge
     {
-        id: 118,
+        id: 1118,
         name: "Rebel Saboteur",
         title: "",
         affiliation: REBEL,
@@ -2776,7 +2757,7 @@ export const UNITS = [
         ]
     }, // TODO: Overload cna trigger same surge ability twice per attack
     {
-        id: 119,
+        id: 1119,
         name: "Rebel Saboteur (Elite)",
         title: "",
         affiliation: REBEL,
@@ -2798,7 +2779,7 @@ export const UNITS = [
         ]
     }, // TODO: Overload cna trigger same surge ability twice per attack
     {
-        id: 120,
+        id: 1120,
         name: "Rebel Trooper",
         title: "",
         affiliation: REBEL,
@@ -2821,7 +2802,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 121,
+        id: 1121,
         name: "Rebel Trooper (Elite)",
         title: "",
         affiliation: REBEL,
@@ -2844,7 +2825,7 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 122,
+        id: 1122,
         name: "Sabine Wren",
         title: "Spectre-5",
         affiliation: REBEL,
@@ -2867,7 +2848,7 @@ export const UNITS = [
         ]
     },  
     {
-        id: 123,
+        id: 1123,
         name: "Saska Teft",
         title: "",
         affiliation: REBEL,
@@ -2891,7 +2872,7 @@ export const UNITS = [
         ]
     },  
     {
-        id: 124,
+        id: 1124,
         name: "Tress Hacnua",
         title: "",
         affiliation: REBEL,
@@ -2913,7 +2894,7 @@ export const UNITS = [
         ]
     },  
     {
-        id: 125,
+        id: 1125,
         name: "Verena Talos",
         title: "",
         affiliation: REBEL,
@@ -2936,7 +2917,7 @@ export const UNITS = [
         ]
     },  //TODO: Add weapon Fighting Knife- melee using 1 red die +1 damage
     {
-        id: 126,
+        id: 1126,
         name: "Wookiee Warrior",
         title: "",
         affiliation: REBEL,
@@ -2958,7 +2939,7 @@ export const UNITS = [
         ]
     },  
     {
-        id: 127,
+        id: 1127,
         name: "Wookiee Warrior (Elite)",
         title: "",
         affiliation: REBEL,
@@ -2980,7 +2961,7 @@ export const UNITS = [
         ]
     },  
     {
-        id: 128,
+        id: 1128,
         name: "Zeb Orrelios",
         title: "Spectre-4",
         affiliation: REBEL,
@@ -3002,8 +2983,32 @@ export const UNITS = [
             [2, 0, -1, 0, 0, 0]
         ]
     },  //TODO: Add Weapon- Bo-Rifle Staff Strike- Melee attack 2 red dice 
+    
+    
     {
-        id: 300,
+        id: 1200,
+        name: "J4X-7",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 3,
+        defenseDice: [],
+        attackDice: [BLUE],
+        attackType: RANGED,
+        attackBonus: [0, 0, 0, -1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+        surgeAbilities: [
+            [0, 1, -1, 0, 0, 0]
+        ]
+    },
+    {
+        id: 1300,
         isHero: true,
         name: "Biv Bodhrik",
         title: "Vengeful Guerrilla",
@@ -3031,7 +3036,7 @@ export const UNITS = [
 		surgeAbilities: []
     }, // ?????
     {
-        id: 301,
+        id: 1301,
         isHero: true,
         name: "Loku Kanoloa (Hero)",
         title: "Deadly Marksman",
@@ -3063,35 +3068,5 @@ export const UNITS = [
                 bonus: [0,1,0,0,0,0]
             }
         ]
-    },
-    {
-        id: 0,
-        isHero: true,
-        name: "",
-        title: "",
-        affiliation: REBEL,
-        size: SMALL,
-        health: 0,
-        endurance: 0,
-        speed: 0,
-        woundedEndurance: 0,
-        woundedSpeed: 0,
-        defenseDice: [],
-        attributeDice: [
-            [BLUE, GREEN, YELLOW],
-            [BLUE],
-            [BLUE, GREEN]
-        ],
-        woundedAttributeDice: [
-            [RED, BLUE, GREEN],
-            [RED],
-            [RED, BLUE]
-        ],
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [
-
-        ]
-    },
+    }
 ]

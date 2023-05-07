@@ -26,10 +26,11 @@ export const AMMUNITION = "Ammunition"
 
 /**
  * Weapons in Imperial Assault
+ * (all weapon ids in the 2000's)
  */
 export const WEAPONS = [
     {
-        id: 0,
+        id: 2000,
         name: '434 "Deathhammer"',
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -44,7 +45,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 1,
+        id: 2001,
         name: "A-12 Sniper Rifle",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -60,7 +61,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 2,
+        id: 2002,
         name: "A280",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -75,9 +76,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 3,
+        id: 2003,
         name: "All-Weather Rifle",
         description: "Loku Kanoloa starter weapon", // TODO?
+        starter: true,
         type: RANGED,
         traits: [PROJECTILE, RIFLE],
         attackDice: [BLUE, GREEN],
@@ -90,7 +92,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 4,
+        id: 2004,
         name: "Bo-rifle",
         type: MELEE,
         traits: [STAFF, RIFLE],
@@ -104,9 +106,10 @@ export const WEAPONS = [
         ]
     }, // TODO: option of ranged attack with one less surge
     {
-        id: 5,
+        id: 2005,
         name: "Bodyguard Rifle",
         description: "Onar Koma starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, RIFLE],
         attackDice: [GREEN, RED],
@@ -117,7 +120,7 @@ export const WEAPONS = [
         surgeAbilities: []
     }, // TODO: Use -1 damage and +2 accuracy?
     {
-        id: 6,
+        id: 2006,
         name: "Charge Pistol",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -132,7 +135,7 @@ export const WEAPONS = [
         ]
     }, // TODO: Use damage token?
     {
-        id: 300,
+        id: 2300,
         name: "Close and Personal",
         type: MELEE,
         traits: [],
@@ -144,9 +147,10 @@ export const WEAPONS = [
         surgeAbilities: []
     },
     {
-        id: 7,
+        id: 2007,
         name: "DC-15S Blaster",
         description: "CT-1701 starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER],
         attackDice: [GREEN, GREEN],
@@ -157,7 +161,7 @@ export const WEAPONS = [
         surgeAbilities: []
     }, // TODO: If target didn't get any damage, gain damage token
     {
-        id: 8,
+        id: 2008,
         name: "DDC Defender",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -172,7 +176,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 9,
+        id: 2009,
         name: "DH-17",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -187,9 +191,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 10,
+        id: 2010,
         name: "Diplomat's Blaster",
         description: "Murne Rin starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [BLUE, GREEN],
@@ -202,7 +207,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 11,
+        id: 2011,
         name: "Disruptor Pistol",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -216,7 +221,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 12,
+        id: 2012,
         name: "DL-44",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -231,7 +236,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 13,
+        id: 2013,
         name: "DLT-19",
         type: RANGED,
         traits: [BLASTER, HEAVY],
@@ -246,7 +251,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 14,
+        id: 2014,
         name: "DT-12 Heavy Blaster Pistol",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -261,7 +266,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 15,
+        id: 2015,
         name: "DXR-6",
         type: RANGED,
         traits: [DISRUPTOR, RIFLE],
@@ -276,7 +281,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 16,
+        id: 2016,
         name: "E-11",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -291,7 +296,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 17,
+        id: 2017,
         name: "E-11D",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -305,7 +310,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 18,
+        id: 2018,
         name: "EE-3 Carbine",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -320,9 +325,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 19,
+        id: 2019,
         name: "Hair-Trigger Pistol",
         description: "Vinto Hreeda starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [BLUE, YELLOW],
@@ -337,7 +343,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 20,
+        id: 2020,
         name: "Hand Cannon",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -349,9 +355,10 @@ export const WEAPONS = [
         surgeAbilities: []
     }, // TODO: May apply -1 damage and +2 accuracy
     {
-        id: 21,
+        id: 2021,
         name: "Holdout Blaster",
         description: "Gideon Argus starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [BLUE, YELLOW],
@@ -364,7 +371,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 22,
+        id: 2022,
         name: "Hunter's Rifle",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -379,9 +386,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 23,
+        id: 2023,
         name: "Infantry Rifle",
         description: "Fenn Signis starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, RIFLE],
         attackDice: [BLUE, GREEN],
@@ -395,9 +403,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 24,
+        id: 2024,
         name: "Longblaster",
         description: "Mak Eshka'rey starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, RIFLE],
         attackDice: [BLUE, BLUE],
@@ -411,9 +420,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 25,
+        id: 2025,
         name: 'MGL-9 "Boomer"',
         description: "Drokkatta starter weapon",
+        starter: true,
         type: RANGED,
         traits: [PROJECTILE, EXPLOSIVE],
         attackDice: [BLUE, RED],
@@ -426,9 +436,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 26,
+        id: 2026,
         name: "Military Blaster",
         description: "Verena Talos starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [BLUE, YELLOW],
@@ -442,9 +453,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 27,
+        id: 2027,
         name: "Modified Blaster",
         description: "Saska Teft starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [GREEN, YELLOW],
@@ -459,7 +471,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 28,
+        id: 2028,
         name: "Modified Energy Cannon",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -474,7 +486,7 @@ export const WEAPONS = [
         ]
     }, // TODO: Pick ability dice for wrench
     {
-        id: 29,
+        id: 2029,
         name: "Off-Hand Blaster",
         description: "Vinto Hreeda 3 XP upgrade",
         type: RANGED,
@@ -489,7 +501,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 30,
+        id: 2030,
         name: "Pulse Cannon",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -505,7 +517,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 31,
+        id: 2031,
         name: "Repeater Cannon",
         description: "Drokkatta 3 XP upgrade",
         type: RANGED,
@@ -520,9 +532,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 32,
+        id: 2032,
         name: "Repeating Blaster",
         description: "Biv Bodhrik starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, HEAVY],
         attackDice: [BLUE, RED],
@@ -535,9 +548,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 33,
+        id: 2033,
         name: "Service Rifle",
         description: "Ko-Tun Feralo starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, RIFLE],
         attackDice: [BLUE, GREEN],
@@ -550,9 +564,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 34,
+        id: 2034,
         name: "Sidearm Blaster",
         description: "MHD-19 starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [BLUE, YELLOW],
@@ -565,7 +580,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 35,
+        id: 2035,
         name: "Sporting Blaster",
         type: RANGED,
         traits: [BLASTER, PISTOL],
@@ -581,7 +596,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 36,
+        id: 2036,
         name: "T-21",
         type: RANGED,
         traits: [BLASTER, HEAVY],
@@ -596,7 +611,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 37,
+        id: 2037,
         name: "Tatooine Hunting Rifle",
         type: RANGED,
         traits: [PROJECTILE, RIFLE],
@@ -610,7 +625,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 38,
+        id: 2038,
         name: "Valken-38 Carbine",
         type: RANGED,
         traits: [BLASTER, RIFLE],
@@ -625,9 +640,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 39,
+        id: 2039,
         name: "Vintage Blaster",
         description: "Jyn Odan starter weapon",
+        starter: true,
         type: RANGED,
         traits: [BLASTER, PISTOL],
         attackDice: [GREEN, GREEN],
@@ -641,7 +657,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 40,
+        id: 2040,
         name: "Ancient Lightsaber",
         type: MELEE,
         traits: [BLADE, ENERGY],
@@ -656,7 +672,7 @@ export const WEAPONS = [
         ]
     }, // TODO: Pick insight dice for dice
     {
-        id: 41,
+        id: 2041,
         name: "Armored Gauntlets",
         type: MELEE,
         traits: [FIST],
@@ -671,7 +687,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 42,
+        id: 2042,
         name: "BD-1 Vibro-Ax",
         type: MELEE,
         traits: [BLADE, STAFF],
@@ -685,7 +701,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 43,
+        id: 2043,
         name: "Bo-rifle",
         type: MELEE,
         traits: [STAFF, RIFLE],
@@ -699,7 +715,7 @@ export const WEAPONS = [
         ]
     }, // TODO: check if -1 surge applies
     {
-        id: 44,
+        id: 2044,
         name: "Double Vibrosword",
         type: MELEE,
         traits: [BLADE],
@@ -713,9 +729,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 45,
+        id: 2045,
         name: "Duelist's Blade",
         description: "Shyla Varad starter weapon",
+        starter: true,
         type: MELEE,
         traits: [BLADE],
         attackDice: [GREEN, YELLOW],
@@ -729,7 +746,7 @@ export const WEAPONS = [
         ]
     }, // TODO: Check if replace yellow with red?
     {
-        id: 46,
+        id: 2046,
         name: "Electrostaff",
         type: MELEE,
         traits: [STAFF, ENERGY],
@@ -743,7 +760,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 47,
+        id: 2047,
         name: "Fighting Knife",
         description: "Verena Talos starting weapon",
         type: MELEE,
@@ -758,7 +775,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 48,
+        id: 2048,
         name: "Force Pike",
         type: MELEE,
         traits: [STAFF],
@@ -773,7 +790,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 49,
+        id: 2049,
         name: "Gaffi Stick",
         type: MELEE,
         traits: [CLUB],
@@ -785,9 +802,10 @@ export const WEAPONS = [
         surgeAbilities: []
     },
     {
-        id: 50,
+        id: 2050,
         name: "Heirloom Dagger",
         description: "Davith Elso starter weapon",
+        starter: true,
         type: MELEE,
         traits: [BLADE],
         attackDice: [GREEN, YELLOW],
@@ -801,9 +819,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 51,
+        id: 2051,
         name: "Plasteel Staff",
         description: "Diala Passil starter weapon",
+        starter: true,
         type: MELEE,
         traits: [STAFF],
         attackDice: [GREEN, YELLOW],
@@ -816,7 +835,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 52,
+        id: 2052,
         name: "Polearm",
         type: MELEE,
         traits: [BLADE, STAFF],
@@ -830,7 +849,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 53,
+        id: 2053,
         name: "Punch Dagger",
         type: MELEE,
         traits: [BLADE, FIST],
@@ -845,9 +864,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 54,
+        id: 2054,
         name: "Reinforced Cyberarm",
         description: "Tress Hacnua starter weapon",
+        starter: true,
         type: MELEE,
         traits: [FIST],
         attackDice: [GREEN, BLUE],
@@ -858,7 +878,7 @@ export const WEAPONS = [
         surgeAbilities: []
     },
     {
-        id: 55,
+        id: 2055,
         name: "Rykk Blades",
         type: MELEE,
         traits: [BLADE],
@@ -870,7 +890,7 @@ export const WEAPONS = [
         surgeAbilities: []
     }, // TODO: Pick attack dice as strength pool, convert surge to damage?
     {
-        id: 56,
+        id: 2056,
         name: "Shrouded Lightsaber",
         description: "Davith Elso 3 XP upgrade",
         type: MELEE,
@@ -895,7 +915,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 57,
+        id: 2057,
         name: "Shu Yen's Lightsaber",
         description: "Diala reward",
         type: MELEE,
@@ -911,7 +931,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 58,
+        id: 2058,
         name: "Stun Baton",
         type: MELEE,
         traits: [STAFF],
@@ -925,7 +945,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 59,
+        id: 2059,
         name: "Vibro Knucklers",
         type: MELEE,
         traits: [FIST, BLADE],
@@ -940,9 +960,10 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 60,
+        id: 2060,
         name: "Vibro-Ax",
         description: "Gaarkhan starter weapon",
+        starter: true,
         type: MELEE,
         traits: [BLADE],
         attackDice: [RED, YELLOW],
@@ -955,9 +976,10 @@ export const WEAPONS = [
         ]
     }, // TODO: Handle if they want to pick Cleave?
     {
-        id: 61,
+        id: 2061,
         name: "Vibro-Claws",
         description: "Jarrod Kelvin starter weapon",
+        starter: true,
         type: MELEE,
         traits: [BLADE, FIST],
         attackDice: [YELLOW, YELLOW],
@@ -970,7 +992,7 @@ export const WEAPONS = [
         ]
     }, // TODO: Get rid of token surge abilities
     {
-        id: 62,
+        id: 2062,
         name: "Vibroblade",
         type: MELEE,
         traits: [BLADE],
@@ -984,7 +1006,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 63,
+        id: 2063,
         name: "Vibroknife",
         type: MELEE,
         traits: [BLADE],
@@ -999,7 +1021,7 @@ export const WEAPONS = [
         ]
     },
     {
-        id: 64,
+        id: 2064,
         name: "Vibrosword",
         type: MELEE,
         traits: [BLADE],

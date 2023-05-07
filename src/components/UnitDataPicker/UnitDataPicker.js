@@ -1,54 +1,45 @@
 import React from 'react'
 import { Stack } from 'react-bootstrap'
 import { CollapsableDataArea } from '../CollapsableDataArea'
-import ClassCardSelect from './ClassCardSelect'
-import ModSelect from './ModSelect'
 import OptionalAbilitiesInput from './OptionalAbilitiesInput'
-import UnitSelect from './UnitSelect'
-import WeaponSelect from './WeaponSelect'
 import CheckboxInput from './CheckboxInput'
-import { CLASS_CARD, cleanSelectedOptional, MOD, 
-    summarizeUnitData, UNIT, WEAPON } from '../../utilities'
+import { cleanSelectedOptional, summarizeUnitData} from '../../utilities'
+import CardsSelect from './CardsSelect'
 
 export default function UnitDataPicker({ data, setData, isAttack = false }) {
-    const { unit, classCards, weapon, mods, focused, hidden, selectedOptionalIds } = data
+    const { cards, focused, hidden, selectedOptionalIds } = data
     
-    const onDataChange = (property) => (newValue) => {
+    const getOnDataChange = (property) => (newValue) => {
         setData({ 
-            ...data, 
-            selectedOptionalIds: cleanSelectedOptional(selectedOptionalIds, newValue, property),
+            ...data,
+            selectedOptionalIds: (property === "cards") ? cleanSelectedOptional(selectedOptionalIds, newValue) : selectedOptionalIds,
             [property]: newValue,
         })
     }
 
     return (
-        <CollapsableDataArea label="Unit" collapsedData={summarizeUnitData(data)} startCollapsed>
+        <CollapsableDataArea label="Cards" collapsedData={summarizeUnitData(data)} startCollapsed>
             <Stack gap={2}>
                 <Stack direction="horizontal" gap={2}>
-                    <UnitSelect value={unit} onChange={onDataChange(UNIT)} />
+                    <CardsSelect values={cards} onChange={getOnDataChange("cards")} />
                     {isAttack && 
                         <CheckboxInput 
                             label="Focused" 
                             id={ isAttack ? "attack-focused-checkbox" : "defense-focused-checkbox" } 
                             value={focused} 
-                            onChange={onDataChange("focused")}
+                            onChange={getOnDataChange("focused")}
                         />
                     }
                     <CheckboxInput 
                         label="Hidden" 
                         id={ isAttack ? "attack-hidden-checkbox" : "defense-hidden-checkbox" } 
                         value={hidden} 
-                        onChange={onDataChange("hidden")}
+                        onChange={getOnDataChange("hidden")}
                     />
-                </Stack>
-                <ClassCardSelect value={classCards} onChange={onDataChange(CLASS_CARD)} />
-                <Stack direction="horizontal" gap={2}>
-                    <WeaponSelect value={weapon} onChange={onDataChange(WEAPON)} />
-                    <ModSelect value={mods} onChange={onDataChange(MOD)} />
                 </Stack>
                 <OptionalAbilitiesInput
                     values={selectedOptionalIds}
-                    onChange={onDataChange("selectedOptionalIds")}
+                    onChange={getOnDataChange("selectedOptionalIds")}
                     unitData={data}
                     isAttack={isAttack}
                 />

@@ -1,10 +1,7 @@
 import { useState } from "react"
 
 export const getEmptyUnitData = (changes) => ({ 
-    unit: null, 
-    classCards: [],
-    weapon: null,
-    mods: [],
+    cards: [],
     focused: false,
     hidden: false,
     selectedOptionalIds: [],

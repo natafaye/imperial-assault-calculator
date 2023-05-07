@@ -393,7 +393,7 @@ export default class Attack {
             dotProduct += this.rolls[i] * probabilities[i]
             sumValue += probabilities[i]
         }
-        return dotProduct / sumValue
+        return sumValue && dotProduct / sumValue
     }
 
     /**

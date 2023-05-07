@@ -7,10 +7,10 @@ export default function RerollListLabels({ abilities = [[], []], className = "",
         <>
             {abilities.flatMap((list, type) =>
                 list.map((ability, index) => (
-                    <span className={className} key={index}>
+                    <span className={className} key={type + "-" + index}>
                         <RerollAbilityLabel 
                             ability={ability} 
-                            prefix={labelAttack ? "When " + (type == ATTACK ? "attacking " : "defending ") : ""} 
+                            prefix={labelAttack ? "When " + (type === ATTACK ? "attacking " : "defending ") : ""} 
                         />
                         {showHRBelow ? <hr /> : index !== list.length - 1 ? <span className="me-2">,</span> : ""}
                     </span>
