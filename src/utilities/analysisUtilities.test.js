@@ -1,4 +1,4 @@
-import { addValues, getAttackData, getAverage, getCardType, getDefenseData, getHistograms } from "./analysisUtilities"
+import { addValues, getAttackData, getAverage, getCardFromId, getCardType, getDefenseData, getHistograms } from "./analysisUtilities"
 import { UNITS, CLASS_CARDS, BLACK, BLUE, GREEN, YELLOW, RED, WEAPONS, WHITE, DEFENSE, MODS } from "../data"
 import { CLASS_CARD, MOD, UNIT, WEAPON } from "./optionalAbilityUtilities"
 
@@ -131,5 +131,14 @@ describe("getCardType", () => {
         WEAPONS.forEach(c => expect(getCardType(c)).toBe(WEAPON))
         MODS.forEach(c => expect(getCardType(c)).toBe(MOD))
         CLASS_CARDS.forEach(c => expect(getCardType(c)).toBe(CLASS_CARD))
+    })
+})
+
+describe("getCardFromId", () => {
+    it("works with all units, weapons, mods, and class cards", () => {
+        UNITS.forEach(c => expect(getCardFromId(c.id)).toBe(c))
+        WEAPONS.forEach(c => expect(getCardFromId(c.id)).toBe(c))
+        MODS.forEach(c => expect(getCardFromId(c.id)).toBe(c))
+        CLASS_CARDS.forEach(c => expect(getCardFromId(c.id)).toBe(c))
     })
 })

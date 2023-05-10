@@ -35,7 +35,7 @@ const noMatchesMessage = <>
     <p>Separate search terms with a space.</p>
 </>
 
-export default function CardsSelect({ value, onChange }) {
+export default function CardsSelect({ values, onChange }) {
     return (
         <Select
             options={CARD_OPTIONS}
@@ -45,7 +45,7 @@ export default function CardsSelect({ value, onChange }) {
             getOptionValue={c => c.id}
             placeholder="Select Cards"
             noOptionsMessage={() => noMatchesMessage}
-            value={value}
+            value={values}
             onChange={onChange}
             isMulti={true}
             isClearable={true}

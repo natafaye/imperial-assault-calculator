@@ -1,7 +1,5 @@
 import UnitDataPicker from "./UnitDataPicker";
-import useUnitData from "./useUnitData"
-import { getEmptyUnitData } from "./useUnitData";
+import { useUnitData, useUnitDataWithSearchParams, getEmptyUnitData } from "./useUnitData"
 
 export default UnitDataPicker;
-
-export { useUnitData, getEmptyUnitData }
+export { useUnitData, useUnitDataWithSearchParams, getEmptyUnitData }

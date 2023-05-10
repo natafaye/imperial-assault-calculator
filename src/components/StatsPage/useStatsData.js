@@ -1,15 +1,17 @@
 import { useState } from "react"
-import { useCustomData } from "../../components/CustomDataPicker"
-import { useUnitData } from "../../components/UnitDataPicker"
 import { useLocalStorageState } from "../../utilities"
+import { useCustomDataWithSearchParams } from "../CustomDataPicker"
+import { useUnitDataWithSearchParams } from "../UnitDataPicker"
+import { useSearchParams } from "react-router-dom"
 
-const getEmptyResults = () => ({ histogram: [], average: 0, totalNum: 0 })
+const getEmptyResults = () => ({ histogram: [], average: 0 })
 
 export default function useStatsData() {
-    const [customAttack, customAttackDispatch] = useCustomData()
-    const [customDefense, customDefenseDispatch] = useCustomData()
-    const [unitAttack, setUnitAttack] = useUnitData()
-    const [unitDefense, setUnitDefense] = useUnitData()
+    const [params, setParams] = useSearchParams()
+    const [unitAttack, setUnitAttack] = useUnitDataWithSearchParams("a", params, setParams)
+    const [unitDefense, setUnitDefense] = useUnitDataWithSearchParams("d", params, setParams)
+    const [customAttack, customAttackDispatch] = useCustomDataWithSearchParams("a", params, setParams)
+    const [customDefense, customDefenseDispatch] = useCustomDataWithSearchParams("d", params, setParams)
     const [requiredAccuracy, setRequiredAccuracy] = useState(0)
     const [results, setResults] = useState(getEmptyResults())
 

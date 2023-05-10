@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
 import { CLASS_CARD, MOD, UNIT, WEAPON, getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE } from '../data'
+import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE, UNITS, WEAPONS, MODS, CLASS_CARDS } from '../data'
 
 /**
  * Interface function that gets an Attack object with the right data
@@ -222,4 +222,16 @@ export const getCardType = (card) => {
     if(card.id >= 3000) return MOD
     if(card.id >= 2000) return WEAPON
     else return UNIT
+}
+
+/**
+ * Gets the unit, weapon, mod, or class card with a particular id
+ * @param {number} id The id to check for
+ * @returns {object} The unit, weapon, mod, or class card with that id
+ */
+export const getCardFromId = (id) => {
+    return UNITS.find(u => u.id === id) 
+        || WEAPONS.find(w => w.id === id) 
+        || MODS.find(m => m.id === id) 
+        || CLASS_CARDS.find(c => c.id === id)
 }

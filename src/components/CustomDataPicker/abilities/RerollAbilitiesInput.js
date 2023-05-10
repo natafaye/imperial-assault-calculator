@@ -60,6 +60,8 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
     <PropertyInput
       property={RER}
       value={formData[AMOUNT]}
+      min={1}
+      max={5}
       onChange={(e) => onUpdate(AMOUNT, e.target.value)}
       idPrefix={idPrefix + "-reroll"}
       disabled={formData[AMOUNT] === undefined}

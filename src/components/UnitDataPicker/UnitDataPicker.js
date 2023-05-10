@@ -18,7 +18,7 @@ export default function UnitDataPicker({ data, setData, isAttack = false }) {
     }
 
     return (
-        <CollapsableDataArea label="Cards" collapsedData={summarizeUnitData(data)} startCollapsed>
+        <CollapsableDataArea label="Cards" collapsedData={summarizeUnitData(data)}>
             <Stack gap={2}>
                 <Stack direction="horizontal" gap={2}>
                     <CardsSelect values={cards} onChange={getOnDataChange("cards")} />
