@@ -1,4 +1,8 @@
 // Colors for the bar chart bars and text, at indexes corresponding to the values
+
+import { DAM } from "../../data";
+import PropertyIcon from "../_icons/PropertyIcon";
+
 // The last color is used for all subsequent numbers
 export const BAR_COLORS = ["#E74C3C", "#49CFAD", "#00BC8C", "#00AA7E", "#019971", "#018763", "#017555", "#026448", "#02523A"]
 export const BAR_TEXT_COLORS = ["#FFF", "#222", "#222", "#222", "#222", "#FFF"]
@@ -42,13 +46,14 @@ export const renderDamageTicks = (tick) => (
 
 /**
  * A tooltip for a Histogram that looks like this:
- *     230 / 1296
- *     Exactly: 17.75%
- *     At Least: 32.18%
+ *     2 <DamageIcon>
+ *     Exactly: 17%
+ *     At Least: 32%
  */
 export function HistogramTooltip({ item }) {
     return (
         <div className="bg-light p-2 rounded text-dark">
+            {item.value} <PropertyIcon property={DAM} className="ms-2"/><br/>
             Exactly: {item.percentage.toFixed(0)}%<br />
             At Least: {item.atLeastPercentage.toFixed(0)}%
         </div>
