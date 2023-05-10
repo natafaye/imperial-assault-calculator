@@ -1,10 +1,12 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Button } from "react-bootstrap";
-import { SummarizedDataLabel, SurgeListLabels, CardLabel } from "../../components/_labels"
-import PropertyIcon from "../../components/_icons/PropertyIcon";
-import DieIcon from "../../components/_icons/DieIcon";
+import { Link } from "react-router-dom";
+import { SummarizedDataLabel, SurgeListLabels, CardLabel } from "../_labels"
+import PropertyIcon from "../_icons/PropertyIcon";
+import DieIcon from "../_icons/DieIcon";
+import { getSearchParamsForAttack } from "../../utilities";
 import { ACC, BLACK, DAM, WHITE } from "../../data";
 
 const AverageHeader = ({ die, property }) => (
@@ -29,10 +31,15 @@ const ValueCell = ({ value, property, decimalPoints = 2 }) => (
     </span>
 )
 
-const RowActions = ({ id, onDelete }) => (
-    <Button variant="outline-danger" size="sm" onClick={() => onDelete(id)}>
-        <FontAwesomeIcon icon={faTrash} title="Delete Attack" />
-    </Button>
+const RowActions = ({ id, onDelete, searchParams }) => (
+    <>
+        <Link to={"/?" + searchParams.toString()} className="btn btn-outline-warning btn-sm me-2">
+            <FontAwesomeIcon icon={faChartSimple} title="See stats for this attack" />
+        </Link>
+        <Button variant="outline-danger" size="sm" onClick={() => onDelete(id)}>
+            <FontAwesomeIcon icon={faTrash} title="Delete attack" />
+        </Button>
+    </>
 )
 
 const columnHelper = createColumnHelper();
@@ -83,7 +90,7 @@ export const getTableColumns = (onDelete) => [
     columnHelper.display({
         id: 'actions',
         header: "Actions",
-        cell: props => <RowActions id={props.row.original.id} onDelete={onDelete} />
+        cell: props => <RowActions id={props.row.original.id} onDelete={onDelete} searchParams={getSearchParamsForAttack(props.row.original)} />
     })
 ]
 

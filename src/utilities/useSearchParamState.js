@@ -28,7 +28,7 @@ export const useSearchParamsState = ({ params, setParams, toConverter, fromConve
   const setState = (newState) => {
     //setState(newState)
     setParams(prevParams => {
-      const newParams = (typeof newState === "function") ? toConverter(newState(fromConverter(prevParams))) : toConverter(newState)
+      const newParams = (typeof newState === "function") ? toConverter(newState(new URLSearchParams(fromConverter(prevParams)))) : toConverter(newState)
       return updateSearchParams(newParams, prevParams)
     })
   }

@@ -8,10 +8,10 @@ const getEmptyResults = () => ({ histogram: [], average: 0 })
 
 export default function useStatsData() {
     const [params, setParams] = useSearchParams()
-    const [unitAttack, setUnitAttack] = useUnitDataWithSearchParams("a", params, setParams)
-    const [unitDefense, setUnitDefense] = useUnitDataWithSearchParams("d", params, setParams)
-    const [customAttack, customAttackDispatch] = useCustomDataWithSearchParams("a", params, setParams)
-    const [customDefense, customDefenseDispatch] = useCustomDataWithSearchParams("d", params, setParams)
+    const [unitAttack, setUnitAttack] = useUnitDataWithSearchParams(params, setParams, true)
+    const [unitDefense, setUnitDefense] = useUnitDataWithSearchParams(params, setParams, false)
+    const [customAttack, customAttackDispatch] = useCustomDataWithSearchParams(params, setParams, true)
+    const [customDefense, customDefenseDispatch] = useCustomDataWithSearchParams(params, setParams, false)
     const [requiredAccuracy, setRequiredAccuracy] = useState(0)
     const [results, setResults] = useState(getEmptyResults())
 

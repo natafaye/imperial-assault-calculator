@@ -8,7 +8,7 @@ import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
-import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED } from '../../data'
+import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED, ATTACK } from '../../data'
 import { useEffect } from 'react'
 
 export default function ComparePage({ compareData, compareUpdaters }) {
@@ -34,7 +34,8 @@ export default function ComparePage({ compareData, compareUpdaters }) {
       dice: a.attackDice,
       bonus: a.attackBonus,
       surgeAbilities: a.surgeAbilities,
-      unitData: { cards: [a] }
+      rerollAbilities: (a.rerollAbilities && a.rerollAbilities[ATTACK]) || [],
+      unitData: { cards: [a], focused: false, hidden: false, selectedOptionalIds: [] }
     }))
     setAttackList([...additions, ...attackList])
   }

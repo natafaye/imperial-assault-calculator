@@ -1,5 +1,6 @@
 import { useReducer } from "react"
-import { useSearchParamsReducer, MAX_PROPERTY_VALUE, MAX_REROLL_TYPE, MIN_PROPERTY_VALUE, MIN_REROLL_TYPE } from "../../utilities"
+import { useSearchParamsReducer, convertCustomDataToParamData, MAX_PROPERTY_VALUE, MAX_REROLL_TYPE, 
+    MIN_PROPERTY_VALUE, MIN_REROLL_TYPE, DEFENSE_CUSTOM_PARAM_NAMES, ATTACK_CUSTOM_PARAM_NAMES } from "../../utilities"
 import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE } from "../../data"
 
 const initialValues = () => ({
@@ -98,15 +99,8 @@ export function useCustomData() {
  * @param {string} prefix Prefix to put on the beginning of the search params to distinguish them from others made by this hook
  * @returns {[object, function(object)]} The custom data and a dispatch function that updates the state and the search params
  */
-export function useCustomDataWithSearchParams(prefix, params, setParams) {
-    const [diceParam, bonusParam, rerollsParam, surgesParam] = [`${prefix}dice`, `${prefix}bonus`, `${prefix}rerolls`, `${prefix}surges`]
-
-    const toConverter = (data) => ({
-        [diceParam]: data.dice.join("."),
-        [bonusParam]: data.bonus.some(b => b) ? data.bonus.join(".") : "",
-        [rerollsParam]: data.rerollAbilities?.map(ability => ability.join(".")).join("_") || "",
-        [surgesParam]: data.surgeAbilities?.map(ability => ability.join(".")).join("_") || ""
-    })
+export function useCustomDataWithSearchParams(params, setParams, isAttack) {
+    const [diceParam, bonusParam, rerollsParam, surgesParam] = (isAttack) ? ATTACK_CUSTOM_PARAM_NAMES : DEFENSE_CUSTOM_PARAM_NAMES
     
     const fromConverter = (params) => {
         const data = {}
@@ -152,5 +146,5 @@ export function useCustomDataWithSearchParams(prefix, params, setParams) {
         return data
     }
 
-    return useSearchParamsReducer({ reducer, params, setParams, toConverter, fromConverter })
+    return useSearchParamsReducer({ reducer, params, setParams, toConverter: (data) => convertCustomDataToParamData(data, isAttack), fromConverter })
 }
