@@ -6,14 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AddAttackForm from './AddAttackForm'
 import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
+import useCompareData from './useCompareData'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
 import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED } from '../../data'
+import { useEffect } from 'react'
 
-export default function ComparePage({ data, updaters }) {
-  const { attackList, sorting, columnVisibility } = data
-  const { setAttackList, setSorting, setColumnVisibility } = updaters
+export default function ComparePage() {
+  const [compareData, compareUpdaters] = useCompareData()
+  const { attackList, sorting, columnVisibility } = compareData
+  const { setAttackList, setSorting, setColumnVisibility } = compareUpdaters
   const [showAddForm, setShowAddForm] = useState(false)
+
+  useEffect(() => {
+    document.title = "Compare | Imperial Assault Calculator"
+  }, [])
 
   const addAttack = (attack) => {
     setAttackList([getCompareResults(attack), ...attackList])

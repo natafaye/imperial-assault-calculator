@@ -28,3 +28,29 @@ export const summarizeUnitData = ({ cards = [], focused = false, hidden = false 
         allData.push("Hidden")
     return (allData.length <= 2) ? allData.join(" and ") : allData.slice(0, -2).join(", ") + ", " + allData.slice(-2).join(" and ")
 }
+
+/**
+ * Take a set of attack and defense (custom and unit) data and creates a string summarizing the data
+ * 
+ * @param {{ customAttack, customDefense, unitAttack, unitDefense}} allData All the attack and defense data to summarize
+ * @return {string} A summary string
+ */
+export const summarizeAttackAndDefense = (allData) => {
+    let attackString = ""
+    if(allData.unitAttack.cards.length)
+        attackString = summarizeUnitData(allData.unitAttack)
+    else if(allData.customAttack.dice.length)
+        attackString = allData.customAttack.dice.join(" & ")
+
+    let defenseString = ""
+    if(allData.unitDefense.cards.length)
+        defenseString = summarizeUnitData(allData.unitDefense) 
+    else if(allData.customDefense.dice.length)
+        defenseString = allData.customDefense.dice.join(" & ")
+
+    let attackAndDefenseString = attackString
+    if(attackString && defenseString)
+        attackAndDefenseString += " vs " + defenseString
+
+    return attackAndDefenseString
+}

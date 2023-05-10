@@ -1,11 +1,19 @@
 import React from 'react'
 import StatsDataInput from "./StatsDataInput";
 import StatsHistogram from './StatsHistogram';
-import { getStatsResults } from '../../utilities';
+import useStatsData from './useStatsData';
+import { getStatsResults, summarizeAttackAndDefense } from '../../utilities';
+import { useEffect } from 'react';
 
-export default function StatsPage({ data, updaters }) {
-    const { results, settings, ...inputData } = data
-    const { setResults, setSettings, ...inputUpdaters } = updaters
+export default function StatsPage() {
+    const [statsData, statsUpdaters] = useStatsData()
+    const { results, settings, ...inputData } = statsData
+    const { setResults, setSettings, ...inputUpdaters } = statsUpdaters
+
+    useEffect(() => {
+        const summary = summarizeAttackAndDefense(inputData)
+        document.title = (summary ? summary + " | " : "") + "Imperial Assault Calculator"
+    }, [inputData])
 
     const calculate = () => setResults(getStatsResults(inputData))
 
