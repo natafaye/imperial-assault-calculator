@@ -11,13 +11,14 @@ import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE, UNITS, W
  * @param {number?} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
  * @returns {Attack} An Attack object
  */
-export const getAttackObject = (attack, defense, requiredAccuracy = 0) => {
+export const getAttackObject = (attack, defense, requiredAccuracy = 0, postWebWorkerMessage) => {
     return new Attack(
         attack.dice.concat(defense?.dice || []),
         attack.surgeAbilities,
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
-        [ attack.rerollAbilities || [], defense?.rerollAbilities || [] ]
+        [ attack.rerollAbilities || [], defense?.rerollAbilities || [] ],
+        postWebWorkerMessage
     )
 }
 
@@ -33,8 +34,8 @@ export const getAttackObject = (attack, defense, requiredAccuracy = 0) => {
  *  histogram: {value: number, amount: number, percentage: number, atLeastPercentage: number }[],
  * }} All the stats data
  */
-export const getStatsResults = ({ customAttack, customDefense, requiredAccuracy }) => {
-    const attackData = getAttackObject(customAttack, customDefense, requiredAccuracy)
+export const getStatsResults = ({ customAttack, customDefense, requiredAccuracy }, postWebWorkerMessage) => {
+    const attackData = getAttackObject(customAttack, customDefense, requiredAccuracy, postWebWorkerMessage)
     return {
         average: attackData.average,
         histogram: getHistogram(attackData.rolls, attackData.probabilities)

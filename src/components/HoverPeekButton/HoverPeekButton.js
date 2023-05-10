@@ -2,7 +2,7 @@ import React from 'react'
 import { useSpring, animated } from '@react-spring/web'
 import styles from './hover-peek-button.module.css'
 
-export default function HoverPeekButton({ children, as = "button", onClick, className = "", peekClassName, ...props }) {
+export default function HoverPeekButton({ children, as = "button", onClick, className = "", peekClassName, peekTextColor = "white", ...props }) {
     const [{ y }, api] = useSpring(() => ({ y: 100 }))
 
     const Component = as;
@@ -26,7 +26,7 @@ export default function HoverPeekButton({ children, as = "button", onClick, clas
             />
             <animated.span 
                 className={styles.content} 
-                style={{ color: y.to(v => v < 50 ? "white" : "" )}}
+                style={{ color: y.to(v => v < 50 ? peekTextColor : "" )}}
             >
                 {children}
             </animated.span>

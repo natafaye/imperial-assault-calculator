@@ -33,6 +33,11 @@
         rgba(0, 188, 140, 1) 100%);
 }
 
+.darker-red-orange-green-gradient {
+    background: rgb(139,59,6);
+    background: linear-gradient(90deg, rgba(139,59,6,1) 0%, rgba(194,124,11,1) 39%, rgba(175,120,14,1) 63%, rgba(0,124,92,1) 100%);
+}
+
 .no-background { background: none !important; }
 .no-background:hover { background: none !important; }
 .no-background:active { background: none !important; }

@@ -6,14 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AddAttackForm from './AddAttackForm'
 import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
-import useCompareData from './useCompareData'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
 import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED } from '../../data'
 import { useEffect } from 'react'
 
-export default function ComparePage() {
-  const [compareData, compareUpdaters] = useCompareData()
+export default function ComparePage({ compareData, compareUpdaters }) {
   const { attackList, sorting, columnVisibility } = compareData
   const { setAttackList, setSorting, setColumnVisibility } = compareUpdaters
   const [showAddForm, setShowAddForm] = useState(false)

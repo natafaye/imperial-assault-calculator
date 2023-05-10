@@ -44,18 +44,41 @@ export default class Attack {
      * @param {number[6][]?} surge All the attacker's surge abilities in the format [ACC, DAM, SURGE_COST, BLO, EVA, DOD]
      * @param {number[6]?} bonus Any other bonuses (both attack and defense)
      * @param {number?} distance The distance to the target, or the minimum required accuracy below which damage is zero
-     * @param {[number[2][], number[2][]]} rerollabilities All the attacker's attack abilities and the defender's defend abilities
+     * @param {[number[2][], number[2][]]} rerollabilities All the attacker's attack abilities and the defender's defend abilities, ex: [[[0,1],[1,1]], []]
+     * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
      */
-    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []]) {
+    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []], postWebWorkerMessage) {
         this.dice = dice
         this.surgeabilities = surge
         this.bonus = bonus
         this.distance = distance
-        // attacker's reroll abilities are first list, defender's are second list
-        // each reroll ability is [type of dice, max number of dice]
         this.rerollabilities = rerollabilities
+
+        // Save access to function to post web worker messages, if running in web worker
+        this.postWebWorkerMessage = postWebWorkerMessage
+
         this.genrolls()
         this.average = this.calcaverage(this.probabilities)
+    }
+
+    /**
+     * If Attack is running in a Web Worker, sends a Web Worker message with the current progress percentage
+     * @param {{ stage, done, total }} status The stage 
+     * @returns 
+     */
+    updateWebWorkerProgress = function({ stage, done, total }) {
+        if(!this.postWebWorkerMessage) return
+
+        // Calculating roll damage is extimated to be the first 3% of the time when there are reroll abilities
+        // and the whole time when there are no reroll abilities
+        if(stage === "rolls") {
+            if(this.rerollabilities.some(a => a.length))
+                this.postWebWorkerMessage(3 * done / total)
+            else
+                this.postWebWorkerMessage(100 * done / total)
+        } else if(stage === "rerolls") {
+            this.postWebWorkerMessage(3 + (97 * done / total))
+        }
     }
 
     /**
@@ -94,6 +117,7 @@ export default class Attack {
             }
             const finalresult = this.rollresult(baseresult)
             this.rolls[rollid] = finalresult[hit]
+            this.updateWebWorkerProgress({ stage: "rolls", done: rollid, total: this.rolls.length })
         }
 
         // Factor in Punch Dagger ability to this.rolls damage values before calculating reroll probabilites
@@ -112,7 +136,8 @@ export default class Attack {
     }
 
     /**
-     * A recursive function that takes the probabilities of each possible roll and generates the probabilites 
+     * A recursive function that does a depth first search on reroll abilities
+     * and takes the probabilities of each possible roll and generates the probabilites 
      * after using all the remaining reroll abilities and dice that can be rerolled
      * Assumes players will pick the statisically best dice to reroll for each ability and statistically best order to use abilities
      * @param {number[]} probabilities The probabilities of each possible roll
@@ -120,7 +145,7 @@ export default class Attack {
      * @param {Set<number>} diceleft The indexes of all the dice left in the this.dice array that can be rerolled
      * @returns A new array of probabilities with the reroll abilities probabilities added in
      */
-    genrerolls(probabilities, abilities, diceleft) {
+    genrerolls(probabilities, abilities, diceleft, isRecursive) {
         // Pick the next ability type to use, and use attack abilities before defense abilities
         let playerid
         if (abilities[ATTACK].length)
@@ -191,8 +216,11 @@ export default class Attack {
         // Fill an array with zeros for all the possible rolls
         let newprobabilities = full(this.rolls.length, 0)
 
+        const totalProbabilitiesToCheck = probabilities.filter(p => p).length
+
         // For every possible roll
         for (let rollid = 0; rollid < probabilities.length; rollid++) {
+
             const p = probabilities[rollid]
             // If there is a chance the player will get to this roll
             if (p) {
@@ -211,7 +239,7 @@ export default class Attack {
                             const abilities2 = [abilities[0].slice(0), abilities[1].slice(0)]
                             abilities2[playerid].splice(abilityid, 1)
                             const diceleft2 = difference(diceleft, sets[setid])
-                            probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2)
+                            probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2, true)
                         }
 
                         // Add the result to the list of probabilities and average hits
@@ -227,7 +255,7 @@ export default class Attack {
                 if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
                     const abilities0 = abilities.slice(0)
                     abilities0[playerid] = []
-                    probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft)
+                    probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft, true)
                 }
 
                 // Add the result to the list of probabilities and average hits
@@ -246,6 +274,8 @@ export default class Attack {
 
                 // Add the probabilities for the best rerolls choice for this particular original roll to the list of probabilities
                 newprobabilities = addArrays(newprobabilities, probabilitieslist[probabilitiesid])
+                
+                if(!isRecursive) this.updateWebWorkerProgress({ stage: "rerolls", done: rollid, total: totalProbabilitiesToCheck })
             }
         }
 
