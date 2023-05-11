@@ -35,13 +35,13 @@ const noMatchesMessage = <>
     <p>Separate search terms with a space.</p>
 </>
 
-export default function CardsSelect({ values, onChange }) {
+export default function CardsSelect({ values, onChange, placement, className = "" }) {
     return (
         <Select
             options={CARD_OPTIONS}
-            className="text-dark w-100"
+            className={"text-dark w-100 " + className}
             filterOption={filterOption}
-            getOptionLabel={c => <CardLabel card={c} />}
+            getOptionLabel={c => <CardLabel card={c} placement={placement} />}
             getOptionValue={c => c.id}
             placeholder="Select Cards"
             noOptionsMessage={() => noMatchesMessage}

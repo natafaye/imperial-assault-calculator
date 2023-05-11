@@ -29,17 +29,17 @@ export default function StatsPage() {
 
     const calculate = () => {
         if(window.Worker) {
-            worker.onmessage = (e) => {
-                if(typeof e.data === "number") {
-                    setProgress(e.data)
-                } else if(typeof e.data === "object") {
-                    setResults(e.data)
+            worker.onmessage = (message) => {
+                if(typeof message.data === "number") {
+                    setProgress(message.data)
+                } else if(typeof message.data === "object") {
+                    setResults(message.data)
                     setError(null)
                     setProgress(null)
                 }
             }
             worker.onerror = (error) => {
-                setError("Uh oh! Something went wrong. Error Message: " + error.message)
+                setError("ERROR: " + error.message)
                 setProgress(null)
                 worker.terminate()
             }

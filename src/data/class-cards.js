@@ -1,4 +1,4 @@
-import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE, DEFENSE, ATTACK } from "./constants"
+import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK } from "./constants"
 import { REBEL } from "./units"
 
 // Hero names
@@ -729,15 +729,14 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
+		surgeAbilities: [],
         optionalAttack: [
             {
                 cost: "Attacking with a Melee weapon, exhaust Proximity Strike", 
-                rerollAbilities: [[], []]
+                rerollAbilities: [[DEFENSE_THEN_ATTACK, undefined], []]
             }
-        ],
-		surgeAbilities: [
         ]
-    }, // TODO: force reroll one defense THEN reroll one attack
+    },
     {
         id: 4034,
         name: "Rapid Fire",
@@ -749,8 +748,7 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-        ],
+		surgeAbilities: [],
         optionalAttack: [
             {
                 cost: "Attacking with a Ranged weapon",

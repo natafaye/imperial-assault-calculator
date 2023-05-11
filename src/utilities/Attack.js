@@ -3,6 +3,7 @@ import {
     DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE,
     DEFENSE, AMOUNT, ALL_ATTACK
 } from "../data"
+import { DEFENSE_THEN_ATTACK } from "../data/constants"
 import { full, union, difference, setInArray, range, argmax, argmin, addArrays } from "./pythonConversionUtilities"
 
 /**
@@ -145,10 +146,10 @@ export default class Attack {
      * @param {Set<number>} diceleft The indexes of all the dice left in the this.dice array that can be rerolled
      * @returns A new array of probabilities with the reroll abilities probabilities added in
      */
-    genrerolls(probabilities, abilities, diceleft, isRecursive) {
+    genrerolls(probabilities, abilities, diceleft, isRecursive = false, finishCoupledAbility = false) {
         // Pick the next ability type to use, and use attack abilities before defense abilities
         let playerid
-        if (abilities[ATTACK].length)
+        if (abilities[ATTACK].length || finishCoupledAbility)
             playerid = ATTACK
         else if (abilities[DEFENSE].length)
             playerid = DEFENSE
@@ -160,9 +161,18 @@ export default class Attack {
         if (!diceleft.size)
             return probabilities
 
+        
+        let abilitiestocheck = abilities[playerid]
+
+        // Finish proximity strike and add Attack reroll to list of abilities
+        if(finishCoupledAbility)
+            abilitiestocheck = abilitiestocheck.concat([[0, 1]])
+
         const listOfDiceSetsByAbility = new Array(abilities[playerid].length)
-        for (let abilityid = 0; abilityid < abilities[playerid].length; abilityid++) {
-            const ability = abilities[playerid][abilityid]
+        for (let abilityid = 0; abilityid < abilitiestocheck.length; abilityid++) {
+            const ability = abilitiestocheck[abilityid]
+            let diceTypeToReroll = ability[TYPE]
+            let amountToReroll = ability[AMOUNT]
 
             // Make a list of all the possible reroll combos
             let sets
@@ -184,6 +194,16 @@ export default class Attack {
                 // Or if it's a normal ability, build a list of all possible combos
             } else {
                 sets = []
+
+                // If it's the Proximity Strike ability
+                if(ability[TYPE] === DEFENSE_THEN_ATTACK) {
+                    // You don't have to do the defense reroll to get the attack one, so rerolling no dice is an option
+                    sets = [new Set()] 
+                    // We're rerolling 1 defense to start this ability out
+                    diceTypeToReroll = DEFENSE
+                    amountToReroll = 1
+                }
+
                 // Breadth first search to find all possible combos
                 const branches = [new Set()]
                 while (branches.length) {
@@ -191,7 +211,7 @@ export default class Attack {
                     // For each dice
                     for (const diceid of diceleft) {
                         // If the dice is the right player's and this combo hasn't already used this dice
-                        if (this.dicetype(diceid) === ability[TYPE] && !branch.has(diceid)) {
+                        if (this.dicetype(diceid) === diceTypeToReroll && !branch.has(diceid)) {
                             // Make a new combo with this dice on the end of it
                             const newbranch = union(branch, diceid)
                             // If we haven't already found this combo
@@ -202,7 +222,7 @@ export default class Attack {
                                 // We already pushed the current combo to the list, so we're assuming
                                 // this ability allows you to use less than the number specified
                                 // TODO: Confirm this on all abilities
-                                if (newbranch.size < ability[AMOUNT]) {
+                                if (newbranch.size < amountToReroll) {
                                     branches.push(newbranch)
                                 }
                             }
@@ -229,17 +249,20 @@ export default class Attack {
 
                 for (let abilityid = 0; abilityid < listOfDiceSetsByAbility.length; abilityid++) {
                     const sets = listOfDiceSetsByAbility[abilityid]
+
                     // Loop over all the possible reroll combos for this ability
                     for (let setid = 0; setid < sets.length; setid++) {
                         // Reroll the reroll combo and get the new probabilites
                         let probabilities2 = this.reroll(rollid, sets[setid], p)
 
+                        // If Proximity Strike, make sure attack is added to options of next ability check
+                        let startCoupledAbility = abilities[playerid][abilityid] && abilities[playerid][abilityid][TYPE] === DEFENSE_THEN_ATTACK
                         // Recursively generate rerolls with the abilities minus the one just used and dice minus the ones just rerolled
-                        if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
+                        if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0 || startCoupledAbility) {
                             const abilities2 = [abilities[0].slice(0), abilities[1].slice(0)]
                             abilities2[playerid].splice(abilityid, 1)
                             const diceleft2 = difference(diceleft, sets[setid])
-                            probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2, true)
+                            probabilities2 = this.genrerolls(probabilities2, abilities2, diceleft2, true, startCoupledAbility)
                         }
 
                         // Add the result to the list of probabilities and average hits
@@ -252,7 +275,7 @@ export default class Attack {
                 let probabilities0 = this.reroll(rollid, new Set(), p)
 
                 // Recursively generate rerolls with the dice left and no more abilities for this player 
-                if (abilities[playerid].length > 1 || abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
+                if (abilities[playerid === ATTACK ? DEFENSE : ATTACK].length > 0) {
                     const abilities0 = abilities.slice(0)
                     abilities0[playerid] = []
                     probabilities0 = this.genrerolls(probabilities0, abilities0, diceleft, true)

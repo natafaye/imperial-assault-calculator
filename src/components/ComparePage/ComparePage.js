@@ -1,49 +1,78 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { Button, Col, Dropdown, Row } from 'react-bootstrap'
+import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import { Button, Col, Row } from 'react-bootstrap'
 import { getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AddAttackForm from './AddAttackForm'
 import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
+import AddAllAttacksButton from './AddAllAttacksButton'
+import QuickAddAttack from './QuickAddAttack'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
-import { IMPERIAL, MERCENARY, REBEL, UNITS, WEAPONS, MELEE, RANGED, ATTACK } from '../../data'
-import { useEffect } from 'react'
+import GradientProgressBar from '../GradientProgressBar'
 
 export default function ComparePage({ compareData, compareUpdaters }) {
   const { attackList, sorting, columnVisibility } = compareData
   const { setAttackList, setSorting, setColumnVisibility } = compareUpdaters
   const [showAddForm, setShowAddForm] = useState(false)
 
+  const [progress, setProgress] = useState(null)
+  const [error, setError] = useState(null)
+  const [worker, setWorker] = useState(null)
+  const [needNewWorkerFlag, setNeedNewWorkerFlag] = useState(0)
+
   useEffect(() => {
-    document.title = "Compare | Imperial Assault Calculator"
-  }, [])
+    const newWorker = new Worker(new URL("./compareWorker.js", import.meta.url))
+    setWorker(newWorker)
+    setProgress(null)
+    return () => newWorker.terminate()
+  }, [needNewWorkerFlag])
 
   const addAttack = (attack) => {
-    setAttackList([getCompareResults(attack), ...attackList])
+    if (window.Worker) {
+      worker.onmessage = (message) => {
+        if (typeof message.data === "number") {
+          setProgress(message.data)
+        } else if (typeof message.data === "object") {
+          setAttackList(prevList => [message.data, ...prevList])
+          setError(null)
+          setProgress(null)
+        }
+      }
+      worker.onerror = (error) => {
+        setError("ERROR: " + error.message)
+        setProgress(null)
+        worker.terminate()
+      }
+      setProgress(0)
+      worker.postMessage(attack)
+    } else {
+      setAttackList(prevList => [getCompareResults(attack), ...prevList])
+    }
   }
 
-  const addAllAttacks = (filter) => {
-    const isWeapon = (filter === RANGED || filter === MELEE) 
-    let additions = (isWeapon ?
-      WEAPONS.filter(w => w.type === filter) 
-      : UNITS.filter(u => u.affiliation === filter && !u.isHero)
-    ).map(a => getCompareResults({
-      name: a.name,
-      dice: a.attackDice,
-      bonus: a.attackBonus,
-      surgeAbilities: a.surgeAbilities,
-      rerollAbilities: (a.rerollAbilities && a.rerollAbilities[ATTACK]) || [],
-      unitData: { cards: [a], focused: false, hidden: false, selectedOptionalIds: [] }
-    }))
+  const cancel = () => {
+    if (window.Worker) {
+      worker?.terminate()
+      setProgress(null)
+      setError(null)
+      setNeedNewWorkerFlag(prev => ++prev)
+    }
+  }
+
+  const addAllAttacks = (additions) => {
     setAttackList([...additions, ...attackList])
   }
 
   const deleteAttack = useCallback(
-    id => setAttackList(currList => currList.filter(a => a.id !== id)), 
+    id => setAttackList(currList => currList.filter(a => a.id !== id)),
     [setAttackList]
   )
+
+  useEffect(() => {
+    document.title = "Compare | Imperial Assault Calculator"
+  }, [])
 
   const columns = useMemo(() => getTableColumns(deleteAttack), [deleteAttack])
 
@@ -67,30 +96,27 @@ export default function ComparePage({ compareData, compareUpdaters }) {
           <Button variant="outline-success" className="me-2 mb-2 flex-shrink-0" onClick={() => setShowAddForm(true)}>
             <FontAwesomeIcon icon={faPlus} /> Add Attack
           </Button>
-          <Dropdown className="mb-2 flex-shrink-0">
-            <Dropdown.Toggle variant="outline-success" id="add-all-dropdown">
-              <FontAwesomeIcon icon={faPlus} /> Add All
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => addAllAttacks(MELEE)}>Add All Melee Weapons</Dropdown.Item>
-              <Dropdown.Item onClick={() => addAllAttacks(RANGED)}>Add All Ranged Weapons</Dropdown.Item>
-              <Dropdown.Item onClick={() => addAllAttacks(REBEL)}>Add All Rebel Units</Dropdown.Item>
-              <Dropdown.Item onClick={() => addAllAttacks(MERCENARY)}>Add All Mercenary Units</Dropdown.Item>
-              <Dropdown.Item onClick={() => addAllAttacks(IMPERIAL)}>Add All Imperial Units</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Col>
-        <Col className="d-flex flex-wrap align-items-center justify-content-end">
-          <ColumnVisibilityPicker table={table} className="me-2 mb-2 flex-shrink-0"/>
+          <AddAllAttacksButton onAdd={addAllAttacks} />
+          <QuickAddAttack onAdd={addAttack} />
+          <ColumnVisibilityPicker table={table} className="me-2 mb-2 flex-shrink-0" />
           <Button variant="outline-danger" className="mb-2 flex-shrink-0" onClick={() => setAttackList([])}>
             <FontAwesomeIcon icon={faTrash} /> Clear Table
           </Button>
         </Col>
       </Row>
       <Row>
+        {progress !== null && <Col className="mb-4">
+          <div className="d-flex align-items-center">
+            <GradientProgressBar amount={progress} className="flex-grow-1 me-2" gradientClassName='red-orange-green-gradient' ariaLabel="Add attack progress" animated striped/>
+            <Button variant="outline-warning" size="sm" onClick={cancel}>Cancel</Button>
+          </div>
+          { error && <p className="text-warning text-center">{error}</p> }
+        </Col>}
+      </Row>
+      <Row>
         <Col>
           <CompareAttacksTable table={table} />
-          <AddAttackForm show={showAddForm} onHide={() => setShowAddForm(false)} onSubmit={addAttack} />
+          <AddAttackForm show={showAddForm} onHide={() => setShowAddForm(false)} onSubmit={addAttack}/>
         </Col>
       </Row>
     </>

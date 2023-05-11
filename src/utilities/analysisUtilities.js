@@ -53,9 +53,9 @@ export const getStatsResults = ({ customAttack, customDefense, requiredAccuracy 
  * }} attackData Data about an attack
  * @returns {object} comparison data for the attack
  */
-export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...customData }) => {
-    const blackAttack = getAttackObject(customData, { dice: [BLACK] }, requiredAccuracy)
-    const whiteAttack = getAttackObject(customData, { dice: [WHITE] }, requiredAccuracy)
+export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...customData }, postWebWorkerMessage) => {
+    const blackAttack = getAttackObject(customData, { dice: [BLACK] }, requiredAccuracy, postWebWorkerMessage)
+    const whiteAttack = getAttackObject(customData, { dice: [WHITE] }, requiredAccuracy, postWebWorkerMessage)
     const [min, max] = getMinMaxAccuracy(customData)
     return { 
         id: uuid(), 

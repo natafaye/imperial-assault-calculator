@@ -1,9 +1,10 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import PropertyIcon from '../_icons/PropertyIcon'
+import { MAX_PROPERTY_VALUE, MIN_PROPERTY_VALUE } from '../../utilities'
 import { PROPERTY_LABELS } from '../../data'
 
-export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false, min = -15, max = 15 }) {
+export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false }) {
     return (
         <span 
             style={{ flexBasis: "70px", maxWidth: "150px" }} 
@@ -14,8 +15,8 @@ export default function PropertyInput({ property, value, onChange, idPrefix, dis
             </Form.Label>
             <Form.Control 
                 type="number" 
-                min={min} 
-                max={max} 
+                min={MIN_PROPERTY_VALUE} 
+                max={MAX_PROPERTY_VALUE} 
                 size="sm" 
                 id={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} 
                 name={property} 

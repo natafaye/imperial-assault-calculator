@@ -159,7 +159,7 @@ export const WEAPONS = [
         cost: 0,
         attackBonus: [2, 0, 0, 0, 0, 0],
         surgeAbilities: []
-    }, // TODO: If target didn't get any damage, gain damage token
+    },
     {
         id: 2008,
         name: "DDC Defender",

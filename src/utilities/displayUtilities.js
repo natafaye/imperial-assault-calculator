@@ -37,15 +37,15 @@ export const summarizeUnitData = ({ cards = [], focused = false, hidden = false 
  */
 export const summarizeAttackAndDefense = (allData) => {
     let attackString = ""
-    if(allData.unitAttack.cards.length)
+    if(allData.unitAttack?.cards.length)
         attackString = summarizeUnitData(allData.unitAttack)
-    else if(allData.customAttack.dice.length)
+    else if(allData.customAttack?.dice.length)
         attackString = allData.customAttack.dice.join(" & ")
 
     let defenseString = ""
-    if(allData.unitDefense.cards.length)
+    if(allData.unitDefense?.cards.length)
         defenseString = summarizeUnitData(allData.unitDefense) 
-    else if(allData.customDefense.dice.length)
+    else if(allData.customDefense?.dice.length)
         defenseString = allData.customDefense.dice.join(" & ")
 
     let attackAndDefenseString = attackString

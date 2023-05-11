@@ -33,10 +33,10 @@ const ValueCell = ({ value, property, decimalPoints = 2 }) => (
 
 const RowActions = ({ id, onDelete, searchParams }) => (
     <>
-        <Link to={"/?" + searchParams.toString()} className="btn btn-outline-warning btn-sm me-2">
+        <Link to={"/?" + searchParams.toString()} className="btn btn-outline-warning btn-sm me-2 mb-2">
             <FontAwesomeIcon icon={faChartSimple} title="See stats for this attack" />
         </Link>
-        <Button variant="outline-danger" size="sm" onClick={() => onDelete(id)}>
+        <Button variant="outline-danger" className="mb-2" size="sm" onClick={() => onDelete(id)}>
             <FontAwesomeIcon icon={faTrash} title="Delete attack" />
         </Button>
     </>

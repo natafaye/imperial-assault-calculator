@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightToBracket, faPlus } from '@fortawesome/free-solid-svg-icons'
 import UnitInfoPicker, { getEmptyUnitData, useUnitData } from '../UnitDataPicker'
 import CustomInfoPicker, { clearCustomData, replaceCustomData, useCustomData } from '../CustomDataPicker'
-import { getAttackData, summarizeUnitData } from '../../utilities'
 import RequiredAccuracyPicker from '../RequiredAccuracyPicker'
+import { getAttackData, summarizeAttackAndDefense } from '../../utilities'
 
 export default function AddAttackForm({ show, onHide, onSubmit }) {
     const [nameValue, setNameValue] = useState("")
@@ -25,12 +25,19 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
         return newErrors
     }
 
-    const fillName = () => setNameValue(summarizeUnitData(unitData))
+    const fillName = useCallback(
+        () => setNameValue(summarizeAttackAndDefense({ customAttack: customData, unitAttack: unitData })), 
+        [customData, unitData, setNameValue]
+    )
 
     const updateData = (newData) => {
         setUnitData(newData)
         customDataDispatch(replaceCustomData(getAttackData(newData)))
     }
+
+    useEffect(() => {
+        fillName()
+    }, [customData, fillName])
 
     const onClickSubmit = () => {
         const errors = validateName(nameValue);

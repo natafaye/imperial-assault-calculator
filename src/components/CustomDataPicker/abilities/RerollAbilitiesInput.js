@@ -3,7 +3,8 @@ import AbilitiesInput from './AbilitiesInput'
 import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'
 import PlayerTypeIcon from '../../_icons/PlayerTypeIcon'
-import { ATTACK, DEFENSE, AMOUNT, RER, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, ALL_ATTACK, TURN_ATTACK_DIE } from '../../../data'
+import { ATTACK, DEFENSE, AMOUNT, RER, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, 
+  ALL_ATTACK, TURN_ATTACK_DIE, DEFENSE_THEN_ATTACK } from '../../../data'
 import { RerollAbilityLabel } from '../../_labels'
 
 const options = [
@@ -12,6 +13,7 @@ const options = [
   ATTACK_AND_DEFENSE,
   ATTACK_OR_DEFENSE,
   ALL_ATTACK,
+  DEFENSE_THEN_ATTACK,
   TURN_ATTACK_DIE
 ]
 
@@ -21,6 +23,7 @@ const labels = [
   <><PlayerTypeIcon type={ATTACK} showTitle={false} /> & <PlayerTypeIcon type={DEFENSE} showTitle={false} /></>,
   <><PlayerTypeIcon type={ATTACK} showTitle={false} /> or <PlayerTypeIcon type={DEFENSE} /></>,
   <>All <PlayerTypeIcon type={ATTACK} showTitle={false} /></>,
+  <><PlayerTypeIcon type={DEFENSE} showTitle={false} /> &rarr; <PlayerTypeIcon type={ATTACK} showTitle={false} /></>,
   <>Turn <PlayerTypeIcon type={ATTACK} showTitle={false} /></>,
 ]
 
@@ -30,7 +33,8 @@ const tooltips = [
   "Reroll all attack dice AND all defense dice",
   "Reroll all attack dice OR all defense dice",
   "Reroll all attack dice",
-  "After any rerolls, you may turn 1 die showing a single attack icon to another side"
+  "You may force defender to reroll 1 defense die. Then, you may reroll 1 attack die.",
+  "After any rerolls, you may turn 1 die showing a single attack icon to another side",
 ]
 
 const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
@@ -40,7 +44,6 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
     if (newType !== DEFENSE && newType !== ATTACK) {
       onUpdate(AMOUNT, undefined)
     } else if (!formData[AMOUNT]) {
-      console.log("setting to 1")
       onUpdate(AMOUNT, 1)
     }
   }
@@ -53,7 +56,7 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
       options={options}
       labels={labels}
       tooltips={tooltips}
-      className="me-2"
+      className="me-2 flex-wrap"
       variant="outline-secondary"
       size="sm"
     />,
