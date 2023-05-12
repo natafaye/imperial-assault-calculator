@@ -39,6 +39,6 @@ Created with much love for complicated board games and taking too long on your t
 
 [jtfuller3](https://github.com/jtfuller3) wrote the behemoth of an algorithm
 
-[natafaye]("https://github.com/natafaye") wrote the React UI and converted the algorithm from Python to Javascript, with a few additions
+[natafaye](https://github.com/natafaye) wrote the React UI and converted the algorithm from Python to Javascript, with a few additions
 
 [Donate to Our Board Game Addiction](https://www.buymeacoffee.com/nataliecodes)
