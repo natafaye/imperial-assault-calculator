@@ -16,8 +16,9 @@ export default function TopBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={NavLink} to="/">Stats</Nav.Link>
-                        <Nav.Link as={NavLink} to="/compare">Compare</Nav.Link>
+                        <Nav.Link as={NavLink} to="/">Damage Stats</Nav.Link>
+                        <Nav.Link as={NavLink} to="/compare">Compare Attacks</Nav.Link>
+                        <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

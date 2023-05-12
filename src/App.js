@@ -5,6 +5,7 @@ import { useReducedMotion } from '@react-spring/web';
 import TopBar from "./components/TopBar";
 import StatsPage from "./components/StatsPage";
 import ComparePage, { useCompareData } from './components/ComparePage';
+import AboutPage from './components/AboutPage/AboutPage';
 
 function App() {
   const [compareData, compareUpdaters] = useCompareData()
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<StatsPage />}/>
           <Route path="/compare" element={<ComparePage compareData={compareData} compareUpdaters={compareUpdaters}/>}/>
+          <Route path="/about" element={<AboutPage />}/>
         </Routes>
       </Container>
     </>
