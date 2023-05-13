@@ -1,4 +1,4 @@
-# https://natafaye.github.io/imperial-assault-calculator/
+# Imperial Assault
 
 This is a calculator for the Star Wars board game [Imperial Assault](https://www.fantasyflightgames.com/en/products/star-wars-imperial-assault) 
 that calculates the likelihood of getting different damage amounts for a particular attack and defense 
