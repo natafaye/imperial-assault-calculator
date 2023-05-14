@@ -8,8 +8,8 @@ export default function PropertyInput({ property, value, onChange, idPrefix, dis
             style={{ flexBasis: "70px", maxWidth: "150px" }} 
             className="flex-shrink-0 flex-grow-1 d-inline-flex align-items-center me-2"
         >
-            <Form.Label htmlFor={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} className="mx-1 mb-0">
-                <PropertyIcon property={property} size="sm"/>
+            <Form.Label htmlFor={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} className="me-1 mb-0">
+                <PropertyIcon property={property} size="1.3rem"/>
             </Form.Label>
             <Form.Control 
                 type="number" 
