@@ -1,4 +1,3 @@
-import React from 'react'
 import PropertyIcon from './PropertyIcon'
 import { ACC, DICE, WHITE } from '../../data'
 

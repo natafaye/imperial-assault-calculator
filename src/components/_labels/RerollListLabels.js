@@ -1,4 +1,3 @@
-import React from 'react'
 import RerollLabel from './RerollLabel';
 import { ATTACK } from '../../data';
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import UnitDataPicker, { getEmptyUnitData } from '../UnitDataPicker';
 import CustomDataPicker, { clearCustomData, replaceCustomData } from '../CustomDataPicker';

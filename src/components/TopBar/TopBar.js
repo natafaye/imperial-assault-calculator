@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

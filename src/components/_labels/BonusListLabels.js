@@ -1,4 +1,3 @@
-import React from 'react'
 import PropertyListLabels from './PropertyListLabels'
 
 export default function BonusListLabels({ bonus, className = "", showHRBelow = true, isAttack = false }) {

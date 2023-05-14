@@ -1,10 +1,9 @@
-import React from 'react'
 import { Stack } from 'react-bootstrap'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropertyInput from './PropertyInput'
-import { ACC, BLO, EVA, DAM, SUR, DOD } from '../../data'
 import { clearBonus, updateBonus } from './useCustomData'
+import { ACC, BLO, EVA, DAM, SUR, DOD } from '../../data'
 
 export default function BonusInput({ bonus, dispatch, idPrefix }) {
     const handleBonusChange = (event) => dispatch(updateBonus({ 

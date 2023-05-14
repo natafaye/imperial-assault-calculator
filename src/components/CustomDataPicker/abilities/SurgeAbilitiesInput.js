@@ -1,4 +1,3 @@
-import React from 'react'
 import AbilitiesInput from './AbilitiesInput'
 import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'

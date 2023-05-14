@@ -37,7 +37,7 @@ export default function AboutPage() {
             </p> 
             <p>Columns can be sorted and shown/hidden.</p>
 
-            <h4 className="display-5 mb-3 mt-5">Algorithm Assumptions</h4>
+            <h4 className="display-5 mb-3 mt-5">Assumptions</h4>
             <p>To calculate the damage probabilities, the calculator makes certain assumptions about the players and interpreations of game rules, including:</p>
             <ul>
                 <li>Players will make reroll ability and surge ability choices that are most likely to optimize damage</li>

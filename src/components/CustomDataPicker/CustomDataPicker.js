@@ -1,12 +1,11 @@
-import React from 'react'
 import { CollapsableDataArea } from '../CollapsableDataArea'
 import { SummarizedDataLabel } from '../_labels'
 import DiceListInput from './DiceListInput'
 import BonusInput from './BonusInput'
 import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
 import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
-import { ATTACK, DEFENSE } from '../../data'
 import { formatRerollAbilities } from '../../utilities'
+import { ATTACK, DEFENSE } from '../../data'
 
 export default function CustomDataPicker({ data, dispatch, pickDieSides = false, isAttack = false }) {
     const { dice, diceSides, bonus, rerollAbilities, surgeAbilities } = data

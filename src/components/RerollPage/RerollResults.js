@@ -1,4 +1,3 @@
-import React from 'react'
 import DieIcon from '../_icons/DieIcon'
 
 export default function RerollResults({ results }) {

@@ -1,4 +1,3 @@
-import React from 'react'
 import ButtonToggle from './ButtonToggle'
 
 export default function ButtonBooleanToggle({ trueLabel, falseLabel, ...props }) {

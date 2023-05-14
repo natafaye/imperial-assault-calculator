@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function DieSelectMenu({ isOpen, selected, onChange, options }) {
 
     const handleKeyDown = (color) => (event) => {

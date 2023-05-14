@@ -1,4 +1,3 @@
-import React from 'react'
 import CheckboxDropdown from '../CheckboxDropdown'
 
 export default function ColumnVisibilityPicker({ table, className = "" }) {

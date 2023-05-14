@@ -1,4 +1,3 @@
-import React from 'react'
 import CardsSelect from '../UnitDataPicker/CardsSelect'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'

@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, createContext, useContext, useEffect, useState, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
-const CollapseContext = React.createContext();
+const CollapseContext = createContext();
 
 /**
  * Provides context for CollapseAllButton and ExpandCollapseArea
@@ -21,7 +21,7 @@ export default function CollapseProvider({ children }) {
  * @returns {[boolean, function]} Whether or not the area is collapsed and a function for setting it to collapsed or not
  */
 export const useCollapseData = (initialValue = false) => {
-  const { current: uniqueId } = React.useRef(uuid());
+  const { current: uniqueId } = useRef(uuid());
   const context = useContext(CollapseContext)
 
   // Allow collapse data to be used outside of a CollapseProvider with local state

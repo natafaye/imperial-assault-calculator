@@ -1,8 +1,7 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
-import { DICE_CLASSES, WHITE } from '../../data';
 import DieSideIcon from './DieSideIcon';
+import { DICE_CLASSES, WHITE } from '../../data';
 
 export default function DieIcon({ color, side = null, size = "1", className = "", negative = false }) {
   return (

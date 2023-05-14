@@ -1,4 +1,3 @@
-import React from 'react'
 import { getAllOptionalAbilities } from '../../utilities'
 import { OptionalAbilityLabel } from '../_labels'
 import CheckboxInput from './CheckboxInput'

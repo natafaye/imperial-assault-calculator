@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSpring, animated, config } from '@react-spring/web';
 import useMeasure from 'react-use-measure';
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';

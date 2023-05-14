@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, ButtonGroup, Dropdown, Form } from 'react-bootstrap'
 
 export default function CheckboxDropdown({ 

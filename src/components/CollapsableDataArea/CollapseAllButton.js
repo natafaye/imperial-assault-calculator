@@ -1,4 +1,3 @@
-import React from 'react'
 import { useCollapseAll } from './CollapseProvider';
 
 export default function CollapseAllButton({ children, as = "button", ...props }) {

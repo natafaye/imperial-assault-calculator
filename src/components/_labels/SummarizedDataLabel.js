@@ -1,4 +1,3 @@
-import React from 'react'
 import BonusListLabels from './BonusListLabels'
 import DiceListLabels from './DiceListLabels'
 import SurgeListLabels from './SurgeListLabels'

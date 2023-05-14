@@ -1,4 +1,3 @@
-import React from 'react'
 import NumberSlider from '../NumberSlider'
 import { ACC, PROPERTY_LABELS } from '../../data'
 import { getMinMaxAccuracy } from '../../utilities'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
 export default function ButtonToggle({

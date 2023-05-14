@@ -1,4 +1,3 @@
-import React from 'react'
 import SurgeLabel from './SurgeLabel';
 
 export default function SurgeListLabels({ abilities, className = "", showHRBelow = true }) {

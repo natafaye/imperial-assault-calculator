@@ -2,7 +2,6 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { flexRender } from '@tanstack/react-table'
 import { useTransition, animated } from '@react-spring/web'
-import React from 'react'
 import { Table } from 'react-bootstrap';
 
 export default function CompareAttacksTable({ table }) {
