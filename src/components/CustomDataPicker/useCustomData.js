@@ -1,7 +1,8 @@
 import { useReducer } from "react"
-import { useSearchParamsReducer, convertCustomDataToParamData, MAX_PROPERTY_VALUE, MAX_REROLL_TYPE, 
-    MIN_PROPERTY_VALUE, MIN_REROLL_TYPE, DEFENSE_CUSTOM_PARAM_NAMES, ATTACK_CUSTOM_PARAM_NAMES } from "../../utilities"
-import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE } from "../../data"
+import { useSearchParamsReducer } from "../../hooks/useSearchParamsState"
+import { convertCustomDataToParamData, DEFENSE_CUSTOM_PARAM_NAMES, ATTACK_CUSTOM_PARAM_NAMES } from "../../utilities"
+import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE, MAX_PROPERTY_VALUE, MAX_REROLL_TYPE, 
+    MIN_PROPERTY_VALUE, MIN_REROLL_TYPE } from "../../data"
 
 const initialValues = () => ({
     dice: [],

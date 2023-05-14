@@ -3,8 +3,8 @@ import FullDataInput from '../FullDataInput';
 import StatsHistogram from './StatsHistogram';
 import CalculateButton from '../CalculateButton';
 import useStatsData from './useStatsData';
+import { useProgressWorker } from '../../hooks/useProgressWorker';
 import { getStatsResults, summarizeAttackAndDefense } from '../../utilities';
-import useProgressWorker from '../../utilities/useProgressWorker';
 
 export default function StatsPage() {
     const [statsData, statsUpdaters] = useStatsData()

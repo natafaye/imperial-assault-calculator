@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import Attack from './Attack'
-import { CLASS_CARD, MOD, UNIT, WEAPON, getAllOptionalAbilities } from "./optionalAbilityUtilities"
-import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE, UNITS, WEAPONS, MODS, CLASS_CARDS } from '../data'
+import { getAllOptionalAbilities } from "./optionalAbilityUtilities"
+import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE } from '../data'
 
 /**
  * Interface function that gets an Attack object with the right data
@@ -87,24 +87,10 @@ export const getRerollResults = ({ customAttack, customDefense, requiredAccuracy
 }
 
 /**
- * Adds the values of two arrays together to produce a new array
- * @param {number[]} a An array to add
- * @param {number[][]} others Any other arrays to add (of the same length as a)
- * @returns {number[]} An array of the sum of the values of all the arrays
- */
-export const addValues = (a = [0, 0, 0, 0, 0, 0], ...others) => {
-    return a.map((value, index) => value + others.reduce((total, b) => b ? total + b[index] : total, 0))
-}
-
-/**
  * Creates histogram data for damage
  * @param {number[]} damageOfRolls an array of damage numbers for all possible rolls
  * @param {number[]} probabilityOfRolls an array of probabilities for all possible rolls
- * @returns {{
- *  value: number, 
- *  amount: number, 
- *  percentage: number, 
- *  atLeastPercentage: number }[]
+ * @returns {{ value: number, amount: number, percentage: number, atLeastPercentage: number }[]
  * } An array of histogram data
  */
 export const getHistogram = (damageOfRolls, probabilityOfRolls) => {
@@ -134,28 +120,10 @@ export const getHistogram = (damageOfRolls, probabilityOfRolls) => {
     return histogram;
 }
 
-const removeFromArray = (array, toRemove) => {
-    let newArray = [...array]
-    toRemove.forEach(item => {
-        if (newArray.indexOf(item) !== -1) {
-            newArray.splice(newArray.indexOf(item), 1)
-        }
-    })
-    return newArray
-}
-
 /**
  * Combines all the unit & class cards & weapon & mods data to make one set of attack data
- * @param {{ 
- *  cards: object[]?, 
- *  focused: boolean?,
- *  hidden: boolean?, 
- *  selectedOptionalIds: string[]?}} unitData The data to combine
- * @returns {{ 
- *  dice: string[], 
- *  bonus: [], 
- *  surgeAbilities: number[][], 
- *  rerollAbilities: [number[], number[]] }} The combined attack data
+ * @param {{ cards: object[]?, focused: boolean?, hidden: boolean?, selectedOptionalIds: string[]?}} unitData The data to combine
+ * @returns {{ dice: string[], bonus: [], surgeAbilities: number[][], rerollAbilities: [number[], number[]] }} The combined attack data
  */
 export const getAttackData = ({ cards = [], focused = false, hidden = false, selectedOptionalIds = [] }) => {
     const optionals = getAllOptionalAbilities({ cards, isAttack: true })
@@ -228,26 +196,19 @@ export const getMinMaxAccuracy = (attack, defense) => {
     return [min < 0 ? 0 : min, max < 0 ? 0 : max]
 }
 
-/**
- * Gets the type (unit, weapon, mod, or class card) of a card
- * @param {object} card The card to get the type of
- * @returns {string} The type of the card
- */
-export const getCardType = (card) => {
-    if(card.id >= 4000) return CLASS_CARD
-    if(card.id >= 3000) return MOD
-    if(card.id >= 2000) return WEAPON
-    else return UNIT
+
+// Helper utilities
+
+function removeFromArray(array, toRemove) {
+    let newArray = [...array]
+    toRemove.forEach(item => {
+        if (newArray.indexOf(item) !== -1) {
+            newArray.splice(newArray.indexOf(item), 1)
+        }
+    })
+    return newArray
 }
 
-/**
- * Gets the unit, weapon, mod, or class card with a particular id
- * @param {number} id The id to check for
- * @returns {object} The unit, weapon, mod, or class card with that id
- */
-export const getCardFromId = (id) => {
-    return UNITS.find(u => u.id === id) 
-        || WEAPONS.find(w => w.id === id) 
-        || MODS.find(m => m.id === id) 
-        || CLASS_CARDS.find(c => c.id === id)
+export function addValues(a = [0, 0, 0, 0, 0, 0], ...others) {
+    return a.map((value, index) => value + others.reduce((total, b) => b ? total + b[index] : total, 0))
 }

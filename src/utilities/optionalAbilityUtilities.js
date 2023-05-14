@@ -1,8 +1,3 @@
-export const UNIT = "unit"
-export const CLASS_CARD = "classCards"
-export const WEAPON = "weapon"
-export const MOD = "mods"
-
 /**
  * Gets all the optional abilities from an entity and gives each an identifying id
  * of the form: [type of entity]-[id of entity]-[index of optional ability in array]

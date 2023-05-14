@@ -2,7 +2,7 @@ import { AMOUNT, ATTACK, DEFENSE, RER, REROLL_TYPE_LABELS, TURN_ATTACK_DIE, TYPE
 import { pluralize } from "../../utilities"
 import PropertyIcon from "../_icons/PropertyIcon"
 
-export default function RerollAbilityLabel({ ability, prefix = "" }) {
+export default function RerollLabel({ ability, prefix = "" }) {
     const type = ability[TYPE]
     const amount = ability[AMOUNT]
     return (

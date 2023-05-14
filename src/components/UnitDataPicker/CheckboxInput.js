@@ -1,7 +1,6 @@
-import React from 'react'
 import { Form } from 'react-bootstrap'
 
-export default function CheckboxInput({ label, value, onChange, id = "checkbox-input", size = "lg" }) {
+export default function CheckboxInput({ label, value, onChange, id = "checkbox-input", name = "", size = "lg" }) {
     return (
         <Form.Group controlId={id}>
             <Form.Check 
@@ -9,7 +8,8 @@ export default function CheckboxInput({ label, value, onChange, id = "checkbox-i
                 label={label} 
                 size={size} 
                 checked={value} 
-                onChange={(e) => onChange(e.target.checked)} 
+                name={name}
+                onChange={(e) => onChange(e.target.checked, e.target.name)} 
             />
         </Form.Group>
     )

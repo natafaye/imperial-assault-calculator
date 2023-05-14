@@ -5,7 +5,7 @@ import ButtonToggle from '../../ButtonToggle'
 import PlayerTypeIcon from '../../_icons/PlayerTypeIcon'
 import { ATTACK, DEFENSE, AMOUNT, RER, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, 
   ALL_ATTACK, TURN_ATTACK_DIE, DEFENSE_THEN_ATTACK } from '../../../data'
-import { RerollAbilityLabel } from '../../_labels'
+import { RerollLabel } from '../../_labels'
 
 const options = [
   ATTACK,
@@ -81,7 +81,7 @@ export default function RerollAbilitiesInput({ values, dispatch, defaultValue, i
       addLabel="Reroll Ability"
       idPrefix={idPrefix}
       renderFormLayoutGroups={renderRerollFormLayoutGroups}
-      displayComponent={RerollAbilityLabel}
+      displayComponent={RerollLabel}
       defaultValue={defaultValue}
     />
   )

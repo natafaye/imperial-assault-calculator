@@ -10,8 +10,8 @@ import AddAllAttacksButton from './AddAllAttacksButton'
 import QuickAddAttack from './QuickAddAttack'
 import GradientProgressBar from '../GradientProgressBar'
 import { getTableColumns } from './tableColumns'
+import { useProgressWorker } from '../../hooks/useProgressWorker'
 import { getCompareResults } from '../../utilities'
-import useProgressWorker from '../../utilities/useProgressWorker'
 
 export default function ComparePage({ compareData, compareUpdaters }) {
   const {attackList, sorting, columnVisibility} = compareData

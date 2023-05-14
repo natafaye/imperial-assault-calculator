@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
 import RerollResults from './RerollResults'
 import CalculateButton from '../CalculateButton'
-import { getRerollResults } from '../../utilities'
-import useProgressWorker from '../../utilities/useProgressWorker'
 import FullDataInput from '../FullDataInput'
 import useRerollData from './useRerollData'
+import { useProgressWorker } from '../../hooks/useProgressWorker'
+import { getRerollResults } from '../../utilities'
 
 export default function RerollPage() {
     const [inputData, setInputData] = useRerollData()

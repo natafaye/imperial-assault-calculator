@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { useLocalStorageState } from "../../utilities"
+import { useSearchParams } from "react-router-dom"
 import { useCustomDataWithSearchParams } from "../CustomDataPicker"
 import { useUnitDataWithSearchParams } from "../UnitDataPicker"
-import { useSearchParams } from "react-router-dom"
+import { useLocalStorageState } from "../../hooks/useLocalStorageState"
 
 const getEmptyResults = () => ({ histogram: [], average: 0 })
 

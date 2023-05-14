@@ -1,5 +1,5 @@
-import { getWeaponAttackAvgDamage, TEST_DATA } from "../testing";
-import { BLACK, DAM, WHITE } from "../data"
+import { getWeaponAttackAvgDamage, TEST_DATA } from "../../testing";
+import { BLACK, DAM, WHITE } from "../../data"
 
 describe("Attack", () => {
     [BLACK, WHITE].forEach(die => {

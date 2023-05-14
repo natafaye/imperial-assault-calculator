@@ -11,8 +11,8 @@ export default function RerollResults({ results }) {
             { results.map((result, index) => 
                 <tr key={index}>
                     <td className="d-flex justify-content-center">
-                        { result.dice.map(die => 
-                            <DieIcon key={index} color={die} size="2" className="mx-1" />
+                        { result.dice.map((die, dieIndex) => 
+                            <DieIcon key={index + "-" + dieIndex} color={die} size="2" className="mx-1" />
                         )}
                         { result.dice.length === 0 && "None" }
                     </td>

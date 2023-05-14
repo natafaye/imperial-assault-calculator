@@ -1,8 +1,6 @@
-import React from 'react'
 import { Form } from 'react-bootstrap'
 import PropertyIcon from '../_icons/PropertyIcon'
-import { MAX_PROPERTY_VALUE, MIN_PROPERTY_VALUE } from '../../utilities'
-import { PROPERTY_LABELS } from '../../data'
+import { PROPERTY_LABELS, MAX_PROPERTY_VALUE, MIN_PROPERTY_VALUE } from '../../data'
 
 export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false, min = MIN_PROPERTY_VALUE, max = MAX_PROPERTY_VALUE }) {
     return (

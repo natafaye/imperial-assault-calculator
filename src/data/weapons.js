@@ -1,4 +1,5 @@
-import { ALL_ATTACK, ATTACK, BLUE, GREEN, RED, TURN_ATTACK_DIE, YELLOW } from "./constants";
+import { ALL_ATTACK, ATTACK, TURN_ATTACK_DIE } from "./reroll-abilities";
+import { BLUE, GREEN, RED, YELLOW } from "./dice"
 
 // WEAPON TYPES
 export const RANGED = "Ranged"

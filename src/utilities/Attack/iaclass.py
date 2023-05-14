@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.7
 # last edited 20230225 by science et al
 
+# This code is not used in the app, it is the original algorithm code
+
 from copy import deepcopy
 from iadice import dice, acc, hit, sur, blo, eva, dod
 import numpy as np

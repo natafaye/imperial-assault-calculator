@@ -1,5 +1,5 @@
-import { WEAPONS, MODS, RER, SUR, CLASS_CARDS, UNITS, ATTACK, DEFENSE } from "../data"
 import { getAttackData, getAttackObject } from "../utilities"
+import { WEAPONS, MODS, RER, SUR, CLASS_CARDS, UNITS, ATTACK } from "../data"
 
 const addToProperty = (attackData, property, toAdd) => {
     if(property === RER)

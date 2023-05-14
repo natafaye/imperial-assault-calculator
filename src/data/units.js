@@ -1,4 +1,5 @@
-import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE, ATTACK_OR_DEFENSE, ATTACK, DEFENSE } from "./constants";
+import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE } from "./reroll-abilities";
+import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
 import { MELEE, RANGED } from "./weapons";
 
 export const IMPERIAL = "Imperial"

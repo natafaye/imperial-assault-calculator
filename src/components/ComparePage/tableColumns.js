@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { SummarizedDataLabel, SurgeListLabels, CardLabel } from "../_labels"
+import { SummarizedDataLabel, SurgeListLabels } from "../_labels"
 import PropertyIcon from "../_icons/PropertyIcon";
 import DieIcon from "../_icons/DieIcon";
-import { getSearchParamsForAttack } from "../../utilities";
+import { formatRerollAbilities, getSearchParamsForAttack } from "../../utilities";
 import { ACC, BLACK, DAM, WHITE } from "../../data";
 
 const AverageHeader = ({ die, property }) => (
@@ -48,20 +48,10 @@ export const getTableColumns = (onDelete) => [
     columnHelper.accessor('name', {
         header: "Name"
     }),
-    columnHelper.accessor(row => row.unitData?.cards?.map(c => c.name).join(", "), {
-        header: "Cards",
-        cell: info => <>
-            { info.row.original.unitData?.cards?.map(card => 
-                <span className="me-2" key={card.id}>
-                    <CardLabel card={card} placement="right"/>
-                </span>
-            )}
-        </>
-    }),
     columnHelper.accessor(row => row.dice, {
         header: "Stats",
         cell: info => <SummarizedDataLabel
-            data={info.row.original}
+            data={{...info.row.original, rerollAbilities: formatRerollAbilities(info.row.original.rerollAbilities, true)}}
             expandSurges={false}
             labelAttack={false}
             isAttack

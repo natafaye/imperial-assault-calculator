@@ -1,28 +1,27 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
 import { getAllOptionalAbilities } from '../../utilities'
 import { OptionalAbilityLabel } from '../_labels'
+import CheckboxInput from './CheckboxInput'
 
 export default function OptionalAbilitiesInput({ values, onChange, unitData, isAttack = false }) {
     const optionalAbilities = getAllOptionalAbilities({ ...unitData, isAttack })
 
-    const onCheckChange = ({ target }) => {
-        onChange(target.checked ? [...values, target.name] : values.filter(v => v !== target.name))
+    const onCheckChange = (newValue, name) => {
+        onChange(newValue ? [...values, name] : values.filter(v => v !== name))
     }
 
     return (
         <div>
             {optionalAbilities.map((ability, index) => (
-                <Form.Group controlId={"checkbox-optional-" + index} key={ability.id}>
-                    <Form.Check
-                        type="checkbox"
-                        label={<OptionalAbilityLabel ability={ability} isSelected={values.includes(ability.id)} isAttack={isAttack} />}
-                        size="lg"
-                        name={ability.id}
-                        checked={values.includes(ability.id)}
-                        onChange={onCheckChange}
-                    />
-                </Form.Group>
+                <CheckboxInput 
+                    key={ability.id}
+                    id={"checkbox-optional-" + index}
+                    label={<OptionalAbilityLabel ability={ability} isSelected={values.includes(ability.id)} isAttack={isAttack} />}
+                    onChange={onCheckChange}
+                    name={ability.id}
+                    value={values.includes(ability.id)}
+                    size="lg"
+                />
             ))}
         </div>
     )

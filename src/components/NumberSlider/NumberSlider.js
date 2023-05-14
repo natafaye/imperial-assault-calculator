@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactSlider from 'react-slider'
+import "./NumberSlider.css"
 
 export default function NumberSlider({ min, max, value, onChange, barClass = "bg-info", className = "", ariaLabel = "Number slider" }) {
     const renderTrack = (props, state) => (

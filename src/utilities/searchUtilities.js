@@ -1,3 +1,4 @@
+import { CLASS_CARD, MOD, UNIT, WEAPON } from "../data"
 
 /**
  * Prepares a string for search by removing spaces and punctuation and converting to all lowercase
@@ -36,3 +37,15 @@ export const searchArray = (toSearch, term) => toSearch?.some(item => searchExac
  * @returns {number | NaN} The number at the end or NaN
  */
 export const getNumAtEnd = (str) => parseInt(str.slice(str.search(/\d+$/)))
+
+/**
+ * Gets the type (unit, weapon, mod, or class card) of a card
+ * @param {object} card The card to get the type of
+ * @returns {string} The type of the card
+ */
+export const getCardType = (card) => {
+    if(card.id >= 4000) return CLASS_CARD
+    if(card.id >= 3000) return MOD
+    if(card.id >= 2000) return WEAPON
+    else return UNIT
+}

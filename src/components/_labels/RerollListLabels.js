@@ -1,5 +1,5 @@
 import React from 'react'
-import RerollAbilityLabel from './RerollAbilityLabel';
+import RerollLabel from './RerollLabel';
 import { ATTACK } from '../../data';
 
 export default function RerollListLabels({ abilities = [[], []], className = "", showHRBelow = true, labelAttack = true }) {
@@ -8,7 +8,7 @@ export default function RerollListLabels({ abilities = [[], []], className = "",
             {abilities.flatMap((list, type) =>
                 list.map((ability, index) => (
                     <span className={className} key={type + "-" + index}>
-                        <RerollAbilityLabel 
+                        <RerollLabel 
                             ability={ability} 
                             prefix={labelAttack ? "When " + (type === ATTACK ? "attacking " : "defending ") : ""} 
                         />

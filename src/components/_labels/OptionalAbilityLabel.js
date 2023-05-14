@@ -1,8 +1,7 @@
 import React from 'react'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SummarizedDataLabel from './SummarizedDataLabel'
-import { formatRerollAbilities } from '../../utilities'
 
 export default function OptionalAbilityLabel({ ability, isSelected, selectedClass = "text-info", isAttack = false }) {
     return (

@@ -1,9 +1,7 @@
 import {
-    ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE,
-    DICE as dice, ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE,
-    DEFENSE, AMOUNT, ALL_ATTACK
-} from "../data"
-import { DEFENSE_THEN_ATTACK } from "../data/constants"
+    ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, DICE as dice, 
+    ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, DEFENSE, AMOUNT, ALL_ATTACK, DEFENSE_THEN_ATTACK
+} from "../../data"
 import { full, union, difference, setInArray, range, argmax, argmin, addArrays, isEqualSet } from "./pythonConversionUtilities"
 
 /**

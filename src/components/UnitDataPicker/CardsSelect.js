@@ -1,5 +1,4 @@
 import Select from 'react-select'
-import { CardLabel } from '../_labels'
 import { CLASS_CARDS, UNITS, MODS, WEAPONS } from '../../data'
 import { getCardType, getNumAtEnd, search, searchArray, searchExact } from '../../utilities'
 
@@ -35,13 +34,13 @@ const noMatchesMessage = <>
     <p>Separate search terms with a space.</p>
 </>
 
-export default function CardsSelect({ values, onChange, placement, className = "" }) {
+export default function CardsSelect({ values, onChange, className = "" }) {
     return (
         <Select
             options={CARD_OPTIONS}
             className={"text-dark w-100 " + className}
             filterOption={filterOption}
-            getOptionLabel={c => <CardLabel card={c} placement={placement} />}
+            getOptionLabel={c => c.name}
             getOptionValue={c => c.id}
             placeholder="Select Cards"
             noOptionsMessage={() => noMatchesMessage}

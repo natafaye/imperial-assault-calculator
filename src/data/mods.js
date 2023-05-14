@@ -1,5 +1,5 @@
 import { RANGED, MELEE, ENERGY, BALANCE, IMPACT, SIGHTS, BARREL, AMMUNITION, BLADE } from "./weapons";
-import { GREEN, RED, YELLOW, BLUE } from "./constants"
+import { GREEN, RED, YELLOW, BLUE } from "./dice"
 
 /**
  * Mods for weapons in Imperial Assault

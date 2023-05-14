@@ -5,7 +5,7 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 import DieSelectMenu from './DieSelectMenu'
 import DieIcon from '../_icons/DieIcon'
 import { addDie, changeDieSide, deleteDie } from './useCustomData'
-import { useClickOutside } from '../../utilities'
+import { useClickOutside } from '../../hooks/useClickOutside'
 import { ATTACK_DICE, DEFENSE_DICE } from '../../data'
 
 function DieItem({ color, index, dispatch, side = null, pickDieSides = false }) {

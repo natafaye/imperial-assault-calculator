@@ -1,4 +1,5 @@
-import { BLUE, RED, YELLOW, WHITE, GREEN, ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK } from "./constants"
+import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK } from "./reroll-abilities"
+import { BLUE, RED, YELLOW, WHITE, GREEN } from "./dice"
 import { REBEL } from "./units"
 
 // Hero names

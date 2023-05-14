@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useReducedMotion } from '@react-spring/web';
@@ -8,7 +7,7 @@ import ComparePage, { useCompareData } from './components/ComparePage';
 import AboutPage from './components/AboutPage/AboutPage';
 import RerollPage from './components/RerollPage/RerollPage';
 
-function App() {
+export default function App() {
   const [compareData, compareUpdaters] = useCompareData()
   
   useReducedMotion()
@@ -27,5 +26,3 @@ function App() {
     </>
   );
 }
-
-export default App;
