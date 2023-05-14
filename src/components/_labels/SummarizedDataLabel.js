@@ -9,9 +9,6 @@ function SummarizedDataLabel({
     data: { dice, bonus, rerollAbilities, surgeAbilities, negativeAttackDice }, 
     isAttack = false, expandSurges = true, labelAttack = false 
 }) {
-    if(!rerollAbilities) rerollAbilities = []
-    if(typeof rerollAbilities[0] !== "array")
-        rerollAbilities = isAttack ? [rerollAbilities, []] : [[], rerollAbilities]
     const hasRerollAbilities = rerollAbilities?.some(l => l.length)
     return (
         <span className="d-inline-flex align-items-center flex-wrap">

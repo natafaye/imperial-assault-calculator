@@ -84,3 +84,7 @@ export const getSearchParamsForAttack = (attack) => {
     const unitParams = convertUnitDataToParamData(attack.unitData, true)
     return new URLSearchParams({ ...customParams, ...unitParams })
 }
+
+export const formatRerollAbilities = (rerollAbilities, isAttack) => {
+    return (isAttack) ? [rerollAbilities || [], []] : [[], rerollAbilities || []]
+}

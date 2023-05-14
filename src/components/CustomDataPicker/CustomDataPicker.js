@@ -6,6 +6,7 @@ import BonusInput from './BonusInput'
 import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
 import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
 import { ATTACK, DEFENSE } from '../../data'
+import { formatRerollAbilities } from '../../utilities'
 
 export default function CustomDataPicker({ data, dispatch, pickDieSides = false, isAttack = false }) {
     const { dice, diceSides, bonus, rerollAbilities, surgeAbilities } = data
@@ -16,7 +17,7 @@ export default function CustomDataPicker({ data, dispatch, pickDieSides = false,
             label="Custom"
             collapsedData={
                 <SummarizedDataLabel
-                    data={{ dice, bonus, rerollAbilities: (isAttack) ? [rerollAbilities, []] : [[], rerollAbilities], surgeAbilities }}
+                    data={{ dice, bonus, rerollAbilities: formatRerollAbilities(rerollAbilities, isAttack), surgeAbilities }}
                     expandSurges={false}
                     labelAttack={false}
                     isAttack={isAttack}
