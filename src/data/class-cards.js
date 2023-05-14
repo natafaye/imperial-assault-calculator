@@ -732,8 +732,8 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
         optionalAttack: [
             {
-                cost: "Attacking with a Melee weapon, exhaust Proximity Strike", 
-                rerollAbilities: [[DEFENSE_THEN_ATTACK, undefined], []]
+                cost: "Melee attack, exhaust Proximity Strike", 
+                rerollAbilities: [[[DEFENSE_THEN_ATTACK, undefined]], []]
             }
         ]
     },
@@ -751,7 +751,7 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
         optionalAttack: [
             {
-                cost: "Attacking with a Ranged weapon",
+                cost: "Ranged attack",
                 rerollAbilities: [[[ATTACK_AND_DEFENSE, undefined]], []]
             }
         ]

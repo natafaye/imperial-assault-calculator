@@ -283,4 +283,36 @@ export const TEST_DATA = {
             [WHITE]: [undefined, 2.92]
         }
     },
+    "None": {
+        "Ahsoka Tano": {
+            [BLACK]: [undefined, 4.97],
+            [WHITE]: [undefined, 4.71]
+        }
+    },
+    "Duelist's Blade": {
+        "Proximity Strike and 4035-0": {
+            [BLACK]: [undefined, 2.56],
+            [WHITE]: [undefined, 2.70]
+        }
+    },
+    "Hair-Trigger Pistol": {
+        "None": {
+            [BLACK]: [undefined, 1.60],
+            [WHITE]: [undefined, 1.90]
+        },
+        "Rapid Fire and 4034-0": {
+            [BLACK]: [undefined, 1.85],
+            [WHITE]: [undefined, 2.22]
+        }
+    },
+    "Charge Pistol": {
+        "None": {
+            [BLACK]: [undefined, 2.05],
+            [WHITE]: [undefined, 2.18]
+        },
+        "Rapid Fire and 4034-0": {
+            [BLACK]: [undefined, 2.42],
+            [WHITE]: [undefined, 2.73]
+        }
+    },
 }
