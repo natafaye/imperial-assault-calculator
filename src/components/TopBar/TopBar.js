@@ -18,6 +18,7 @@ export default function TopBar() {
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} to="/">Damage Stats</Nav.Link>
                         <Nav.Link as={NavLink} to="/compare">Compare Attacks</Nav.Link>
+                        <Nav.Link as={NavLink} to="/reroll">Which to Reroll</Nav.Link>
                         <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

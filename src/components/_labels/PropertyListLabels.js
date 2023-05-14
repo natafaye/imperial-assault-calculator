@@ -7,7 +7,7 @@ export function PropertyLabel({ value, property, isAttack = false, className = "
         return null
 
     if (property === ACC)
-        return <span className={className}>+{value} {PROPERTY_LABELS[property]}</span>
+        return <span className={className}>{value > 0 ? "+" : ""}{value} {PROPERTY_LABELS[property]}</span>
 
     if (property === BLO && value < 0 && isAttack) 
         return <span className={className}>{ Math.abs(value) } Pierce</span>

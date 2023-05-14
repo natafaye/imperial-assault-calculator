@@ -4,7 +4,7 @@ import {
     DEFENSE, AMOUNT, ALL_ATTACK
 } from "../data"
 import { DEFENSE_THEN_ATTACK } from "../data/constants"
-import { full, union, difference, setInArray, range, argmax, argmin, addArrays } from "./pythonConversionUtilities"
+import { full, union, difference, setInArray, range, argmax, argmin, addArrays, isEqualSet } from "./pythonConversionUtilities"
 
 /**
  * Converts an array of side indexes into one number that would index into an array of all possible roll combos
@@ -30,9 +30,6 @@ const defensefloor = (result) => {
     result[dod] = Math.max(0, result[dod])
 }
 
-/**
- * Converted by Natalie Childs from python code by Jack Fuller
- */
 export default class Attack {
 
     /**
@@ -42,18 +39,23 @@ export default class Attack {
      *   this.probabilites = the likelihood of getting each possible roll
      * 
      * @param {string[]?} dice All the dice (attack and defense)
-     * @param {number[6][]?} surge All the attacker's surge abilities in the format [ACC, DAM, SURGE_COST, BLO, EVA, DOD]
+     * @param {number[6][]?} surge All the attacker's surge abilities in the format [ACC, DAM, SURGE_COST, BLO, EVA, DOD], where SURGE_COST is negative
      * @param {number[6]?} bonus Any other bonuses (both attack and defense)
      * @param {number?} distance The distance to the target, or the minimum required accuracy below which damage is zero
      * @param {[number[2][], number[2][]]} rerollabilities All the attacker's attack abilities and the defender's defend abilities, ex: [[[0,1],[1,1]], []]
+     * @param {number[]?} rollByte An array of side indexes to indicate the roll that should be checked - used on the Which to Reroll page
      * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
      */
-    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []], postWebWorkerMessage) {
+    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []], rollByte, postWebWorkerMessage) {
         this.dice = dice
         this.surgeabilities = surge
         this.bonus = bonus
         this.distance = distance
         this.rerollabilities = rerollabilities
+
+        // For Which to Reroll calculation
+        this.rollId = rollByte?.length && byte2id(rollByte)
+        this.rerollOptions = []
 
         // Save access to function to post web worker messages, if running in web worker
         this.postWebWorkerMessage = postWebWorkerMessage
@@ -64,8 +66,7 @@ export default class Attack {
 
     /**
      * If Attack is running in a Web Worker, sends a Web Worker message with the current progress percentage
-     * @param {{ stage, done, total }} status The stage 
-     * @returns 
+     * @param {{ stage, done, total }} status The stage ("rolls" or "rerolls"), the amount that has been done, and the total to do
      */
     updateWebWorkerProgress = function({ stage, done, total }) {
         if(!this.postWebWorkerMessage) return
@@ -131,7 +132,11 @@ export default class Attack {
 
         // Calculate the likelihood of every possible roll, factoring in reroll abilities
         // min probability is 6 to the power of (-2 * number of dice) because of rerolls
-        this.probabilities = full(this.rolls.length, this.rolls.length)
+        // If we're doing a Which to Reroll check, all rolls except the one being checked are set to 0
+        this.probabilities = full(this.rolls.length, this.rollId !== undefined ? 0 : this.rolls.length)
+        if(this.rollId !== undefined)
+            this.probabilities[this.rollId] = this.rolls.length
+
         const diceleft = new Set(range(this.dice.length))
         this.probabilities = this.genrerolls(this.probabilities, this.rerollabilities, diceleft)
     }
@@ -294,6 +299,25 @@ export default class Attack {
                 // If defender choose min average damage
                 else
                     probabilitiesid = argmin(hitslist)
+
+                // For Which to Reroll calculation
+                if(!isRecursive && this.rollId !== undefined) {
+                    this.rerollOptions = listOfDiceSetsByAbility
+                        // Flatten the two dimensional array
+                        .flatMap(l => l)
+                        // Map each set to reroll info about the set
+                        .map((set, index) => ({ 
+                            avgDamage: hitslist[index], 
+                            dice: Array.from(set).map(dieIndex => this.dice[dieIndex]),
+                            set: set
+                        }))
+                        // Remove any duplicates
+                        .filter((option, index, array) => index === array.findIndex(o => isEqualSet(o.set, option.set)))
+                        // Add the result for not rerolling any dice
+                        .concat({ avgDamage: hitslist.at(-1), dice: [] })
+                    // Sort it from highest damage to lowest damage
+                    this.rerollOptions.sort((a, b) => (playerid === ATTACK) ? b.avgDamage - a.avgDamage : a.avgDamage - b.avgDamage)
+                }
 
                 // Add the probabilities for the best rerolls choice for this particular original roll to the list of probabilities
                 newprobabilities = addArrays(newprobabilities, probabilitieslist[probabilitiesid])

@@ -105,6 +105,6 @@ export function addArrays(a, b) {
  * @param {Set<number>} b A set to check
  * @returns {boolean} true if they are equal, false if not
  */
-function isEqualSet(a, b) {
+export function isEqualSet(a, b) {
     return a.size === b.size && [...a].every(item => b.has(item))
 }

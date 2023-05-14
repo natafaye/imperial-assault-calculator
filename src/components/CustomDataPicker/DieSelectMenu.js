@@ -1,7 +1,6 @@
 import React from 'react'
-import DieIcon from '../_icons/DieIcon';
 
-export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
+export default function DieSelectMenu({ isOpen, selected, onChange, options }) {
 
     const handleKeyDown = (color) => (event) => {
         if (event.key === " " || event.key === "SpaceBar" || event.key === "Enter") {
@@ -19,17 +18,17 @@ export default function DieSelectMenu({ isOpen, colors, selected, onChange }) {
             role="listbox"
             aria-activedescendant={`die-selector-${selected}`}
         >
-            {colors.map(color => (
-                <li key={color}
+            {options.map(option => (
+                <li key={option.value}
                     className="p-1"
-                    id={`die-selector-${color}`}
+                    id={`die-selector-${option.value}`}
                     tabIndex={0}
                     role="option"
-                    aria-selected={selected === color}
-                    onClick={() => onChange(color)}
-                    onKeyDown={handleKeyDown(color)}
+                    aria-selected={selected === option.Reactvalue}
+                    onClick={() => onChange(option.value)}
+                    onKeyDown={handleKeyDown(option.value)}
                 >
-                    <DieIcon color={color} size="1.3" />
+                    { option.label }
                 </li>
             ))}
         </ul>

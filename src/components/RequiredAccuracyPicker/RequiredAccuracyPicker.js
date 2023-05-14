@@ -12,7 +12,7 @@ function getSliderClass(min, max, value) {
     return (percentage <= .5) ? "bg-warning" : "bg-danger"
 }
 
-export default function RequiredAccuracyPicker({ value, onChange, customAttack, customDefense }) {
+export default function RequiredAccuracyPicker({ value, onChange, customAttack, customDefense, className = "" }) {
     const [[min, max], setMinMaxAccuracy] = useState([0, 10])
 
     // Update accuracy min, max, and required value when the attack or defense data changes
@@ -23,7 +23,7 @@ export default function RequiredAccuracyPicker({ value, onChange, customAttack, 
     }, [customAttack, customDefense, onChange])
 
     return (
-        <div className="d-flex my-2 align-items-center">
+        <div className={"d-flex my-2 align-items-center " + className}>
             <label htmlFor="minimumAccuracyRange" className="form-label mx-2 text-muted">
                 Require&nbsp;<strong className="text-white">{value}</strong>&nbsp;{PROPERTY_LABELS[ACC]}
             </label>

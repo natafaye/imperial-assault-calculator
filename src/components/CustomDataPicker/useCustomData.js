@@ -5,9 +5,10 @@ import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE } from "../../data"
 
 const initialValues = () => ({
     dice: [],
+    diceSides: [], // Only used on Which to Reroll page
     bonus: [0,0,0,0,0,0],
     rerollAbilities: [],
-    surgeAbilities: []
+    surgeAbilities: [],
 })
 
 const reducer = (state, action) => {
@@ -16,12 +17,19 @@ const reducer = (state, action) => {
         case "add-die":
             return {
                 ...state,
-                dice: state.dice.concat(action.payload)
+                dice: state.dice.concat(action.payload),
+                diceSides: state.diceSides?.concat(0)
             }
         case "delete-die":
             return {
                 ...state,
-                dice: state.dice.filter((_, i) => i !== action.payload)
+                dice: state.dice.filter((_, i) => i !== action.payload),
+                diceSides: state.diceSides?.filter((_, i) => i !== action.payload)
+            }
+        case "change-die-side":
+            return {
+                ...state,
+                diceSides: state.diceSides?.map((value, index) => (index === action.payload.index) ? action.payload.value : value)
             }
         case "update-bonus":
             return {
@@ -55,7 +63,10 @@ const reducer = (state, action) => {
         case "clear":
             return initialValues()
         case "replace":
-            return action.payload
+            return {
+                ...action.payload,
+                diceSides: action.payload.dice.map(_ => 0)
+            }
         default:
             return state
     }
@@ -63,6 +74,7 @@ const reducer = (state, action) => {
 
 export const addDie = (payload) => ({ type: "add-die", payload })
 export const deleteDie = (payload) => ({ type: "delete-die", payload })
+export const changeDieSide = (payload) => ({ type: "change-die-side", payload })
 export const updateBonus = (payload) => ({ type: "update-bonus", payload })
 export const clearBonus = () => ({ type: "clear-bonus" })
 export const addAbility = (payload) => ({ type: "add-ability", payload })

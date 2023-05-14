@@ -7,8 +7,8 @@ import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
 import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
 import { ATTACK, DEFENSE } from '../../data'
 
-export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
-    const { dice, bonus, rerollAbilities, surgeAbilities } = data
+export default function CustomDataPicker({ data, dispatch, pickDieSides = false, isAttack = false }) {
+    const { dice, diceSides, bonus, rerollAbilities, surgeAbilities } = data
     const idPrefix = isAttack ? "Attack" : "Defense"
 
     return (
@@ -23,8 +23,8 @@ export default function CustomInfoPicker({ data, dispatch, isAttack = false }) {
                 />
             }
         >
-            <div className="d-flex flex-wrap align-items-center">
-                <DiceListInput values={dice} dispatch={dispatch} isAttack={isAttack} />
+            <div className="d-flex flex-wrap align-items-stretch">
+                <DiceListInput values={dice} sideValues={diceSides} dispatch={dispatch} isAttack={isAttack} pickDieSides={pickDieSides} />
             </div>
             <BonusInput
                 idPrefix={idPrefix} 

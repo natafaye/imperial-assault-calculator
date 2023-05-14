@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import { useCallback, useMemo, useState, useEffect } from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import { getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -8,57 +8,24 @@ import CompareAttacksTable from './CompareAttacksTable'
 import ColumnVisibilityPicker from './ColumnVisibilityPicker'
 import AddAllAttacksButton from './AddAllAttacksButton'
 import QuickAddAttack from './QuickAddAttack'
+import GradientProgressBar from '../GradientProgressBar'
 import { getTableColumns } from './tableColumns'
 import { getCompareResults } from '../../utilities'
-import GradientProgressBar from '../GradientProgressBar'
+import useProgressWorker from '../../utilities/useProgressWorker'
 
 export default function ComparePage({ compareData, compareUpdaters }) {
-  const { attackList, sorting, columnVisibility } = compareData
-  const { setAttackList, setSorting, setColumnVisibility } = compareUpdaters
+  const {attackList, sorting, columnVisibility} = compareData
+  const {setAttackList, setSorting, setColumnVisibility} = compareUpdaters
   const [showAddForm, setShowAddForm] = useState(false)
 
-  const [progress, setProgress] = useState(null)
-  const [error, setError] = useState(null)
-  const [worker, setWorker] = useState(null)
-  const [needNewWorkerFlag, setNeedNewWorkerFlag] = useState(0)
-
-  useEffect(() => {
-    const newWorker = new Worker(new URL("./compareWorker.js", import.meta.url))
-    setWorker(newWorker)
-    setProgress(null)
-    return () => newWorker.terminate()
-  }, [needNewWorkerFlag])
+  const makeNewWorker = useCallback(() => new Worker(new URL("./compareWorker.js", import.meta.url)), [])
+  const {progress, error, startWorker, cancelWorker} = useProgressWorker(
+    (addition) => setAttackList(prevList => [addition, ...prevList]),
+    makeNewWorker
+  )
 
   const addAttack = (attack) => {
-    if (window.Worker) {
-      worker.onmessage = (message) => {
-        if (typeof message.data === "number") {
-          setProgress(message.data)
-        } else if (typeof message.data === "object") {
-          setAttackList(prevList => [message.data, ...prevList])
-          setError(null)
-          setProgress(null)
-        }
-      }
-      worker.onerror = (error) => {
-        setError("ERROR: " + error.message)
-        setProgress(null)
-        worker.terminate()
-      }
-      setProgress(0)
-      worker.postMessage(attack)
-    } else {
-      setAttackList(prevList => [getCompareResults(attack), ...prevList])
-    }
-  }
-
-  const cancel = () => {
-    if (window.Worker) {
-      worker?.terminate()
-      setProgress(null)
-      setError(null)
-      setNeedNewWorkerFlag(prev => ++prev)
-    }
+      startWorker(attack, () => setAttackList(prevList => [getCompareResults(attack), ...prevList]))
   }
 
   const addAllAttacks = (additions) => {
@@ -105,13 +72,15 @@ export default function ComparePage({ compareData, compareUpdaters }) {
         </Col>
       </Row>
       <Row>
-        {progress !== null && <Col className="mb-4">
-          <div className="d-flex align-items-center">
-            <GradientProgressBar amount={progress} className="flex-grow-1 me-2" gradientClassName='red-orange-green-gradient' ariaLabel="Add attack progress" animated striped/>
-            <Button variant="outline-warning" size="sm" onClick={cancel}>Cancel</Button>
-          </div>
-          { error && <p className="text-warning text-center">{error}</p> }
-        </Col>}
+        {progress !== null && 
+          <Col className="mb-4">
+            <div className="d-flex align-items-center">
+              <GradientProgressBar amount={progress} className="flex-grow-1 me-2" gradientClassName='red-orange-green-gradient' ariaLabel="Add attack progress" animated striped/>
+              <Button variant="outline-warning" size="sm" onClick={cancelWorker}>Cancel</Button>
+            </div>
+            { error && <p className="text-warning text-center">{error}</p> }
+          </Col>
+        }
       </Row>
       <Row>
         <Col>

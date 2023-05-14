@@ -9,6 +9,7 @@ import { ACC, BLACK, GREEN, WHITE, DICE_MAX, DICE_MIN, ATTACK, DEFENSE, UNITS, W
  * @param {object} attack Data about the attack
  * @param {object?} defense Optional data about the defense (for adding the defense bonus in)
  * @param {number?} requiredAccuracy A minimum required accuracy to hit, below which damage is 0
+ * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
  * @returns {Attack} An Attack object
  */
 export const getAttackObject = (attack, defense, requiredAccuracy = 0, postWebWorkerMessage) => {
@@ -18,6 +19,7 @@ export const getAttackObject = (attack, defense, requiredAccuracy = 0, postWebWo
         addValues(attack.bonus, defense?.bonus),
         requiredAccuracy,
         [ attack.rerollAbilities || [], defense?.rerollAbilities || [] ],
+        attack.diceSides?.concat(defense?.diceSides || []),
         postWebWorkerMessage
     )
 }
@@ -29,6 +31,7 @@ export const getAttackObject = (attack, defense, requiredAccuracy = 0, postWebWo
  *  customDefense: object,
  *  requiredAccuracy: number
  * }} data The attack and defense data
+ * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
  * @returns {{ 
  *  average: number, 
  *  histogram: {value: number, amount: number, percentage: number, atLeastPercentage: number }[],
@@ -51,6 +54,7 @@ export const getStatsResults = ({ customAttack, customDefense, requiredAccuracy 
  *  unitData: { unit: object?, classCards: object[], weapon: object?, mods: object[], focused: boolean } 
  *  requiredAccuracy: number,
  * }} attackData Data about an attack
+ * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
  * @returns {object} comparison data for the attack
  */
 export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...customData }, postWebWorkerMessage) => {
@@ -69,6 +73,17 @@ export const getCompareResults = ({ name, unitData, requiredAccuracy = 0, ...cus
         minAcc: min, 
         maxAcc: max 
     }
+}
+
+/**
+ * Takes data about an attack and defense with reroll abilities and gets the avg damage for rerolling particular dice next
+ * @param {{ customAttack, customDefense, requiredAccuracy }} data Attack and defense data with diceSide arrays on them
+ * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
+ * @returns {{ dice, avgDamage }[]} An array of data about the average damage of rerolling different sets of dice
+ */
+export const getRerollResults = ({ customAttack, customDefense, requiredAccuracy }, postWebWorkerMessage) => {
+    const attackData = getAttackObject(customAttack, customDefense, requiredAccuracy, postWebWorkerMessage)
+    return attackData.rerollOptions
 }
 
 /**

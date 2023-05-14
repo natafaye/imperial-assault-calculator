@@ -4,7 +4,7 @@ import PropertyIcon from '../_icons/PropertyIcon'
 import { MAX_PROPERTY_VALUE, MIN_PROPERTY_VALUE } from '../../utilities'
 import { PROPERTY_LABELS } from '../../data'
 
-export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false }) {
+export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false, min = MIN_PROPERTY_VALUE, max = MAX_PROPERTY_VALUE }) {
     return (
         <span 
             style={{ flexBasis: "70px", maxWidth: "150px" }} 
@@ -15,8 +15,8 @@ export default function PropertyInput({ property, value, onChange, idPrefix, dis
             </Form.Label>
             <Form.Control 
                 type="number" 
-                min={MIN_PROPERTY_VALUE} 
-                max={MAX_PROPERTY_VALUE} 
+                min={min} 
+                max={max} 
                 size="sm" 
                 id={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} 
                 name={property} 

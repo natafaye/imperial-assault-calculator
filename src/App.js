@@ -6,6 +6,7 @@ import TopBar from "./components/TopBar";
 import StatsPage from "./components/StatsPage";
 import ComparePage, { useCompareData } from './components/ComparePage';
 import AboutPage from './components/AboutPage/AboutPage';
+import RerollPage from './components/RerollPage/RerollPage';
 
 function App() {
   const [compareData, compareUpdaters] = useCompareData()
@@ -18,6 +19,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<StatsPage />}/>
+          <Route path="/reroll" element={<RerollPage />}/>
           <Route path="/compare" element={<ComparePage compareData={compareData} compareUpdaters={compareUpdaters}/>}/>
           <Route path="/about" element={<AboutPage />}/>
         </Routes>

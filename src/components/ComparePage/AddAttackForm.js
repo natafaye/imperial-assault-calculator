@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { Button, Form, Modal, Stack } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightToBracket, faPlus } from '@fortawesome/free-solid-svg-icons'
-import UnitInfoPicker, { getEmptyUnitData, useUnitData } from '../UnitDataPicker'
-import CustomInfoPicker, { clearCustomData, replaceCustomData, useCustomData } from '../CustomDataPicker'
+import UnitDataPicker, { getEmptyUnitData, useUnitData } from '../UnitDataPicker'
+import CustomDataPicker, { clearCustomData, replaceCustomData, useCustomData } from '../CustomDataPicker'
 import RequiredAccuracyPicker from '../RequiredAccuracyPicker'
 import { getAttackData, summarizeAttackAndDefense } from '../../utilities'
 
@@ -68,8 +68,8 @@ export default function AddAttackForm({ show, onHide, onSubmit }) {
                         </Button>
                     </Stack>
                 </Form.Group>
-                <UnitInfoPicker data={unitData} setData={updateData} isAttack />
-                <CustomInfoPicker data={customData} dispatch={customDataDispatch} isAttack />
+                <UnitDataPicker data={unitData} setData={updateData} isAttack />
+                <CustomDataPicker data={customData} dispatch={customDataDispatch} isAttack />
                 <RequiredAccuracyPicker value={requiredAccuracy} onChange={setRequiredAccuracy} customAttack={customData} />
             </Modal.Body>
             <Modal.Footer>

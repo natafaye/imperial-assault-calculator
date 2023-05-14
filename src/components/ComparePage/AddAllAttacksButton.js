@@ -4,7 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { getCompareResults } from '../../utilities'
 import { UNITS, WEAPONS, MELEE, RANGED, ATTACK, MERCENARY, IMPERIAL, REBEL } from '../../data'
 
-export default function AddAllAttacksButton({ addAdd }) {
+export default function AddAllAttacksButton({ onAdd }) {
 
     const addAllAttacksOfType = (filter) => {
         const isWeapon = (filter === RANGED || filter === MELEE)
@@ -19,7 +19,7 @@ export default function AddAllAttacksButton({ addAdd }) {
             rerollAbilities: (a.rerollAbilities && a.rerollAbilities[ATTACK]) || [],
             unitData: { cards: [a], focused: false, hidden: false, selectedOptionalIds: [] }
         }))
-        addAdd(additions)
+        onAdd(additions)
     }
 
     return (
