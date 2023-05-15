@@ -1,5 +1,5 @@
 import {
-    ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, BLACK, WHITE, DICE as dice, 
+    ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, PIERCE as prc, BLACK, WHITE, DICE as dice, 
     ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, DEFENSE, AMOUNT, ALL_ATTACK, DEFENSE_THEN_ATTACK
 } from "../../data"
 import { full, union, difference, setInArray, range, argmax, argmin, addArrays, isEqualSet } from "./pythonConversionUtilities"
@@ -26,6 +26,7 @@ const defensefloor = (result) => {
     result[blo] = Math.max(0, result[blo])
     result[eva] = Math.max(0, result[eva])
     result[dod] = Math.max(0, result[dod])
+    result[prc] = Math.max(0, result[prc])
 }
 
 export default class Attack {
@@ -44,7 +45,7 @@ export default class Attack {
      * @param {number[]?} rollByte An array of side indexes to indicate the roll that should be checked - used on the Which to Reroll page
      * @param {function?} postWebWorkerMessage A function for posting a web worker message, if running in web worker
      */
-    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []], rollByte, postWebWorkerMessage) {
+    constructor(dice = [], surge = [], bonus = [0, 0, 0, 0, 0, 0, 0], distance = 0, rerollabilities = [[], []], rollByte, postWebWorkerMessage) {
         this.dice = dice
         this.surgeabilities = surge
         this.bonus = bonus
@@ -109,12 +110,13 @@ export default class Attack {
             let baseresult = this.bonus.slice(0)
             // Get the indexes of the sides that are facing up on each dice
             const rollbyte = this.id2byte(rollid)
-            // For each die, get the damage results and save it in the this.rolls array
+            // For each die, add its icons to the base result
             for (let diceid = 0; diceid < rollbyte.length; diceid++) {
                 const sideid = rollbyte[diceid]
                 const color = this.dice[diceid]
                 baseresult = addArrays(baseresult, dice[color][sideid])
             }
+            // save the final damage result to the this.rolls array
             const finalresult = this.rollresult(baseresult)
             this.rolls[rollid] = finalresult[hit]
             this.updateWebWorkerProgress({ stage: "rolls", done: rollid, total: this.rolls.length })
@@ -380,7 +382,7 @@ export default class Attack {
     /**
      * Use surges to get the final damage result from a base result of a roll
      * Assumes the player will make choices that maximize their damage
-     * @param {number[6]} baseresult The results so far without using surges yet
+     * @param {number[7]} baseresult The results so far without using surges yet
      * @returns {number} The final damage result for this roll
      */
     rollresult(baseresult) {
@@ -433,6 +435,11 @@ export default class Attack {
         // Calculate damage for each possible result
         for (const result of possibleresults) {
             defensefloor(result)
+
+            // handle pierces
+            result[blo] -= result[prc]
+            defensefloor(result)
+
             if (result[hit] > result[blo]) {
                 if (result[dod] || result[acc] < this.distance)
                     result[hit] = 0

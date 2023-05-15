@@ -1,6 +1,6 @@
 import React from 'react'
 import PropertyIcon from '../_icons/PropertyIcon'
-import { ACC, BLO, PROPERTY_LABELS } from '../../data'
+import { ACC, BLO, PIERCE, PROPERTY_LABELS } from '../../data'
 
 export function PropertyLabel({ value, property, isAttack = false, className = "" }) {
     if (!value) 
@@ -11,6 +11,9 @@ export function PropertyLabel({ value, property, isAttack = false, className = "
 
     if (property === BLO && value < 0 && isAttack) 
         return <span className={className}>{ Math.abs(value) } Pierce</span>
+
+    if (property === PIERCE && value)
+        return <span className={className}>{value} Pierce</span>
 
     return <span className={className}>{value > 0 ? "+" : ""}{value} <PropertyIcon property={property}/></span>
 }

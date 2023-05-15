@@ -3,316 +3,316 @@ import { BLACK, WHITE } from "../data";
 export const TEST_DATA = {
     "A-12 Sniper Rifle": {
         "None": {
-            [BLACK]: [undefined, 3.89],
-            [WHITE]: [undefined, 3.90]
+            [BLACK]: 3.89,
+            [WHITE]: 3.90
         },
         "Surge": {
-            [BLACK]: [undefined, 4.75],
-            [WHITE]: [undefined, 4.77]
+            [BLACK]: 4.75,
+            [WHITE]: 4.77
         }
     },
     "A280": {
         "None": {
-            [BLACK]: [undefined, 2.39],
-            [WHITE]: [undefined, 2.22]
+            [BLACK]: 2.39,
+            [WHITE]: 2.22
         },
         "Surge": {
-            [BLACK]: [undefined, 3.78],
-            [WHITE]: [undefined, 3.08]
+            [BLACK]: 3.78,
+            [WHITE]: 3.08
         },
         "Loku Kanoloa (Hero) and 1301-0 and Coordinated Attack (Loku) and 4011-0": {
-            [BLACK]: [undefined, 5.79],
-            [WHITE]: [undefined, 5.00]
+            [BLACK]: 5.79,
+            [WHITE]: 5.00
         },
         "Loku Kanoloa (Hero) and 1301-0 and Disruption Cell and 3301-2 and Coordinated Attack (Loku) and 4011-0": {
-            [BLACK]: [undefined, 6.53],
-            [WHITE]: [undefined, 5.69]
+            [BLACK]: 6.53,
+            [WHITE]: 5.69
         },
         "Loku Kanoloa (Hero) and 1301-0 and Coordinated Attack (Loku) and 4011-0 and Surge": {
-            [BLACK]: [undefined, 7.04],
-            [WHITE]: [undefined, 5.81]
+            [BLACK]: 7.04,
+            [WHITE]: 5.81
         },
         "Loku Kanoloa (Hero) and 1301-0 and Disruption Cell and 3301-2 and Coordinated Attack (Loku) and 4011-0 and Surge": {
-            [BLACK]: [undefined, 7.92],
-            [WHITE]: [undefined, 6.54]
+            [BLACK]: 7.92,
+            [WHITE]: 6.54
         },
         "Loku Kanoloa (Hero) and Disruption Cell and 3301-2 and Reroll and Surge": {
-            [BLACK]: [undefined, 5.10],
-            [WHITE]: [undefined, 4.19]
+            [BLACK]: 5.10,
+            [WHITE]: 4.19
         }
     },
     "All-Weather Rifle": {
         "None": {
-            [BLACK]: [undefined, 1.60],
-            [WHITE]: [undefined, 1.75]
+            [BLACK]: 1.60,
+            [WHITE]: 1.75
         },
         "Surge": {
-            [BLACK]: [undefined, 1.88],
-            [WHITE]: [undefined, 1.97]
+            [BLACK]: 1.88,
+            [WHITE]: 1.97
         }
     },
     "Armored Gauntlets": {
         "None": {
-            [BLACK]: [undefined, 2.54],
-            [WHITE]: [undefined, 2.38]
+            [BLACK]: 2.54,
+            [WHITE]: 2.38
         },
         "Surge": {
-            [BLACK]: [undefined, 3.31],
-            [WHITE]: [undefined, 3.08]
+            [BLACK]: 3.31,
+            [WHITE]: 3.08
         }
     },
     "BD-1 Vibro-Ax": {
         "None": {
-            [BLACK]: [undefined, 2.50],
-            [WHITE]: [undefined, 2.65]
+            [BLACK]: 2.50,
+            [WHITE]: 2.65
         },
         "Surge": {
-            [BLACK]: [undefined, 2.94],
-            [WHITE]: [undefined, 3.04]
+            [BLACK]: 2.94,
+            [WHITE]: 3.04
         },
         "High-Impact Guard": {
-            [BLACK]: [undefined, 3.07],
-            [WHITE]: [undefined, 2.92]
+            [BLACK]: 3.07,
+            [WHITE]: 2.92
         },
         "High-Impact Guard and Surge": {
-            [BLACK]: [undefined, 4.36],
-            [WHITE]: [undefined, 3.90]
+            [BLACK]: 4.36,
+            [WHITE]: 3.90
         }
     },
     "Bo-rifle": {
         "None": {
-            [BLACK]: [undefined, 3.56],
-            [WHITE]: [undefined, 3.55]
+            [BLACK]: 3.56,
+            [WHITE]: 3.55
         },
         "Surge": {
-            [BLACK]: [undefined, 3.94],
-            [WHITE]: [undefined, 3.90]
+            [BLACK]: 3.94,
+            [WHITE]: 3.90
         }
     },
     "Close and Personal": {
         "Crushing Blow and 4015-0 and Vibrobayonet and 3017-0 and Reroll and Surge": {
-            [BLACK]: [undefined, 5.72],
-            [WHITE]: [undefined, 5.13]
+            [BLACK]: 5.72,
+            [WHITE]: 5.13
         }
     },
     "DC-15S Blaster": {
         "None": {
-            [BLACK]: [undefined, 1.33],
-            [WHITE]: [undefined, 1.74]
+            [BLACK]: 1.33,
+            [WHITE]: 1.74
         }
     },
     "DDC Defender": {
         "None": {
-            [BLACK]: [undefined, 1.50],
-            [WHITE]: [undefined, 1.79]
+            [BLACK]: 1.50,
+            [WHITE]: 1.79
         },
         "Surge": {
-            [BLACK]: [undefined, 1.71],
-            [WHITE]: [undefined, 2.06]
+            [BLACK]: 1.71,
+            [WHITE]: 2.06
         }
     },
     '434 "Deathhammer"': {
         "Reroll and Surge": {
-            [BLACK]: [undefined, 4.20],
-            [WHITE]: [undefined, 4.05]
+            [BLACK]: 4.20,
+            [WHITE]: 4.05
         }
     },
     "DH-17": {
         "None": {
-            [BLACK]: [undefined, 2.13],
-            [WHITE]: [undefined, 2.07]
+            [BLACK]: 2.13,
+            [WHITE]: 2.07
         },
         "Surge": {
-            [BLACK]: [undefined, 2.48],
-            [WHITE]: [undefined, 2.50]
+            [BLACK]: 2.48,
+            [WHITE]: 2.50
         },
         "Disruption Cell and 3301-1 and Point Blank Shot and 4037-0": {
-            [BLACK]: [undefined, 4.08],
-            [WHITE]: [undefined, 3.73]
+            [BLACK]: 4.08,
+            [WHITE]: 3.73
         },
         "Disruption Cell and 3301-1 and Point Blank Shot and 4037-0 and Surge": {
-            [BLACK]: [undefined, 5.05],
-            [WHITE]: [undefined, 4.10]
+            [BLACK]: 5.05,
+            [WHITE]: 4.10
         }
     },
     "DL-44": {
         "None": {
-            [BLACK]: [undefined, 2.20],
-            [WHITE]: [undefined, 2.16]
+            [BLACK]: 2.20,
+            [WHITE]: 2.16
         }
     },
     "DLT-19": {
         "None": {
-            [BLACK]: [undefined, 3.16],
-            [WHITE]: [undefined, 3.12]
+            [BLACK]: 3.16,
+            [WHITE]: 3.12
         }
     },
     "DXR-6": {
         "None": {
-            [BLACK]: [undefined, 3.39],
-            [WHITE]: [undefined, 3.35]
+            [BLACK]: 3.39,
+            [WHITE]: 3.35
         },
         "Surge": {
-            [BLACK]: [undefined, 5.01],
-            [WHITE]: [undefined, 4.14]
+            [BLACK]: 5.01,
+            [WHITE]: 4.14
         }
     },
     "Heirloom Dagger": {
         "Falling Leaf and 4027-0": {
-            [BLACK]: [undefined, 3.01],
-            [WHITE]: [undefined, 2.92]
+            [BLACK]: 3.01,
+            [WHITE]: 2.92
         },
         "Falling Leaf and 4027-0 and Surge": {
-            [BLACK]: [undefined, 3.28],
-            [WHITE]: [undefined, 3.20]
+            [BLACK]: 3.28,
+            [WHITE]: 3.20
         }
     },
     "Hunter's Rifle": {
         "None": {
-            [BLACK]: [undefined, 2.42],
-            [WHITE]: [undefined, 2.14]
+            [BLACK]: 2.42,
+            [WHITE]: 2.14
         },
         "Surge": {
-            [BLACK]: [undefined, 3.25],
-            [WHITE]: [undefined, 2.64]
+            [BLACK]: 3.25,
+            [WHITE]: 2.64
         }
     },
     "Longblaster": {
         "Focused and Surge": {
-            [BLACK]: [undefined, 3.78],
-            [WHITE]: [undefined, 3.52]
+            [BLACK]: 3.78,
+            [WHITE]: 3.52
         }
     },
     "Modified Blaster": {
         "Plasma Cell and Focused and Surge": {
-            [BLACK]: [undefined, 5.00],
-            [WHITE]: [undefined, 4.33]
+            [BLACK]: 5.00,
+            [WHITE]: 4.33
         }
     },
     "Plasteel Staff": {
         "None": {
-            [BLACK]: [undefined, 1.50],
-            [WHITE]: [undefined, 1.79]
+            [BLACK]: 1.50,
+            [WHITE]: 1.79
         },
         "Surge": {
-            [BLACK]: [undefined, 1.71],
-            [WHITE]: [undefined, 2.06]
+            [BLACK]: 1.71,
+            [WHITE]: 2.06
         },
         "High-Impact Guard and Focused and Surge": {
-            [BLACK]: [undefined, 4.84],
-            [WHITE]: [undefined, 4.62]
+            [BLACK]: 4.84,
+            [WHITE]: 4.62
         }
     },
     "Polearm": {
         "None": {
-            [BLACK]: [undefined, 3.09],
-            [WHITE]: [undefined, 3.17]
+            [BLACK]: 3.09,
+            [WHITE]: 3.17
         },
         "Surge": {
-            [BLACK]: [undefined, 3.67],
-            [WHITE]: [undefined, 3.38]
+            [BLACK]: 3.67,
+            [WHITE]: 3.38
         }
     },
     "Punch Dagger": {
         "None": {
-            [BLACK]: [undefined, 3.22],
-            [WHITE]: [undefined, 3.01]
+            [BLACK]: 3.22,
+            [WHITE]: 3.01
         },
         "Surge": {
-            [BLACK]: [undefined, 3.97],
-            [WHITE]: [undefined, 3.82]
+            [BLACK]: 3.97,
+            [WHITE]: 3.82
         },
         "High-Impact Guard": {
-            [BLACK]: [undefined, 3.92],
-            [WHITE]: [undefined, 3.55]
+            [BLACK]: 3.92,
+            [WHITE]: 3.55
         },
         "High-Impact Guard and Surge": {
-            [BLACK]: [undefined, 5.27],
-            [WHITE]: [undefined, 4.65]
+            [BLACK]: 5.27,
+            [WHITE]: 4.65
         }
     },
     "Repeating Blaster": {
         "Reroll and Surge": {
-            [BLACK]: [undefined, 2.30],
-            [WHITE]: [undefined, 2.66]
+            [BLACK]: 2.30,
+            [WHITE]: 2.66
         }
     },
     "Shu Yen's Lightsaber": {
         "None": {
-            [BLACK]: [undefined, 2.56],
-            [WHITE]: [undefined, 2.46]
+            [BLACK]: 2.56,
+            [WHITE]: 2.46
         }
     },
     "Shrouded Lightsaber": {
         "High-Impact Guard and Falling Leaf and 4027-0 and Hidden and 2056-0": {
-            [BLACK]: [undefined, 6.91],
-            [WHITE]: [undefined, 5.59]
+            [BLACK]: 6.91,
+            [WHITE]: 5.59
         },
         "High-Impact Guard and Falling Leaf and 4027-0 and Hidden and 2056-0 and Surge": {
-            [BLACK]: [undefined, 8.00],
-            [WHITE]: [undefined, 6.48]
+            [BLACK]: 8.00,
+            [WHITE]: 6.48
         }
     },
     "Sporting Blaster": {
         "None": {
-            [BLACK]: [undefined, 3.23],
-            [WHITE]: [undefined, 2.72]
+            [BLACK]: 3.23,
+            [WHITE]: 2.72
         },
         "Surge": {
-            [BLACK]: [undefined, 3.59],
-            [WHITE]: [undefined, 3.03]
+            [BLACK]: 3.59,
+            [WHITE]: 3.03
         }
     },
     "Vibro Knucklers": {
         "None": {
-            [BLACK]: [undefined, 2.75],
-            [WHITE]: [undefined, 2.38]
+            [BLACK]: 2.75,
+            [WHITE]: 2.38
         },
         "Surge": {
-            [BLACK]: [undefined, 3.72],
-            [WHITE]: [undefined, 3.08]
+            [BLACK]: 3.72,
+            [WHITE]: 3.08
         }
     },
     "Vibrosword": {
         "None": {
-            [BLACK]: [undefined, 2.17],
-            [WHITE]: [undefined, 2.19]
+            [BLACK]: 2.17,
+            [WHITE]: 2.19
         },
         "Surge": {
-            [BLACK]: [undefined, 2.89],
-            [WHITE]: [undefined, 2.92]
+            [BLACK]: 2.89,
+            [WHITE]: 2.92
         }
     },
     "None": {
         "Ahsoka Tano": {
-            [BLACK]: [undefined, 4.97],
-            [WHITE]: [undefined, 4.71]
+            [BLACK]: 4.97,
+            [WHITE]: 4.71
         }
     },
     "Duelist's Blade": {
         "Proximity Strike and 4035-0": {
-            [BLACK]: [undefined, 2.56],
-            [WHITE]: [undefined, 2.70]
+            [BLACK]: 2.56,
+            [WHITE]: 2.70
         }
     },
     "Hair-Trigger Pistol": {
         "None": {
-            [BLACK]: [undefined, 1.60],
-            [WHITE]: [undefined, 1.90]
+            [BLACK]: 1.60,
+            [WHITE]: 1.90
         },
         "Rapid Fire and 4034-0": {
-            [BLACK]: [undefined, 1.85],
-            [WHITE]: [undefined, 2.22]
+            [BLACK]: 1.85,
+            [WHITE]: 2.22
         }
     },
     "Charge Pistol": {
         "None": {
-            [BLACK]: [undefined, 2.05],
-            [WHITE]: [undefined, 2.18]
+            [BLACK]: 2.05,
+            [WHITE]: 2.18
         },
         "Rapid Fire and 4034-0": {
-            [BLACK]: [undefined, 2.42],
-            [WHITE]: [undefined, 2.73]
+            [BLACK]: 2.42,
+            [WHITE]: 2.73
         }
     },
 }

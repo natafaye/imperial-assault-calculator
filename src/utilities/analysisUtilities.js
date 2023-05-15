@@ -145,7 +145,7 @@ export const getAttackData = ({ cards = [], focused = false, hidden = false, sel
         bonus: addValues(
             ...cards.map(c => c.attackBonus),
             ...optionals.map(a => a.bonus),
-            (hidden ? [0,0,1,0,0,0] : undefined)
+            (hidden ? [0,0,1,0,0,0, 0] : undefined)
         ),
         rerollAbilities: [].concat(
             cards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[ATTACK]) || []),
@@ -170,7 +170,7 @@ export const getDefenseData = ({ cards = [], hidden = false, selectedOptionalIds
         ).filter(d => d),
         bonus: addValues(
             ...cards.map(c => c.defenseBonus),
-            (hidden ? [-2,0,0,0,0,0] : undefined)
+            (hidden ? [-2,0,0,0,0,0, 0] : undefined)
         ),
         rerollAbilities: [].concat(
             cards.flatMap(c => (c.rerollAbilities && c.rerollAbilities[DEFENSE]) || []),
@@ -209,6 +209,6 @@ function removeFromArray(array, toRemove) {
     return newArray
 }
 
-export function addValues(a = [0, 0, 0, 0, 0, 0], ...others) {
+export function addValues(a = [0, 0, 0, 0, 0, 0, 0], ...others) {
     return a.map((value, index) => value + others.reduce((total, b) => b ? total + b[index] : total, 0))
 }

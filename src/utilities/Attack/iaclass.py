@@ -23,7 +23,7 @@ def defensefloor(result):
 
 class Attack:
 
-    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []], special=''):
+    def __init__(self, dice, surge, bonus=[0, 0, 0, 0, 0, 0, 0], distance=0, rerollabilities=[[], []], special=''):
         self.dice = dice
         self.surgeabilities = []
         for ability in surge:

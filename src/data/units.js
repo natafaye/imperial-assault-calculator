@@ -45,11 +45,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
         ]
     }, // TODO: Choose to use surge to recover 2 health
     {
@@ -67,14 +67,14 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -92,12 +92,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, // TODO: Trigger +1 damage and 1 reroll if has fewer than 9 damage
     {
@@ -115,11 +115,11 @@ export const UNITS = [
         defenseDice: [BLACK, BLACK],
         attackDice: [BLUE, RED, RED],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ],
     },
     {
@@ -137,11 +137,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, // TODO: allow for 3 different attacks with each die and +3 accuracy
     {
@@ -159,12 +159,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -182,12 +182,12 @@ export const UNITS = [
         defenseDice: [BLACK, BLACK],
         attackDice: [RED, RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], [[DEFENSE, 1]]],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     },
     {
@@ -205,12 +205,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [4, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [4, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, -1, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -228,12 +228,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -251,13 +251,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, // TODO: shock lance
     {
@@ -275,11 +275,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: Pick to recover
     {
@@ -297,11 +297,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [1, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -319,11 +319,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, -3, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 3],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -341,11 +341,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -363,11 +363,11 @@ export const UNITS = [
         defenseDice: [BLACK, BLACK],
         attackDice: [],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, // TODO: Pick 3 attack dice with no duplicates
     {
@@ -385,11 +385,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: trigger defending +1 block bonus if 4 or more spaces away
     {
@@ -407,11 +407,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -429,12 +429,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, // TODO: Trigger defense reroll
     {
@@ -452,12 +452,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     }, // TODO: Trigger defense reroll
     {
@@ -475,12 +475,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -498,14 +498,14 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0],
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, -1, 0, 0],
-            [0, 0, -1, 0, 0, -1]
+            [0, 0, -1, 0, 0, 0, 1],
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 1],
+            [0, 0, -1, 0, 0, -1, 0]
         ]
     },
     {
@@ -523,12 +523,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, // TODO: While defending, you may convert 1 block to 1 evade
     {
@@ -546,12 +546,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0]
         ] // TODO: While defending, you may convert 1 block to 1 evade
     }, // TODO: Trigger add blue die to attack pool if within 2 spaces
     {
@@ -569,12 +569,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -592,12 +592,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
         ]
     },//TODO: Add in a recover recommendation/Prioritization
     {
@@ -615,12 +615,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -638,12 +638,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -661,12 +661,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -684,11 +684,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -706,11 +706,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -728,12 +728,12 @@ export const UNITS = [
         defenseDice: [BLACK, WHITE],
         attackDice: [RED, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [0, 2, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -751,12 +751,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },// TODO: Pick 1 Block or 1 Evade when defending for the tank
     {
@@ -774,13 +774,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
     {
@@ -798,13 +798,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
     {
@@ -822,12 +822,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -845,12 +845,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -868,12 +868,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
     {
@@ -891,12 +891,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
     {
@@ -914,13 +914,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0],
-            [0, 0, -1, 0, 0, -1]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3],
+            [0, 0, -1, 0, 0, -1, 0]
         ]
     },// TODO: :Lightsaber throw doing a ranged attach with red die and yellow plus 3 accuracy, Defending if no block is rolled then add 1 block
     {
@@ -938,12 +938,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 3, -2, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 3, -2, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -961,12 +961,12 @@ export const UNITS = [
         defenseDice: [],
         attackDice: [BLUE, RED],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -984,11 +984,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
         ]
     },// TODO: Choose to apply 2 accuracy, 2 damage, or 2 recovery on attack
     {
@@ -1006,11 +1006,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, GREEN],
         attackType: RANGED,
-        attackBonus: [2, 2, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [2, 2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
         ]
     },
     {
@@ -1028,8 +1028,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
 
@@ -1050,8 +1050,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
 
@@ -1072,11 +1072,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
+            [0, 2, -1, 0, 0, 0, 0],
         ]
     },
     {
@@ -1094,8 +1094,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, RED],
         attackType: MELEE,
-        attackBonus: [0, -1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, -1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
 
@@ -1116,8 +1116,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, RED],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
 
@@ -1138,12 +1138,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [1, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0],
+            [0, 2, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0],
         ]
     },
     {
@@ -1161,13 +1161,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, -1],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, -1, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1185,12 +1185,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, -1],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, -1, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1208,12 +1208,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },// TODO: Can force defender to reroll their defense die
     {
@@ -1231,13 +1231,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },// TODO: Can force defender to reroll their defense die
     {
@@ -1255,12 +1255,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, RED, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0],
         ]
     },
     {
@@ -1278,11 +1278,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },// TODO: Can pick any combination of 2 attack dice
     {
@@ -1300,8 +1300,8 @@ export const UNITS = [
         defenseDice: [BLUE],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
 
@@ -1322,12 +1322,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: May apply 1 block and -1 evade while defending
     {
@@ -1345,13 +1345,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },// TODO: May apply 1 block and -1 evade while defending
     {
@@ -1369,11 +1369,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1391,11 +1391,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1413,11 +1413,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -3, 0, 0]
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     },
     {
@@ -1435,11 +1435,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },// TODO: add a block for every evade result while defending
     {
@@ -1457,11 +1457,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1479,12 +1479,12 @@ export const UNITS = [
         defenseDice: [],
         attackDice: [BLUE, RED, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [-2, 2, -1, 0, 0, 0],
-            [-1, 1, -1, 0, 0, 0]
+            [-2, 2, -1, 0, 0, 0, 0],
+            [-1, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1502,11 +1502,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 1, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 3, -1, 0, 0, 0]
+            [0, 3, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1524,11 +1524,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1546,12 +1546,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1569,11 +1569,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1591,11 +1591,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1613,8 +1613,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -1635,8 +1635,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -1657,11 +1657,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -1679,11 +1679,11 @@ export const UNITS = [
         defenseDice: [],
         attackDice: [GREEN],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -1701,11 +1701,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1723,11 +1723,11 @@ export const UNITS = [
         defenseDice: [],
         attackDice: [GREEN],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1745,13 +1745,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1769,8 +1769,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, RED],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -1791,8 +1791,8 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, RED],
         attackType: MELEE,
-        attackBonus: [0, 2, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 2, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -1813,12 +1813,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1836,13 +1836,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1860,11 +1860,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1882,11 +1882,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },// TODO: can reroll an attack die if adjacent to friendly TROOPER 
     {
@@ -1904,12 +1904,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK_OR_DEFENSE, undefined]], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     },
     {
@@ -1927,13 +1927,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE],
         attackType: RANGED,
-        attackBonus: [1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [2, 0, -1, 0, 0, 0, 0]
         ],
         optionalAttack: [
             {
@@ -1957,13 +1957,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE],
         attackType: RANGED,
-        attackBonus: [1, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [3, 0, -1, 0, 0, 0, 0]
         ],
         optionalAttack: [
             {
@@ -1987,12 +1987,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [-2, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [-2, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2010,12 +2010,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2033,17 +2033,17 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [2, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [2, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ],
         optionalDefense: [
             { 
                 cost: "Within 3 spaces of 2+ hostiles", 
-                bonus: [0, 0, 0, 1, 0, 0] 
+                bonus: [0, 0, 0, 1, 0, 0, 0] 
             }
         ],
     }, 
@@ -2062,8 +2062,8 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -2090,11 +2090,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, 
     {
@@ -2112,12 +2112,12 @@ export const UNITS = [
         defenseDice: [BLACK, WHITE],
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2135,12 +2135,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2158,12 +2158,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2181,11 +2181,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], [[DEFENSE, 1]]],
 		surgeAbilities: [
-            [0, 0, -1, -3, 0, 0]
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2203,11 +2203,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [1, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [1, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2225,12 +2225,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
     {
@@ -2248,13 +2248,13 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, -1],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0]
-        ] //TODO: a reverse pierce, reduce pierce value by one up to zero
+            [0, 2, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0]
+        ]
     }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
     {
         id: 1097,
@@ -2271,12 +2271,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2294,12 +2294,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, RED, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2317,11 +2317,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, 
     {
@@ -2339,11 +2339,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2361,12 +2361,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 1, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 1, -1, 0, 0, 0, 0]
         ]//: TODO: While defending apply +1 Block to defense for each evade
     }, //TODO: add Classcard "Distracting"
     {
@@ -2384,12 +2384,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -2, -2, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -2, 0, 0, 0, 2]
         ]
     }, 
     {
@@ -2407,12 +2407,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [YELLOW, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, 
     {
@@ -2430,12 +2430,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [2, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [2, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, //TODO: Apply +1 Block for each Evade result while defending
     {
@@ -2453,12 +2453,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2476,12 +2476,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2499,11 +2499,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], [[DEFENSE, 1]]],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },  // TODO: replace die instead of reroll?
     {
@@ -2521,12 +2521,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, YELLOW, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2544,12 +2544,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, RED],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, 
     {
@@ -2567,12 +2567,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, //TODO: add saber strike as a weapon (Melee attack with 1 red and 1 yellow and pierce 3)
     {
@@ -2590,12 +2590,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     },
     {
@@ -2613,13 +2613,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, BLUE],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [2, 0, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [2, 0, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, 
     {
@@ -2637,11 +2637,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2659,12 +2659,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2682,12 +2682,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2705,12 +2705,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 3]
         ]
     }, 
     {
@@ -2728,11 +2728,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 1, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 1, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, //TODO: if you roll blank, you can add +1 dodge
     {
@@ -2750,11 +2750,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, // TODO: Overload cna trigger same surge ability twice per attack
     {
@@ -2772,11 +2772,11 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [RED, YELLOW],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     }, // TODO: Overload cna trigger same surge ability twice per attack
     {
@@ -2794,12 +2794,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -1, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2817,12 +2817,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, YELLOW],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     }, 
     {
@@ -2840,12 +2840,12 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [BLUE, GREEN, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },  
     {
@@ -2863,13 +2863,13 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
-        attackBonus: [1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [1, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [1, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },  
     {
@@ -2887,8 +2887,8 @@ export const UNITS = [
         defenseDice: [WHITE],
         attackDice: [GREEN, RED, YELLOW],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             
@@ -2909,12 +2909,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [BLUE, GREEN],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
         ]
     },  //TODO: Add weapon Fighting Knife- melee using 1 red die +1 damage
     {
@@ -2932,11 +2932,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },  
     {
@@ -2954,11 +2954,11 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: MELEE,
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },  
     {
@@ -2976,12 +2976,12 @@ export const UNITS = [
         defenseDice: [BLACK],
         attackDice: [RED, GREEN],
         attackType: RANGED,
-        attackBonus: [3, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [3, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },  //TODO: Add Weapon- Bo-Rifle Staff Strike- Melee attack 2 red dice 
     
@@ -3001,11 +3001,11 @@ export const UNITS = [
         defenseDice: [],
         attackDice: [BLUE],
         attackType: RANGED,
-        attackBonus: [0, 0, 0, -1, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -3031,8 +3031,8 @@ export const UNITS = [
             [RED],
             [RED, BLUE]
         ],
-        attackBonus: [0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // ?????
@@ -3059,14 +3059,14 @@ export const UNITS = [
             [RED, BLUE, GREEN],
             [RED]
         ],
-        attackBonus: [2, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [],
         optionalAttack: [
             {
                 cost: "Target has recon token",
-                bonus: [0,1,0,0,0,0]
+                bonus: [0,1,0,0,0,0, 0]
             }
         ]
     }

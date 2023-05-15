@@ -6,10 +6,11 @@ export const BLO = 3 // Blocks
 export const EVA = 4 // Evades
 export const DOD = 5 // Dodges
 
-export const RER = 6 // Rerolls
+export const PIERCE = 6 // Pierce (for negative pierce value)
+export const RER = 7 // Rerolls
 
 // Properties
-export const PROPERTY_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Reroll"]
+export const PROPERTY_LABELS = ["Accuracy", "Damage", "Surge", "Block", "Evade", "Dodge", "Pierce", "Reroll"]
 
 // Ability checks
 export const STRENGTH = 0

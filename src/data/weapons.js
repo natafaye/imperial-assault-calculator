@@ -39,10 +39,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 600,
-        attackBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [2, 0, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [2, 0, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -54,11 +54,11 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 3,
         cost: 1150,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [0, 0, -1, 0, 0, -1]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [0, 0, -1, 0, 0, -1, 0]
         ]
     },
     {
@@ -70,10 +70,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 2,
         cost: 600,
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -87,9 +87,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -101,9 +101,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 750,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: option of ranged attack with one less surge
     {
@@ -117,7 +117,7 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     }, // TODO: Use -1 damage and +2 accuracy?
     {
@@ -129,10 +129,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 1,
         cost: 350,
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: Use damage token?
     {
@@ -144,7 +144,7 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     },
     {
@@ -158,7 +158,7 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [2, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     },
     {
@@ -170,10 +170,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 550,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -185,10 +185,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 1,
         cost: 200,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [2, 0, -1, 0, 0, 0],
-            [0, 1, -1, -1, 0, 0]
+            [2, 0, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -202,9 +202,9 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -216,9 +216,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 700,
-        attackBonus: [2, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 3, -1, 0, 0, 0]
+            [0, 3, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -230,10 +230,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 1,
         cost: 500,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 1, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -245,10 +245,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 950,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -260,10 +260,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 600,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -275,10 +275,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 3,
         cost: 1000,
-        attackBonus: [6, 0, 0, 0, 0, 0],
+        attackBonus: [6, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -290,10 +290,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 1,
         cost: 400,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -305,9 +305,9 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 2,
         cost: 700,
-        attackBonus: [4, 0, 0, 0, 0, 0],
+        attackBonus: [4, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -319,10 +319,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 2,
         cost: 550,
-        attackBonus: [2, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -336,11 +336,11 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ALL_ATTACK, undefined]], []],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -352,7 +352,7 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 400,
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     }, // TODO: May apply -1 damage and +2 accuracy
     {
@@ -366,9 +366,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -380,10 +380,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 600,
-        attackBonus: [2, 0, 0, 0, 0, 0],
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -397,10 +397,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -414,10 +414,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -431,9 +431,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [1, 0, -1, 0, 0, 0]
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -447,10 +447,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -2, 0, 0, 0],
-            [1, 0, -1, -1, 0, 0]
+            [0, 2, -2, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -464,11 +464,11 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [1, 0, 0, 0, 0, 0],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -480,10 +480,10 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 3,
         cost: 1000,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
         surgeAbilities: [
-            [2, 1, -1, 0, 0, 0]
+            [2, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: Pick ability dice for wrench
     {
@@ -496,9 +496,9 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, -1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -510,11 +510,11 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 1200,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -527,9 +527,9 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
         ]
     },
     {
@@ -543,9 +543,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [1, 0, -1, 0, 0, 0]
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -559,9 +559,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [2, 0, -1, 0, 0, 0]
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -575,9 +575,9 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -589,11 +589,11 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 900,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -605,10 +605,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 2,
         cost: 900,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -2, 0, 0],
-            [3, 0, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2],
+            [3, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -620,9 +620,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 250,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -634,10 +634,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 1250,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [2, 0, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [2, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -651,10 +651,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [1, 0, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [1, 0, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -666,10 +666,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 1000,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 1, -2, -3, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 1, -2, 0, 0, 0, 3]
         ]
     }, // TODO: Pick insight dice for dice
     {
@@ -681,10 +681,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 1,
         cost: 300,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -696,9 +696,9 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 2,
         cost: 600,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0],
         ]
     },
     {
@@ -710,9 +710,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 750,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     }, // TODO: check if -1 surge applies
     {
@@ -724,9 +724,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 650,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -740,10 +740,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, // TODO: Check if replace yellow with red?
     {
@@ -755,9 +755,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 1250,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -770,9 +770,9 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 1, 0, 0, 0, 0],
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -2, 0, 0]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -784,10 +784,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 1100,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -799,7 +799,7 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 200,
-        attackBonus: [0, 0, 0, -1, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
         surgeAbilities: []
     },
     {
@@ -813,10 +813,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -1, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -830,9 +830,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -844,9 +844,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 650,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     },
     {
@@ -858,10 +858,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 400,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[TURN_ATTACK_DIE, undefined]],[]],
         surgeAbilities: [
-            [0, 3, -2, 0, 0, 0]
+            [0, 3, -2, 0, 0, 0, 0]
         ]
     },
     {
@@ -875,7 +875,7 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     },
     {
@@ -887,7 +887,7 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 3,
         cost: 950,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: []
     }, // TODO: Pick attack dice as strength pool, convert surge to damage?
     {
@@ -900,17 +900,17 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -3, 0, 0],
-            [0, 1, -1, 0, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 3],
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 1, -1, 0, 0, 0, 0]
         ],
         optionalAttack: [
             {
                 cost: "Hidden",
                 surgeAbilities: [
-                    [0, 2, -1, 0, 0, 0]
+                    [0, 2, -1, 0, 0, 0, 0]
                 ]
             }
         ]
@@ -925,10 +925,10 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -3, 0, 0],
-            [0, 1, -1, 0, 0, 0]
+            [0, 0, -1, 0, 0, 0, 3],
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -940,9 +940,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 2,
         cost: 500,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -954,10 +954,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 2,
         cost: 400,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -971,9 +971,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -1, -1, 0, 0]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
     }, // TODO: Handle if they want to pick Cleave?
     {
@@ -987,9 +987,9 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 0,
         cost: 0,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -2, 0, 0, 0],
+            [0, 0, -2, 0, 0, 0, 0],
         ]
     }, // TODO: Get rid of token surge abilities
     {
@@ -1001,9 +1001,9 @@ export const WEAPONS = [
         modSpots: 1,
         tier: 1,
         cost: 300,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0]
         ]
     },
     {
@@ -1015,10 +1015,10 @@ export const WEAPONS = [
         modSpots: 0,
         tier: 1,
         cost: 150,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0],
-            [0, 0, -1, -2, 0, 0]
+            [0, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
         ]
     },
     {
@@ -1030,9 +1030,9 @@ export const WEAPONS = [
         modSpots: 2,
         tier: 1,
         cost: 350,
-        attackBonus: [0, 0, 0, 0, 0, 0],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 2, -1, 0, 0, 0]
+            [0, 2, -1, 0, 0, 0, 0]
         ]
     }, // Use one strain to apply pierce 1?
 ]

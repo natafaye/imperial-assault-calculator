@@ -7,7 +7,7 @@ import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE, MAX_PROPERTY_VALUE, MAX_REROLL
 const initialValues = () => ({
     dice: [],
     diceSides: [], // Only used on Which to Reroll page
-    bonus: [0,0,0,0,0,0],
+    bonus: [0,0,0,0,0,0,0],
     rerollAbilities: [],
     surgeAbilities: [],
 })
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
         case "clear-bonus":
             return {
                 ...state,
-                bonus: [0,0,0,0,0,0]
+                bonus: [0,0,0,0,0,0,0]
             }
         case "add-ability":
             return {
@@ -95,7 +95,7 @@ const parsePropertyList = (listString) => {
         .split(".")
         .map(d => parseInt(d))
         .filter(d => d >= MIN_PROPERTY_VALUE && d <= MAX_PROPERTY_VALUE)
-    if(list.length !== 6) return [0,0,0,0,0,0]
+    if(list.length !== 7) return [0,0,0,0,0,0,0]
     return list
 }
 
@@ -131,7 +131,7 @@ export function useCustomDataWithSearchParams(params, setParams, isAttack) {
             data.bonus = parsePropertyList(bonusString)
         }
         else {
-            data.bonus = [0,0,0,0,0,0]
+            data.bonus = [0,0,0,0,0,0,0]
         }
 
         const rerollsString = params.get(rerollsParam)

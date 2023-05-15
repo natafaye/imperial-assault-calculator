@@ -7,7 +7,7 @@ describe("Attack", () => {
             Object.keys(TEST_DATA[weaponName]).forEach(additionsString => {
                 it(`works with ${weaponName} and ${additionsString} against ${die} die`, () => {
                     expect(getWeaponAttackAvgDamage(weaponName, additionsString, die))
-                        .toBeCloseTo(TEST_DATA[weaponName][additionsString][die][DAM])
+                        .toBeCloseTo(TEST_DATA[weaponName][additionsString][die])
                 })
             })
         });

@@ -45,7 +45,7 @@ export default function SurgeAbilitiesInput({ values, dispatch, className = '' }
       addLabel="Surge Ability"
       renderFormLayoutGroups={renderSurgeFormLayoutGroups}
       displayComponent={SurgeLabel}
-      defaultValue={[0, 0, -1, 0, 0, 0]}
+      defaultValue={[0, 0, -1, 0, 0, 0, 0]}
       className={className}
     />
   )

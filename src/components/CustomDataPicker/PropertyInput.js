@@ -5,7 +5,7 @@ import { PROPERTY_LABELS, MAX_PROPERTY_VALUE, MIN_PROPERTY_VALUE } from '../../d
 export default function PropertyInput({ property, value, onChange, idPrefix, disabled = false, min = MIN_PROPERTY_VALUE, max = MAX_PROPERTY_VALUE }) {
     return (
         <span 
-            style={{ flexBasis: "70px", maxWidth: "150px" }} 
+            style={{ flexBasis: "70px", maxWidth: "145px" }} 
             className="flex-shrink-0 flex-grow-1 d-inline-flex align-items-center me-2"
         >
             <Form.Label htmlFor={`${idPrefix}-${PROPERTY_LABELS[property]}-input`} className="me-1 mb-0">

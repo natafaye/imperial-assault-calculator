@@ -1,7 +1,6 @@
-import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBullseye, faRepeat } from '@fortawesome/free-solid-svg-icons'
-import { ACC, BLO, DAM, DOD, EVA, PROPERTY_LABELS, RER, SUR } from '../../data'
+import { ACC, BLO, DAM, DOD, EVA, PIERCE, PROPERTY_LABELS, RER, SUR } from '../../data'
 
 const PATH_PROPS = {
     [DAM]: { 
@@ -22,28 +21,23 @@ const PATH_PROPS = {
         d: "M 239.73047 57.667969 A 182.33252 182.33252 0 0 0 142.8457 85.707031 L 240 182.86328 L 337.15625 85.707031 A 182.33252 182.33252 0 0 0 240 57.667969 A 182.33252 182.33252 0 0 0 239.73047 57.667969 z M 85.707031 142.84375 A 182.33252 182.33252 0 0 0 57.667969 240 A 182.33252 182.33252 0 0 0 85.707031 337.1543 L 182.86328 240 L 85.707031 142.84375 z M 394.29297 142.8457 L 297.13672 240 L 394.29297 337.15625 A 182.33252 182.33252 0 0 0 422.33203 240 A 182.33252 182.33252 0 0 0 394.29297 142.8457 z M 240 297.13672 L 142.84375 394.29297 A 182.33252 182.33252 0 0 0 240 422.33203 A 182.33252 182.33252 0 0 0 337.1543 394.29297 L 240 297.13672 z ",
         transform: "scale(0.26458333)"
     },
+    [PIERCE]: { 
+        d: "M 2.4570312 10.935547 C 15.144729 24.147077 25.617577 39.252735 35.125 54.894531 L 40.382812 34.431641 L 62.275391 41.021484 L 64.996094 16.917969 C 63.51459 16.924445 62.031399 16.936904 60.552734 16.9375 C 41.091461 16.53416 21.43395 15.582857 2.4570312 10.935547 z M 125.01172 10.935547 C 114.53644 13.690039 103.82639 15.172747 93.042969 15.978516 L 77.726562 61.679688 L 52.402344 58.421875 L 48.832031 79.253906 C 55.048337 91.345255 60.602948 103.82001 63.734375 117.07031 C 69.381247 95.768473 79.879224 76.121923 90.796875 57.115234 C 100.69582 40.739766 111.22436 24.349507 125.01172 10.935547 z "
+    },
 }
 
 export default function PropertyIcon({ property, color = "white", size = "1rem", className = "" }) {
-    switch (property) {
-        case ACC:
-            return <FontAwesomeIcon icon={faBullseye} title={PROPERTY_LABELS[property]} fontSize={size} className={className} />
-        case DAM:
-        case SUR:
-        case BLO:
-        case EVA:
-        case DOD:
-            return (
-                <span title={PROPERTY_LABELS[property]} className={className}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127 127" width={size} height={size}>
-                        <path style={{ fill: color }}
-                            {...PATH_PROPS[property]}/>
-                    </svg>
-                </span>
-            )
-        case RER:
-            return <FontAwesomeIcon icon={faRepeat} title={PROPERTY_LABELS[property]} fontSize={ size } className={className}/>
-        default:
-            return null
-    }
+    if(property === null || property === undefined) return null
+    if(property === ACC)
+        return <FontAwesomeIcon icon={faBullseye} title={PROPERTY_LABELS[property]} fontSize={size} className={className} />
+    if(property === RER)
+        return <FontAwesomeIcon icon={faRepeat} title={PROPERTY_LABELS[property]} fontSize={ size } className={className}/>
+    return (
+        <span title={PROPERTY_LABELS[property]} className={className}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127 127" width={size} height={size}>
+                <path style={{ fill: color }}
+                    {...PATH_PROPS[property]}/>
+            </svg>
+        </span>
+    )
 }
