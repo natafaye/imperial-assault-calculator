@@ -79,7 +79,7 @@ export const WEAPONS = [
     {
         id: 2003,
         name: "All-Weather Rifle",
-        description: "Loku Kanoloa starter weapon", // TODO?
+        description: "Loku Kanoloa starter weapon",
         starter: true,
         type: RANGED,
         traits: [PROJECTILE, RIFLE],
@@ -104,8 +104,14 @@ export const WEAPONS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Use as ranged",
+                bonus: [0, 0, -1, 0, 0, 0, 0]
+            }
         ]
-    }, // TODO: option of ranged attack with one less surge
+    },
     {
         id: 2005,
         name: "Bodyguard Rifle",

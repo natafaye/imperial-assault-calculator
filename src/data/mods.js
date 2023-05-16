@@ -13,10 +13,13 @@ export const MODS = [
         modType: BALANCE,
         cost: 300,
         tier: 1,
-        description: "Exhaust this card while attacking to apply +1 surge to the attack results.",
         attackDice: [],
-        attackBonus: [0, 0, 1, 0, 0, 0, 0],
-        surgeAbilities: []
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        surgeAbilities: [],
+        optionalAttack: {
+            cost: "Exhaust Balanced Hilt",
+            bonus: [0, 0, 1, 0, 0, 0, 0]
+        }
     },
     {
         id: 3002,

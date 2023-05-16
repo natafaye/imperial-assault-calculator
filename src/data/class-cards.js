@@ -1,6 +1,6 @@
 import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK } from "./reroll-abilities"
 import { BLUE, RED, YELLOW, WHITE, GREEN } from "./dice"
-import { REBEL } from "./units"
+import { IMPERIAL, REBEL } from "./units"
 
 // Hero names
 export const BIV = "Biv Bodhrik"
@@ -130,13 +130,13 @@ export const CLASS_CARDS = [
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         optionalDefense: [
             { 
-                cost: "Exhaust Auxiliary Training, spend power token", 
+                cost: "Exhaust Auxiliary Training, spent power token", 
                 rerollAbilities: [[], [[DEFENSE, 1]]] 
             }
         ],
         optionalAttack: [
             { 
-                cost: "Exhaust Auxiliary Training, spend power token", 
+                cost: "Exhaust Auxiliary Training, spent power token", 
                 rerollAbilities: [[[ATTACK, 1]], []]
             }
         ],
@@ -171,7 +171,7 @@ export const CLASS_CARDS = [
         optionalDefense: [],
         optionalAttack: [
             {
-                cost: "Attacking figure adjacent to figure with recon token", 
+                cost: "Target adjacent to figure with recon token", 
                 bonus: [0, 1, 0, 0, 0, 0, 0] 
             }
         ],
@@ -192,7 +192,7 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {  
                 cost: "Exhaust Battlefield Experience", 
-                rerollAbilities: [[ATTACK, 1], []] 
+                rerollAbilities: [[[ATTACK, 1]], []] 
             }
         ],
         rerollAbilities: [[], []],
@@ -935,4 +935,189 @@ export const CLASS_CARDS = [
         rerollAbilities: [[], []],
 		surgeAbilities: []
     }, // TODO: Supporting fire does +1 damage insted of pierce 1
+    {
+        id: 4053,
+        name: "Arc Blasters",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Ranged attack",
+                surgeAbilities: [
+                    [0, 1, -1, 0, 0, 0, 0]
+                ]
+            }
+        ]
+    },
+    {
+        id: 4054,
+        name: "Armor Corps",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Adjacent to droid/heavy weapon/vehicle",
+                rerollAbilities: [[], [[DEFENSE, 1]]]
+            }
+        ]
+    },
+    {
+        id: 4055,
+        name: "Assassins",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Assassins",
+                rerollAbilities: [[[ATTACK, 10]],[]]
+            }
+        ]
+    },
+    {
+        id: 4056,
+        name: "Assault Armor",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Black die, exhaust Assault Armor",
+                rerollAbilities: [[[ATTACK, 1]],[]]
+            }
+        ]
+    },
+    {
+        id: 4057,
+        name: "Black Sun Armor",
+        affiliation: REBEL,
+		availableTo: [ONAR],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "May apply one",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            },
+            {
+                cost: "May apply one",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4058,
+        name: "Bladestorm",
+        affiliation: REBEL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4059,
+        name: "Blaster Emplacements",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Blaster Emplacements",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4060,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4061,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4062,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4063,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
 ]

@@ -51,7 +51,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2],
         ]
-    }, // TODO: Choose to use surge to recover 2 health
+    },
     {
         id: 1001,
         name: "Agent Blaise",
@@ -98,8 +98,13 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2]
-        ]
-    }, // TODO: Trigger +1 damage and 1 reroll if has fewer than 9 damage
+        ],
+        optionalAttack: {
+            cost: "Fewer than 9 damage",
+            bonus: [0, 1, 0, 0, 0, 0, 0],
+            rerollAbilities: [[[ATTACK, 1]], []]
+        }
+    },
     {
         id: 1003,
         name: "AT-ST",
@@ -142,8 +147,25 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
+        ],
+        optionalAttack: [
+            {
+                cost: "Missile Salvo with Blue",
+                negativeAttackDice: [RED, YELLOW],
+                bonus: [3, 0, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Missile Salvo with Red",
+                negativeAttackDice: [BLUE, YELLOW],
+                bonus: [3, 0, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Missile Salvo with Yellow",
+                negativeAttackDice: [BLUE, RED],
+                bonus: [3, 0, 0, 0, 0, 0, 0]
+            },
         ]
-    }, // TODO: allow for 3 different attacks with each die and +3 accuracy
+    },
     {
         id: 1005,
         name: "Captain Terro",
@@ -989,8 +1011,20 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 1],
+        ],
+        optionalAttack: [
+            {
+                cost: "Choose one",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Choose one",
+                surgeAbilities: [
+                    [2, 0, -1, 0, 0, 0, 0]
+                ]
+            },
         ]
-    },// TODO: Choose to apply 2 accuracy, 2 damage, or 2 recovery on attack
+    },
     {
         id: 1042,
         name: "Bossk",
@@ -2011,7 +2045,7 @@ export const UNITS = [
         attackDice: [GREEN, YELLOW],
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [-2, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2],
@@ -2984,6 +3018,27 @@ export const UNITS = [
             [2, 0, -1, 0, 0, 0, 0]
         ]
     },  //TODO: Add Weapon- Bo-Rifle Staff Strike- Melee attack 2 red dice 
+    {
+        id: 1129,
+        name: "88-Z",
+        affiliation: IMPERIAL,
+        deploymentCost: 0,
+        reinforceCost: null,
+		traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 4,
+        speed: 3,
+        defenseDice: [],
+        attackDice: [YELLOW],
+        attackType: RANGED,
+        attackBonus: [2, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 1, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [
+            [2, 0, -1, 0, 0, 0, 0]
+        ]
+    },
     
     
     {
@@ -3011,7 +3066,7 @@ export const UNITS = [
     {
         id: 1300,
         isHero: true,
-        name: "Biv Bodhrik",
+        name: "Biv Bodhrik (Hero)",
         title: "Vengeful Guerrilla",
         affiliation: REBEL,
         size: SMALL,
@@ -3034,8 +3089,14 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // ?????
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ]
+    },
     {
         id: 1301,
         isHero: true,
