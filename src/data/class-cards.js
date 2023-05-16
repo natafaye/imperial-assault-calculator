@@ -274,40 +274,20 @@ export const CLASS_CARDS = [
         optionalDefense: [],
         optionalAttack: [
             { 
-                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                cost: "Target has recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
                 dice: [RED] 
             },
             { 
-                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                cost: "Target has recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
                 dice: [YELLOW] 
             },
             { 
-                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                cost: "Target has recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
                 dice: [GREEN] 
             },
             { 
-                cost: "Attacking figure with recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
+                cost: "Target has recon token, Loku spend 2 strain, exhaust Coordinated Attack", 
                 dice: [BLUE] 
-            },
-        ],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    },
-    {
-        id: 4012,
-        name: "Covering Fire (CT-1701)",
-        affiliation: REBEL,
-		availableTo: [CT1701],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        optionalDefense: [],
-        optionalAttack: [
-            { 
-                cost: "Ranged attack, to gain damage token for someone within 3 spaces",
-                bonus: [0, -1, 0, 0, 0, 0, 0] 
             },
         ],
         rerollAbilities: [[], []],
@@ -325,7 +305,7 @@ export const CLASS_CARDS = [
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         optionalDefense: [
             { 
-                cost: "Discard Hidden condition", 
+                cost: "Discard Hidden", 
                 bonus: [0, 0, 0, 1, 0, 0, 0] 
             },
         ],
@@ -346,11 +326,11 @@ export const CLASS_CARDS = [
         optionalDefense: [],
         optionalAttack: [
             { 
-                cost: "Defender adjacent to Verena, spend 1 strain (pick one)", 
-                bonus: [0, 0, 0, 0, 0, 0, 1] 
+                cost: "Defender next to Verena, spend 1 strain (pick one)", 
+                bonus: [0, 0, 0, -1, 0, 0, 0] 
             },
             { 
-                cost: "Defender adjacent to Verena, spend 1 strain (pick one)", 
+                cost: "Defender next to Verena, spend 1 strain (pick one)", 
                 bonus: [0, 0, 0, 0, -1, 0, 0] 
             },
         ],
@@ -370,7 +350,7 @@ export const CLASS_CARDS = [
         optionalDefense: [],
         optionalAttack: [
             { 
-                cost: 'Using Melee attack of "Close and Personal"', 
+                cost: 'Melee attack of "Close and Personal"', 
                 surgeAbilities: [[0, 2, -1, 0, 0, 0, 0]] 
             },
         ],
@@ -1070,11 +1050,11 @@ export const CLASS_CARDS = [
     },
     {
         id: 4060,
-        name: "",
+        name: "Cloaking Device",
         affiliation: IMPERIAL,
 		availableTo: [IMPERIAL],
-        cost: 1,
-        defenseDice: [],
+        cost: 3,
+        defenseDice: [WHITE],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
@@ -1083,14 +1063,14 @@ export const CLASS_CARDS = [
     },
     {
         id: 4061,
-        name: "",
+        name: "Combat Veterans",
         affiliation: IMPERIAL,
 		availableTo: [IMPERIAL],
-        cost: 1,
+        cost: 4,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        attackBonus: [2, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [],
     },

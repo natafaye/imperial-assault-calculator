@@ -124,8 +124,14 @@ export const WEAPONS = [
         tier: 0,
         cost: 0,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        surgeAbilities: []
-    }, // TODO: Use -1 damage and +2 accuracy?
+        surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "May use",
+                bonus: [2, -1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
     {
         id: 2006,
         name: "Charge Pistol",
@@ -137,10 +143,9 @@ export const WEAPONS = [
         cost: 350,
         attackBonus: [1, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 1, -1, 0, 0, 0, 0],
             [0, 1, -1, 0, 0, 0, 0]
         ]
-    }, // TODO: Use damage token?
+    },
     {
         id: 2300,
         name: "Close and Personal",

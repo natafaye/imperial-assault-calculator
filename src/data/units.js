@@ -1,6 +1,7 @@
 import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE } from "./reroll-abilities";
 import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
 import { MELEE, RANGED } from "./weapons";
+import { redirect } from "react-router-dom";
 
 export const IMPERIAL = "Imperial"
 export const MERCENARY = "Mercenary"
@@ -1020,7 +1021,7 @@ export const UNITS = [
             {
                 cost: "Choose one",
                 surgeAbilities: [
-                    [2, 0, -1, 0, 0, 0, 0]
+                    [0, 2, -1, 0, 0, 0, 0]
                 ]
             },
         ]
@@ -1065,8 +1066,31 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Scout form",
+                negativeAttackDice: [RED],
+                dice: BLUE,
+                bonus: [2, 0, 0, 0, 0, 0, 0],
+                surgeAbilities: [
+                    [0, 0, -1, 0, 0, 0, 2],
+                    [2, 1, -1, 0, 0, 0, 0]
+                ]
+            },
+            {
+                cost: "Senator form",
+                bonus: [1, 0, 0, 0, 0, 0, 0],
+                surgeAbilities: [
+                    [0, 1, -1, 0, 0, 0, 0],
+                ]
+            },
+            {
+                cost: "Streetrat form",
+                surgeAbilities: [
+                    [0, 1, -1, 0, 0, 0, 0],
+                ]
+            }
         ]
     },
     {
@@ -2099,9 +2123,7 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-            
-        ],
+		surgeAbilities: [],
         optionalDefense: [
             { 
                 cost: "Adjacent to friendly figure", 
@@ -3162,7 +3184,55 @@ export const UNITS = [
             {
                 cost: "Ranged attack",
                 bonus: [0, -1, 1, 0, 0, 0, 0]
-            }
+            },
         ]
+    },
+    {
+        id: 1303,
+        isHero: true,
+        name: "CT-1701 (Hero)",
+        title: "Wildfire",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, YELLOW],
+            [GREEN],
+            [BLUE, GREEN, GREEN]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED],
+            [RED],
+            [BLUE, RED, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 1304,
+        name: "Cam Droid",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 3,
+        speed: 5,
+        defenseDice: [],
+        attackDice: [YELLOW],
+        attackType: RANGED,
+        attackBonus: [2, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 1, 0],
+        rerollAbilities: [[], []],
+        surgeAbilities: []
     },
 ]
