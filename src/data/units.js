@@ -3130,5 +3130,39 @@ export const UNITS = [
                 bonus: [0,1,0,0,0,0, 0]
             }
         ]
-    }
+    },
+    {
+        id: 1302,
+        isHero: true,
+        name: "Drokkatta (Hero)",
+        title: "Demolitions Expert",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 13,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, GREEN, GREEN],
+            [BLUE, BLUE],
+            [GREEN, GREEN]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED, GREEN],
+            [BLUE, RED],
+            [RED, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Ranged attack",
+                bonus: [0, -1, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
 ]
