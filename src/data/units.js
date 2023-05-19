@@ -99,11 +99,13 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2]
         ],
-        optionalAttack: {
-            cost: "Fewer than 9 damage",
-            bonus: [0, 1, 0, 0, 0, 0, 0],
-            rerollAbilities: [[[ATTACK, 1]], []]
-        }
+        optionalAttack: [
+            {
+                cost: "Fewer than 9 damage",
+                bonus: [0, 1, 0, 0, 0, 0, 0],
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ]
     },
     {
         id: 1003,
@@ -1173,7 +1175,7 @@ export const UNITS = [
             {
                 cost: "Scout form",
                 negativeAttackDice: [RED],
-                dice: BLUE,
+                dice: [BLUE],
                 bonus: [2, 0, 0, 0, 0, 0, 0],
                 surgeAbilities: [
                     [0, 0, -1, 0, 0, 0, 2],
@@ -2985,7 +2987,7 @@ export const UNITS = [
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, 0, 0, 0, 1]
+            [0, 0, -1, 0, 0, 0, 1],
             [0, 0, -1, 0, 0, 0, 1]
         ]
     },
@@ -3008,7 +3010,7 @@ export const UNITS = [
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
-            [0, 0, -1, 0, 0, 0, 2]
+            [0, 0, -1, 0, 0, 0, 2],
             [0, 0, -1, 0, 0, 0, 2]
         ]
     },

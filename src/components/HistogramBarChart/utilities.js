@@ -53,7 +53,7 @@ export const renderDamageTicks = (tick) => (
 export function HistogramTooltip({ item }) {
     return (
         <div className="bg-light p-2 rounded text-dark">
-            {item.value} <PropertyIcon property={DAM} className="ms-2"/><br/>
+            {item.value} <PropertyIcon property={DAM}/><br/>
             Exactly: {item.percentage.toFixed(0)}%<br />
             At Least: {item.atLeastPercentage.toFixed(0)}%
         </div>

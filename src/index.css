@@ -41,3 +41,22 @@
 .no-background { background: none !important; }
 .no-background:hover { background: none !important; }
 .no-background:active { background: none !important; }
+
+
+/***** Apply Text Colors to SVGs *****/
+
+.text-info {
+    fill: rgba(var(--bs-info-rgb),var(--bs-text-opacity))!important;
+}
+.text-muted {
+    fill: #888!important;
+}
+.text-white {
+    fill: #fff
+}
+.text-dark {
+    fill: rgba(var(--bs-dark-rgb),var(--bs-text-opacity))!important;
+}
+body {
+    fill: var(--bs-body-color)
+}

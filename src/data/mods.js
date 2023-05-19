@@ -16,10 +16,12 @@ export const MODS = [
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [],
-        optionalAttack: {
-            cost: "Exhaust Balanced Hilt",
-            bonus: [0, 0, 1, 0, 0, 0, 0]
-        }
+        optionalAttack: [
+            {
+                cost: "Exhaust Balanced Hilt",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
     },
     {
         id: 3301,

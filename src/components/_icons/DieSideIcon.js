@@ -18,7 +18,6 @@ export default function DieSideIcon({ color, side }) {
                             property={property} 
                             className={value === 2 ? "order-first" : ""} 
                             size={SIZE_BY_VALUE[totalIcons] + "rem"} 
-                            color={color !== WHITE ? "white" : "#222"} 
                         />
                     )
                     : DICE[color][side][ACC] !== 0 &&

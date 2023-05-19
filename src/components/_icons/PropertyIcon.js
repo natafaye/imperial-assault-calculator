@@ -35,8 +35,7 @@ export default function PropertyIcon({ property, color = "white", size = "1rem",
     return (
         <span title={PROPERTY_LABELS[property]} className={className}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127 127" width={size} height={size}>
-                <path style={{ fill: color }}
-                    {...PATH_PROPS[property]}/>
+                <path {...PATH_PROPS[property]}/>
             </svg>
         </span>
     )
