@@ -1,4 +1,4 @@
-import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK } from "./reroll-abilities"
+import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK, ALL_ATTACK, TURN_ATTACK_DIE } from "./reroll-abilities"
 import { BLUE, RED, YELLOW, WHITE, GREEN } from "./dice"
 import { IMPERIAL, REBEL } from "./units"
 
@@ -24,9 +24,6 @@ export const VINTO = "Vinto Hreeda"
 
 // Droid name
 export const J4X7 = "JFX-7"
-
-// TODO: Brute Strength attribute test helper
-// TODO: Put back in Desperado?
 
 /**
  * All the class cards (reward and upgrades) that the heroes and Imperials can use
@@ -394,11 +391,7 @@ export const CLASS_CARDS = [
                 cost: "Exhaust Dead On", 
                 bonus: [0, 1, 0, 0, 0, 0, 0] 
             },
-            { 
-                cost: 'Using "Pinpoint Shot", exhaust Dead On', 
-                bonus: [0, 1, 0, 0, 0, 0, 0] 
-            }, 
-        ], // TODO: make sure still applied with pinpoint shot
+        ],
         rerollAbilities: [[], []],
 		surgeAbilities: []
     },
@@ -436,7 +429,7 @@ export const CLASS_CARDS = [
         optionalAttack: [],
         rerollAbilities: [[], []],
 		surgeAbilities: []
-    }, // TODO: STOPPED CONVERTING HERE
+    },
     {
         id: 4021,
         name: "Dig In",
@@ -448,7 +441,13 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 2, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Within 2 spaces of Ko-Tun, spend 1 strain, exhaust Dig In",
+                bonus: [0, 0, 0, 2, 0, 0, 0]
+            }
+        ]
     },
     {
         id: 4022,
@@ -457,11 +456,17 @@ export const CLASS_CARDS = [
 		availableTo: [ONAR],
         cost: 4,
         defenseDice: [],
-        attackDice: [RED],
+        attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Don't Make Me Hurt You",
+                attackDice: [RED]
+            }
+        ]
     },
     {
         id: 4024,
@@ -471,37 +476,23 @@ export const CLASS_CARDS = [
         cost: 4,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Choose to exhaust
-    {
-        id: 4025,
-        name: "Execute",
-        affiliation: REBEL,
-		availableTo: [MAK],
-        cost: 3,
-        defenseDice: [],
-        attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Allow removing all dice from target's defense pool
-    {
-        id: 4026,
-        name: "Explosive Reflexes",
-        affiliation: REBEL,
-		availableTo: [JARROD, J4X7],
-        cost: 3,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // Replace 1 die with another die of your choice
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Embody the Force",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ],
+        optionalDefense: [
+            {
+                cost: "Exhaust Embody the Force",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
     {
         id: 4027,
         name: "Falling Leaf",
@@ -528,25 +519,19 @@ export const CLASS_CARDS = [
 		availableTo: [GAARKHAN],
         cost: 2,
         defenseDice: [],
-        attackDice: [RED],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Trigger if focused instead of green die
-    {
-        id: 4029,
-        name: "Fire Support Specialist",
-        affiliation: REBEL,
-		availableTo: [REBEL],
-        cost: 3,
-        defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Remove 1 dice from defense pool
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Focused",
+                negativeAttackDice: [GREEN],
+                dice: [RED]
+            }
+        ]
+    },
     {
         id: 4030,
         name: "Force Adept",
@@ -560,7 +545,7 @@ export const CLASS_CARDS = [
         rerollAbilities: [[[ATTACK, 1]], []],
 		surgeAbilities: [
         ]
-    }, // TODO: add blue die for attribute test
+    },
     {
         id: 4031,
         name: "Gunslinger",
@@ -572,35 +557,14 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain, exhaust Gunslinger",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
         ]
-    }, // TODO: Allow using surge abilities from other pistols
-    {
-        id: 4032,
-        name: "Military Efficiency",
-        affiliation: REBEL,
-		availableTo: [GIDEON],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Convert 1 damage to 1 surge, or 1 block to 1 evade
-    {
-        id: 4053,
-        name: "Hondo's Treasure",
-        affiliation: REBEL,
-		availableTo: [REBEL],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 1, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Choose to use
+    },
     {
         id: 4054,
         name: "Hunt Them Down (Reward)",
@@ -609,11 +573,17 @@ export const CLASS_CARDS = [
         cost: 0,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [0, 0, 1, 0, 0, 0, 1],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: while attacking an imperial TROOPER
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Attacking Imperial Trooper",
+                bonus: [0, 0, 1, 0, 0, 0, 1]
+            }
+        ]
+    },
     {
         id: 4040,
         name: "Mon Cala Special Forces",
@@ -641,19 +611,6 @@ export const CLASS_CARDS = [
 		surgeAbilities: []
     },
     {
-        id: 4038,
-        name: "Pinpoint Shot",
-        affiliation: REBEL,
-		availableTo: [VINTO],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 1, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Remove all results except accuracy, then add 1
-    {
         id: 4037,
         name: "Point Blank Shot",
         affiliation: REBEL,
@@ -667,38 +624,25 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
         optionalAttack: [
             {
-                cost: "Attacking with pistol targeting adjacent figure, replace Yellow with Red",
-                bonus: [0,0,0,0,0,0, 1],
+                cost: "Attacking with pistol targeting adjacent figure",
+                bonus: [0, 0, 0, 0, 0, 0, 1],
                 dice: [RED],
                 negativeAttackDice: [YELLOW]
             },
             {
-                cost: "Attacking with pistol targeting adjacent figure, replace Green with Red",
-                bonus: [0,0,0,0,0,0, 1],
+                cost: "Attacking with pistol targeting adjacent figure",
+                bonus: [0, 0, 0, 0, 0, 0, 1],
                 dice: [RED],
                 negativeAttackDice: [GREEN]
             },
             {
-                cost: "Attacking with pistol targeting adjacent figure, replace Blue with Red",
-                bonus: [0,0,0,0,0,0, 1],
+                cost: "Attacking with pistol targeting adjacent figure",
+                bonus: [0, 0, 0, 0, 0, 0, 1],
                 dice: [RED],
                 negativeAttackDice: [BLUE]
             },
         ]
-    }, // TODO: Replace one die with red die, trigger adjacent & pistol
-    {
-        id: 4036,
-        name: "Power Converter",
-        affiliation: REBEL,
-		availableTo: [REBEL],
-        cost: 3,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // Replace 1 die in your attack pool with a different attack die of your choice
+    },
     {
         id: 4035,
         name: "Proximity Strike",
@@ -738,20 +682,6 @@ export const CLASS_CARDS = [
         ]
     },
     {
-        id: 4033,
-        name: "Roll With It",
-        affiliation: REBEL,
-		availableTo: [JYN],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [
-        ]
-    }, // TODO: Choose to use, Convert 1 or more block to evade
-    {
         id: 4041,
         name: "Sharpshooter",
         affiliation: REBEL,
@@ -777,34 +707,7 @@ export const CLASS_CARDS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
         ]
-    }, // TODO: applies to attribute tests
-    {
-        id: 4045,
-        name: "",
-        affiliation: REBEL,
-		availableTo: [],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [
-        ]
     },
-    {
-        id: 4046,
-        name: "Structural Exploitation",
-        affiliation: REBEL,
-		availableTo: [DROKKATTA],
-        cost: 3,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [1, 1, 0, 0, 0, 0, 1],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: trigger to use, if object apply additional +1 damage and pierce 1
     {
         id: 4047,
         name: "Student of Battle",
@@ -816,39 +719,36 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-            [0, 0, -1, 0, 0, 0, 2],
-            [5, 0, -1, 0, 0, 0, 0]
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: 'Attack using "Close Quarters"',
+                surgeAbilities: [
+                    [0, 0, -1, 0, 0, 0, 2],
+                    [5, 0, -1, 0, 0, 0, 0]
+                ],
+            }
         ]
-    }, // TODO: Trigger or not
-    {
-        id: 4043,
-        name: "Swords Dance",
-        affiliation: REBEL,
-		availableTo: [SHYLA],
-        cost: 0,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [
-        ]
-    }, // TODO: Remove 1 die from attack pool
+    },
     {
         id: 4044,
         name: "Take Cover",
         affiliation: REBEL,
 		availableTo: [FENN],
         cost: 1,
-        defenseDice: [WHITE],
+        defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Spend 1 strain, exhaust Take Cover",
+                dice: [WHITE]
+            }
         ]
-    }, // TODO: turn on
+    },
     {
         id: 4048,
         name: "Thermal Explosives",
@@ -856,12 +756,18 @@ export const CLASS_CARDS = [
 		availableTo: [DROKKATTA],
         cost: 4,
         defenseDice: [],
-        attackDice: [YELLOW],
+        attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: trigger or not for strain with ranged weapon
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Ranged attack, exhaust Thermal Explosives",
+                dice: [YELLOW]
+            }
+        ]
+    },
     {
         id: 4049,
         name: "Weakness Identified",
@@ -873,9 +779,14 @@ export const CLASS_CARDS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Fewer figures than starting",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
         ]
-    }, // TODO: Either remove one defense die or apply +1 damage
+    },
     {
         id: 4050,
         name: "Weapon Expert",
@@ -884,11 +795,17 @@ export const CLASS_CARDS = [
         cost: 2,
         defenseDice: [],
         attackDice: [],
-        attackBonus: [2, 0, 0, 0, 0, 0, 1],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Choose to use
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain",
+                bonus: [2, 0, 0, 0, 0, 0, 1]
+            }
+        ]
+    },
     {
         id: 4051,
         name: "Wholeness",
@@ -898,10 +815,16 @@ export const CLASS_CARDS = [
         defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Add green die for attribute tests, choose to use while defending
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Wholeness",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
     {
         id: 4052,
         name: "X-8 Upgrade",
@@ -913,8 +836,14 @@ export const CLASS_CARDS = [
         attackBonus: [0, 1, 0, 0, 0, 0, -1],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: []
-    }, // TODO: Supporting fire does +1 damage insted of pierce 1
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: 'Using "Supporting Fire"',
+                bonus: [0, 1, 0, 0, 0, 0, -1]
+            }
+        ]
+    },
     {
         id: 4053,
         name: "Arc Blasters",
@@ -1076,6 +1005,1406 @@ export const CLASS_CARDS = [
     },
     {
         id: 4062,
+        name: "Devastating Legion",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Pick one, target within 3 spaces of villian",
+                bonus: [0, 0, 0, -1, 0, 0, 0]
+            },
+            {
+                cost: "Pick one, target within 3 spaces of villian",
+                bonus: [0, 0, 0, 0, -1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4063,
+        name: "Electromagnetic Disruptors",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Attacker within 3 spaces of 88-Z",
+                bonus: [-1, 0, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4064,
+        name: "Embrace Anger",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Embrace Anger",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4065,
+        name: "Experimental Arms",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Take 1 damage",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4066,
+        name: "Explosive Munitions",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Ranged attack, exhaust Explosive Munitions",
+                dice: [RED],
+                negativeAttackDice: [YELLOW]
+            },
+            {
+                cost: "Ranged attack, exhaust Explosive Munitions",
+                dice: [RED],
+                negativeAttackDice: [GREEN]
+            },
+            {
+                cost: "Ranged attack, exhaust Explosive Munitions",
+                dice: [RED],
+                negativeAttackDice: [BLUE]
+            },
+        ]
+    },
+    {
+        id: 4067,
+        name: "Extra Ammunition",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Ranged weapon, exhaust Extra Ammunition",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ]
+    },
+    {
+        id: 4068,
+        name: "Find the Weakness",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4069,
+        name: "Guild Hunters",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [
+            [2, 1, -1, 0, 0, 0, 0],
+            [0, 0, -1, 0, 0, 0, 2]
+        ],
+    },
+    {
+        id: 4070,
+        name: "Heavy Firepower",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Heavy Firepower",
+                negativeAttackDice: [RED],
+                bonus: [0, 3, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4071,
+        name: "I'm on the Leader",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAtack: [
+            {
+                cost: "Attacking healthiest hero",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4072,
+        name: "Imperial Industry",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [
+            [0, 1, -1, 0, 0, 0, 0]
+        ],
+    },
+    {
+        id: 4073,
+        name: "Indomitable",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Indomitable",
+                dice: [BLACK]
+            }
+        ]
+    },
+    {
+        id: 4074,
+        name: "Into the Fray",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Within 3 spaces of 2+ hostiles",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4075,
+        name: "Knowledge of Attack",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Knowledge of Attack",
+                bonus: [0, 0, -1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4076,
+        name: "Lady Luck",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Lady Luck",
+                rerollAbilities: [[[ALL_ATTACK, undefined]], []],
+            }
+        ]
+    },
+    {
+        id: 4077,
+        name: "Laminate Armor",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 700,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Laminate Armor",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4078,
+        name: "Lead from the Front",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Gain 1",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Gain 1",
+                bonus: [0, 0, 0, 0, 0, 0, 1]
+            },
+            {
+                cost: "Gain 1",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            },
+        ]
+    },
+    {
+        id: 4079,
+        name: "Macrobinoculars",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard Macrobinoculars",
+                bonus: [3, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4080,
+        name: "Mandalorian Helment",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 250,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain, exhaust Mandalorian Helmet",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+
+        ]
+    },
+    {
+        id: 4081,
+        name: "Mandalorian Heritage",
+        affiliation: REBEL,
+		availableTo: [SHYLA],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Melee attack, pick 1",
+                surgeAbilities: [
+                    [0, 2, -1, 0, 0, 0, 0]
+                ]
+            }
+        ]
+    },
+    {
+        id: 4082,
+        name: "Mechanical Protocol",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Droid attacking, exhaust Mechanical Protocol",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4083,
+        name: "Merciless",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Target suffered damage, exhaust Merciless",
+                bonus: [0, 3, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4085,
+        name: "Most Wanted",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Hero defending, exhaust Most Wanted",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Hero defending with Bounty, exhaust Most Wanted",
+                bonus: [0, 3, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4086,
+        name: "Mutual Destruction",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Suffer 1 damage",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4087,
+        name: "Old Wounds",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Wounded hero attacking",
+                bonus: [0, -1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4088,
+        name: "No Quarter",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Targeting hero with 2 or more strain",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4089,
+        name: "Nowhere to Hide",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Nowhere to Hide",
+                dice: [BLUE]
+            }
+        ]
+    },
+    {
+        id: 4090,
+        name: "Nowhere to Run",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Hero target w/3+ strain, exhaust Nowhere to Run",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Hero target w/3+ strain, Mercenary, exhaust Nowhere to Run",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4091,
+        name: "Oppression",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Hero attacking w/2+ strain",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4092,
+        name: "Optimal Tactics",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Within 3 spaces of friendly leader",
+                bonus: [0, 1, 0, 0, 0, 0, 0],
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ]
+    },
+    {
+        id: 4093,
+        name: "Overwatch",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard recon token, interrupt attack",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4094,
+        name: "Personal Shields",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 550,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Deplete Personal Shields",
+                bonus: [0, 0, 0, 5, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4095,
+        name: "Pinpoint Accuracy",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Deplete Pinpoint Accuracy",
+                bonus: [0, 0, 0, 0, 0, -1, 0]
+            }
+        ]
+    },
+    {
+        id: 4096,
+        name: "Plastoid Armor",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 350,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Plastoid Armor",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4097,
+        name: "Power Generator",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard Power Generator and crate",
+                bonus: [0, 2, 0, 0, 0, 0, 2]
+            }
+        ]
+    },
+    {
+        id: 4098,
+        name: "Punishing Force",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Punishing Force",
+                rerollAbilities: [[[ATTACK, 10]], []]
+            }
+        ]
+    },
+    {
+        id: 4099,
+        name: "Reinforced Helment",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 300,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Reinforced Helmet",
+                rerollAbilities: [[], [[ATTACK, 1]]]
+            }
+        ]
+    },
+    {
+        id: 4100,
+        name: "Professional Aide",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Professional Aide",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4101,
+        name: "Ringleader",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Adjacent to villian",
+                bonus: [1, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4102,
+        name: "Savage Weaponry",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 1],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4103,
+        name: "Shadow Armor",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Shadow Armor",
+                bonus: [0, -1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust Shadow Armor",
+                bonus: [0, 0, -1, 0, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust Shadow Armor",
+                bonus: [-2, 0, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4104,
+        name: "Shadow Suit",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4105,
+        name: "Shadowsilk Cloak",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Shadowsilk Cloak",
+                bonus: [-2, 0, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust Shadowsilk Cloak",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4106,
+        name: "Sharpshooters",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4107,
+        name: "Shielded",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Shielded",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4108,
+        name: "Scout's Loadout",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Scout's Loadout",
+                bonus: [0, 0, 0, 0, -1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4109,
+        name: "Scout's Guidance",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Recon token",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+
+    },
+    {
+        id: 4110,
+        name: "Shock and Awe",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard 1 strain token",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4111,
+        name: "Single-Minded",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Replace other reroll ability",
+                rerollAbilities: [[[TURN_ATTACK_DIE, undefined]], []]
+            }
+        ]
+    },
+    {
+        id: 4112,
+        name: "Shock Troopers",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Target within 2 spaces",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4113,
+        name: "Stay Behind Me",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Suffer 1 damage, adjacent friendly figure",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4114,
+        name: "Strike Force",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[[ATTACK, 1]], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4115,
+        name: "Structural Exploitation",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Structural Exploitation",
+                bonus: [1, 1, 0, 0, 0, 0, 1]
+            },
+            {
+                cost: "Attacking object, exhaust Structural Exploitation",
+                bonus: [1, 2, 0, 0, 0, 0, 2]
+            }
+        ]
+    },
+    {
+        id: 4116,
+        name: "Structural Weakness",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Attacking object, exhaust Structural Weakness",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Attacking Droid or Vehicle, exhaust Structural Weakness",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4117,
+        name: "Superior Augments",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "In a group with 1+ attachments",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4118,
+        name: "Superior Positioning",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Focused",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4119,
+        name: "Target Acquired",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Target Acquired",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4120,
+        name: "Targeting Sensors",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Within 2 spaces of 88-Z",
+                bonus: [1, 1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust Targetiing Sensors",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4121,
+        name: "Surprise Attack",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Surprise Attack, no line of sight",
+                bonus: [2, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4122,
+        name: "Trophy Armor",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Trophy Armor",
+                rerollAbilities: [[], [[DEFENSE, 1]]],
+            }
+        ]
+    },
+    {
+        id: 4123,
+        name: "Unstoppable",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 4,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Wounded",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4124,
+        name: "Vendetta",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Targeting hero with bounty token",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ]
+    },
+    {
+        id: 4125,
+        name: "Versatile Attack",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 2,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Versatile Attack",
+                dice: [YELLOW],
+                surgeAbilities: [
+                    [0, 1, -1, 0, 0, 0, 0],
+                    [0, 0, -1, 0, 0, 0, 2]
+                ]
+            }
+        ]
+    },
+    {
+        id: 4126,
+        name: "Veteran Prowess",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Using Havoc Shot",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4127,
+        name: "Unnatural Abilities",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 1, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Starting group size is 1",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4128,
+        name: "Trench Fighter",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Target within 3 spaces, exhaust Trench Fighter",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4129,
+        name: "The Power of Passion",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spends a damage token",
+                bonus: [0, 1, 1, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust The Power of Passion",
+                rerollAbilities: [[[ATTACK, 10]], []]
+            }
+        ]
+    },
+    {
+        id: 4130,
+        name: "Turbocharger",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard 1 strain",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4131,
+        name: "Vicious Strike",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 3,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain, melee attack",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4132,
+        name: "Weapons Cache",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: null,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard 1 token",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4133,
+        name: "Wookie Loyalty",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust Wookie Loyalty",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4134,
+        name: "Wanted: Dead",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Wanted: Dead",
+                bonus: [0, 1, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 4135,
         name: "",
         affiliation: IMPERIAL,
 		availableTo: [IMPERIAL],
@@ -1088,7 +2417,46 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
     },
     {
-        id: 4063,
+        id: 4136,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4137,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4138,
+        name: "",
+        affiliation: IMPERIAL,
+		availableTo: [IMPERIAL],
+        cost: 1,
+        defenseDice: [],
+        attackDice: [],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 4139,
         name: "",
         affiliation: IMPERIAL,
 		availableTo: [IMPERIAL],

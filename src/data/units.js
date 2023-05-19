@@ -1,7 +1,6 @@
-import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE } from "./reroll-abilities";
+import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE, TURN_ATTACK_DIE } from "./reroll-abilities";
 import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
 import { MELEE, RANGED } from "./weapons";
-import { redirect } from "react-router-dom";
 
 export const IMPERIAL = "Imperial"
 export const MERCENARY = "Mercenary"
@@ -282,7 +281,7 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2]
         ]
-    }, // TODO: shock lance
+    },
     {
         id: 1010,
         name: "E-Web Engineer",
@@ -304,7 +303,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0]
         ]
-    }, // TODO: Pick to recover
+    },
     {
         id: 1011,
         name: "E-Web Engineer (Elite)",
@@ -321,7 +320,7 @@ export const UNITS = [
         attackDice: [BLUE, RED, YELLOW],
         attackType: RANGED,
         attackBonus: [3, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [1, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 1, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
@@ -392,7 +391,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
         ]
-    }, // TODO: Pick 3 attack dice with no duplicates
+    },
     {
         id: 1015,
         name: "Heavy Stormtrooper",
@@ -413,8 +412,14 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Attacker 4+ spaces away",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
         ]
-    }, // TODO: trigger defending +1 block bonus if 4 or more spaces away
+    },
     {
         id: 1016,
         name: "Heavy Stormtrooper (Elite)",
@@ -435,6 +440,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Attacker 4+ spaces away",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
         ]
     },
     {
@@ -458,8 +469,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Adjacent to friendly figure",
+                rerollAbilities: [[], [[DEFENSE, 1]]]
+            }
         ]
-    }, // TODO: Trigger defense reroll
+    },
     {
         id: 1018,
         name: "Imperial Officer (Elite)",
@@ -481,8 +498,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [3, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Adjacent to friendly figure",
+                rerollAbilities: [[], [[DEFENSE, 1]]]
+            }
         ]
-    }, // TODO: Trigger defense reroll
+    },
     {
         id: 1019,
         name: "ISB Infiltrator",
@@ -552,8 +575,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Optional",
+                bonus: [0, 0, 0, -1, 1, 0, 0]
+            }
         ]
-    }, // TODO: While defending, you may convert 1 block to 1 evade
+    },
     {
         id: 1022,
         name: "Jet Trooper (Elite)",
@@ -575,8 +604,20 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [3, 0, -1, 0, 0, 0, 0]
-        ] // TODO: While defending, you may convert 1 block to 1 evade
-    }, // TODO: Trigger add blue die to attack pool if within 2 spaces
+        ],
+        optionalAttack: [
+            {
+                cost: "Target within 2 spaces",
+                dice: [BLUE]
+            }
+        ],
+        optionalDefense: [
+            {
+                cost: "Optional",
+                bonus: [0, 0, 0, -1, 1, 0, 0]
+            }
+        ]
+    },
     {
         id: 1023,
         name: "Kayn Somos",
@@ -622,7 +663,7 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1],
         ]
-    },//TODO: Add in a recover recommendation/Prioritization
+    },
     {
         id: 1025,
         name: "Probe Droid (Elite)",
@@ -667,6 +708,12 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Optional",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -690,6 +737,12 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Optional",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -780,8 +833,18 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Pick 1",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            },
+            {
+                cost: "Pick 1",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
         ]
-    },// TODO: Pick 1 Block or 1 Evade when defending for the tank
+    },
     {
         id: 1032,
         name: "Sentry Droid",
@@ -804,8 +867,18 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2],
             [1, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Multi-Fire",
+                bonus: [0, -1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Charged Shot",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            }
         ]
-    },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
+    },
     {
         id: 1033,
         name: "Sentry Droid (Elite)",
@@ -828,8 +901,18 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Multi-Fire",
+                bonus: [0, -1, 0, 0, 0, 0, 0]
+            },
+            {
+                cost: "Charged Shot",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            }
         ]
-    },// TODO: Choose between Multi-fire or charged shot (attack twice and subtract 1 damage from each, or add 2 accuracy)
+    },
     {
         id: 1034,
         name: "Snowtrooper",
@@ -897,8 +980,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Adjacent to friendly Trooper",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
         ]
-    },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
+    },
     {
         id: 1037,
         name: "Stormtrooper (Elite)",
@@ -920,8 +1009,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [3, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Adjacent to friendly Trooper",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
         ]
-    },// TODO: You may choose to reroll 1 attack die if adjacent other TROOPER
+    },
     {
         id: 1038,
         name: "The Grand Inquisitor",
@@ -944,8 +1039,15 @@ export const UNITS = [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 3],
             [0, 0, -1, 0, 0, -1, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Lightsaber Throw",
+                negativeAttackDice: [GREEN],
+                bonus: [3, 0, 0, 0, 0, 0, 0]
+            }
         ]
-    },// TODO: :Lightsaber throw doing a ranged attach with red die and yellow plus 3 accuracy, Defending if no block is rolled then add 1 block
+    },
     {
         id: 1039,
         name: "Thrawn",
@@ -1135,6 +1237,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
+        ],
+        optionalAttack: [
+            {
+                cost: "Target doesn't have Harmful condition",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -1155,10 +1263,20 @@ export const UNITS = [
         attackBonus: [0, -1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Suffer 1 strain",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
+        ],
+        optionalDefense: [
+            {
+                cost: "Ranged attack",
+                rerollAbilities: [[], [[DEFENSE, 1]]]
+            }
         ]
-    },// TODO: Can reroll attack die with a surge token and can reroll a defense die if attacked by range
+    },
     {
         id: 1047,
         name: "Gamorrean Guard (Elite)",
@@ -1177,8 +1295,12 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[[ATTACK, 1]], []],
-		surgeAbilities: [
-
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Ranged attack",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            }
         ]
     },
     {
@@ -1268,12 +1390,12 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[ATTACK, 1]], []],
+        rerollAbilities: [[[ATTACK, 1], [DEFENSE, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1]
         ]
-    },// TODO: Can force defender to reroll their defense die
+    },
     {
         id: 1052,
         name: "HK Assassin Droid (Elite)",
@@ -1291,13 +1413,13 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[ATTACK, 1]], []],
+        rerollAbilities: [[[ATTACK, 1], [DEFENSE, 1]], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1]
         ]
-    },// TODO: Can force defender to reroll their defense die
+    },
     {
         id: 1053,
         name: "Hondo Ohnaka",
@@ -1319,6 +1441,12 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0],
+        ],
+        optionalAttack: [
+            {
+                cost: "Some conditions",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -1342,7 +1470,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
         ]
-    },// TODO: Can pick any combination of 2 attack dice
+    },
     {
         id: 1055,
         name: "Jabba the Hutt",
@@ -1361,9 +1489,7 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-
-        ]
+		surgeAbilities: []
     },
     {
         id: 1056,
@@ -1386,8 +1512,14 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Optional",
+                bonus: [0, 0, 0, 1, -1, 0, 0]
+            }
         ]
-    },// TODO: May apply 1 block and -1 evade while defending
+    },
     {
         id: 1057,
         name: "Jawa Scavenger (Elite)",
@@ -1410,8 +1542,14 @@ export const UNITS = [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 2],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalDefense: [
+            {
+                cost: "Optional",
+                bonus: [0, 0, 0, 1, -1, 0, 0]
+            }
         ]
-    },// TODO: May apply 1 block and -1 evade while defending
+    },
     {
         id: 1058,
         name: "Loth-cat",
@@ -1499,7 +1637,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
         ]
-    },// TODO: add a block for every evade result while defending
+    },
     {
         id: 1062,
         name: "Nexu (Elite)",
@@ -1632,6 +1770,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
+        ],
+        optionalAttack: [
+            {
+                cost: "Adjacent to target",
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -1654,6 +1798,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
+        ],
+        optionalAttack: [
+            {
+                cost: "Adjacent to target",
+                bonus: [0, 2, 0, 0, 0, 0, 0]
+            }
         ]
     },
     {
@@ -1674,10 +1824,8 @@ export const UNITS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-            
-        ]
-    },// TODO: Can perform a ranged attack instead with a blue and a red die
+		surgeAbilities: []
+    },
     {
         id: 1070,
         name: "Tusken Raider (Elite)",
@@ -1699,7 +1847,7 @@ export const UNITS = [
 		surgeAbilities: [
             
         ]
-    },// TODO: Can perform a ranged attack instead with a blue and a red die
+    },
     {
         id: 1071,
         name: "Ugnaught Tinkerer",
@@ -1830,9 +1978,7 @@ export const UNITS = [
         attackBonus: [0, 1, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-            
-        ]
+		surgeAbilities: []
     },
     {
         id: 1077,
@@ -1852,9 +1998,7 @@ export const UNITS = [
         attackBonus: [0, 2, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
-		surgeAbilities: [
-            
-        ]
+		surgeAbilities: []
     },
     {
         id: 1078,
@@ -1945,8 +2089,14 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Adjacent to friendly Trooper",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            }
         ]
-    },// TODO: can reroll an attack die if adjacent to friendly TROOPER 
+    },
     {
         id: 1082,
         name: "Ahsoka Tano",
@@ -2287,8 +2437,15 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Target within 3 spaces",
+                attackDice: [RED],
+                negativeAttackDice: [BLUE]
+            }
         ]
-    }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
+    },
     {
         id: 1096,
         name: "Echo Base Trooper (Elite)",
@@ -2310,8 +2467,15 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [3, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Target within 3 spaces",
+                attackDice: [RED],
+                negativeAttackDice: [BLUE]
+            }
         ]
-    }, //TODO: Replace one blue die with red die if within 3 spaces of hostile
+    },
     {
         id: 1097,
         name: "Ezra Bridger",
@@ -2333,6 +2497,24 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 3]
+        ],
+        optionalAttack: [
+            {
+                cost: "1 non-red die friend within 3 spaces",
+                rerollAbilities: [[[ATTACK, 1]], []]
+            },
+            {
+                cost: "2 non-red die friend within 3 spaces",
+                rerollAbilities: [[[ATTACK, 2]], []]
+            },
+            {
+                cost: "3 non-red die friend within 3 spaces",
+                rerollAbilities: [[[ATTACK, 3]], []]
+            },
+            {
+                cost: "Friendly force user within 3 spaces",
+                rerollAbilities: [[[TURN_ATTACK_DIE, 1]], []]
+            }
         ]
     }, 
     {
@@ -2423,12 +2605,12 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [2, 1, -1, 0, 0, 0, 0]
-        ]//: TODO: While defending apply +1 Block to defense for each evade
-    }, //TODO: add Classcard "Distracting"
+        ],
+    },
     {
         id: 1102,
         name: "Hera Syndulla",
-        title: "Spectre-2",
+        title: "SPECTRE-2",
         affiliation: REBEL,
         deploymentCost: 4,
         reinforceCost: null,
@@ -2493,11 +2675,11 @@ export const UNITS = [
             [2, 2, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1]
         ]
-    }, //TODO: Apply +1 Block for each Evade result while defending
+    },
     {
         id: 1105,
         name: "Kanan Jarrus",
-        title: "Spectre-1",
+        title: "SPECTRE-1",
         affiliation: REBEL,
         deploymentCost: 8,
         reinforceCost: null,
@@ -2561,7 +2743,7 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
         ]
-    },  // TODO: replace die instead of reroll?
+    },
     {
         id: 1108,
         name: "Leia Organa",
@@ -2606,11 +2788,17 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1]
+        ],
+        optionalAttack: [
+            {
+                cost: "Set Your Sights",
+                bonus: [2, 0, 0, 0, 0, 0, 0]
+            }
         ]
     }, 
     {
         id: 1110,
-        name: "Luke Skywalker",
+        name: "Luke Skywalker (Hero of the Rebellion)",
         title: "Hero of the Rebellion",
         affiliation: REBEL,
         deploymentCost: 10,
@@ -2629,8 +2817,17 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Saber Strike",
+                negativeAttackDice: [BLUE, GREEN, YELLOW],
+                dice: [RED, YELLOW],
+                bonus: [0, 0, 0, 0, 0, 0, 3]
+            }
+
         ]
-    }, //TODO: add saber strike as a weapon (Melee attack with 1 red and 1 yellow and pierce 3)
+    },
     {
         id: 1111,
         name: "Luke Skywalker (Jedi Knight)",
@@ -2770,28 +2967,6 @@ export const UNITS = [
         ]
     }, 
     {
-        id: 1117,
-        name: "R2-D2",
-        title: "Loyal Astromech",
-        affiliation: REBEL,
-        deploymentCost: 3,
-        reinforceCost: null,
-		traits: [DROID],
-        size: SMALL,
-        elite: true,
-        health: 6,
-        speed: 3,
-        defenseDice: [WHITE],
-        attackDice: [YELLOW],
-        attackType: RANGED,
-        attackBonus: [2, 0, 1, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [
-            [0, 0, -1, 0, 0, 0, 2]
-        ]
-    }, //TODO: if you roll blank, you can add +1 dodge
-    {
         id: 1118,
         name: "Rebel Saboteur",
         title: "",
@@ -2811,8 +2986,9 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 1]
+            [0, 0, -1, 0, 0, 0, 1]
         ]
-    }, // TODO: Overload cna trigger same surge ability twice per attack
+    },
     {
         id: 1119,
         name: "Rebel Saboteur (Elite)",
@@ -2833,8 +3009,9 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2]
+            [0, 0, -1, 0, 0, 0, 2]
         ]
-    }, // TODO: Overload cna trigger same surge ability twice per attack
+    },
     {
         id: 1120,
         name: "Rebel Trooper",
@@ -2856,6 +3033,12 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 1],
             [1, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Hasn't exited space",
+                bonus: [2, 1, 0, 0, 0, 0, 0]
+            }
         ]
     }, 
     {
@@ -2879,12 +3062,18 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 2],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Hasn't exited space",
+                bonus: [2, 1, 0, 0, 0, 0, 0]
+            }
         ]
     }, 
     {
         id: 1122,
         name: "Sabine Wren",
-        title: "Spectre-5",
+        title: "SPECTRE-5",
         affiliation: REBEL,
         deploymentCost: 7,
         reinforceCost: null,
@@ -2945,7 +3134,7 @@ export const UNITS = [
         attackType: MELEE,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
+        rerollAbilities: [[[ATTACK, 1]], [[ATTACK, 1]]],
 		surgeAbilities: [
             
         ]
@@ -2971,8 +3160,16 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1],
+        ],
+        optionalAttack: [
+            {
+                cost: "Fighting Knife",
+                negativeAttackDice: [BLUE, GREEN],
+                dice: [RED],
+                bonus: [0, 1, 0, 0, 0, 0, 0]
+            }
         ]
-    },  //TODO: Add weapon Fighting Knife- melee using 1 red die +1 damage
+    },
     {
         id: 1126,
         name: "Wookiee Warrior",
@@ -2993,6 +3190,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Suffered 5+ damage",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
         ]
     },  
     {
@@ -3015,6 +3218,12 @@ export const UNITS = [
         rerollAbilities: [[], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Suffered 5+ damage",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
         ]
     },  
     {
@@ -3038,8 +3247,15 @@ export const UNITS = [
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [2, 0, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Bo-Rifle Staff Strike",
+                negativeAttackDice: [GREEN],
+                dice: [RED]
+            }
         ]
-    },  //TODO: Add Weapon- Bo-Rifle Staff Strike- Melee attack 2 red dice 
+    },
     {
         id: 1129,
         name: "88-Z",
@@ -3149,7 +3365,7 @@ export const UNITS = [
         optionalAttack: [
             {
                 cost: "Target has recon token",
-                bonus: [0,1,0,0,0,0, 0]
+                bonus: [0, 1, 0, 0, 0, 0, 0]
             }
         ]
     },
@@ -3217,6 +3433,190 @@ export const UNITS = [
     },
     {
         id: 1304,
+        isHero: true,
+        name: "Davith Elso (Hero)",
+        title: 'Codename "Hawkbat"',
+        affiliation: REBEL,
+        size: SMALL,
+        health: 11,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW],
+            [BLUE]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED],
+            [BLUE, RED, GREEN],
+            [RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+    },
+    {
+        id: 1305,
+        isHero: true,
+        name: "Diala Passil (Hero)",
+        title: "Haunted Exile",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 5,
+        speed: 4,
+        woundedEndurance: 4,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW],
+            [BLUE]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED],
+            [BLUE, RED, GREEN],
+            [RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Spend 1 strain",
+                rerollAbilities: [[], [[DEFENSE, 1]]]
+            }
+        ]
+    },
+    {
+        id: 1306,
+        isHero: true,
+        name: "Fenn Signis (Hero)",
+        title: "Hardened Veteran",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED, BLUE],
+            [RED, BLUE],
+            [RED, BLUE]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1307,
+        isHero: true,
+        name: "Gaarkhan (Hero)",
+        title: "Fierce Warrior",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 14,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, GREEN, YELLOW],
+            [BLUE],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED, GREEN],
+            [RED],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1308,
+        isHero: true,
+        name: "Gideon Argus (Hero)",
+        title: "Valiant Commander",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 10,
+        endurance: 5,
+        speed: 4,
+        woundedEndurance: 4,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED],
+            [RED, BLUE, GREEN],
+            [RED, BLUE]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1309,
+        isHero: true,
+        name: "Jarrod Kelvin (Hero)",
+        title: 'with "JAX"',
+        affiliation: REBEL,
+        size: SMALL,
+        health: 10,
+        endurance: 5,
+        speed: 4,
+        woundedEndurance: 4,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [GREEN, GREEN],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [RED, GREEN],
+            [BLUE, RED],
+            [BLUE, RED, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Exhaust 1 melee weapon, pick 1",
+                bonus: [0, 0, 0, 1, 0, 0, 0]
+            },
+            {
+                cost: "Exhaust 1 melee weapon, pick 1",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 1310,
         name: "Cam Droid",
         title: "",
         affiliation: REBEL,
@@ -3234,5 +3634,399 @@ export const UNITS = [
         defenseBonus: [0, 0, 0, 0, 0, 1, 0],
         rerollAbilities: [[], []],
         surgeAbilities: []
+    },
+    {
+        id: 1311,
+        name: "Junk Droid",
+        title: "",
+        affiliation: MERCENARY,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 1,
+        speed: 4,
+        defenseDice: [],
+        attackDice: [GREEN],
+        attackType: MELEE,
+        attackBonus: [0, 1, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+        surgeAbilities: []
+    },
+    {
+        id: 1312,
+        isHero: true,
+        name: "Jyn Odan (Hero)",
+        title: "The Smuggler",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 10,
+        endurance: 4,
+        speed: 5,
+        woundedEndurance: 3,
+        woundedSpeed: 4,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [RED, BLUE],
+            [RED, BLUE, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1313,
+        isHero: true,
+        name: "Ko-Tun Feralo (Hero)",
+        title: "Rebel Quartermaster",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN, YELLOW],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [BLUE, RED, GREEN],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1313,
+        isHero: true,
+        name: "Ko-Tun Feralo (Hero)",
+        title: "Rebel Quartermaster",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN, YELLOW],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [BLUE, RED, GREEN],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1314,
+        isHero: true,
+        name: "MHD-19 (Hero)",
+        title: "Loyal Medic",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [RED, BLUE],
+            [RED, BLUE, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1314,
+        isHero: true,
+        name: "Mak Eshka'rey (Hero)",
+        title: "Bold Renegade",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 10,
+        endurance: 5,
+        speed: 4,
+        woundedEndurance: 4,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain, no line of sight",
+                bonus: [0, 0, 0, 0, 0, 0, 2]
+            }
+        ]
+    },
+    {
+        id: 1315,
+        isHero: true,
+        name: "Murne Rin (Hero)",
+        title: "Master of Intelligence",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN, YELLOW],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [BLUE, RED, GREEN],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1315,
+        isHero: true,
+        name: "Onar Koma (Hero)",
+        title: "Furious Bodyguard",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 20,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [],
+        attributeDice: [
+            [BLUE, YELLOW, YELLOW],
+            [GREEN, YELLOW],
+            [BLUE, RED]
+        ],
+        woundedAttributeDice: [
+            [BLUE, RED, YELLOW],
+            [RED, GREEN],
+            [RED, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1311,
+        name: "Pit Droid",
+        title: "",
+        affiliation: REBEL,
+        deploymentCost: null,
+        reinforceCost: null,
+        traits: [DROID],
+        size: SMALL,
+        elite: false,
+        health: 3,
+        speed: 4,
+        defenseDice: [WHITE],
+        attackDice: [],
+        attackType: MELEE,
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+        surgeAbilities: []
+    },
+    {
+        id: 1312,
+        isHero: true,
+        name: "Saska Teft (Hero)",
+        title: "Brilliant Engineer",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 11,
+        endurance: 4,
+        speed: 5,
+        woundedEndurance: 3,
+        woundedSpeed: 4,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE],
+            [BLUE, GREEN],
+            [BLUE, GREEN, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [RED, BLUE],
+            [RED, BLUE, GREEN]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Discard 1 device token",
+                bonus: [0, 0, 1, 0, 0, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 1313,
+        isHero: true,
+        name: "Shyla Varad (Hero)",
+        title: "Daughter of Mandalore",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 4,
+        speed: 5,
+        woundedEndurance: 3,
+        woundedSpeed: 4,
+        defenseDice: [BLACK],
+        attributeDice: [
+            [BLUE, BLUE, GREEN],
+            [GREEN, GREEN],
+            [BLUE, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [BLUE, BLUE, RED],
+            [RED, GREEN],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1314,
+        isHero: true,
+        name: "Tress Hacnua (Hero)",
+        title: "Cybernetic Brawler",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 11,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [GREEN, YELLOW],
+            [GREEN, GREEN],
+            [BLUE, BLUE]
+        ],
+        woundedAttributeDice: [
+            [GREEN, RED],
+            [GREEN, RED],
+            [BLUE, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
+    },
+    {
+        id: 1315,
+        isHero: true,
+        name: "Verena Talos (Hero)",
+        title: "Cunning Operative",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 12,
+        endurance: 5,
+        speed: 4,
+        woundedEndurance: 4,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [BLUE, GREEN],
+            [BLUE, GREEN],
+            [BLUE, GREEN]
+        ],
+        woundedAttributeDice: [
+            [RED, BLUE],
+            [RED, BLUE],
+            [RED, BLUE]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: [],
+        optionalDefense: [
+            {
+                cost: "Adjacent to another hostile",
+                bonus: [0, 0, 0, 0, 1, 0, 0]
+            }
+        ]
+    },
+    {
+        id: 1316,
+        isHero: true,
+        name: "Vinto Hreeda (Hero)",
+        title: "Reckless Vigilante",
+        affiliation: REBEL,
+        size: SMALL,
+        health: 11,
+        endurance: 4,
+        speed: 4,
+        woundedEndurance: 3,
+        woundedSpeed: 3,
+        defenseDice: [WHITE],
+        attributeDice: [
+            [GREEN],
+            [BLUE, GREEN, GREEN],
+            [RED, YELLOW]
+        ],
+        woundedAttributeDice: [
+            [RED],
+            [BLUE, RED, GREEN],
+            [RED, RED]
+        ],
+        attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[], []],
+		surgeAbilities: []
     },
 ]

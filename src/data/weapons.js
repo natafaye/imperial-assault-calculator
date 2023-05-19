@@ -364,8 +364,14 @@ export const WEAPONS = [
         tier: 1,
         cost: 400,
         attackBonus: [1, 0, 0, 0, 0, 0, 0],
-        surgeAbilities: []
-    }, // TODO: May apply -1 damage and +2 accuracy
+        surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "May apply",
+                bonus: [2, -1, 0, 0, 0, 0, 0]
+            }
+        ]
+    },
     {
         id: 2021,
         name: "Holdout Blaster",
@@ -496,7 +502,7 @@ export const WEAPONS = [
         surgeAbilities: [
             [2, 1, -1, 0, 0, 0, 0]
         ]
-    }, // TODO: Pick ability dice for wrench
+    },
     {
         id: 2029,
         name: "Off-Hand Blaster",
@@ -571,6 +577,7 @@ export const WEAPONS = [
         tier: 0,
         cost: 0,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
+        rerollAbilities: [[[ATTACK, 1]], []],
         surgeAbilities: [
             [2, 0, -1, 0, 0, 0, 0]
         ]
@@ -682,7 +689,7 @@ export const WEAPONS = [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 1, -2, 0, 0, 0, 3]
         ]
-    }, // TODO: Pick insight dice for dice
+    },
     {
         id: 2041,
         name: "Armored Gauntlets",
@@ -724,8 +731,14 @@ export const WEAPONS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "As an action",
+                bonus: [0, 0, -1, 0, 0, 0, 0]
+            }
         ]
-    }, // TODO: check if -1 surge applies
+    },
     {
         id: 2044,
         name: "Double Vibrosword",
@@ -755,8 +768,15 @@ export const WEAPONS = [
         surgeAbilities: [
             [0, 1, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1]
+        ],
+        optionalAttack: [
+            {
+                cost: "As an action",
+                attackDice: [RED],
+                negativeAttackDice: [YELLOW]
+            }
         ]
-    }, // TODO: Check if replace yellow with red?
+    },
     {
         id: 2046,
         name: "Electrostaff",
@@ -890,18 +910,6 @@ export const WEAPONS = [
         surgeAbilities: []
     },
     {
-        id: 2055,
-        name: "Rykk Blades",
-        type: MELEE,
-        traits: [BLADE],
-        attackDice: [],
-        modSpots: 1,
-        tier: 3,
-        cost: 950,
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        surgeAbilities: []
-    }, // TODO: Pick attack dice as strength pool, convert surge to damage?
-    {
         id: 2056,
         name: "Shrouded Lightsaber",
         description: "Davith Elso 3 XP upgrade",
@@ -986,7 +994,7 @@ export const WEAPONS = [
         surgeAbilities: [
             [0, 0, -1, 0, 0, 0, 1]
         ]
-    }, // TODO: Handle if they want to pick Cleave?
+    },
     {
         id: 2061,
         name: "Vibro-Claws",
@@ -1002,7 +1010,7 @@ export const WEAPONS = [
         surgeAbilities: [
             [0, 0, -2, 0, 0, 0, 0],
         ]
-    }, // TODO: Get rid of token surge abilities
+    },
     {
         id: 2062,
         name: "Vibroblade",
@@ -1044,6 +1052,12 @@ export const WEAPONS = [
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0]
+        ],
+        optionalAttack: [
+            {
+                cost: "Spend 1 strain",
+                bonus: [0, 0, 0, 0, 0, 0, 1]
+            }
         ]
-    }, // Use one strain to apply pierce 1?
+    },
 ]
