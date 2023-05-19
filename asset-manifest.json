@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/imperial-assault-calculator/static/css/main.8add07ea.css",
-    "main.js": "/imperial-assault-calculator/static/js/main.d9f3d02a.js",
-    "static/js/526.14b3a2e9.chunk.js": "/imperial-assault-calculator/static/js/526.14b3a2e9.chunk.js",
-    "static/js/633.62e628e5.chunk.js": "/imperial-assault-calculator/static/js/633.62e628e5.chunk.js",
-    "static/js/275.36841c81.chunk.js": "/imperial-assault-calculator/static/js/275.36841c81.chunk.js",
+    "main.css": "/imperial-assault-calculator/static/css/main.4666835f.css",
+    "main.js": "/imperial-assault-calculator/static/js/main.38fea151.js",
+    "static/js/526.284c3208.chunk.js": "/imperial-assault-calculator/static/js/526.284c3208.chunk.js",
+    "static/js/633.c5fc29a6.chunk.js": "/imperial-assault-calculator/static/js/633.c5fc29a6.chunk.js",
+    "static/js/275.218952b0.chunk.js": "/imperial-assault-calculator/static/js/275.218952b0.chunk.js",
     "static/js/787.49da4a57.chunk.js": "/imperial-assault-calculator/static/js/787.49da4a57.chunk.js",
-    "static/js/24.8460e0af.chunk.js": "/imperial-assault-calculator/static/js/24.8460e0af.chunk.js",
+    "static/js/24.d1a046a7.chunk.js": "/imperial-assault-calculator/static/js/24.d1a046a7.chunk.js",
     "index.html": "/imperial-assault-calculator/index.html",
-    "main.8add07ea.css.map": "/imperial-assault-calculator/static/css/main.8add07ea.css.map",
-    "main.d9f3d02a.js.map": "/imperial-assault-calculator/static/js/main.d9f3d02a.js.map",
-    "526.14b3a2e9.chunk.js.map": "/imperial-assault-calculator/static/js/526.14b3a2e9.chunk.js.map",
-    "633.62e628e5.chunk.js.map": "/imperial-assault-calculator/static/js/633.62e628e5.chunk.js.map",
-    "275.36841c81.chunk.js.map": "/imperial-assault-calculator/static/js/275.36841c81.chunk.js.map",
+    "main.4666835f.css.map": "/imperial-assault-calculator/static/css/main.4666835f.css.map",
+    "main.38fea151.js.map": "/imperial-assault-calculator/static/js/main.38fea151.js.map",
+    "526.284c3208.chunk.js.map": "/imperial-assault-calculator/static/js/526.284c3208.chunk.js.map",
+    "633.c5fc29a6.chunk.js.map": "/imperial-assault-calculator/static/js/633.c5fc29a6.chunk.js.map",
+    "275.218952b0.chunk.js.map": "/imperial-assault-calculator/static/js/275.218952b0.chunk.js.map",
     "787.49da4a57.chunk.js.map": "/imperial-assault-calculator/static/js/787.49da4a57.chunk.js.map",
-    "24.8460e0af.chunk.js.map": "/imperial-assault-calculator/static/js/24.8460e0af.chunk.js.map"
+    "24.d1a046a7.chunk.js.map": "/imperial-assault-calculator/static/js/24.d1a046a7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8add07ea.css",
-    "static/js/main.d9f3d02a.js"
+    "static/css/main.4666835f.css",
+    "static/js/main.38fea151.js"
   ]
 }
