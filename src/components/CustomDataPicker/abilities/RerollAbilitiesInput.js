@@ -3,7 +3,7 @@ import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'
 import PlayerTypeIcon from '../../_icons/PlayerTypeIcon'
 import { ATTACK, DEFENSE, AMOUNT, RER, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, 
-  ALL_ATTACK, TURN_ATTACK_DIE, DEFENSE_THEN_ATTACK } from '../../../data'
+  ALL_ATTACK, TURN_ATTACK_DIE, DEFENSE_THEN_ATTACK, MIN_REROLL_AMOUNT, MAX_REROLL_AMOUNT } from '../../../data'
 import { RerollLabel } from '../../_labels'
 
 const options = [
@@ -62,8 +62,8 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }) => {
     <PropertyInput
       property={RER}
       value={formData[AMOUNT]}
-      min={1}
-      max={5}
+      min={MIN_REROLL_AMOUNT}
+      max={MAX_REROLL_AMOUNT}
       onChange={(e) => onUpdate(AMOUNT, e.target.value)}
       idPrefix={idPrefix + "-reroll"}
       disabled={formData[AMOUNT] === undefined}

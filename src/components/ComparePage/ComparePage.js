@@ -12,24 +12,41 @@ import GradientProgressBar from '../GradientProgressBar'
 import { getTableColumns } from './tableColumns'
 import { useProgressWorker } from '../../hooks/useProgressWorker'
 import { getCompareResults } from '../../utilities'
+import { MELEE, RANGED, UNITS, WEAPONS } from '../../data'
+import { getCompareAttackFromCard } from './comparePageUtilities'
 
 export default function ComparePage({ compareData, compareUpdaters }) {
-  const {attackList, sorting, columnVisibility} = compareData
-  const {setAttackList, setSorting, setColumnVisibility} = compareUpdaters
+  const { attackList, sorting, columnVisibility } = compareData
+  const { setAttackList, setSorting, setColumnVisibility } = compareUpdaters
   const [showAddForm, setShowAddForm] = useState(false)
 
-  const makeNewWorker = useCallback(() => new Worker(new URL("./compareWorker.js", import.meta.url)), [])
-  const {progress, error, startWorker, cancelWorker} = useProgressWorker(
+  const makeNewAddWorker = useCallback(() => new Worker(new URL("./addWorker.js", import.meta.url)), [])
+  const [addProgress, addError, startAddWorker, cancelAddWorker] = useProgressWorker(
     (addition) => setAttackList(prevList => [addition, ...prevList]),
-    makeNewWorker
+    makeNewAddWorker
+  )
+
+  const makeNewAddAllWorker = useCallback(() => new Worker(new URL("./addAllWorker.js", import.meta.url)), [])
+  const [addAllProgress, addAllError, startAddAllWorker, cancelAddAllWorker] = useProgressWorker(
+    (additions) => setAttackList(prevList => [...additions, ...prevList]),
+    makeNewAddAllWorker
   )
 
   const addAttack = (attack) => {
-      startWorker(attack, () => setAttackList(prevList => [getCompareResults(attack), ...prevList]))
+    startAddWorker(attack, getCompareResults)
   }
 
-  const addAllAttacks = (additions) => {
-    setAttackList([...additions, ...attackList])
+  const addAllAttacksOfType = (filter) => {
+    const isWeapon = (filter === RANGED || filter === MELEE)
+    let cards = isWeapon ? WEAPONS.filter(w => w.type === filter) : UNITS.filter(u => u.affiliation === filter && !u.isHero)
+
+    const backupAction = () => cards.map(card => getCompareResults(getCompareAttackFromCard(card)))
+    startAddAllWorker(cards, backupAction)
+  }
+
+  const cancel = () => {
+    cancelAddWorker()
+    cancelAddAllWorker()
   }
 
   const deleteAttack = useCallback(
@@ -63,7 +80,7 @@ export default function ComparePage({ compareData, compareUpdaters }) {
           <Button variant="outline-success" className="me-2 mb-2 flex-shrink-0" onClick={() => setShowAddForm(true)}>
             <FontAwesomeIcon icon={faPlus} /> Add Attack
           </Button>
-          <AddAllAttacksButton onAdd={addAllAttacks} />
+          <AddAllAttacksButton onAddAll={addAllAttacksOfType} />
           <QuickAddAttack onAdd={addAttack} />
           <ColumnVisibilityPicker table={table} className="me-2 mb-2 flex-shrink-0" />
           <Button variant="outline-danger" className="mb-2 flex-shrink-0" onClick={() => setAttackList([])}>
@@ -72,20 +89,29 @@ export default function ComparePage({ compareData, compareUpdaters }) {
         </Col>
       </Row>
       <Row>
-        {progress !== null && 
+        {(addProgress !== null || addAllProgress !== null) &&
           <Col className="mb-4">
             <div className="d-flex align-items-center">
-              <GradientProgressBar amount={progress} className="flex-grow-1 me-2" gradientClassName='red-orange-green-gradient' ariaLabel="Add attack progress" animated striped/>
-              <Button variant="outline-warning" size="sm" onClick={cancelWorker}>Cancel</Button>
+              <GradientProgressBar
+                amount={addProgress || addAllProgress || 0}
+                className="flex-grow-1 me-2"
+                gradientClassName='red-orange-green-gradient'
+                ariaLabel="Add attack progress"
+                animated
+                striped
+              />
+              <Button variant="outline-warning" size="sm" onClick={cancel}>Cancel</Button>
             </div>
-            { error && <p className="text-warning text-center">{error}</p> }
+            {(addError || addAllError) &&
+              <p className="text-warning text-center">{addError || addAllError}</p>
+            }
           </Col>
         }
       </Row>
       <Row>
         <Col>
           <CompareAttacksTable table={table} />
-          <AddAttackForm show={showAddForm} onHide={() => setShowAddForm(false)} onSubmit={addAttack}/>
+          <AddAttackForm show={showAddForm} onHide={() => setShowAddForm(false)} onSubmit={addAttack} />
         </Col>
       </Row>
     </>

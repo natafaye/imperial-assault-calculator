@@ -2,31 +2,32 @@ import React from 'react'
 import PropertyIcon from '../_icons/PropertyIcon'
 import { ACC, BLO, PIERCE, PROPERTY_LABELS } from '../../data'
 
-export function PropertyLabel({ value, property, isAttack = false, className = "" }) {
+export function PropertyLabel({ value, property, isAttack = false }) {
     if (!value) 
         return null
 
     if (property === ACC)
-        return <span className={className}>{value > 0 ? "+" : ""}{value} {PROPERTY_LABELS[property]}</span>
+        return <>{value > 0 ? "+" : ""}{value} {PROPERTY_LABELS[property]}</>
 
     if (property === BLO && value < 0 && isAttack) 
-        return <span className={className}>{ Math.abs(value) } Pierce</span>
+        return <>{ Math.abs(value) } Pierce</>
 
     if (property === PIERCE && value)
-        return <span className={className}>{value} Pierce</span>
+        return <>{value} Pierce</>
 
-    return <span className={className}>{value > 0 ? "+" : ""}{value} <PropertyIcon property={property}/></span>
+    return <>{value > 0 ? "+" : ""}{value} <PropertyIcon property={property}/></>
 }
 
-export default function PropertyListLabels({ properties, className = "", isAttack = false }) {
+export default function PropertyListLabels({ properties, isAttack = false, suffix = "" }) {
     return (
         <>
             { properties.map((value, property) => (
                 <React.Fragment key={property}>
-                    <PropertyLabel value={value} property={property} className={className} isAttack={isAttack}/>
-                    { value !== 0 && properties.slice(property + 1).some(p => p) && <span className="me-2">,</span> }
+                    <PropertyLabel value={value} property={property} isAttack={isAttack}/>
+                    { value !== 0 && properties.slice(property + 1).some(p => p) && ",  " }
                 </React.Fragment>
             ))}
+            {suffix}
         </>
     )
 }

@@ -2469,3 +2469,6 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
     },
 ]
+
+// TODO: More complicated property logic?
+// Nexu, Reactive armor, R2D2, Jyn, Scouted, Grand Inquisitor, Combat Coat

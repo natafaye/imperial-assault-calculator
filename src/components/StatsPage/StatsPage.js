@@ -12,7 +12,7 @@ export default function StatsPage() {
     const { setResults, setSettings, ...inputUpdaters } = statsUpdaters
 
     const makeNewWorker = useCallback(() => new Worker(new URL("./statsWorker.js", import.meta.url)), [])
-    const { progress, error, startWorker, cancelWorker } = useProgressWorker(setResults, makeNewWorker)
+    const [ progress, error, startWorker, cancelWorker ] = useProgressWorker(setResults, makeNewWorker)
 
     const calculate = () => startWorker(inputData, getStatsResults)
 

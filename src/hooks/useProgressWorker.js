@@ -5,7 +5,7 @@ import { useEffect } from "react"
  * A hook that manages a web worker that responds with progress percentage messages
  * @param {function} setResults A function for setting the results when the work is finished
  * @param {function} makeNewWorker A function that makes a new worker (this reference must be stable!)
- * @returns {{ progress, error, startWorker, cancelWorker }} The current progress or null, an error or null, a function for starting and cancelling the worker
+ * @returns {[ number?, string?, startWorker, cancelWorker ]} The current progress or null, an error or null, a function for starting and cancelling the worker
  */
 export function useProgressWorker(setResults, makeNewWorker) {
     const [progress, setProgress] = useState(null)
@@ -57,5 +57,5 @@ export function useProgressWorker(setResults, makeNewWorker) {
         }
     }
 
-    return { progress, error, startWorker, cancelWorker }
+    return [ progress, error, startWorker, cancelWorker ]
 }

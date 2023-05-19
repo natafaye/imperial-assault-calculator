@@ -1,26 +1,9 @@
 import { Dropdown } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { getCompareResults } from '../../utilities'
-import { UNITS, WEAPONS, MELEE, RANGED, ATTACK, MERCENARY, IMPERIAL, REBEL } from '../../data'
+import { MELEE, RANGED, MERCENARY, IMPERIAL, REBEL } from '../../data'
 
-export default function AddAllAttacksButton({ onAdd }) {
-
-    const addAllAttacksOfType = (filter) => {
-        const isWeapon = (filter === RANGED || filter === MELEE)
-        let additions = (isWeapon ?
-            WEAPONS.filter(w => w.type === filter)
-            : UNITS.filter(u => u.affiliation === filter && !u.isHero)
-        ).map(a => getCompareResults({
-            name: a.name,
-            dice: a.attackDice,
-            bonus: a.attackBonus,
-            surgeAbilities: a.surgeAbilities,
-            rerollAbilities: (a.rerollAbilities && a.rerollAbilities[ATTACK]) || [],
-            unitData: { cards: [a], focused: false, hidden: false, selectedOptionalIds: [] }
-        }))
-        onAdd(additions)
-    }
+export default function AddAllAttacksButton({ onAddAll }) {
 
     return (
         <Dropdown className="mb-2 flex-shrink-0">
@@ -28,11 +11,11 @@ export default function AddAllAttacksButton({ onAdd }) {
                 <FontAwesomeIcon icon={faPlus} /> Add All
             </Dropdown.Toggle>
             <Dropdown.Menu>
-                <Dropdown.Item onClick={() => addAllAttacksOfType(MELEE)}>Add All Melee Weapons</Dropdown.Item>
-                <Dropdown.Item onClick={() => addAllAttacksOfType(RANGED)}>Add All Ranged Weapons</Dropdown.Item>
-                <Dropdown.Item onClick={() => addAllAttacksOfType(REBEL)}>Add All Rebel Units</Dropdown.Item>
-                <Dropdown.Item onClick={() => addAllAttacksOfType(MERCENARY)}>Add All Mercenary Units</Dropdown.Item>
-                <Dropdown.Item onClick={() => addAllAttacksOfType(IMPERIAL)}>Add All Imperial Units</Dropdown.Item>
+                <Dropdown.Item onClick={() => onAddAll(MELEE)}>Add All Melee Weapons</Dropdown.Item>
+                <Dropdown.Item onClick={() => onAddAll(RANGED)}>Add All Ranged Weapons</Dropdown.Item>
+                <Dropdown.Item onClick={() => onAddAll(REBEL)}>Add All Rebel Units</Dropdown.Item>
+                <Dropdown.Item onClick={() => onAddAll(MERCENARY)}>Add All Mercenary Units</Dropdown.Item>
+                <Dropdown.Item onClick={() => onAddAll(IMPERIAL)}>Add All Imperial Units</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
     )

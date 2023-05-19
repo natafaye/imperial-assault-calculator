@@ -11,7 +11,7 @@ export default function RerollPage() {
     const [results, setResults] = useState([])
 
     const makeNewWorker = useCallback(() => new Worker(new URL("./rerollWorker.js", import.meta.url)), [])
-    const {progress, error, startWorker, cancelWorker} = useProgressWorker(setResults, makeNewWorker)
+    const [progress, error, startWorker, cancelWorker] = useProgressWorker(setResults, makeNewWorker)
 
     const calculate = () => startWorker(inputData, getRerollResults)
 

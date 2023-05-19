@@ -134,8 +134,11 @@ export default class Attack {
         // min probability is 6 to the power of (-2 * number of dice) because of rerolls
         // If we're doing a Which to Reroll check, all rolls except the one being checked are set to 0
         this.probabilities = full(this.rolls.length, this.rollId !== undefined ? 0 : this.rolls.length)
-        if(this.rollId !== undefined)
+        if(this.rollId !== undefined) {
             this.probabilities[this.rollId] = this.rolls.length
+            // Add the result for not rerolling any dice regardless of if there's reroll abilities
+            this.rerollOptions = [{ avgDamage: this.rolls[this.rollId], dice: [] }]
+        }
 
         const diceleft = new Set(range(this.dice.length))
         this.probabilities = this.genrerolls(this.probabilities, this.rerollabilities, diceleft)
@@ -226,7 +229,6 @@ export default class Attack {
                                 // If this ability isn't all used up, add it to the branches to go deeper on
                                 // We already pushed the current combo to the list, so we're assuming
                                 // this ability allows you to use less than the number specified
-                                // TODO: Confirm this on all abilities
                                 if (newbranch.size < amountToReroll) {
                                     branches.push(newbranch)
                                 }
@@ -302,7 +304,7 @@ export default class Attack {
 
                 // For Which to Reroll calculation
                 if(!isRecursive && this.rollId !== undefined) {
-                    this.rerollOptions = listOfDiceSetsByAbility
+                    this.rerollOptions = this.rerollOptions.concat(listOfDiceSetsByAbility
                         // Flatten the two dimensional array
                         .flatMap(l => l)
                         // Map each set to reroll info about the set
@@ -312,9 +314,7 @@ export default class Attack {
                             set: set
                         }))
                         // Remove any duplicates
-                        .filter((option, index, array) => index === array.findIndex(o => isEqualSet(o.set, option.set)))
-                        // Add the result for not rerolling any dice
-                        .concat({ avgDamage: hitslist.at(-1), dice: [] })
+                        .filter((option, index, array) => index === array.findIndex(o => isEqualSet(o.set, option.set))))
                     // Sort it from highest damage to lowest damage
                     this.rerollOptions.sort((a, b) => (playerid === ATTACK) ? b.avgDamage - a.avgDamage : a.avgDamage - b.avgDamage)
                 }

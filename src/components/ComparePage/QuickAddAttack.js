@@ -12,7 +12,7 @@ export default function QuickAddAttack({ onAdd }) {
     }
 
     return (
-        <div className="d-flex align-items-center flex-grow-1 mb-2 mx-4">
+        <div className="d-flex flex-grow-1 mb-2 mx-md-4">
             <CardsSelect values={cards} onChange={setCards} className="flex-grow-1"/>
             <Button variant="outline-success" className="flex-grow-1 ms-2" onClick={quickAdd}>Quick&nbsp;Add</Button>
         </div>
