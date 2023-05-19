@@ -6,9 +6,10 @@ import { pluralize } from '../../utilities'
 
 function SummarizedDataLabel({
     data: { dice, bonus, rerollAbilities, surgeAbilities, negativeAttackDice },
-    isAttack = false, expandSurges = true, labelAttack = false
+    isAttack = false, expandSurges = true, labelAttack = false, emptyLabel = ""
 }) {
     const hasRerollAbilities = rerollAbilities?.some(l => l.length)
+    if(!dice?.length && !negativeAttackDice?.length && !bonus?.some(b => b) && !hasRerollAbilities && !surgeAbilities?.length) return emptyLabel
     return (
         <span>
 

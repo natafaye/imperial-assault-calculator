@@ -20,6 +20,7 @@ export default function CustomDataPicker({ data, dispatch, pickDieSides = false,
                     expandSurges={false}
                     labelAttack={false}
                     isAttack={isAttack}
+                    emptyLabel="No data"
                 />
             }
         >
