@@ -307,12 +307,12 @@ export const TEST_DATA = {
     },
     "Charge Pistol": {
         "None": {
-            [BLACK]: 2.05,
-            [WHITE]: 2.18
+            [BLACK]: 1.87,
+            [WHITE]: 2.10
         },
         "Rapid Fire and 4034-0": {
-            [BLACK]: 2.42,
-            [WHITE]: 2.73
+            [BLACK]: 2.31,
+            [WHITE]: 2.63
         }
     },
 }
