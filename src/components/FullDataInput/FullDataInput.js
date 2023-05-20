@@ -3,7 +3,7 @@ import UnitDataPicker, { getEmptyUnitData } from '../UnitDataPicker';
 import CustomDataPicker, { clearCustomData, replaceCustomData } from '../CustomDataPicker';
 import { CollapsableDataArea, CollapseProvider } from '../CollapsableDataArea';
 import RequiredAccuracyPicker from '../RequiredAccuracyPicker';
-import SectionHeader from "../StatsPage/SectionHeader";
+import SectionHeader from "./SectionHeader";
 import PlayerTypeIcon from "../_icons/PlayerTypeIcon";
 import { getAttackData, getDefenseData } from '../../utilities';
 import { ATTACK, DEFENSE } from '../../data';

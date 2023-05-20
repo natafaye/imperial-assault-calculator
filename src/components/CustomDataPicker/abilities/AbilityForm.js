@@ -19,7 +19,7 @@ export default function AbilityForm({ idPrefix, value, defaultValue, onSave, onC
         <form>
             <Stack direction="horizontal" gap={1} className="flex-wrap border border-secondary rounded p-2 justify-content-center">
                 { renderFormLayoutGroups({ formData, onUpdate, idPrefix }).map((group, index, groups) => (
-                    <div className="d-flex flex-wrap" key={index}>
+                    <div className="d-flex flex-wrap flex-grow-1 justify-content-center" key={index}>
                         { group }
                         { index === groups.length - 1 && (
                             <>

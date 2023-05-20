@@ -14,8 +14,9 @@ export default function ButtonToggle({
                     key={option}
                     checked={value === option}
                     title={tooltips[index]}
-                    style={{ maxWidth, minWidth }}
+                    style={{ maxWidth, minWidth, gap: 4 }}
                     onChange={() =>  onChange(option)}
+                    className="d-inline-flex align-items-center justify-content-center"
                 >
                     {labels[index]}
                 </ToggleButton>
