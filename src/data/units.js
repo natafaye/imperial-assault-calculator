@@ -1,4 +1,4 @@
-import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE, TURN_ATTACK_DIE } from "./reroll-abilities";
+import { ATTACK_OR_DEFENSE, ATTACK, DEFENSE, TURN_ATTACK, ANY_DIE } from "./reroll-abilities";
 import { BLACK, BLUE, GREEN, RED, YELLOW, WHITE } from "./dice"
 import { MELEE, RANGED } from "./weapons";
 
@@ -2042,7 +2042,7 @@ export const UNITS = [
         attackType: RANGED,
         attackBonus: [2, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
+        rerollAbilities: [[[ANY_DIE, 1]], []],
 		surgeAbilities: [
             [0, 2, -1, 0, 0, 0, 0],
             [0, 0, -1, 0, 0, 0, 1],
@@ -2515,7 +2515,7 @@ export const UNITS = [
             },
             {
                 cost: "Friendly force user within 3 spaces",
-                rerollAbilities: [[[TURN_ATTACK_DIE, 1]], []]
+                rerollAbilities: [[[TURN_ATTACK, undefined]], []]
             }
         ]
     }, 

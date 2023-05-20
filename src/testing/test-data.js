@@ -111,12 +111,6 @@ export const TEST_DATA = {
             [WHITE]: 2.06
         }
     },
-    '434 "Deathhammer"': {
-        "Reroll and Surge": {
-            [BLACK]: 4.20,
-            [WHITE]: 4.05
-        }
-    },
     "DH-17": {
         "None": {
             [BLACK]: 2.13,
@@ -287,6 +281,14 @@ export const TEST_DATA = {
         "Ahsoka Tano": {
             [BLACK]: 4.97,
             [WHITE]: 4.71
+        },
+        "Ezra Bridger and 1097-3": {
+            [BLACK]: 6.01,
+            [WHITE]: 4.88
+        },
+        "Weequay Pirate (Elite)": {
+            [BLACK]: 3.20,
+            [WHITE]: 3.26
         }
     },
     "Duelist's Blade": {
@@ -313,6 +315,44 @@ export const TEST_DATA = {
         "Rapid Fire and 4034-0": {
             [BLACK]: 2.31,
             [WHITE]: 2.63
-        }
+        },
+        "Combat Vambrace and 4136-0": {
+            [BLACK]: 2.17,
+            [WHITE]: 2.37
+        },
+        "Single-Minded and 4111-0": {
+            [BLACK]: 2.43,
+            [WHITE]: 2.69
+        },
+        "Assault Armor and 4056-0": {
+            [BLACK]: 2.23,
+            [WHITE]: 2.10
+        },
+    },
+    '434 "Deathhammer"': {
+        "Reroll and Surge": {
+            [BLACK]: 4.20,
+            [WHITE]: 4.05
+        },
+        "None": {
+            [BLACK]: 3.21,
+            [WHITE]: 3.29
+        },
+        "Rapid Fire and 4034-0": {
+            [BLACK]: 3.72,
+            [WHITE]: 4.00
+        },
+        "Combat Vambrace and 4136-0": {
+            [BLACK]: 3.63,
+            [WHITE]: 3.63
+        },
+        "Single-Minded and 4111-0": {
+            [BLACK]: 4.21,
+            [WHITE]: 4.18
+        },
+        "Assault Armor and 4056-0": {
+            [BLACK]: 3.60,
+            [WHITE]: 3.29
+        },
     },
 }

@@ -25,7 +25,7 @@ export default function BonusInput({ bonus, dispatch, idPrefix }) {
                 <PropertyInput property={EVA} value={bonus[EVA]} onChange={handleBonusChange} idPrefix={idPrefix} />
                 <PropertyInput property={DOD} value={bonus[DOD]} onChange={handleBonusChange} idPrefix={idPrefix} />
                 <PropertyInput property={PIERCE} value={bonus[PIERCE]} onChange={handleBonusChange} idPrefix={idPrefix} />
-                <button className="btn btn-sm btn-outline-warning ms-1" onClick={clearAll} title="Clear">
+                <button className="btn btn-sm btn-outline-warning" onClick={clearAll} title="Clear">
                     <FontAwesomeIcon icon={faXmark}/>
                 </button>
             </div>

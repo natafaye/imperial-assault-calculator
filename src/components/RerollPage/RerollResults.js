@@ -11,12 +11,12 @@ export default function RerollResults({ results }) {
                 <tr key={index}>
                     <td className="d-flex justify-content-center">
                         { result.dice.map((die, dieIndex) => 
-                            <DieIcon key={index + "-" + dieIndex} color={die} size="2" className="mx-1" />
+                            <DieIcon key={index + "-" + dieIndex} color={die} side={result.sides[dieIndex]} size="3" className="mx-1" />
                         )}
                         { result.dice.length === 0 && "None" }
                     </td>
                     <td>
-                        { result.avgDamage.toFixed(2) }
+                        { result.avgDamage?.toFixed(2) }
                     </td>
                 </tr>
             )}

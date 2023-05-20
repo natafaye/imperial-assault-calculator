@@ -2,11 +2,13 @@ import Select from 'react-select'
 import { CLASS_CARDS, UNITS, MODS, WEAPONS } from '../../data'
 import { getCardType, getNumAtEnd, search, searchArray, searchExact } from '../../utilities'
 
+const nameSort = (a, b) => a.name.toLowerCase() < b.name.toLowerCase()
+
 const CARD_OPTIONS = [
-    { label: "Units", options: UNITS },
-    { label: "Weapons", options: WEAPONS },
-    { label: "Mods", options: MODS },
-    { label: "Class Cards", options: CLASS_CARDS }
+    { label: "Weapons", options: WEAPONS.sort(nameSort) },
+    { label: "Units", options: UNITS.sort(nameSort) },
+    { label: "Mods", options: MODS.sort(nameSort) },
+    { label: "Class Cards", options: CLASS_CARDS.sort(nameSort) }
 ]
 
 const filterOption = (candidate, input) => input.split(" ").every(term =>

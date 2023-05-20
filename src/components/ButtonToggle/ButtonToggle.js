@@ -1,7 +1,7 @@
 import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 
 export default function ButtonToggle({
-    id, value, onChange, labels, options, tooltips = [], size = "", variant = "outline-primary", className = ""
+    id, value, onChange, labels, options, tooltips = [], size = "", variant = "outline-primary", className = "", maxWidth = null, minWidth = null
 }) {
     return (
         <ButtonGroup className={className}>
@@ -14,6 +14,7 @@ export default function ButtonToggle({
                     key={option}
                     checked={value === option}
                     title={tooltips[index]}
+                    style={{ maxWidth, minWidth }}
                     onChange={() =>  onChange(option)}
                 >
                     {labels[index]}

@@ -29,9 +29,9 @@ const PATH_PROPS = {
 export default function PropertyIcon({ property, size = "1rem", className = "" }) {
     if(property === null || property === undefined) return null
     if(property === ACC)
-        return <FontAwesomeIcon icon={faBullseye} title={PROPERTY_LABELS[property]} fontSize={size} size="sm" className={className} />
+        return <FontAwesomeIcon icon={faBullseye} title={PROPERTY_LABELS[property]} size="sm" className={className} style={{ fontSize: size, verticalAlign: "middle" }}/>
     if(property === RER)
-        return <FontAwesomeIcon icon={faRepeat} title={PROPERTY_LABELS[property]} fontSize={size} size="sm" className={className}/>
+        return <FontAwesomeIcon icon={faRepeat} title={PROPERTY_LABELS[property]} size="sm" className={className} style={{ fontSize: size, verticalAlign: "middle" }}/>
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127 127" width={size} height={size} title={PROPERTY_LABELS[property]} className={className}>
             <path {...PATH_PROPS[property]}/>

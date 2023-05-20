@@ -1,6 +1,7 @@
 import {
     ACC as acc, BLO as blo, DAM as hit, EVA as eva, DOD as dod, SUR as sur, PIERCE as prc, BLACK, WHITE, DICE as dice, 
-    ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ATTACK_DIE, DEFENSE, AMOUNT, ALL_ATTACK, DEFENSE_THEN_ATTACK
+    ATTACK, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, TURN_ONE_SYMBOL_ATTACK, ANY_DIE, BLACK_DIE, ONE_SYMBOL_ATTACK, 
+    TURN_ATTACK, DEFENSE, AMOUNT, ALL_ATTACK, DEFENSE_THEN_ATTACK, ATTACK_DICE, DEFENSE_DICE
 } from "../../data"
 import { full, union, difference, setInArray, range, argmax, argmin, addArrays, isEqualSet } from "./pythonConversionUtilities"
 
@@ -28,6 +29,8 @@ const defensefloor = (result) => {
     result[dod] = Math.max(0, result[dod])
     result[prc] = Math.max(0, result[prc])
 }
+
+const isOneSymbolAttack = (side) => side[hit] + side[sur] === 1
 
 export default class Attack {
 
@@ -122,12 +125,13 @@ export default class Attack {
             this.updateWebWorkerProgress({ stage: "rolls", done: rollid, total: this.rolls.length })
         }
 
-        // Factor in Punch Dagger ability to this.rolls damage values before calculating reroll probabilites
+        // Factor in Punch Dagger/Ezra Bridger/Single-Minded ability to this.rolls damage values before calculating reroll probabilites
         // Even though this ability is used after rerolls, it needs to be factored in before deciding which dice to reroll
-        if (this.rerollabilities[ATTACK].some(ability => ability[TYPE] === TURN_ATTACK_DIE)) {
-            // Remove the punch dagger turn die ability and use it now
-            this.rerollabilities[ATTACK] = this.rerollabilities[ATTACK].filter(ability => ability[TYPE] !== TURN_ATTACK_DIE)
-            this.punchdagger()
+        const turnAbilities = this.rerollabilities[ATTACK].filter(a => a[TYPE] === TURN_ONE_SYMBOL_ATTACK || a[TYPE] === TURN_ATTACK)
+        if (turnAbilities.length) {
+            // Remove the turn die abilities and use them now
+            this.rerollabilities[ATTACK] = this.rerollabilities[ATTACK].filter(a => a[TYPE] !== TURN_ONE_SYMBOL_ATTACK && a[TYPE] !== TURN_ATTACK)
+            turnAbilities.forEach(a => this.turndie(a[TYPE]))
         }
 
         // Calculate the likelihood of every possible roll, factoring in reroll abilities
@@ -179,7 +183,7 @@ export default class Attack {
         const listOfDiceSetsByAbility = new Array(abilities[playerid].length)
         for (let abilityid = 0; abilityid < abilitiestocheck.length; abilityid++) {
             const ability = abilitiestocheck[abilityid]
-            let diceTypeToReroll = ability[TYPE]
+            let diceTypeToReroll = ability[TYPE] === ATTACK ? ATTACK_DICE : DEFENSE_DICE
             let amountToReroll = ability[AMOUNT]
 
             // Make a list of all the possible reroll combos
@@ -189,17 +193,17 @@ export default class Attack {
                 sets = [new Set(), new Set()]
                 for (const diceid of diceleft)
                     sets[this.dicetype(diceid)].add(diceid)
-                // Or if it's Rapid Fire's ability, the one possible reroll combo is all the dice
+            // Or if it's Rapid Fire's ability, the one possible reroll combo is all the dice
             } else if (ability[TYPE] === ATTACK_AND_DEFENSE) {
                 sets = [new Set(diceleft)]
-                // Or if it's Hair Trigger Pistol's ability
+            // Or if it's Hair Trigger Pistol's ability
             } else if (ability[TYPE] === ALL_ATTACK) {
                 sets = [new Set()]
                 for (const diceid of diceleft) {
                     if (this.dicetype(diceid) === ATTACK)
                         sets[0].add(diceid)
                 }
-                // Or if it's a normal ability, build a list of all possible combos
+            // Or if it's a normal ability, build a list of all possible combos
             } else {
                 sets = []
 
@@ -208,8 +212,17 @@ export default class Attack {
                     // You don't have to do the defense reroll to get the attack one, so rerolling no dice is an option
                     sets = [new Set()] 
                     // We're rerolling 1 defense to start this ability out
-                    diceTypeToReroll = DEFENSE
+                    diceTypeToReroll = DEFENSE_DICE
                     amountToReroll = 1
+                // Or if it's the Weequay Pirate ability
+                } else if(ability[TYPE] === ANY_DIE) {
+                    diceTypeToReroll = [...ATTACK_DICE, ...DEFENSE_DICE]
+                // Or if it's the Assault Armor ability
+                } else if(ability[TYPE] === BLACK_DIE ) {
+                    diceTypeToReroll = [BLACK]
+                // Or if it's Combat Vambrace ability
+                } else if(ability[TYPE] === ONE_SYMBOL_ATTACK) {
+                    diceTypeToReroll = ATTACK_DICE
                 }
 
                 // Breadth first search to find all possible combos
@@ -218,8 +231,8 @@ export default class Attack {
                     const branch = branches.pop()
                     // For each dice
                     for (const diceid of diceleft) {
-                        // If the dice is the right player's and this combo hasn't already used this dice
-                        if (this.dicetype(diceid) === diceTypeToReroll && !branch.has(diceid)) {
+                        // If the dice is the right type for the ability and this combo hasn't already used this dice
+                        if (diceTypeToReroll.includes(this.dice[diceid]) && !branch.has(diceid)) {
                             // Make a new combo with this dice on the end of it
                             const newbranch = union(branch, diceid)
                             // If we haven't already found this combo
@@ -253,12 +266,22 @@ export default class Attack {
             if (p) {
                 const probabilitieslist = []
                 const hitslist = []
+                
+                // If Combat Vambrace, remove sets with dice that have more than one icon
+                const oneSymbolAttackDieIndexes = this.dice.map((die, index) => isOneSymbolAttack(dice[die][this.id2byte(rollid)[index]]) ? index : null).filter(i => i !== null)
+                const diceSets = listOfDiceSetsByAbility.map((list, abilityid) => 
+                    (abilitiestocheck[abilityid][TYPE] === ONE_SYMBOL_ATTACK ? 
+                        list.filter(set => Array.from(set).every(dieIndex => oneSymbolAttackDieIndexes.includes(dieIndex))) 
+                        : list
+                    )
+                )
 
-                for (let abilityid = 0; abilityid < listOfDiceSetsByAbility.length; abilityid++) {
-                    const sets = listOfDiceSetsByAbility[abilityid]
+                for (let abilityid = 0; abilityid < diceSets.length; abilityid++) {
+                    const sets = diceSets[abilityid]
 
                     // Loop over all the possible reroll combos for this ability
                     for (let setid = 0; setid < sets.length; setid++) {
+
                         // Reroll the reroll combo and get the new probabilites
                         let probabilities2 = this.reroll(rollid, sets[setid], p)
 
@@ -304,13 +327,15 @@ export default class Attack {
 
                 // For Which to Reroll calculation
                 if(!isRecursive && this.rollId !== undefined) {
-                    this.rerollOptions = this.rerollOptions.concat(listOfDiceSetsByAbility
+                    const rollbyte = this.id2byte(rollid)
+                    this.rerollOptions = this.rerollOptions.concat(diceSets
                         // Flatten the two dimensional array
                         .flatMap(l => l)
                         // Map each set to reroll info about the set
                         .map((set, index) => ({ 
                             avgDamage: hitslist[index], 
                             dice: Array.from(set).map(dieIndex => this.dice[dieIndex]),
+                            sides: Array.from(set).map(dieIndex => rollbyte[dieIndex]),
                             set: set
                         }))
                         // Remove any duplicates
@@ -479,10 +504,10 @@ export default class Attack {
     }
 
     /**
-     * Updates this.rolls damage values to factor in using the special Punch Dagger ability:
+     * Updates this.rolls damage values to factor in using the special Punch Dagger/Ezra Bridger/Single-Minded ability:
      * "After any rerolls, you may turn 1 die showing any single attack icon to any other side"
      */
-    punchdagger() {
+    turndie(type) {
         const newrolls = this.rolls.slice(0)
         // Loop over all the roll damage results
         for (let rollid = 0; rollid < this.rolls.length; rollid++) {
@@ -497,7 +522,7 @@ export default class Attack {
                     const color = this.dice[diceid]
                     const side = dice[color][sideid]
                     // If there's only one attack symbol
-                    if (side[hit] + side[sur] === 1) {
+                    if (type !== TURN_ONE_SYMBOL_ATTACK || isOneSymbolAttack(side)) {
                         // Loop over all the sides and add what the damage could be to a list of potentials
                         for (let newsideid = 0; newsideid < 6; newsideid++) {
                             const newrollbyte = rollbyte.slice(0)

@@ -1,4 +1,4 @@
-import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK, ALL_ATTACK, TURN_ATTACK_DIE } from "./reroll-abilities"
+import { ATTACK_AND_DEFENSE, DEFENSE, ATTACK, DEFENSE_THEN_ATTACK, ALL_ATTACK, TURN_ATTACK, BLACK_DIE, ONE_SYMBOL_ATTACK } from "./reroll-abilities"
 import { BLUE, RED, YELLOW, WHITE, GREEN, BLACK } from "./dice"
 import { IMPERIAL, REBEL } from "./units"
 
@@ -917,8 +917,8 @@ export const CLASS_CARDS = [
 		surgeAbilities: [],
         optionalAttack: [
             {
-                cost: "Black die, exhaust Assault Armor",
-                rerollAbilities: [[[ATTACK, 1]],[]]
+                cost: "Exhaust Assault Armor",
+                rerollAbilities: [[[BLACK_DIE, 1]],[]]
             }
         ]
     },
@@ -1948,7 +1948,7 @@ export const CLASS_CARDS = [
         optionalAttack: [
             {
                 cost: "Replace other reroll ability",
-                rerollAbilities: [[[TURN_ATTACK_DIE, undefined]], []]
+                rerollAbilities: [[[TURN_ATTACK, undefined]], []]
             }
         ]
     },
@@ -2404,71 +2404,25 @@ export const CLASS_CARDS = [
         ]
     },
     {
-        id: 4135,
-        name: "",
-        affiliation: IMPERIAL,
-		availableTo: [IMPERIAL],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [],
-    },
-    {
         id: 4136,
-        name: "",
-        affiliation: IMPERIAL,
-		availableTo: [IMPERIAL],
-        cost: 1,
+        name: "Combat Vambrace",
+        affiliation: REBEL,
+		availableTo: [REBEL],
+        cost: 200,
         defenseDice: [],
         attackDice: [],
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         defenseBonus: [0, 0, 0, 0, 0, 0, 0],
         rerollAbilities: [[], []],
 		surgeAbilities: [],
-    },
-    {
-        id: 4137,
-        name: "",
-        affiliation: IMPERIAL,
-		availableTo: [IMPERIAL],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [],
-    },
-    {
-        id: 4138,
-        name: "",
-        affiliation: IMPERIAL,
-		availableTo: [IMPERIAL],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [],
-    },
-    {
-        id: 4139,
-        name: "",
-        affiliation: IMPERIAL,
-		availableTo: [IMPERIAL],
-        cost: 1,
-        defenseDice: [],
-        attackDice: [],
-        attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        defenseBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[], []],
-		surgeAbilities: [],
+        optionalAttack: [
+            {
+                cost: "Exhaust Combat Vambrace",
+                rerollAbilities: [[[ONE_SYMBOL_ATTACK, 1]], []]
+            }
+        ]
     },
 ]
 
 // TODO: More complicated property logic?
-// Nexu, Reactive armor, R2D2, Jyn, Scouted, Grand Inquisitor, Combat Coat
+// Nexu, Reactive armor, R2D2, Jyn, Scouted, Grand Inquisitor, Combat Coat, Kanan Jarus

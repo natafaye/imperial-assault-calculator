@@ -1,4 +1,4 @@
-import { ALL_ATTACK, ATTACK, TURN_ATTACK_DIE } from "./reroll-abilities";
+import { ALL_ATTACK, ATTACK, TURN_ONE_SYMBOL_ATTACK } from "./reroll-abilities";
 import { BLUE, GREEN, RED, YELLOW } from "./dice"
 
 // WEAPON TYPES
@@ -890,7 +890,7 @@ export const WEAPONS = [
         tier: 1,
         cost: 400,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
-        rerollAbilities: [[[TURN_ATTACK_DIE, undefined]],[]],
+        rerollAbilities: [[[TURN_ONE_SYMBOL_ATTACK, undefined]],[]],
         surgeAbilities: [
             [0, 3, -2, 0, 0, 0, 0]
         ]
