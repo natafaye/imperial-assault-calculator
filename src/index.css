@@ -60,3 +60,9 @@
 body {
     fill: var(--bs-body-color)
 }
+.btn {
+    fill: var(--bs-btn-color)
+}
+.btn-check:checked+.btn, .btn.active {
+    fill: var(--bs-btn-active-color)
+}
