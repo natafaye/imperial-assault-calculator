@@ -4,9 +4,9 @@ import { DEFENSE_CUSTOM_PARAM_NAMES, ATTACK_CUSTOM_PARAM_NAMES, getCustomDataToP
 import { AMOUNT, ATTACK_DICE, DEFENSE_DICE, TYPE, MAX_PROPERTY_VALUE, MAX_REROLL_TYPE, 
     MIN_PROPERTY_VALUE, MIN_REROLL_TYPE } from "../../data"
 
-const initialValues = (): CustomData => ({
+const initialValues = (useDiceSides: boolean): CustomData => ({
     dice: [],
-    diceSides: [],
+    diceSides: useDiceSides ? [] : undefined,
     bonus: [0,0,0,0,0,0,0],
     rerollAbilities: [],
     surgeAbilities: [],
@@ -61,11 +61,11 @@ const reducer = (state: CustomData, action: CustomDataAction) : CustomData => {
                 )
             }
         case "clear":
-            return initialValues()
+            return initialValues(state.diceSides !== undefined)
         case "replace":
             return {
                 ...action.payload,
-                diceSides: action.payload.dice.map(_ => 0)
+                diceSides: state.diceSides ? action.payload.dice.map(_ => 0) : undefined
             }
         default:
             return state
@@ -74,7 +74,7 @@ const reducer = (state: CustomData, action: CustomDataAction) : CustomData => {
 
 export const addDie = (payload: Die) => ({ type: "add-die", payload })
 export const deleteDie = (payload: number) => ({ type: "delete-die", payload })
-export const changenumber = (payload: { index: number, value: number }) => ({ type: "change-die-side", payload })
+export const changeDieSide = (payload: { index: number, value: number }) => ({ type: "change-die-side", payload })
 export const updateBonus = (payload: { property: number, value: number}) => ({ type: "update-bonus", payload })
 export const clearBonus = () => ({ type: "clear-bonus" })
 export const addAbility = (payload: { type: AbilityType, ability: Ability }) => ({ type: "add-ability", payload })
@@ -112,8 +112,8 @@ const parsePropertyList = (listString: string) : PropertyList => {
 /**
  * Sets up custom data without storing it in the search params
  */
-export function useCustomData() : [CustomData, CustomDispatch] {
-    return useReducer(reducer, initialValues())
+export function useCustomData(useDiceSides = false) : [CustomData, CustomDispatch] {
+    return useReducer(reducer, initialValues(useDiceSides))
 }
 
 /**

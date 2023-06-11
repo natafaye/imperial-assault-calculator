@@ -6,7 +6,7 @@ import { useProgressWorker } from '../../hooks/useProgressWorker'
 import { getRerollResults } from '../../utilities'
 
 export default function RerollPage() {
-    const [fullData, setFullData] = useFullData()
+    const [fullData, setFullData] = useFullData(true)
     const [results, setResults] = useState<RerollOption[]>([])
 
     const makeNewWorker = useCallback(() => new Worker(new URL("./rerollWorker.ts", import.meta.url)), [])
@@ -16,7 +16,7 @@ export default function RerollPage() {
 
     return (
         <>
-            <FullDataInput data={fullData} updaters={setFullData} picknumbers />
+            <FullDataInput data={fullData} updaters={setFullData} pickDiceSides />
             <CalculateButton onCalculate={calculate} onCancel={cancelWorker} progress={progress} error={error}/>
             <RerollResults results={results}/>
         </>

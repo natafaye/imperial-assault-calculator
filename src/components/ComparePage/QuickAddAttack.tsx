@@ -14,7 +14,7 @@ export default function QuickAddAttack({ onAdd }: { onAdd: (attack: NamedAttackD
 
     return (
         <div className="d-flex flex-grow-1 mb-2 mx-md-4">
-            <CardsSelect values={cards} onChange={setCards} className="flex-grow-1"/>
+            <CardsSelect values={cards} onChange={setCards} className="flex-grow-1" isAttack />
             <Button variant="outline-success" className="flex-grow-1 ms-2" onClick={quickAdd}>Quick&nbsp;Add</Button>
         </div>
     )

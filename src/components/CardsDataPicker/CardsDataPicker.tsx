@@ -26,7 +26,7 @@ export default function CardsDataPicker({ data, setData, isAttack = false }: Car
         <CollapsableDataArea label="Cards" collapsedData={summarizeCardsData(data)}>
             <Stack gap={2}>
                 <Stack direction="horizontal" gap={2}>
-                    <CardsSelect values={cards} onChange={getOnDataChange("cards")} />
+                    <CardsSelect values={cards} onChange={getOnDataChange("cards")} isAttack={isAttack} />
                     {isAttack && 
                         <CheckboxInput 
                             label="Focused" 

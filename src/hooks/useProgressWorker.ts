@@ -18,7 +18,7 @@ export function useProgressWorker<InputType, ResultType>(
     const [progress, setProgress] = useState<number | null>(null)
     const [error, setError] = useState<string | null>(null)
     const workerRef = useRef<Worker | null>(null)
-    const makeNewWorkerCallback = useCallback(makeNewWorker, [])
+    const makeNewWorkerCallback = useCallback(makeNewWorker, []) // eslint-disable-line react-hooks/exhaustive-deps
     const [needNewWorkerFlag, setNeedNewWorkerFlag] = useState(0)
 
     // Make sure there are no memory leaks by creating the worker in a useEffect with a clean up function

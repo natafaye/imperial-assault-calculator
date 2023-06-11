@@ -3,19 +3,19 @@ import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import DieSelectMenu from "./DieSelectMenu";
-import { changenumber, deleteDie } from "./useCustomData";
-import { useClickOutside } from "../../hooks/useClickOutside";
-import DieIcon from "../_icons/DieIcon";
+import { changeDieSide, deleteDie } from "../useCustomData";
+import { useClickOutside } from "../../../hooks/useClickOutside";
+import DieIcon from "../../_icons/DieIcon";
 
 type DieInputProps = {
     color: Die,
     index: number,
     dispatch: CustomDispatch,
     side?: number,
-    picknumbers?: boolean
+    pickDiceSides?: boolean
 }
 
-export default function DieInput({ color, index, dispatch, side, picknumbers = false }: DieInputProps) {
+export default function DieInput({ color, index, dispatch, side, pickDiceSides = false }: DieInputProps) {
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
     const menuRef = useRef(null)
@@ -25,7 +25,7 @@ export default function DieInput({ color, index, dispatch, side, picknumbers = f
     const onDeleteDie = (index: number) => dispatch(deleteDie(index))
 
     const onSideChange = (value: number) => {
-        dispatch(changenumber({ index, value }))
+        dispatch(changeDieSide({ index, value }))
         setIsSideMenuOpen(false)
     }
 
@@ -33,9 +33,9 @@ export default function DieInput({ color, index, dispatch, side, picknumbers = f
         <div className="flex-shrink-0 my-1" style={{ flexBasis: "90px" }}>
             <div className="d-flex">
                 <div ref={menuRef} style={{ lineHeight: "0" }}>
-                    { !picknumbers ?
+                    { !pickDiceSides ?
                         <div className="border border-secondary rounded-0 rounded-start py-2 px-2" style={{ lineHeight: "0" }}>
-                            <DieIcon color={color} side={side} size={2} />
+                            <DieIcon color={color} size={2} />
                         </div>
                         :
                         <>

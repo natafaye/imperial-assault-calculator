@@ -2,22 +2,22 @@ import { useCallback, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import DieSelectMenu from './DieSelectMenu'
-import DieIcon from '../_icons/DieIcon'
-import { addDie } from './useCustomData'
-import { useClickOutside } from '../../hooks/useClickOutside'
-import { ATTACK_DICE, DEFENSE_DICE } from '../../data'
+import DieIcon from '../../_icons/DieIcon'
+import { addDie } from '../useCustomData'
+import { useClickOutside } from '../../../hooks/useClickOutside'
+import { ATTACK_DICE, DEFENSE_DICE } from '../../../data'
 import DieInput from './DieInput'
 
 type DiceListInputProps = {
     values: Die[],
     sideValues?: number[],
     dispatch: CustomDispatch,
-    picknumbers?: boolean,
+    pickDiceSides?: boolean,
     isAttack?: boolean
 }
 
 export default function DiceListInput({ 
-    values, sideValues = [], dispatch, picknumbers = false, isAttack = false 
+    values, sideValues = [], dispatch, pickDiceSides = false, isAttack = false 
 }: DiceListInputProps ) {
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
 
@@ -33,7 +33,7 @@ export default function DiceListInput({
     return (
         <>
             {values.map((color, index) => (
-                <DieInput key={index} color={color} side={sideValues[index]} index={index} picknumbers={picknumbers} dispatch={dispatch} />
+                <DieInput key={index} color={color} side={sideValues[index]} index={index} pickDiceSides={pickDiceSides} dispatch={dispatch} />
             ))}
             <div ref={menuRef} className="py-1">
                 <button className="btn btn-outline-secondary flex-shrink-0 h-100" onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}>

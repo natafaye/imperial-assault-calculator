@@ -1,22 +1,23 @@
 import Select from 'react-select'
-import { CLASS_CARDS, UNITS, MODS, WEAPONS } from '../../data'
+import { CLASS_CARDS, UNITS, MODS, WEAPONS, ATTACK, DEFENSE } from '../../data'
 import { getCardType, getNumAtEnd, search, searchArray, searchExact } from '../../utilities'
 
 type CardsSelectProps = {
     values: Card[],
     onChange: (value: Card[]) => void,
+    isAttack: boolean,
     className?: string
 }
 
-export default function CardsSelect({ values, onChange, className = "" }: CardsSelectProps) {
+export default function CardsSelect({ values, onChange, isAttack = false, className = "" }: CardsSelectProps) {
     return (
         <Select
-            options={CARD_OPTIONS}
+            options={CARD_OPTIONS[isAttack ? ATTACK : DEFENSE]}
             className={"text-dark w-100 " + className}
             filterOption={filterOption}
             getOptionLabel={c => c.name}
             getOptionValue={c => c.id.toString()}
-            placeholder="Select Cards"
+            placeholder="Search Cards"
             noOptionsMessage={() => noMatchesMessage}
             value={values}
             onChange={(cards) => onChange(cards as Card[])}
@@ -31,12 +32,20 @@ export default function CardsSelect({ values, onChange, className = "" }: CardsS
 
 const nameSort = (a: Card, b: Card) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
 
-const CARD_OPTIONS = [
-    { label: "Units", options: UNITS.sort(nameSort) },
-    { label: "Weapons", options: WEAPONS.sort(nameSort) },
-    { label: "Mods", options: MODS.sort(nameSort) },
-    { label: "Class Cards", options: CLASS_CARDS.sort(nameSort) }
-]
+const CARD_OPTIONS = {
+    [ATTACK]: [
+        { label: "Weapons", options: WEAPONS.sort(nameSort) },
+        { label: "Units", options: UNITS.sort(nameSort) },
+        { label: "Mods", options: MODS.sort(nameSort) },
+        { label: "Class Cards", options: CLASS_CARDS.sort(nameSort) }
+    ],
+    [DEFENSE]: [
+        { label: "Units", options: UNITS.sort(nameSort) },
+        { label: "Class Cards", options: CLASS_CARDS.sort(nameSort) },
+        { label: "Weapons", options: WEAPONS.sort(nameSort) },
+        { label: "Mods", options: MODS.sort(nameSort) },
+    ]
+}
 
 const filterOption = (candidate: { data: Card }, input: string) => input.split(" ").every(term =>
        search(candidate.data.name, term)

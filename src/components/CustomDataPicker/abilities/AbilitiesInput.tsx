@@ -10,7 +10,7 @@ type AbilitiesInputProps = {
   dispatch: CustomDispatch,
   type: "surgeAbilities" | "rerollAbilities",
   addLabel: React.ReactNode,
-  renderFormLayoutGroups: (props: AbilityFormLayoutGroupProps) => React.ReactNode[],
+  formInputsComponent: React.ElementType<AbilityFormInputsProps>,
   displayComponent: React.ElementType,
   defaultValue: Ability,
   idPrefix?: string,
@@ -18,7 +18,7 @@ type AbilitiesInputProps = {
 }
 
 export default function AbilitiesInput({ 
-  values, dispatch, type, addLabel, renderFormLayoutGroups, 
+  values, dispatch, type, addLabel, formInputsComponent, 
   displayComponent, defaultValue, idPrefix = '', className = '' 
 }: AbilitiesInputProps) {
   const [showAddForm, setShowAddForm] = useState(false)
@@ -56,7 +56,7 @@ export default function AbilitiesInput({
             key={index}
             idPrefix={"edit-" + idPrefix}
             initialValue={ability}
-            renderFormLayoutGroups={renderFormLayoutGroups}
+            formInputsComponent={formInputsComponent}
             onSave={onUpdateAbility(index)}
             onCancel={() => setEditIndex(null)}
           />
@@ -75,7 +75,7 @@ export default function AbilitiesInput({
       {showAddForm ? (
         <AbilityForm
           idPrefix={"create-" + idPrefix}
-          renderFormLayoutGroups={renderFormLayoutGroups}
+          formInputsComponent={formInputsComponent}
           initialValue={defaultValue}
           onSave={onAddAbility}
           onCancel={() => setShowAddForm(false)}

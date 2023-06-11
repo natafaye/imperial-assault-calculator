@@ -1,6 +1,6 @@
 import { CollapsableDataArea } from '../CollapsableDataArea'
 import { SummarizedDataLabel } from '../_labels'
-import DiceListInput from './DiceListInput'
+import DiceListInput from './dice/DiceListInput'
 import BonusInput from './BonusInput'
 import RerollAbilitiesInput from './abilities/RerollAbilitiesInput'
 import SurgeAbilitiesInput from './abilities/SurgeAbilitiesInput'
@@ -9,12 +9,12 @@ import { ATTACK, DEFENSE } from '../../data'
 type CustomDataPickerProps = {
     data: CustomData,
     dispatch: CustomDispatch,
-    picknumbers?: boolean,
+    pickDiceSides?: boolean,
     isAttack?: boolean
 }
 
 export default function CustomDataPicker({ 
-    data, dispatch, picknumbers = false, isAttack = false 
+    data, dispatch, pickDiceSides = false, isAttack = false 
 }: CustomDataPickerProps) {
     const { dice, diceSides, bonus, rerollAbilities, surgeAbilities } = data
     const idPrefix = isAttack ? "Attack" : "Defense"
@@ -37,7 +37,7 @@ export default function CustomDataPicker({
                     sideValues={diceSides} 
                     dispatch={dispatch} 
                     isAttack={isAttack} 
-                    picknumbers={picknumbers} 
+                    pickDiceSides={pickDiceSides} 
                 />
             </div>
             <BonusInput

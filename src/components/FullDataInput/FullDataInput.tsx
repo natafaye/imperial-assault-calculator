@@ -11,13 +11,13 @@ import { ATTACK, DEFENSE } from '../../data';
 type FullDataInputProps = {
   data: FullData,
   updaters: FullDataUpdaters,
-  picknumbers?: boolean
+  pickDiceSides?: boolean
 }
 
 /**
  * Input for custom and cards and required accuracy attack data and defense data
  */
-export default function FullDataInput({ data, updaters, picknumbers = false }: FullDataInputProps) {
+export default function FullDataInput({ data, updaters, pickDiceSides = false }: FullDataInputProps) {
   const { customAttack, customDefense, cardsAttack, cardsDefense, 
     requiredAccuracy } = data
   const { customAttackDispatch, customDefenseDispatch, setCardsAttack, 
@@ -46,7 +46,7 @@ export default function FullDataInput({ data, updaters, picknumbers = false }: F
             <PlayerTypeIcon type={ATTACK} className="me-3" />Attack
           </SectionHeader>
           <CardsDataPicker data={cardsAttack} setData={updateAttack} isAttack/>
-          <CustomDataPicker data={customAttack} dispatch={customAttackDispatch} picknumbers={picknumbers} isAttack />
+          <CustomDataPicker data={customAttack} dispatch={customAttackDispatch} pickDiceSides={pickDiceSides} isAttack />
           <CollapsableDataArea label="Advanced" collapsedData={"Require " + requiredAccuracy + " accuracy"} startCollapsed>
             <RequiredAccuracyPicker value={requiredAccuracy} onChange={setRequiredAccuracy} customAttack={customAttack} customDefense={customDefense}/>
           </CollapsableDataArea>
@@ -56,7 +56,7 @@ export default function FullDataInput({ data, updaters, picknumbers = false }: F
             <PlayerTypeIcon type={DEFENSE} className="me-3" />Defense
           </SectionHeader>
           <CardsDataPicker data={cardsDefense} setData={updateDefense}/>
-          <CustomDataPicker data={customDefense} dispatch={customDefenseDispatch} picknumbers={picknumbers} />
+          <CustomDataPicker data={customDefense} dispatch={customDefenseDispatch} pickDiceSides={pickDiceSides} />
         </Col>
       </Row>
     </CollapseProvider>

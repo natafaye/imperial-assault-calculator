@@ -3,9 +3,13 @@ import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'
 import SurgeCostIcon from '../../_icons/SurgeCostIcon'
 import { SurgeLabel } from '../../_labels'
-import { ACC, DAM, SUR, BLO, EVA, DOD } from '../../../data'
+import { ACC, DAM, SUR, BLO, EVA, DOD, PIERCE } from '../../../data'
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button } from 'react-bootstrap'
+import styles from './AbilitiesForm.module.css'
 
-const renderSurgeFormLayoutGroups = ({ formData, onUpdate, idPrefix }: AbilityFormLayoutGroupProps) => {
+function SurgeForm({ formData, onUpdate, onSave, onCancel, idPrefix }: AbilityFormInputsProps) {
   const getPropertyInputProps = (prop: number) => ({
     property: prop as Property,
     value: formData[prop],
@@ -13,8 +17,8 @@ const renderSurgeFormLayoutGroups = ({ formData, onUpdate, idPrefix }: AbilityFo
     idPrefix: idPrefix + "-surge"
   })
 
-  return [
-    <>
+  return (
+    <form className={styles.surgeForm}>
       <ButtonToggle
         id={idPrefix + "-surge-cost"}
         name={idPrefix + "-surge-cost"}
@@ -22,20 +26,26 @@ const renderSurgeFormLayoutGroups = ({ formData, onUpdate, idPrefix }: AbilityFo
         onChange={(newCost) => onUpdate(SUR, newCost)}
         options={[-1, -2]}
         labels={[<SurgeCostIcon amount={1} />, <SurgeCostIcon amount={2} />]}
-        className="me-2 flex-grow-1"
-        style={{ maxWidth: "140px" }}
+        className="me-2"
         variant="outline-danger"
         size="sm"
       />
       <PropertyInput {...getPropertyInputProps(ACC)} />
       <PropertyInput {...getPropertyInputProps(DAM)} />
-    </>,
-    <>
       <PropertyInput {...getPropertyInputProps(BLO)} />
       <PropertyInput {...getPropertyInputProps(EVA)} />
       <PropertyInput {...getPropertyInputProps(DOD)} />
-    </>
-  ]
+      <PropertyInput {...getPropertyInputProps(PIERCE)} />
+      <div>
+        <Button variant="outline-success" size="sm" onClick={onSave} type="submit" className="me-1">
+            <FontAwesomeIcon icon={faCheck} title="Save" />
+        </Button>
+        <Button variant="outline-warning" size="sm" onClick={onCancel} type="button">
+            <FontAwesomeIcon icon={faXmark} title="Cancel" />
+        </Button>
+      </div>
+    </form>
+  )
 }
 
 type SurgeAbilitiesInputProps = {
@@ -51,7 +61,7 @@ export default function SurgeAbilitiesInput({ values, dispatch, className = '' }
       dispatch={dispatch}
       type="surgeAbilities"
       addLabel="Surge Ability"
-      renderFormLayoutGroups={renderSurgeFormLayoutGroups}
+      formInputsComponent={SurgeForm}
       displayComponent={SurgeLabel}
       defaultValue={[0, 0, -1, 0, 0, 0, 0]}
       className={className}

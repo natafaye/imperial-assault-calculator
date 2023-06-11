@@ -1,0 +1,17 @@
+.bonusInputList {
+    display: grid;
+    grid-template: 50% 50% / 25% 25% 25% 25%;
+    grid-row-gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .bonusInputList {
+        grid-template: 100% / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 26px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .bonusInputList {
+        grid-template: 50% 50% / 25% 25% 25% 25%;
+    }
+}

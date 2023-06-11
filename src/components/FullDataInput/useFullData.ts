@@ -3,11 +3,11 @@ import { useCustomData, useCustomDataWithSearchParams } from "../CustomDataPicke
 import { useCardsData, useCardsDataWithSearchParams } from "../CardsDataPicker"
 import { useSearchParams } from "react-router-dom"
 
-export function useFullData() : [FullData, FullDataUpdaters] {
+export function useFullData(useDiceSides = false) : [FullData, FullDataUpdaters] {
     const [cardsAttack, setCardsAttack] = useCardsData()
     const [cardsDefense, setCardsDefense] = useCardsData()
-    const [customAttack, customAttackDispatch] = useCustomData()
-    const [customDefense, customDefenseDispatch] = useCustomData()
+    const [customAttack, customAttackDispatch] = useCustomData(useDiceSides)
+    const [customDefense, customDefenseDispatch] = useCustomData(useDiceSides)
     const [requiredAccuracy, setRequiredAccuracy] = useState(0)
 
     const fullData: FullData = { customAttack, customDefense, cardsAttack, cardsDefense, requiredAccuracy }

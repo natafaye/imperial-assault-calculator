@@ -1,0 +1,10 @@
+
+input.propertyInput::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+
+input.propertyInput:focus::placeholder {
+    color: #C0C0C0;
+    opacity: 1;
+}

@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'react-bootstrap'
 import AbilitiesInput from './AbilitiesInput'
 import PropertyInput from '../PropertyInput'
 import ButtonToggle from '../../ButtonToggle'
@@ -5,6 +8,8 @@ import PlayerTypeIcon from '../../_icons/PlayerTypeIcon'
 import { ATTACK, DEFENSE, AMOUNT, RER, TYPE, ATTACK_AND_DEFENSE, ATTACK_OR_DEFENSE, 
   ALL_ATTACK, TURN_ONE_SYMBOL_ATTACK, DEFENSE_THEN_ATTACK, MIN_REROLL_AMOUNT, MAX_REROLL_AMOUNT, ONE_SYMBOL_ATTACK, BLACK_DIE, ANY_DIE, TURN_ATTACK } from '../../../data'
 import { RerollLabel } from '../../_labels'
+import styles from './AbilitiesForm.module.css'
+
 
 const options: RerollAbilityType[] = [
   ATTACK,
@@ -56,7 +61,7 @@ const rerollTypesWithAmount = [
   BLACK_DIE
 ]
 
-const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }: AbilityFormLayoutGroupProps) => {
+function RerollForm({ formData, onUpdate, onSave, onCancel, idPrefix }: AbilityFormInputsProps) {
 
   const updateRerollType = (newType: RerollAbilityType) => {
     onUpdate(TYPE, newType)
@@ -67,31 +72,43 @@ const renderRerollFormLayoutGroups = ({ formData, onUpdate, idPrefix }: AbilityF
     }
   }
 
-  return [
-    <ButtonToggle
-      id={idPrefix + "-reroll-player"}
-      name={idPrefix + "-reroll-player"}
-      value={formData[TYPE] as RerollAbilityType}
-      onChange={updateRerollType}
-      options={options}
-      labels={labels}
-      tooltips={tooltips}
-      className="me-2 flex-wrap mb-1 justify-content-center"
-      buttonClassName='rounded-0'
-      variant="outline-secondary"
-      maxWidth={160}
-      minWidth={70}
-    />,
-    <PropertyInput
-      property={RER}
-      value={formData[AMOUNT]}
-      min={MIN_REROLL_AMOUNT}
-      max={MAX_REROLL_AMOUNT}
-      onChange={(e) => onUpdate(AMOUNT, parseInt(e.target.value))}
-      idPrefix={idPrefix + "-reroll"}
-      disabled={formData[AMOUNT] === undefined}
-    />
-  ]
+  return (
+    <form className={styles.rerollForm}>
+      <ButtonToggle
+        id={idPrefix + "-reroll-player"}
+        name={idPrefix + "-reroll-player"}
+        value={formData[TYPE] as RerollAbilityType}
+        onChange={updateRerollType}
+        options={options}
+        labels={labels}
+        tooltips={tooltips}
+        className="me-2 flex-wrap mb-1 justify-content-center"
+        buttonClassName='rounded-0'
+        variant="outline-secondary"
+        maxWidth={160}
+        minWidth={70}
+      />
+      <div className={"ms-1 " + styles.rerollFormInputGroup}>
+        <PropertyInput
+          property={RER}
+          value={formData[AMOUNT]}
+          min={MIN_REROLL_AMOUNT}
+          max={MAX_REROLL_AMOUNT}
+          onChange={(e) => onUpdate(AMOUNT, parseInt(e.target.value))}
+          idPrefix={idPrefix + "-reroll"}
+          disabled={formData[AMOUNT] === undefined}
+        />
+        <div>
+          <Button variant="outline-success" size="sm" onClick={onSave} type="submit" className="me-1">
+              <FontAwesomeIcon icon={faCheck} title="Save" />
+          </Button>
+          <Button variant="outline-warning" size="sm" onClick={onCancel} type="button">
+              <FontAwesomeIcon icon={faXmark} title="Cancel" />
+          </Button>
+        </div>
+      </div>
+    </form>
+  )
 }
 
 type RerollAbilitiesInputProps = {
@@ -111,7 +128,7 @@ export default function RerollAbilitiesInput({
       type="rerollAbilities"
       addLabel="Reroll Ability"
       idPrefix={idPrefix}
-      renderFormLayoutGroups={renderRerollFormLayoutGroups}
+      formInputsComponent={RerollForm}
       displayComponent={RerollLabel}
       defaultValue={defaultValue}
     />
