@@ -1,3 +1,1 @@
-import RerollPage from "./RerollPage";
-
-export default RerollPage
+export { default } from "./RerollPage"

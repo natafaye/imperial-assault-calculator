@@ -1,5 +1,5 @@
 import ReactSlider from 'react-slider'
-import "./NumberSlider.css"
+import styles from "./NumberSlider.module.css"
 
 type NumberSliderProps = {
     min: number,
@@ -24,8 +24,8 @@ export default function NumberSlider({
             value={value}
             onChange={onChange}
             className={className + " progress overflow-visible"}
-            thumbClassName="rounded-pill number-slider-thumb"
-            thumbActiveClassName="number-slider-thumb-active"
+            thumbClassName={"rounded-pill " + styles.thumb}
+            thumbActiveClassName={styles.thumbActive}
             renderTrack={(props, state) => (
                 <div {...props} className={(state.index === 0) ? barClass + " progress-bar rounded-pill h-100 me-1" : ""}/>
             )}

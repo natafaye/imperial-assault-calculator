@@ -1,3 +1,1 @@
-import CalculateButton from "./CalculateButton";
-
-export default CalculateButton
+export { default } from "./CalculateButton"

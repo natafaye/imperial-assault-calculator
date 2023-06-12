@@ -1,5 +1,2 @@
-import FullDataInput from "./FullDataInput";
-import { useFullData, useFullDataWithSearchParams } from "./useFullData"
-
-export { useFullData, useFullDataWithSearchParams }
-export default FullDataInput
+export { default } from "./FullDataInput";
+export { useFullData, useFullDataWithSearchParams } from "./useFullData"

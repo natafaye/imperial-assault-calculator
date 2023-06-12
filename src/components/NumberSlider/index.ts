@@ -1,3 +1,1 @@
-import NumberSlider from "./NumberSlider";
-
-export default NumberSlider
+export { default } from "./NumberSlider"

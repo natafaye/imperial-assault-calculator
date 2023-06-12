@@ -1,3 +1,1 @@
-import CheckboxDropdown from './CheckboxDropdown'
-
-export default CheckboxDropdown
+export { default } from './CheckboxDropdown'

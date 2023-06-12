@@ -1,3 +1,1 @@
-import RequiredAccuracyPicker from "./RequiredAccuracyPicker";
-
-export default RequiredAccuracyPicker
+export { default } from "./RequiredAccuracyPicker"

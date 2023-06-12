@@ -1,5 +1,5 @@
 import { useSpring, animated } from '@react-spring/web'
-import styles from './hover-peek-button.module.css'
+import styles from './HoverPeekButton.module.css'
 
 type HoverPeekButtonProps<C extends React.ElementType> = { 
     children: React.ReactNode, 

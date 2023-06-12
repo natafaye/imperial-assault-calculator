@@ -1,6 +1,2 @@
-import ComparePage from './ComparePage'
-import useCompareData from './useCompareData'
-
-export default ComparePage
-
-export { useCompareData }
+export { default } from './ComparePage'
+export { default as useCompareData } from './useCompareData'

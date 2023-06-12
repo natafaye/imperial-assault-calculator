@@ -1,9 +1,6 @@
-import OptionalAbilityLabel from './OptionalAbilityLabel'
-import SummarizedDataLabel from './SummarizedDataLabel'
-import SurgeListLabels from './SurgeListLabels'
-import SurgeLabel from './SurgeLabel'
-import PropertyListLabels from './PropertyListLabels'
-import RerollLabel from './RerollLabel'
-
-export { OptionalAbilityLabel, SummarizedDataLabel, SurgeListLabels, 
-    SurgeLabel, PropertyListLabels, RerollLabel }
+export { default as OptionalAbilityLabel } from './OptionalAbilityLabel'
+export { default as SummarizedDataLabel } from './SummarizedDataLabel'
+export { default as SurgeListLabels } from './SurgeListLabels'
+export { default as SurgeLabel } from './SurgeLabel'
+export { default as PropertyListLabels } from './PropertyListLabels'
+export { default as RerollLabel } from './RerollLabel'

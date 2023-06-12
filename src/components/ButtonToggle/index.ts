@@ -1,4 +1,1 @@
-import ButtonToggle, { ButtonBooleanToggle } from "./ButtonToggle";
-
-export { ButtonBooleanToggle }
-export default ButtonToggle
+export { default, ButtonBooleanToggle } from "./ButtonToggle"

@@ -1,5 +1,3 @@
-import CollapseProvider from "./CollapseProvider";
-import CollapsableDataArea from "./CollapsableDataArea";
-import CollapseAllButton from "./CollapseAllButton";
-
-export { CollapseProvider, CollapsableDataArea, CollapseAllButton }
+export { default as CollapseProvider } from "./CollapseProvider"
+export { default as CollapsableDataArea } from "./CollapsableDataArea"
+export { default as CollapseAllButton } from "./CollapseAllButton"

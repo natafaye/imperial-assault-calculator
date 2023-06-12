@@ -1,3 +1,1 @@
-import StatsPage from './StatsPage'
-
-export default StatsPage
+export { default } from './StatsPage'

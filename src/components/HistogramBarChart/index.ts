@@ -1,3 +1,1 @@
-import HistogramBarChart from "./HistogramBarChart"
-
-export default HistogramBarChart
+export { default } from "./HistogramBarChart"

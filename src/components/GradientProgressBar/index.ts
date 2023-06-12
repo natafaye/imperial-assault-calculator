@@ -1,3 +1,1 @@
-import GradientProgressBar from "./GradientProgressBar";
-
-export default GradientProgressBar
+export { default } from "./GradientProgressBar"
