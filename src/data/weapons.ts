@@ -1008,7 +1008,7 @@ export const WEAPONS: Card[] = [
         cost: 0,
         attackBonus: [0, 0, 0, 0, 0, 0, 0],
         surgeAbilities: [
-            [0, 0, -2, 0, 0, 0, 0],
+            [0, 0, -1, -2, 0, 0, 0],
         ]
     },
     {
